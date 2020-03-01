@@ -1,18 +1,41 @@
 import React, {useContext, useState, useEffect} from "react";
 import {StoreContext} from "./_Store";
 
+const showAvatar = false;
 
 export default function PlayersList (props) {
-    const store = useContext(StoreContext); 
+    const store = useContext(StoreContext);
+
+    var jobselectURL;
+    var serverselectURL;
+
+    if(props.url.length>1){
+        // console.log(props.url)
+        props.url.forEach(item=>{
+            const data = item.split(":");
+            if(data[0] === "job"){
+                jobselectURL = decodeURI(data[1]);
+            }else if(data[0] === "server"){
+                serverselectURL = decodeURI(data[1]);
+            }
+        })
+        // console.log(encodeURI(jobselectURL))
+    }
 
     const [localState, setlocalState] = useState({
         playerFinderMessages: [],
         playerFinderInputField: "",
         playerFinderFound: [],
         serverSelect: "All Servers",
-        jobSelect: "All Jobs",
-        jobsList: []
+        jobSelect: jobselectURL || "All Jobs"
     });
+    // console.log(localState)
+
+
+
+    const [jobList,setJobList] = useState([])
+
+    // console.log(localState)
 
     const handlePlayersNameInput = (input) => {
         setlocalState({...localState, playerFinderInputField: input.target.value });
@@ -33,83 +56,89 @@ export default function PlayersList (props) {
         }
     }
 
-    const handlePlayerFinderSubmit = () => {
+    const handlePlayerFinderSubmit = (isButton = true) => {
         // if(!localState.playerFinderInputField || localState.playerFinderInputField.length < 1)
         //     return setlocalState({...localState, playerFinderMessages: "Invalid name or in-game id"});
-        const input = localState.playerFinderInputField.toLocaleLowerCase()
+        const input = localState.playerFinderInputField.toLowerCase()
         const playerFinderFound = [];
         store.state.servers.forEach(server=>{
             if(server.playersData === null)return;
             server.playersData.forEach(player=>{
-            const playername = (player[0]+"#"+player[2]);
-            if(playername.toLowerCase().includes(input) && 
+                const playername = (player[0]+"#"+player[2]);
+                if(playername.toLowerCase().includes(input) && 
                     (localState.serverSelect === "All Servers" || localState.serverSelect === server.name) &&
-                    (localState.jobSelect === "All Jobs" || localState.jobSelect === player[5]))
-                playerFinderFound.push([
+                    (localState.jobSelect === "All Jobs" || localState.jobSelect === player[5])){
+                        playerFinderFound.push([
                             playername,
                             server["ip"],
                             server["name"],
                             player[3],
                             player[5]
-                        ])})
+                        ])
+                    }
+            })
         })
-        if(playerFinderFound.length > 0){
-            setlocalState({
-                ...localState,
-                playerFinderMessages: "Found " + playerFinderFound.length + " player" +(playerFinderFound.length === 1 ?"":"s"),
-                playerFinderFound
-            });
-        }else{
-            setlocalState({
-                ...localState,
-                playerFinderMessages: "Found nothing",
-                playerFinderFound: []
-            });
-        }
+
+        setlocalState(
+            playerFinderFound.length > 0 ? 
+                {   ...localState,
+                    playerFinderMessages: "Found " + playerFinderFound.length + " player" +(playerFinderFound.length === 1 ?"":"s"),
+                    playerFinderFound
+                } : {
+                    ...localState,
+                    playerFinderMessages: isButton ? "Found nothing" : "...",
+                    playerFinderFound: []
+                }
+        )
     }
 
-    const getAllJobs = () => {
-        const list = [];
+
+
+
+    useEffect(()=>{
+
+        const tempJobsList = []
         store.state.servers.forEach(server=>{
-            if(server.isLoaded === true && server.playersData){
+            if(server.playersData){
                 server.playersData.forEach(player=>{
-                    if(!list.includes(player[5]))
-                        list.push(player[5])
+                    if(!tempJobsList.includes(player[5])){
+                        tempJobsList.push(player[5]);
+                    }
                 })
             }
         })
-        setlocalState({...localState,jobsList:list})
-    }
 
-    useEffect(()=>{
-        handlePlayerFinderSubmit();
-        getAllJobs();
+        setJobList(tempJobsList)
+
+        
+
+        handlePlayerFinderSubmit(false);
     },[store.state.servers])
 
   
     return (
+    
         <div id="playerFinder">
         <h2>Online Players Finder</h2>
-
         <form>
             <input type="text" placeholder="Player's name or in-game id" onChange={(input)=>handlePlayersNameInput(input)} onKeyDown={_handleKeyDown}/><br/>
             
-
             <label htmlFor="serverSelector">Filter Server: </label>
-            <select id="serverSelector" onChange={handleServerSelect}>
+            <select id="serverSelector" onChange={handleServerSelect} value={localState.serverSelect}>
                 <option value="All Servers">All Servers</option>
-                {store.state.servers.map((server,index)=>{
-                    return server.isLoaded?<option key={index} value={server.name}>{server.name}</option>:""
-                })}
+                {store.state.servers.map((server,index)=>
+                    server.isLoaded ? <option key={index} value={server.name}>{server.name}</option> : ""
+                )}
             </select><br/>
 
             <label htmlFor="jobSelector">Filter Job: </label>
-            <select id="jobSelector" onChange={handleJobSelect}>
+            <select id="jobSelector" onChange={handleJobSelect} value={localState.jobSelect}> 
                 <option value="All Jobs">All Jobs</option>
-                {localState.jobsList.map((job,index)=>{
-                    return <option key={index} value={job}>{job}</option>
-                })}
+                {jobList.map((job,index)=>
+                    <option key={index} value={job}>{job}</option>
+                )}
             </select><br/>
+
             <input type="button" value="search" onClick={()=>handlePlayerFinderSubmit()}/>
         </form>
 
@@ -125,7 +154,7 @@ export default function PlayersList (props) {
                 localState.playerFinderFound.map((player,index)=>
                 
                 <tr key={index}>
-                    <td>{player[3] ? 
+                    <td>{player[3] && showAvatar === true ? //todo 
                         <a href={player[3]} target="_blank" rel="noopener noreferrer"><img src={player[3] || "#"} height="50px" alt="img" className="avatar"/></a> : 
                         <div className="no-avatar"/>
                     }</td>

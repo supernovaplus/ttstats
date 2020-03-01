@@ -1,22 +1,35 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState, StyleSheet} from "react";
 import {StoreContext} from "./_Store";
+import {initAllServers} from "./_Dispatch";
 
 export default function Timer (){
-    const [state, setState] = useState(true);
+    const [state, setState] = useState({total: 0, online: 0});
     const store = useContext(StoreContext);
-    const time = Date.now()
-    let lastUpdate = 0;
     
+    function handleOnClickRefresh(){
+        initAllServers()(store.dispatch)
+    }
+
+
     useEffect(() => {
-        const interval = setInterval(() => {
-            setState(!state);console.log("test")
-        }, 5000);
+        setState({
+            ...state,
+            total: store.state.servers.length,
+            online: store.state.servers.reduce((acc,server)=>server.isLoaded === true && server.serverData ? acc + 1 : acc ,0),
+        });
+        // const interval = setInterval(() => {
+        //     setState(state+1);
+        // }, 1000);
     
-        return () => clearInterval(interval);
-    });
+        // return () => clearInterval(interval);
+    },[store.state.servers]);
     
 
 
 
-    return (<div>TIMERRRR {lastUpdate}</div>)
+    return (<>
+        <p>
+        Server data is loaded from {state.online} out of {state.total} servers <input type="button" value="refresh all servers" className="btn refresh" onClick={handleOnClickRefresh}/>
+        </p>
+    </>)
 }

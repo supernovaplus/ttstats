@@ -2,7 +2,7 @@ import React, {useContext} from "react";
 import {StoreContext} from "./_Store";
 import {Link} from "react-router-dom";
 
-export default function PlayersList (props) {
+export default function ServerDetails (props) {
     const store = useContext(StoreContext);
 
     if(!props.url || isNaN(props.url))

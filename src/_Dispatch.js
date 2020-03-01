@@ -7,6 +7,8 @@ const timeout = (promise) => new Promise(function(resolve, reject) {
 })
 
 export const initAllServers = () => dispatch => {
+    dispatch({type: "CLEARSERVERSLIST"})
+
     serversListJSON.forEach((server,index) => {
         dispatch({
             type: "ADDSERVER",
@@ -30,13 +32,16 @@ export const initAllServers = () => dispatch => {
 
 // const fetchServer = (server,index) => {
 export const fetchServer = (server,index) => dispatch => {
+    console.log("index",index)
     timeout(
         //https://cors-anywhere.herokuapp.com/
         fetch("http://"+server[0]+"/status/widget/players.json")
         // fetch("https://cors-anywhere.herokuapp.com/http://"+server[0]+"/status/widget/players.json")
         .then(res => res.json())
         ).then(
-        (res) => 
+        (res) => {
+            res.players.forEach(player=>{if(player[5] === "") player[5] = "Unemployed";});
+            
             dispatch({
                 type: "UPDATESERVER",
                 data: {
@@ -46,7 +51,8 @@ export const fetchServer = (server,index) => dispatch => {
                     lastUpdate: Date.now()
                 },
                 index
-            }),
+            })
+        },
         () => {
             dispatch({
                 type: "UPDATESERVER",

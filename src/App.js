@@ -11,7 +11,7 @@ import PlayersFinder from "./PlayersFinder";
 import JobsStats from "./JobsStats";
 import Timer from "./Timer";
 import {StoreProvider} from './_Store';
-import "./App.css";
+
 
 export default function App() {
   return (
@@ -42,7 +42,7 @@ export default function App() {
               case ("?jobs"):
                 return <JobsStats/>;
               case ("?playersfinder"):
-                return <PlayersFinder/>;
+                return <PlayersFinder url={url}/>;
               default:
                 return <Redirect to="/?status"/>;
             }
