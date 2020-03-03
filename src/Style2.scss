@@ -1,0 +1,202 @@
+@import url("https://fonts.googleapis.com/css?family=Spartan:600&display=swap");
+
+$color1: rgba(11, 19, 43, 1);
+$color2: rgba(28, 37, 65, 1);
+$color3: rgba(58, 80, 107, 1);
+$color4: rgba(91, 192, 190, 1);
+$color5: rgba(111, 255, 233, 1);
+$headerButtonColor: rgb(0, 140, 255);
+$headerButtonTextColor: rgb(0, 0, 0);
+$globalFontColor: rgb(29, 23, 12);
+
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Spartan',Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: $color5;
+    text-align: center;
+    background-color: $color2;
+    margin-bottom: 50px;
+}
+
+
+a, a:hover, a:active, a:visited{
+    color: rgb(77, 190, 255);
+}
+
+#jobsStats, #serversStatus, #playersFinder{
+    min-width: 50%;
+}
+
+#header{
+    background-color: $color1;
+}
+
+#header a{
+    background-color: $headerButtonColor;
+    padding: 2px 5px;
+    text-decoration: none;
+    color: $headerButtonTextColor;
+    border-radius: 2px;
+    box-shadow: black 1px 1px;
+}
+
+h2,h3,#form{
+    margin: 5px;
+    padding: 5px;
+    box-shadow: $color1 0 0 10px;
+    background-color: $color1;
+    border-radius: 5px;
+}
+
+table{
+    background-color: $color1;
+    width: 100%;
+}
+
+#jobsStats td{
+    padding: 5px 50px;
+}
+
+
+#header ul{
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    padding: 0;
+}
+
+#header li{
+    padding: 5px 5px;
+}
+
+#content{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+td{
+    padding: 3px;
+}
+
+table{
+    margin: 5px 0;
+    border-collapse: separate;
+    border: 1px solid $color1;
+    border-radius: 5px;
+    align-content: center;
+    justify-content: center;
+}
+
+tr{
+    border-collapse: separate;
+    border: 1px solid red;
+}
+
+td{
+    border-collapse: separate;
+    border: 1px solid rgba(32, 121, 255, 0.205);
+}
+
+th{
+    background-color: rgba(32, 121, 255, 0.205);
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+#content p{
+    padding: 10px;
+}
+
+#form form *{
+    padding: 5px 0px;
+}
+
+// #playersFinder form{
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-content: center;
+// }
+
+#playersFinder #form div *{
+    width: 100%;
+}
+
+
+#playersFinder form input, select{
+    text-align: center;
+    color: white;
+    background-color: $color3;
+    border-radius: 2px;
+    border: 0;
+}
+
+#playersFinder form input{
+    width: 100%;
+    border: 0;
+    text-align: center;
+    background-color: $color3;
+}
+
+#playersFinder form input[type="button"]{
+    margin-top:10px;
+    background-color: $headerButtonColor;
+    color: $headerButtonTextColor;
+    font-weight: bold;
+}
+
+// #content {
+//     // flex-direction: column;
+// }
+
+
+.online{
+    color: white;
+}
+
+.offline{
+    color: $color5;
+}
+
+.loading{
+    color:grey;
+}
+
+#footer{
+    position: fixed;
+    bottom: 0;
+    background-color: $color1;
+    width: 100%;
+}
+
+#footer p{
+    max-width: 600px;
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+@media(max-width:600px){
+    #header ul{
+        flex-direction: column;
+        color: red;
+    }
+    #header a{
+        display: block;
+        
+    }
+    #header li{
+        padding: 1px 0;
+    }
+
+    h2, h3 {
+        width: 100%;
+    }
+}

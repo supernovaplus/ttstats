@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState, StyleSheet} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {StoreContext} from "./_Store";
 import {initAllServers} from "./_Dispatch";
 
@@ -12,11 +12,11 @@ export default function Timer (){
 
 
     useEffect(() => {
-        setState({
-            ...state,
+        setState(s => ({
+            ...s,
             total: store.state.servers.length,
             online: store.state.servers.reduce((acc,server)=>server.isLoaded === true && server.serverData ? acc + 1 : acc ,0),
-        });
+        }));
         // const interval = setInterval(() => {
         //     setState(state+1);
         // }, 1000);

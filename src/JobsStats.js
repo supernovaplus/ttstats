@@ -30,11 +30,11 @@ export default function JobsStats () {
                 }
             })
             const sortedEntries = (Object.entries(jobs).sort((item1,item2)=>item2[1]-item1[1]));
-            setState({
-                ...state,
+            setState(s => ({
+                ...s,
                 entries: sortedEntries,
                 counter: (sortedEntries.reduce((acc,val)=>acc+val[1],0))
-            })
+            }))
         }
     }, [store.state.servers]); 
 
@@ -101,10 +101,10 @@ export default function JobsStats () {
     },[state]);
 
     return (
-        <div>
+        <div id="jobsStats">
             <h2>Top Jobs Now</h2>
             {state.entries.length === 0 ? <div>Loading...</div> : 
-                <table className="jobstatstable">
+                <table>
                     <tbody>
                     <tr><th>%</th><th>Job Name</th><th>Active</th><th>Links</th></tr>
                     {state.entries.map((job,index)=>{

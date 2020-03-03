@@ -7,7 +7,7 @@ export default function PlayersList (props) {
     const store = useContext(StoreContext);
 
     var jobselectURL;
-    var serverselectURL;
+    // var serverselectURL;
 
     if(props.url.length>1){
         // console.log(props.url)
@@ -15,9 +15,10 @@ export default function PlayersList (props) {
             const data = item.split(":");
             if(data[0] === "job"){
                 jobselectURL = decodeURI(data[1]);
-            }else if(data[0] === "server"){
-                serverselectURL = decodeURI(data[1]);
             }
+            // else if(data[0] === "server"){
+            //     serverselectURL = decodeURI(data[1]);
+            // }
         })
         // console.log(encodeURI(jobselectURL))
     }
@@ -38,15 +39,18 @@ export default function PlayersList (props) {
     // console.log(localState)
 
     const handlePlayersNameInput = (input) => {
-        setlocalState({...localState, playerFinderInputField: input.target.value });
+        const value = input.target.value;
+        setlocalState(s => ({...s, playerFinderInputField: value }));
     }
 
     const handleServerSelect = (input) => {
-        setlocalState({...localState, serverSelect: input.target.value });
+        const value = input.target.value;
+        setlocalState(s => ({...s, serverSelect: value }));
     }
 
     const handleJobSelect = (input) => {
-        setlocalState({...localState, jobSelect: input.target.value });
+        const value = input.target.value;
+        setlocalState(s => ({...s, jobSelect: value }));
     }
 
     const _handleKeyDown = (e) => {
@@ -79,16 +83,18 @@ export default function PlayersList (props) {
             })
         })
 
-        setlocalState(
+        setlocalState(s=>(
             playerFinderFound.length > 0 ? 
-                {   ...localState,
-                    playerFinderMessages: "Found " + playerFinderFound.length + " player" +(playerFinderFound.length === 1 ?"":"s"),
-                    playerFinderFound
-                } : {
-                    ...localState,
-                    playerFinderMessages: isButton ? "Found nothing" : "...",
-                    playerFinderFound: []
-                }
+                    {   ...s,
+                        playerFinderMessages: "Found " + playerFinderFound.length + " player" +(playerFinderFound.length === 1 ?"":"s"),
+                        playerFinderFound
+                    } : {
+                        ...s,
+                        playerFinderMessages: isButton ? "Found nothing" : "...",
+                        playerFinderFound: []
+                    }
+            )
+
         )
     }
 
@@ -117,57 +123,63 @@ export default function PlayersList (props) {
 
   
     return (
-    
-        <div id="playerFinder">
-        <h2>Online Players Finder</h2>
-        <form>
-            <input type="text" placeholder="Player's name or in-game id" onChange={(input)=>handlePlayersNameInput(input)} onKeyDown={_handleKeyDown}/><br/>
-            
-            <label htmlFor="serverSelector">Filter Server: </label>
-            <select id="serverSelector" onChange={handleServerSelect} value={localState.serverSelect}>
-                <option value="All Servers">All Servers</option>
-                {store.state.servers.map((server,index)=>
-                    server.isLoaded ? <option key={index} value={server.name}>{server.name}</option> : ""
-                )}
-            </select><br/>
+        <div id="playersFinder">
+            <h2>Online Players Finder</h2>
+            <div id="form">
+                <form>
+                    <input type="text" placeholder="Player's name or in-game id" onChange={(input)=>handlePlayersNameInput(input)} onKeyDown={_handleKeyDown}/>
+                    <div>
+                        <label htmlFor="serverSelector">Filter Server</label>
+                        <select id="serverSelector" onChange={handleServerSelect} value={localState.serverSelect}>
+                            <option value="All Servers">All Servers</option>
+                            {store.state.servers.map((server,index)=>
+                                server.isLoaded ? <option key={index} value={server.name}>{server.name}</option> : ""
+                            )}
+                        </select>
+                    </div>
 
-            <label htmlFor="jobSelector">Filter Job: </label>
-            <select id="jobSelector" onChange={handleJobSelect} value={localState.jobSelect}> 
-                <option value="All Jobs">All Jobs</option>
-                {jobList.map((job,index)=>
-                    <option key={index} value={job}>{job}</option>
-                )}
-            </select><br/>
-
-            <input type="button" value="search" onClick={()=>handlePlayerFinderSubmit()}/>
-        </form>
-
+                    <div>
+                        <label htmlFor="jobSelector">Filter Job</label>
+                        <select id="jobSelector" onChange={(input)=>handleJobSelect(input)} value={localState.jobSelect}> 
+                            <option value="All Jobs">All Jobs</option>
+                            {jobList.map((job,index)=>
+                                <option key={index} value={job}>{job}</option>
+                            )}
+                        </select>
+                    </div>
 
 
-        <div>
-        <p>
-            {localState.playerFinderMessages}
-        </p>
-        <table id="playersFound">
-            <tbody>
+                    <input type="button" value="search" onClick={()=>handlePlayerFinderSubmit()}/>
+                </form>
+            </div>
+
+
+            <h2>
+                {localState.playerFinderMessages}
+            </h2>
+
+
             {!localState.playerFinderFound ? "" :
-                localState.playerFinderFound.map((player,index)=>
+            (<table>
+            <tbody>
+                {localState.playerFinderFound.map((player,index)=>
                 
-                <tr key={index}>
-                    <td>{player[3] && showAvatar === true ? //todo 
-                        <a href={player[3]} target="_blank" rel="noopener noreferrer"><img src={player[3] || "#"} height="50px" alt="img" className="avatar"/></a> : 
-                        <div className="no-avatar"/>
-                    }</td>
-                    <td>#{index+1}</td>
-                    <td><b>{player[0]}</b></td>
-                    <td>{player[4] || "-"}</td>
-                    <td><a href ={"fivem://connect/" + player[1]} title="connect">{player[1]}</a><br/><b>{player[2]}</b></td>
-                </tr>
-            )}
+                    <tr key={index}>
+                        <td>{player[3] && showAvatar === true ? //todo 
+                            <a href={player[3]} target="_blank" rel="noopener noreferrer"><img src={player[3] || "#"} height="50px" alt="img" className="avatar"/></a> : 
+                            <div className="no-avatar"/>
+                        }</td>
+                        <td>#{index+1}</td>
+                        <td><b>{player[0]}</b></td>
+                        <td>{player[4] || "-"}</td>
+                        <td><a href ={"fivem://connect/" + player[1]} title="connect">{player[1]}</a><br/><b>{player[2]}</b></td>
+                    </tr>
+                )}
             </tbody>
-        </table>
-        </div>
-        </div>
+            </table>)
+            }
+
+    </div>
     )
 
 }

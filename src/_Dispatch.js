@@ -30,7 +30,6 @@ export const initAllServers = () => dispatch => {
 };
 
 
-// const fetchServer = (server,index) => {
 export const fetchServer = (server,index) => dispatch => {
     console.log("index",index)
     timeout(

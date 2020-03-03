@@ -34,17 +34,17 @@ ul{
 }
 
 
-header {
+#header {
   margin: 0;
   background-color: transparent;
   text-align: center;
 }
 
-header li a{
+#header li a{
   padding: 0px 10px 1px 10px;
 }
 
-header li {
+#header li {
   display:inline;
   padding-bottom: 1px;
   margin: 1px;
@@ -55,11 +55,11 @@ header li {
   background-color: rgb(173, 218, 255);
 }
 
-header li:hover {
+#header li:hover {
   background-color: white;
 }
 
-header a {
+#header a {
   color: black;
   text-decoration-line: none;
   /* text-decoration-style: double; */
@@ -105,14 +105,14 @@ a {
 
 
 
-main {
+#content {
   padding: 10px;
   /* display: flex;
   flex-direction: column; */
 }
 
 
-header, footer{
+#header, #footer{
   background: rgb(0,172,255);
   background: linear-gradient(14deg, rgba(0,172,255,1) 0%, rgba(80,222,255,1) 100%);
 }
@@ -121,7 +121,7 @@ p{
   margin:0;
 }
 
-main, table{
+#content{
   margin: 0 auto;
 
   display: flex;
@@ -183,13 +183,13 @@ h2 {
   border: 1px solid white;
 }
 
-footer p {
+#footer p {
   margin: 0 auto;
   width: 700px;
   background-color: rgba(255, 255, 255, 0.541);
 }
 
-footer{
+#footer{
   /* display: flex;
   justify-content: flex-end;
   flex-direction: column; */
@@ -213,3 +213,13 @@ footer{
   :hover + .tooltip {
       display: block;
   } */
+
+@media(max-width:700px){
+  body{
+    background-color: red;
+    font-size: .7em;
+  }
+  td,tr,th{
+    max-width: 0;
+  }
+}
