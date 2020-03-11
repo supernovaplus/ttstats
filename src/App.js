@@ -5,11 +5,12 @@ import {
   Link,
   Redirect
 } from "react-router-dom";
-import ServersStatus from "./ServersStatus";
-import ServerInfo from "./ServerInfo";
-import PlayersFinder from "./PlayersFinder";
-import JobsStats from "./JobsStats";
-import Timer from "./Timer";
+import ServersStatus from "./components/ServersStatus";
+import ServerInfo from "./components/ServerInfo";
+import PlayersFinder from "./components/PlayersFinder";
+import JobsStats from "./components/JobsStats";
+import VehicleStats from "./components/VehicleStats";
+import Timer from "./components/Timer";
 import {StoreProvider} from './_Store';
 
 
@@ -22,6 +23,7 @@ export default function App() {
             <li><Link to="/">Servers Status</Link></li>
             <li><Link to="?playersfinder">Players Finder</Link></li>
             <li><Link to="?player">N/A</Link></li>
+            <li><Link to="?vehicles">Vehicle Stats</Link></li>
             <li><Link to="?jobs">Jobs Stats</Link></li>
           </ul>
         </div>
@@ -39,6 +41,8 @@ export default function App() {
                   return <div>player</div>;
                 case ("?jobs"):
                   return <JobsStats/>;
+                case ("?vehicles"):
+                  return <VehicleStats/>;
                 case ("?playersfinder"):
                   return <PlayersFinder url={url}/>;
                 default:

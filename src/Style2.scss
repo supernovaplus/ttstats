@@ -53,12 +53,18 @@ h2,h3,#form{
     border-radius: 5px;
 }
 
+h2,h3,#form {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+}
+
 table{
     background-color: $color1;
     width: 100%;
 }
 
-#jobsStats td{
+#jobsStats td, #carsStats td{
     padding: 5px 50px;
 }
 
@@ -182,6 +188,27 @@ th{
     justify-content: center;
     align-content: center;
 }
+
+.no-avatar{
+    height: 50px;
+    width: 50px;
+    margin: auto;
+    background: url("/no-avatar.gif") no-repeat center;
+    background-size: 50px 50px;
+}
+
+.avatar{
+    border-radius: 50%;
+    background-color: #222222;
+}
+
+// select {
+//     direction: rtl;
+// }
+
+// option {
+//     direction: ltr;
+// }
 
 @media(max-width:600px){
     #header ul{

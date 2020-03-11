@@ -1,5 +1,5 @@
 import React, { createContext, useReducer, useEffect } from 'react';
-import * as dispatches from "./_Dispatch.js"
+import * as dispatchList from "./_Dispatch.js"
 
 
 const reducer = (data, action) => {
@@ -51,10 +51,10 @@ export const StoreProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
     useEffect(() => {
-        dispatches.initAllServers()(dispatch)
+        dispatchList.initAllServers()(dispatch)
     }, []);
 
-  return (<StoreContext.Provider value={{state, dispatch}}>
+  return (<StoreContext.Provider value={{state, dispatch, dispatchList}}>
     {children}
   </StoreContext.Provider>);
 }

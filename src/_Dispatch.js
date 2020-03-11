@@ -19,7 +19,8 @@ export const initAllServers = () => dispatch => {
                 "name": server[1],
                 "playersData": null,
                 "serverData": null,
-                "lastUpdate": null
+                "lastUpdate": null,
+                "vehicleData": null
             },
             index
         })
@@ -29,9 +30,16 @@ export const initAllServers = () => dispatch => {
     dispatch({type: "SERVERSINITED"})
 };
 
+// export const initAllDetailedServers = () => (state) => (dispatch) => {
+//     state.servers.forEach((server,index) => {
+//         if(server.isLoaded && !server.error && !server.vehicleData)
+//             fetchDetailedServer(server,index)(dispatch)
+//     });
+// };
+
 
 export const fetchServer = (server,index) => dispatch => {
-    console.log("index",index)
+    // console.log("index",index)
     timeout(
         //https://cors-anywhere.herokuapp.com/
         fetch("http://"+server[0]+"/status/widget/players.json")
@@ -74,3 +82,19 @@ export const fetchServer = (server,index) => dispatch => {
             index
         })
 })}
+
+
+export const fetchDetailedServer = (server,index) => dispatch => {
+    timeout(
+        fetch("http://"+server.ip+"/status/map/positions.json")
+        .then(res => res.json()))
+        .then(res => {
+            dispatch({
+                type: "UPDATESERVER",
+                data: {
+                    vehicleData: res.players.map(player=>player[4])
+                },
+                index
+            });
+    }).catch((err)=>console.log(err))
+}

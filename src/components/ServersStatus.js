@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import {StoreContext} from "./_Store";
+import {StoreContext} from "../_Store";
 import {Link} from "react-router-dom";
 
 

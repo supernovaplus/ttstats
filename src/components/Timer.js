@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
-import {StoreContext} from "./_Store";
-import {initAllServers} from "./_Dispatch";
+import {StoreContext} from "../_Store";
+import {initAllServers} from "../_Dispatch";
 
 export default function Timer (){
     const [state, setState] = useState({total: 0, online: 0});

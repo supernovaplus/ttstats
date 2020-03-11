@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState, useRef} from "react";
-import {StoreContext} from "./_Store";
+import {StoreContext} from "../_Store";
 import Chart from "chart.js";
 import {Link} from "react-router-dom";
 
@@ -117,6 +117,9 @@ export default function JobsStats () {
             <div>
                 <canvas id="myChart" ref={chartRef}></canvas>
             </div>
+
+            <h3>Total Players Online: {store.state.servers.reduce((acc,server)=>server.isLoaded && server.playersData ? acc + server.playersData.length : acc,0)}</h3>
+
         </div>
     )
 
