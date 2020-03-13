@@ -15,8 +15,14 @@ import {StoreProvider} from './_Store';
 
 
 export default function App() {
+  React.useEffect(()=>{
+    console.log("title")
+    document.title = "ttstats.aca.lt";
+  },[])
+
   return (
-    <Router basename="ttstats">
+    <Router basename="/">
+    {/* <Router basename="ttstats"> */}
       <StoreProvider>
         <div id="header">
           <ul>
