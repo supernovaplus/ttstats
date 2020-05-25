@@ -7,7 +7,6 @@ export default function PlayersList (props) {
     const store = useContext(StoreContext);
 
     var jobselectURL;
-    // var serverselectURL;
 
     if(props.url.length>1){
         // console.log(props.url)
@@ -16,11 +15,8 @@ export default function PlayersList (props) {
             if(data[0] === "job"){
                 jobselectURL = decodeURI(data[1]);
             }
-            // else if(data[0] === "server"){
-            //     serverselectURL = decodeURI(data[1]);
-            // }
+
         })
-        // console.log(encodeURI(jobselectURL))
     }
 
     const [localState, setlocalState] = useState({
@@ -30,13 +26,10 @@ export default function PlayersList (props) {
         serverSelect: "All Servers",
         jobSelect: jobselectURL || "All Jobs"
     });
-    // console.log(localState)
 
 
 
     const [jobList,setJobList] = useState([])
-
-    // console.log(localState)
 
     const handlePlayersNameInput = (input) => {
         const value = input.target.value;
@@ -61,8 +54,6 @@ export default function PlayersList (props) {
     }
 
     const handlePlayerFinderSubmit = (isButton = true) => {
-        // if(!localState.playerFinderInputField || localState.playerFinderInputField.length < 1)
-        //     return setlocalState({...localState, playerFinderMessages: "Invalid name or in-game id"});
         const input = localState.playerFinderInputField.toLowerCase()
         const playerFinderFound = [];
         store.state.servers.forEach(server=>{
@@ -98,11 +89,7 @@ export default function PlayersList (props) {
         )
     }
 
-
-
-
     useEffect(()=>{
-
         const tempJobsList = []
         store.state.servers.forEach(server=>{
             if(server.playersData){
@@ -115,9 +102,6 @@ export default function PlayersList (props) {
         })
 
         setJobList(tempJobsList)
-
-        
-
         handlePlayerFinderSubmit(false);
     },[store.state.servers])
 

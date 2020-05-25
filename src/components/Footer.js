@@ -17,19 +17,15 @@ export default function Timer (){
             total: store.state.servers.length,
             online: store.state.servers.reduce((acc,server)=>server.isLoaded === true && server.serverData ? acc + 1 : acc ,0),
         }));
-        // const interval = setInterval(() => {
-        //     setState(state+1);
-        // }, 1000);
-    
-        // return () => clearInterval(interval);
+
     },[store.state.servers]);
     
 
 
 
-    return (<>
-        <p>
-        Server data is loaded from {state.online} out of {state.total} servers <input type="button" value="refresh all servers" className="btn refresh" onClick={handleOnClickRefresh}/>
-        </p>
-    </>)
+    return (
+        <h3>
+        Server data is loaded from {state.online} out of {state.total} servers <input type="button" value="refresh all servers" className="btn2 refresh" onClick={handleOnClickRefresh}/>
+        </h3>
+    )
 }

@@ -17,9 +17,10 @@ export default function ServerInfo (props) {
         const header = (
             <div>
             <h2>
-                Players List On {server.name}<br/>
+                Name: {server.name}<br/>
                 IP: <a href ={"fivem://connect/" + server.ip}>{server.ip}</a><br/>
                 Uptime: {server.serverData ? server.serverData.uptime : "?"}<br/>
+                Players: {server.playersData ? server.playersData.length : 0}/{server.playersData ? server.serverData.limit : 0}<br/>
                 <Link to="/?status" className="btn btn-primary">Back</Link>
             </h2>
             </div>)

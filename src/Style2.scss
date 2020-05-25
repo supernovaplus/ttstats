@@ -6,6 +6,7 @@ $color3: rgba(58, 80, 107, 1);
 $color4: rgba(91, 192, 190, 1);
 $color5: rgba(111, 255, 233, 1);
 $headerButtonColor: rgb(0, 140, 255);
+$linkCol: rgb(77, 190, 255);
 $headerButtonTextColor: rgb(0, 0, 0);
 $globalFontColor: rgb(29, 23, 12);
 
@@ -15,8 +16,11 @@ $globalFontColor: rgb(29, 23, 12);
     box-sizing: border-box;
 }
 
-body{
+body, .btn2{
     font-family: 'Spartan',Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+body{
     color: $color5;
     text-align: center;
     background-color: $color2;
@@ -24,8 +28,17 @@ body{
 }
 
 
-a, a:hover, a:active, a:visited{
-    color: rgb(77, 190, 255);
+a, a:active, a:visited, a:link{
+    color: $linkCol;
+    // color: $color4;
+    // color: inherit;
+    // color: black;
+}
+
+
+
+a:hover{
+    color: $headerButtonColor;
 }
 
 #jobsStats, #serversStatus, #playersFinder{
@@ -66,6 +79,18 @@ table{
 
 #jobsStats td, #carsStats td{
     padding: 5px 50px;
+}
+
+#split{
+    height: 25px;
+}
+
+.btn2 {
+	border: 0;
+	background-color: $color5;
+	color: $color1;
+	padding: 5px;
+	margin: 0;
 }
 
 
@@ -210,6 +235,10 @@ th{
 //     direction: ltr;
 // }
 
+.gold, .gold *{
+    background-color: $color4 !important;
+}
+
 @media(max-width:600px){
     #header ul{
         flex-direction: column;
@@ -226,4 +255,28 @@ th{
     h2, h3 {
         width: 100%;
     }
+
+    #jobsStats td, #carsStats td, td, tr{
+        padding: 0;
+        margin:0;
+    }
+
+    body{
+        margin-bottom: 100px;
+    }
+
+    td,b{
+        font-size: .8em;
+    }
+
+    #playersFinder .avatar, #playersFinder .no-avatar{
+        display: none;
+    }
+
+    #split{
+        height: 10px;
+    }
+
+
+    
 }

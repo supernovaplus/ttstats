@@ -1,23 +1,19 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect} from "react";
 import {StoreContext} from "../_Store";
-import Chart from "chart.js";
-// import {Link} from "react-router-dom";
 
 
 export default function VehicleStats(){
     const store = useContext(StoreContext);
-    const [isLoadingServers, setIsLoadingServers] = useState([]);
 
     useEffect(()=>{
-        if(store.state.inited){
-            store.state.servers.forEach((server,index) => {
-                if(server.isLoaded && !server.error && !server.vehicleData && !isLoadingServers.includes(index)){
-                    setIsLoadingServers(s=>[...s, index]);
-                    store.dispatchList.fetchDetailedServer(server,index)(store.dispatch)
-                }
-            });
-        }
-    },[store.state.inited, store.state.servers])
+        if(!store.state.inited) return;
+
+        store.state.servers.forEach((server,index) => {
+            if(server.isLoaded && !server.error && !server.vehicleData){
+                store.dispatchList.fetchDetailedServer(server,index)(store.dispatch)
+            }
+        });
+    },[store.state.inited, store.state.servers, store.dispatchList, store.dispatch])
 
     const list = {};
     let totalCounter = 0;
@@ -47,17 +43,12 @@ export default function VehicleStats(){
             
             <table>
                 <tbody>
-                {/* <tr><th>Connect</th><th>Players</th><th>Status</th><th>Uptime</th><th>Details</th></tr> */}
-                {/* {store.state.servers.map((server,index)=>
-                    !server.vehicleData ? "" :
-                server.vehicleData.map(player => <tr><td>{counter++}</td><td>{index}</td><td>{player.vehicle_name}</td></tr> )
-                )} */}
-                {list2.length === 0 ? 
-                    <tr><td>N/A</td></tr> 
-                :   <>
-                    <tr><th>%</th><th>Job Name</th><th>Active</th></tr>
-                    {list2.map((vehicle,index)=><tr key={index}><td>{Math.floor(((vehicle.counter/totalCounter) * 100)+0.5)}%</td><td>{vehicle.vehicle_name}</td><td>{vehicle.counter}</td></tr>)}
-                    </>
+
+                {list2.length === 0 ?  <tr><td>N/A</td></tr> :
+                <>
+                    <tr><th>%</th><th>Name</th><th>Active</th></tr>
+                    {list2.map((vehicle,index)=><tr key={index}><td>{Number(vehicle.counter/totalCounter*100).toFixed(2)}%</td><td>{vehicle.vehicle_name === "None" ? "None, On Foot" : vehicle.vehicle_name}</td><td>{vehicle.counter}</td></tr>)}
+                </>
                 }
                 </tbody>
             </table>
@@ -66,21 +57,4 @@ export default function VehicleStats(){
         </div>
     )
 
-    // return (
-    //     <div id="carsStats">
-    //         <h2>Transport Tycoon Servers List</h2>
-            
-    //         <table>
-    //             <tbody>
-    //             {/* <tr><th>Connect</th><th>Players</th><th>Status</th><th>Uptime</th><th>Details</th></tr> */}
-    //             {store.state.servers.map((server,index)=>
-    //                 <tr key={index}><td>{server.index}</td><td>{JSON.stringify(server.vehicleData)}</td></tr>
-    //             )}
-    //             </tbody>
-    //         </table>
-    //     </div>
-    // )
-
-
-    
 }
