@@ -14,7 +14,6 @@ export default function JobsStats () {
     const [state2, setState2] = useState({entries: [], counter: 0});
     const store = useContext(StoreContext);
     const chartRef = useRef();
-
     
     useEffect(() => {
         if(store.state.inited && store.state.servers.reduce((acc,server)=>server.isLoaded === true ? acc + 1 : acc,0) === store.state.servers.length){
@@ -70,11 +69,9 @@ export default function JobsStats () {
         }
     }, [store.state.servers]); 
 
-
     useEffect(()=>{
         if(chartRef && chartRef.current){
             const current = chartRef.current.getContext("2d");
-            // console.log(current)
             const instance = new Chart(current, {
                 type: 'pie',
                 data: {
@@ -103,11 +100,8 @@ export default function JobsStats () {
                                 }
                             }
                         } 
-                                
                 }});
-
-                return () => instance.destroy();
-    
+            return () => instance.destroy();
         }
     },[state]);
 
@@ -119,12 +113,11 @@ export default function JobsStats () {
                     <tbody>
                     <tr><th>%</th><th>Job Name</th><th>Active</th><th>Links</th></tr>
                     {state.entries.map((job,index)=>{
-                        return <tr key={index}><td>{Number(job[1]/state.counter*100).toFixed(1)}%</td><td>{job[0]}</td><td>{job[1]}</td><td><Link to={encodeURI("/?playersfinder=job:" + job[0])}>Players</Link></td></tr>
+                        return <tr key={index}><td>{Number(job[1]/state.counter*100).toFixed(1)}%</td><td>{job[0]}</td><td>{job[1]}</td><td><Link to={encodeURI("/?playerfinder=job:" + job[0])}>Players</Link></td></tr>
                     })}
                     </tbody>
                 </table>
             }
-
             
             <div id="split"/>
             <h2>Top Company Jobs Now</h2>
@@ -150,7 +143,4 @@ export default function JobsStats () {
 
         </div>
     )
-
-
-
 }

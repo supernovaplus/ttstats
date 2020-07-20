@@ -1,5 +1,4 @@
-import serversListJSON from "./json/serversList.json";
-// import serversListJSON from "./serversListEmpty.json";
+import serversListJSON from "./data/serversList.json";
 
 const timeout = (promise) => new Promise(function(resolve, reject) {
     setTimeout(() => reject(new Error("timeout")), 2000)
@@ -30,20 +29,9 @@ export const initAllServers = () => dispatch => {
     dispatch({type: "SERVERSINITED"})
 };
 
-// export const initAllDetailedServers = () => (state) => (dispatch) => {
-//     state.servers.forEach((server,index) => {
-//         if(server.isLoaded && !server.error && !server.vehicleData)
-//             fetchDetailedServer(server,index)(dispatch)
-//     });
-// };
-
-
 export const fetchServer = (server,index) => dispatch => {
-    // console.log("index",index)
     timeout(
-        //https://cors-anywhere.herokuapp.com/
         fetch("http://"+server[0]+"/status/widget/players.json")
-        // fetch("https://cors-anywhere.herokuapp.com/http://"+server[0]+"/status/widget/players.json")
         .then(res => res.json())
         ).then(
         (res) => {
@@ -82,7 +70,6 @@ export const fetchServer = (server,index) => dispatch => {
             index
         })
 })}
-
 
 export const fetchDetailedServer = (server,index) => dispatch => {
     timeout(

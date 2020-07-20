@@ -10,7 +10,6 @@ export default function Timer (){
         initAllServers()(store.dispatch)
     }
 
-
     useEffect(() => {
         setState(s => ({
             ...s,
@@ -19,9 +18,6 @@ export default function Timer (){
         }));
 
     },[store.state.servers]);
-    
-
-
 
     return (
         <h3>

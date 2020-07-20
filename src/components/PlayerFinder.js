@@ -5,7 +5,6 @@ const showAvatar = false;
 
 export default function PlayersList (props) {
     const store = useContext(StoreContext);
-
     var jobselectURL;
 
     if(props.url.length>1){
@@ -26,8 +25,6 @@ export default function PlayersList (props) {
         serverSelect: "All Servers",
         jobSelect: jobselectURL || "All Jobs"
     });
-
-
 
     const [jobList,setJobList] = useState([])
 
@@ -85,7 +82,6 @@ export default function PlayersList (props) {
                         playerFinderFound: []
                     }
             )
-
         )
     }
 
@@ -104,11 +100,10 @@ export default function PlayersList (props) {
         setJobList(tempJobsList)
         handlePlayerFinderSubmit(false);
     },[store.state.servers])
-
   
     return (
-        <div id="playersFinder">
-            <h2>Online Players Finder</h2>
+        <div id="playerFinder">
+            <h2>Online Player Finder</h2>
             <div id="form">
                 <form>
                     <input type="text" placeholder="Player's name or in-game id" onChange={(input)=>handlePlayersNameInput(input)} onKeyDown={_handleKeyDown}/>
@@ -117,8 +112,7 @@ export default function PlayersList (props) {
                         <select id="serverSelector" onChange={handleServerSelect} value={localState.serverSelect}>
                             <option value="All Servers">All Servers</option>
                             {store.state.servers.map((server,index)=>
-                                server.isLoaded ? <option key={index} value={server.name}>{server.name}</option> : ""
-                            )}
+                                server.isLoaded ? <option key={index} value={server.name}>{server.name}</option> : "")}
                         </select>
                     </div>
 
@@ -127,43 +121,38 @@ export default function PlayersList (props) {
                         <select id="jobSelector" onChange={(input)=>handleJobSelect(input)} value={localState.jobSelect}> 
                             <option value="All Jobs">All Jobs</option>
                             {jobList.map((job,index)=>
-                                <option key={index} value={job}>{job}</option>
-                            )}
+                                <option key={index} value={job}>{job}</option>)}
                         </select>
                     </div>
-
 
                     <input type="button" value="search" onClick={()=>handlePlayerFinderSubmit()}/>
                 </form>
             </div>
 
-
             <h2>
                 {localState.playerFinderMessages}
             </h2>
 
-
             {!localState.playerFinderFound ? "" :
             (<table>
-            <tbody>
-                {localState.playerFinderFound.map((player,index)=>
-                
-                    <tr key={index}>
-                        <td>{player[3] && showAvatar === true ? //todo 
-                            <a href={player[3]} target="_blank" rel="noopener noreferrer"><img src={player[3] || "#"} height="50px" alt="img" className="avatar"/></a> : 
-                            <div className="no-avatar"/>
-                        }</td>
-                        <td>#{index+1}</td>
-                        <td><b>{player[0]}</b></td>
-                        <td>{player[4] || "-"}</td>
-                        <td><a href ={"fivem://connect/" + player[1]} title="connect">{player[1]}</a><br/><b>{player[2]}</b></td>
-                    </tr>
-                )}
-            </tbody>
+                <tbody>
+                    {localState.playerFinderFound.map((player,index)=>
+                    
+                        <tr key={index}>
+                            <td>{player[3] && showAvatar === true ? //todo 
+                                <a href={player[3]} target="_blank" rel="noopener noreferrer"><img src={player[3] || "#"} height="50px" alt="img" className="avatar"/></a> : 
+                                <div className="no-avatar"/>
+                            }</td>
+                            <td>#{index+1}</td>
+                            <td><b>{player[0]}</b></td>
+                            <td>{player[4] || "-"}</td>
+                            <td><a href ={"fivem://connect/" + player[1]} title="connect">{player[1]}</a><br/><b>{player[2]}</b></td>
+                        </tr>
+                    )}
+                </tbody>
             </table>)
             }
             <h3>Total Players Online: {store.state.servers.reduce((acc,server)=>server.isLoaded && server.playersData ? acc + server.playersData.length : acc,0)}</h3>
     </div>
     )
-
 }

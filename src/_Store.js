@@ -1,20 +1,9 @@
 import React, { createContext, useReducer, useEffect } from 'react';
 import * as dispatchList from "./_Dispatch.js"
 
-
 const reducer = (data, action) => {
     switch(action.type){
-        // case ("SET"):
-        //     return {
-        //         ...data,
-        //         ...action.data
-        //     }
-        // case ("PUSH"):
-        //     if(data.servers) data.servers.push(action.data)
-        //     else data.servers = [action.data];
-        //     return {...data};
         case ("ADDSERVER"):
-            // if(!data.servers) data.servers = [];
             const tempArray = data.servers.slice();
             tempArray.splice(action.index, 0, action.data);
             data.servers = tempArray;
@@ -38,7 +27,6 @@ const reducer = (data, action) => {
             return data;
     }
 }
-
 
 const initialState = {
     servers: [],

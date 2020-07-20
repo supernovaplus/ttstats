@@ -28,8 +28,8 @@ export default function ServerInfo (props) {
         if(!server.playersData || server.playersData.length === 0){
             return (
                 <div id="serverInfo">
-                {header}
-                <h2>No Players</h2>
+                    {header}
+                    <h2>No Players</h2>
                 </div>
             ) 
         }
@@ -37,28 +37,25 @@ export default function ServerInfo (props) {
         return (
             <div id="serverInfo">
                 {header}
-                
                 <table>
-                <tbody>
-                    <tr><th>Avatar</th><th>#</th><th>Name</th><th>ID</th><th>Job</th></tr>
-                    {server.playersData.map((player,index) => (
-                    <tr key={index}>
-                        <td>{player[3] ? 
-                            <a href={player[3]} target="_blank" rel="noopener noreferrer"><img src={player[3] || "#"} height="50px" alt="img" className="avatar"/></a> : 
-                            <div className="no-avatar"/>
-                        }</td>
-                        <td>#{index+1}</td>
-                        <td><b>{player[0]}</b></td>
-                        <td>{player[2]}</td>
-                        <td>{player[5] || "-"}</td>
-                    </tr>
-                    ))}
-
-                </tbody>
+                    <tbody>
+                        <tr><th>Avatar</th><th>#</th><th>Name</th><th>ID</th><th>Job</th></tr>
+                        {server.playersData.map((player,index) => (
+                        <tr key={index}>
+                            <td>
+                                {player[3] ? 
+                                    <a href={player[3]} target="_blank" rel="noopener noreferrer"><img src={player[3] || "#"} height="50px" alt="img" className="avatar"/></a> : 
+                                    <div className="no-avatar"/>}
+                            </td>
+                            <td>#{index+1}</td>
+                            <td><b>{player[0]}</b></td>
+                            <td>{player[2]}</td>
+                            <td>{player[5] || "-"}</td>
+                        </tr>
+                        ))}
+                    </tbody>
                 </table>
-                <h2>Updated on {new Date(server.lastUpdate).toTimeString()}</h2>
+                <h2>Data received: {new Date(server.lastUpdate).toTimeString()}</h2>
             </div>)
-
-
     }
 }

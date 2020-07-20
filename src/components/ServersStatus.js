@@ -2,7 +2,6 @@ import React, {useContext} from "react";
 import {StoreContext} from "../_Store";
 import {Link} from "react-router-dom";
 
-
 export default function ServersStatus(){
     const store = useContext(StoreContext);
 
@@ -16,23 +15,38 @@ export default function ServersStatus(){
                 {store.state.servers.map((server,index)=>{
                     if (server.error) {
                         return (
-                            <tr key={index}><td>{server.ip}<br/><b>{server.name}</b></td><td>-/-</td><td className="offline">OFFLINE</td><td></td><td></td></tr>
+                            <tr key={index}>
+                                <td>{server.ip}<br/><b>{server.name}</b></td>
+                                <td>-/-</td><td className="offline">OFFLINE</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
                         );
-
                     } else if (server.isLoaded === false) {
-
                         return (
-                            <tr key={index}><td>{server.ip}<br/><b>{server.name}</b></td><td>-/-</td><td className="loading">Loading</td><td></td><td></td></tr>
+                            <tr key={index}>
+                                <td>{server.ip}<br/><b>{server.name}</b></td>
+                                <td>-/-</td><td className="loading">Loading</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
                         );
-                    
                     } else if (server.playersData === undefined) {
                         return (
-                            <tr key={index}><td>{server.ip}<br/><b>{server.name}</b></td><td>-/-</td><td className="offline">ERROR</td><td></td><td></td></tr>
+                            <tr key={index}>
+                                <td>{server.ip}<br/><b>{server.name}</b></td>
+                                <td>-/-</td><td className="offline">ERROR</td><td></td>
+                                <td></td>
+                            </tr>
                         );
-
                     } else {
                         return (
-                            <tr key={index}><td><a href ={"fivem://connect/" + server.ip} title="connect">{server.ip}</a><br/><b>{server.name}</b></td><td>{server.playersData.length}/{server.serverData.limit}</td><td className="online">ONLINE</td><td>{server.serverData ? server.serverData.uptime : "-"}</td><td><Link to={"/?serverinfo="+(+index+1)} className="btn btn-primary">Players</Link></td></tr>
+                            <tr key={index}>
+                                <td><a href ={"fivem://connect/" + server.ip} title="Connect to the server">{server.ip}</a><br/><b>{server.name}</b></td>
+                                <td>{server.playersData.length}/{server.serverData.limit}</td>
+                                <td className="online">ONLINE</td><td>{server.serverData ? server.serverData.uptime : "-"}</td>
+                                <td><Link to={"/?serverinfo="+(+index+1)} className="btn btn-primary">Players</Link></td>
+                            </tr>
                         );
                     }
                 })}
@@ -41,7 +55,4 @@ export default function ServersStatus(){
             <h3>Total Players Online: {store.state.servers.reduce((acc,server)=>server.isLoaded && server.playersData ? acc + server.playersData.length : acc,0)}</h3>
         </div>
     )
-
-
-    
 }
