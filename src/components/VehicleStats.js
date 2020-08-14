@@ -37,23 +37,27 @@ export default function VehicleStats(){
     return (
         <div id="carsStats">
             <h2>Top Vehicles Now</h2>
-            <table>
-                <tbody>
-                {list.length === 0 ?  <tr><td>N/A</td></tr> :
-                <>
-                    <tr><th>%</th><th>Name</th><th>Active</th></tr>
-                    {Object.values(list)
-                        .sort((a,b) => b.counter - a.counter)
-                        .map((vehicle,index)=>
-                            <tr key={index}>
-                                <td>{Number(vehicle.counter/totalCounter*100).toFixed(2)}%</td>
-                                <td>{vehicle.vehicle_name === "None" ? "None, On Foot" : vehicle.vehicle_name}</td>
-                                <td>{vehicle.counter}</td>
-                            </tr>)}
-                </>
-                }
-                </tbody>
-            </table>
+            {totalCounter === 0 ? 
+                <p>Due to api changes, the access to the vehicle data is unavailable.</p> : 
+
+                <table>
+                    <tbody>
+                    {list.length === 0 ?  <tr><td>N/A</td></tr> :
+                    <>
+                        <tr><th>%</th><th>Name</th><th>Active</th></tr>
+                        {Object.values(list)
+                            .sort((a,b) => b.counter - a.counter)
+                            .map((vehicle,index)=>
+                                <tr key={index}>
+                                    <td>{Number(vehicle.counter/totalCounter*100).toFixed(2)}%</td>
+                                    <td>{vehicle.vehicle_name === "None" ? "None, On Foot" : vehicle.vehicle_name}</td>
+                                    <td>{vehicle.counter}</td>
+                                </tr>)}
+                    </>
+                    }
+                    </tbody>
+                </table>
+            }
             <h3>Total Players Online: {store.state.servers.reduce((acc,server)=>server.isLoaded && server.playersData ? acc + server.playersData.length : acc,0)}</h3>
         </div>
     )

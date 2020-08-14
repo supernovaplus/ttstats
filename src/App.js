@@ -29,7 +29,7 @@ export default function App() {
             <li><Link to="?playerfinder">Player Finder</Link></li>
             <li><Link to="?vehicles">Vehicle Stats</Link></li>
             <li><Link to="?jobs">Job Stats</Link></li>
-            <li><a href="http://ttmap.online" className="gold">ttmap.online</a></li>
+            <li><a href="http://ttmap.aca.lt" className="gold">ttmap.aca.lt</a></li>
           </ul>
         </div>
 
