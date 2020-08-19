@@ -1,5 +1,5 @@
 import React, { createContext, useReducer, useEffect } from 'react';
-import * as dispatchList from "./_Dispatch.js"
+import * as dispatch_list from "./dispatch.js"
 
 const reducer = (data, action) => {
     switch(action.type){
@@ -39,10 +39,12 @@ export const StoreProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
     useEffect(() => {
-        dispatchList.initAllServers()(dispatch)
+        dispatch_list.initAllServers()(dispatch)
     }, []);
 
-  return (<StoreContext.Provider value={{state, dispatch, dispatchList}}>
-    {children}
-  </StoreContext.Provider>);
+    return (
+        <StoreContext.Provider value={{state, dispatch, dispatch_list}}>
+            {children}
+        </StoreContext.Provider>
+    );
 }

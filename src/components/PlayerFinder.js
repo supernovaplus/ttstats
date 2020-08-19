@@ -1,5 +1,5 @@
-import React, {useContext, useState, useEffect} from "react";
-import {StoreContext} from "../_Store";
+import React, { useContext, useState, useEffect } from "react";
+import { StoreContext } from "../store";
 
 const showAvatar = false;
 
@@ -8,13 +8,11 @@ export default function PlayersList (props) {
     var jobselectURL;
 
     if(props.url.length>1){
-        // console.log(props.url)
         props.url.forEach(item=>{
             const data = item.split(":");
             if(data[0] === "job"){
                 jobselectURL = decodeURI(data[1]);
             }
-
         })
     }
 
@@ -129,28 +127,26 @@ export default function PlayersList (props) {
                 </form>
             </div>
 
-            <h2>
-                {localState.playerFinderMessages}
-            </h2>
+            <h2>{localState.playerFinderMessages}</h2>
 
             {!localState.playerFinderFound ? "" :
-            (<table>
-                <tbody>
-                    {localState.playerFinderFound.map((player,index)=>
-                    
-                        <tr key={index}>
-                            <td>{player[3] && showAvatar === true ? //todo 
-                                <a href={player[3]} target="_blank" rel="noopener noreferrer"><img src={player[3] || "#"} height="50px" alt="img" className="avatar"/></a> : 
-                                <div className="no-avatar"/>
-                            }</td>
-                            <td>#{index+1}</td>
-                            <td><b>{player[0]}</b></td>
-                            <td>{player[4] || "-"}</td>
-                            <td><a href ={"fivem://connect/" + player[1]} title="connect">{player[1]}</a><br/><b>{player[2]}</b></td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>)
+                <table>
+                    <tbody>
+                        {localState.playerFinderFound.map((player,index)=>
+                        
+                            <tr key={index}>
+                                <td>{player[3] && showAvatar === true ? //todo 
+                                    <a href={player[3]} target="_blank" rel="noopener noreferrer"><img src={player[3] || "#"} height="50px" alt="img" className="avatar"/></a> : 
+                                    <div className="no-avatar"/>
+                                }</td>
+                                <td>#{index+1}</td>
+                                <td><b>{player[0]}</b></td>
+                                <td>{player[4] || "-"}</td>
+                                <td><a href ={"fivem://connect/" + player[1]} title="connect">{player[1]}</a><br/><b>{player[2]}</b></td>
+                            </tr>
+                        )}
+                    </tbody>
+                </table>
             }
             <h3>Total Players Online: {store.state.servers.reduce((acc,server)=>server.isLoaded && server.playersData ? acc + server.playersData.length : acc,0)}</h3>
     </div>

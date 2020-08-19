@@ -2,21 +2,21 @@ import React from "react";
 import {
   BrowserRouter as Router,
   Route,
-  Link,
-  Redirect
+  Link//,
+  // Redirect
 } from "react-router-dom";
-import ServersStatus from "./components/ServersStatus";
-import ServerInfo from "./components/ServerInfo";
-import PlayerFinder from "./components/PlayerFinder";
-import JobsStats from "./components/JobsStats";
-import VehicleStats from "./components/VehicleStats";
-import Footer from "./components/Footer";
-import {StoreProvider} from './_Store';
+import ServersStatus from "./ServersStatus";
+import ServerInfo from "./ServerInfo";
+import PlayerFinder from "./PlayerFinder";
+import JobsStats from "./JobsStats";
+import VehicleStats from "./VehicleStats";
+import Footer from "./Footer";
+import {StoreProvider} from '../store';
 
 
 export default function App() {
   React.useEffect(()=>{
-    document.title = "ttstats.aca.lt";
+    document.title = "TTSTATS | Transport Tycoon Server Browser";
   },[])
 
   return (
@@ -54,9 +54,7 @@ export default function App() {
             }}/>
         </div>
 
-        <div id="footer">
-          <Footer/>
-        </div>
+        <Footer/>
       </StoreProvider>
     </Router>
   );

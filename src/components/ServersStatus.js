@@ -1,6 +1,6 @@
-import React, {useContext} from "react";
-import {StoreContext} from "../_Store";
-import {Link} from "react-router-dom";
+import React, { useContext } from "react";
+import { StoreContext } from "../store";
+import { Link } from "react-router-dom";
 
 export default function ServersStatus(){
     const store = useContext(StoreContext);

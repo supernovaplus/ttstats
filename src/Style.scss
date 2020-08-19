@@ -239,6 +239,10 @@ th{
     background-color: $color4 !important;
 }
 
+.dark, .dark *{
+    background-color: $color3 !important;
+}
+
 @media(max-width:660px){
     #header ul{
         flex-direction: column;
@@ -276,7 +280,4 @@ th{
     #split{
         height: 10px;
     }
-
-
-    
 }

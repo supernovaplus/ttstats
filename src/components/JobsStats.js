@@ -1,7 +1,7 @@
-import React, {useContext, useEffect, useState, useRef} from "react";
-import {StoreContext} from "../_Store";
+import React, { useContext, useEffect, useState, useRef } from "react";
+import { StoreContext } from "../store";
+import { Link } from "react-router-dom";
 import Chart from "chart.js";
-import {Link} from "react-router-dom";
 
 const colorArray = [
     "#FF0000","#00FF00","#800000","#00FFFF","#000000","#B8860B","#4B0082","#FFDEAD","#8B4513","#A52A2A","#B22222","#228B22","#008B8B","#BA55D3","#F0F8FF","#FF8C00","#FF69B4","#FFA07A","#C71585","#FFF8DC","#F0FFF0","#FFFFFF","#00FF7F","#0000FF","#FFF5EE","#2F4F4F","#006400","#9966CC","#FF6347","#ADD8E6","#FF0000","#00FF00","#800000","#00FFFF","#000000","#B8860B","#4B0082","#FFDEAD","#8B4513","#A52A2A","#B22222","#228B22","#008B8B","#BA55D3","#F0F8FF","#FF8C00","#FF69B4","#FFA07A","#C71585","#FFF8DC","#F0FFF0","#FFFFFF","#00FF7F","#0000FF","#FFF5EE","#2F4F4F","#006400","#9966CC","#FF6347",
@@ -120,6 +120,7 @@ export default function JobsStats () {
             }
             
             <div id="split"/>
+            
             <h2>Top Company Jobs Now</h2>
 
             {state2.entries.length === 0 ? <div>Loading...</div> : 

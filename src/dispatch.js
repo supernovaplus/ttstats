@@ -1,14 +1,14 @@
-import serversListJSON from "./data/serversList.json";
+import servers_list from "./serverslist.json";
 
-const timeout = (promise) => new Promise(function(resolve, reject) {
-    setTimeout(() => reject(new Error("timeout")), 2000)
-    promise.then(resolve, reject)
-})
+const timeout = promise => new Promise(function(resolve, reject) {
+    setTimeout(() => reject(new Error("timeout")), 2000);
+    promise.then(resolve, reject);
+});
 
 export const initAllServers = () => dispatch => {
     dispatch({type: "CLEARSERVERSLIST"})
 
-    serversListJSON.forEach((server,index) => {
+    servers_list.forEach((server,index) => {
         dispatch({
             type: "ADDSERVER",
             data: {
@@ -26,15 +26,11 @@ export const initAllServers = () => dispatch => {
         fetchServer(server,index)(dispatch);
     });
 
-    dispatch({type: "SERVERSINITED"})
+    dispatch({type: "SERVERSINITED"});
 };
 
 export const fetchServer = (server,index) => dispatch => {
-    timeout(
-        fetch("http://"+server[0]+"/status/widget/players.json")
-        .then(res => res.json())
-        ).then(
-        (res) => {
+    timeout( fetch("http://"+server[0]+"/status/widget/players.json").then(res => res.json()) ).then(res => {
             res.players.forEach(player=>{if(player[5] === "") player[5] = "Unemployed";});
             
             dispatch({
@@ -47,8 +43,7 @@ export const fetchServer = (server,index) => dispatch => {
                 },
                 index
             })
-        },
-        () => {
+        },() => {
             dispatch({
                 type: "UPDATESERVER",
                 data: {
@@ -71,7 +66,7 @@ export const fetchServer = (server,index) => dispatch => {
         })
 })}
 
-export const fetchDetailedServer = (server,index) => dispatch => {
+export const fetchDetailedServer = (server, index) => dispatch => {
     timeout(
         fetch("http://"+server.ip+"/status/map/positions.json")
         .then(res => res.json()))
