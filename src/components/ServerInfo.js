@@ -5,8 +5,9 @@ import { Link } from "react-router-dom";
 export default function ServerInfo (props) {
     const store = useContext(StoreContext);
     const urlprop = parseInt(props.url[1])
-    if(!urlprop || isNaN(urlprop))
+    if(!urlprop || isNaN(urlprop)){
         return <h2>URL ERROR</h2>;
+    }
 
     const server = store.state.servers[urlprop-1];
     if(store.state.inited === false){
@@ -14,27 +15,38 @@ export default function ServerInfo (props) {
     }else if(server === undefined){
         return <h2>SERVER ERROR</h2>;
     }else{
-        const header = (
-            <div>
-            <h2>
-                Name: {server.name}<br/>
-                IP: <a href ={"fivem://connect/" + server.ip}>{server.ip}</a><br/>
-                Uptime: {server.serverData ? server.serverData.uptime : "?"}<br/>
-                Players: {server.playersData ? server.playersData.length : 0}/{server.playersData ? server.serverData.limit : 0}<br/>
-                <Link to="/" className="btn btn-primary">Back</Link>
-            </h2>
-            </div>)
+        const dxp = server['serverData'] ? server['serverData']['dxp'] : undefined;
+        
+        return (
+            <div id="serverInfo">
+                <h2>
+                    Name: {server.name}<br/>
+                    IP: <a href ={"fivem://connect/" + server.ip}>{server.ip}</a><br/>
+                    Uptime: {server.serverData ? server.serverData.uptime : "?"}<br/>
+                    Players: {server.playersData ? server.playersData.length : 0}/{server.playersData ? server.serverData.limit : 0}<br/>
+                    <Link to="/" className="btn btn-primary">Back</Link>
+                </h2>
 
+                {!server.playersData || server.playersData.length === 0 ? <h2>No Players</h2> : <>
+                    {dxp !== undefined && dxp[0] === true ? <>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <th>DXP Active</th>
+                                    <th>Hostname</th>
+                                    <th>Seconds Until End</th>
+                                    <th>Additional Time</th>
+                                </tr>
+                                <tr>
+                                    <td>{dxp[0] ? 'Yes' : 'No'}</td>
+                                    <td>{dxp[1]}</td>
+                                    <td>{dxp[2]}</td>
+                                    <td>{dxp[3]}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </> : ''}
 
-        return !server.playersData || server.playersData.length === 0 ? 
-            (   
-                <div id="serverInfo">
-                    {header}
-                    <h2>No Players</h2>
-                </div>
-            ) : (
-                <div id="serverInfo">
-                    {header}
                     <table>
                         <tbody>
                             <tr><th>Avatar</th><th>#</th><th>Name</th><th>ID</th><th>Job</th></tr>
@@ -53,8 +65,9 @@ export default function ServerInfo (props) {
                             ))}
                         </tbody>
                     </table>
-                    <h2>Data received: {new Date(server.lastUpdate).toTimeString()}</h2>
-                </div>
-            );
+                </>}
+            <h2>Last Updated: {new Date(server.lastUpdate).toTimeString()}</h2>
+        </div>
+        );
     }
 }

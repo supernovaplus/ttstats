@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { StoreContext } from "../store";
-import { initAllServers } from "../dispatch";
+import { initAllServers } from "../fetchdata";
 
 export default function Timer (){
     const [state, setState] = useState({total: 0, online: 0});
@@ -22,7 +22,7 @@ export default function Timer (){
     return (
         <div id="footer">
             <h3>
-            Server data is loaded from {state.online} out of {state.total} servers <input type="button" value="refresh all servers" className="btn2 refresh" onClick={handleOnClickRefresh}/>
+                Server data is loaded from {state.online} out of {state.total} servers <input type="button" value="refresh all servers" className="btn2 refresh" onClick={handleOnClickRefresh}/>
             </h3>
         </div> 
     )

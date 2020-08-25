@@ -1,5 +1,5 @@
 import React, { createContext, useReducer, useEffect } from 'react';
-import * as dispatch_list from "./dispatch.js"
+import * as dispatch_list from "./fetchdata.js"
 
 const reducer = (data, action) => {
     switch(action.type){

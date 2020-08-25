@@ -8,31 +8,31 @@ const VehicleClasses = [
 export default function VehicleStats(){
     const store = useContext(StoreContext);
     const [state, setState] = useState({
+        loading: true,
+        error: null,
         timestamp: 0,
         total_vehicles: 0,
         total_classes: 0,
         sorted_vehicles: null,
         sorted_classes: null,
-        error: null
     });
 
     useEffect(()=>{
-        // if(!store.state.inited || timestamp !== 0 ) return;
         fetch("https://novaplus.herokuapp.com/vehicles").then(res=>res.json()).then(res=>{
             if(res && res.timestamp > 0){
                 setState(s => ({...s, 
                                 ...res,
                                 total_vehicles: res.sorted_vehicles.reduce((acc, v) => acc + v[1], 0),
-                                total_classes: res.sorted_classes.reduce((acc, v) => acc + v[1], 0)
+                                total_classes: res.sorted_classes.reduce((acc, v) => acc + v[1], 0),
+                                loading: false
                             }));
             }else{
-                setState(s => ({...s, error: "Error while loading the data"}));
+                setState(s => ({...s, error: "Error while loading the data", loading: false}));
             }
         }).catch(err=>{
             console.log(err);
-            setState(s => ({...s, error: "Error while loading the data"}));
+            setState(s => ({...s, error: "Error while state.loading the data", loading: false}));
         })
-        
     },[])
 
     
@@ -40,9 +40,9 @@ export default function VehicleStats(){
         <div id="carsStats">
             <h2>Top Vehicles Now</h2>
 
-            {state.error ? <h3>Error while trying to load the data, try again later.</h3> : 
-                state.sorted_vehicles === null ? <h2>Loading</h2> : 
-                <>
+            {state.loading ? <h2>Loading</h2> : 
+                state.error ? <h2>Error while trying to load the data, try again later.</h2> :
+                    <>
                     <table>
                         <tbody>
                             {!state.sorted_vehicles ? <tr><td>N/A</td></tr> :
@@ -79,7 +79,7 @@ export default function VehicleStats(){
                     </table>
 
                     <h3>Vehicle stats updates every 5 minutes<br/>Last Updated: {new Date(state.timestamp).toTimeString()}</h3>
-                </>
+                    </>
             }
             <h3>Total Players Online: {store.state.servers.reduce((acc,server)=>server.isLoaded && server.playersData ? acc + server.playersData.length : acc, 0)}</h3>
         </div>

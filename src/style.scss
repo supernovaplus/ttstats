@@ -27,15 +27,12 @@ body{
     margin-bottom: 50px;
 }
 
-
 a, a:active, a:visited, a:link{
     color: $linkCol;
     // color: $color4;
     // color: inherit;
     // color: black;
 }
-
-
 
 a:hover{
     color: $headerButtonColor;
@@ -82,7 +79,7 @@ table{
 }
 
 #split{
-    height: 25px;
+    height: 10px;
 }
 
 .btn2 {
@@ -90,9 +87,8 @@ table{
 	background-color: $color5;
 	color: $color1;
 	padding: 5px;
-	margin: 0;
+    margin: 0;
 }
-
 
 #header ul{
     display: flex;

@@ -40,12 +40,18 @@ export default function ServersStatus(){
                             </tr>
                         );
                     } else {
+                        const dxp = server['serverData']['dxp'];
+                        const isDxpActive = dxp !== undefined && dxp[0] === true;
                         return (
                             <tr key={index}>
-                                <td><a href ={"fivem://connect/" + server.ip} title="Connect to the server">{server.ip}</a><br/><b>{server.name}</b></td>
+                                <td>
+                                    <a href ={"fivem://connect/" + server.ip} title="Connect to the server">{server.ip}</a><br/>
+                                    <b>{server.name}</b>
+                                </td>
                                 <td>{server.playersData.length}/{server.serverData.limit}</td>
-                                <td className="online">ONLINE</td><td>{server.serverData ? server.serverData.uptime : "-"}</td>
-                                <td><Link to={"/?serverinfo="+(+index+1)} className="btn btn-primary">Players</Link></td>
+                                <td className="online">ONLINE{isDxpActive && <>+<Link to={"/?serverinfo="+(+index+1)} className="btn btn-primary" title={`Active: Yes, Time Till End: ${dxp[2]}, Additional Time: ${dxp[3]}`}>DXP</Link></>}</td>
+                                <td>{server.serverData ? server.serverData.uptime : "-"}</td>
+                                <td><Link to={"/?serverinfo="+(+index+1)} className="btn btn-primary">Players</Link> </td>
                             </tr>
                         );
                     }
