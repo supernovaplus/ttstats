@@ -11,13 +11,14 @@ export default function ServersStatus(){
             
             <table>
                 <tbody>
-                <tr><th>Connect</th><th>Players</th><th>Status</th><th>Uptime</th><th>Details</th></tr>
+                <tr><th>Connect</th><th>Players</th><th>Status</th><th>Uptime</th><th>DXP</th><th>Details</th></tr>
                 {store.state.servers.map((server,index)=>{
                     if (server.error) {
                         return (
                             <tr key={index}>
                                 <td>{server.ip}<br/><b>{server.name}</b></td>
                                 <td>-/-</td><td className="offline">OFFLINE</td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                             </tr>
@@ -29,6 +30,7 @@ export default function ServersStatus(){
                                 <td>-/-</td><td className="loading">Loading</td>
                                 <td></td>
                                 <td></td>
+                                <td></td>
                             </tr>
                         );
                     } else if (server.playersData === undefined) {
@@ -36,6 +38,7 @@ export default function ServersStatus(){
                             <tr key={index}>
                                 <td>{server.ip}<br/><b>{server.name}</b></td>
                                 <td>-/-</td><td className="offline">ERROR</td><td></td>
+                                <td></td>
                                 <td></td>
                             </tr>
                         );
@@ -49,9 +52,12 @@ export default function ServersStatus(){
                                     <b>{server.name}</b>
                                 </td>
                                 <td>{server.playersData.length}/{server.serverData.limit}</td>
-                                <td className="online">ONLINE{isDxpActive && <>+<Link to={"/?serverinfo="+(+index+1)} className="btn btn-primary" title={`Active: Yes, Time Till End: ${dxp[2]}, Additional Time: ${dxp[3]}`}>DXP</Link></>}</td>
-                                <td>{server.serverData ? server.serverData.uptime : "-"}</td>
-                                <td><Link to={"/?serverinfo="+(+index+1)} className="btn btn-primary">Players</Link> </td>
+                                <td className="online">ONLINE</td>
+                                <td>{server.serverData ? server.serverData.uptime : '-'}</td>
+                                <td>{isDxpActive ? 
+                                        <><Link to={"/?serverinfo="+(+index+1)} className="btn btn-primary" title={`Active: Yes, Minutes Left: ${Number(Number(dxp[2])/1000/60).toFixed(1)}, Additional Time: ${dxp[3]}`}>Yes</Link></> : '-'}
+                                </td>
+                                <td><Link to={"/?serverinfo="+(+index+1)} className="btn btn-primary">Players</Link></td>
                             </tr>
                         );
                     }

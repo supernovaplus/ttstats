@@ -11,7 +11,7 @@ import PlayerFinder from "./PlayerFinder";
 import JobsStats from "./JobsStats";
 import VehicleStats from "./VehicleStats";
 import Footer from "./Footer";
-import {StoreProvider} from '../store';
+import { StoreProvider } from '../store';
 
 
 export default function App() {

@@ -1,10 +1,30 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { StoreContext } from "../store";
 import { Link } from "react-router-dom";
+
+const DxpClock = ({dxp, timestamp}) => {
+    const [time, setTime] = useState(  parseInt((timestamp + dxp[2] - Date.now())/1000)  );
+    useEffect(()=>{
+        const interval = setInterval(()=>{
+            setTime(t => {
+                if(t <= 1) clearInterval(interval);
+                return t-1;
+            });
+        }, 1000);
+        return () => clearInterval(interval);
+    }, []);
+
+    const HH = Math.floor(time / (60 * 60));
+    const divisor_for_minutes = time % (60 * 60);
+    const MM = Math.floor(divisor_for_minutes / 60);
+    const SS = Math.ceil(divisor_for_minutes % 60);
+    return (<>{time < 1 ? 'finished' : `${HH?HH+'h ':''} ${MM?MM+'m ':''} ${SS?SS+'s':'0s'}`}</>);
+}
 
 export default function ServerInfo (props) {
     const store = useContext(StoreContext);
     const urlprop = parseInt(props.url[1])
+
     if(!urlprop || isNaN(urlprop)){
         return <h2>URL ERROR</h2>;
     }
@@ -34,13 +54,13 @@ export default function ServerInfo (props) {
                                 <tr>
                                     <th>DXP Active</th>
                                     <th>Hostname</th>
-                                    <th>Seconds Until End</th>
+                                    <th>Time Left</th>
                                     <th>Additional Time</th>
                                 </tr>
                                 <tr>
                                     <td>{dxp[0] ? 'Yes' : 'No'}</td>
                                     <td>{dxp[1]}</td>
-                                    <td>{dxp[2]}</td>
+                                    <td style={{'minWidth': '150px'}}><DxpClock dxp={dxp} timestamp={server.lastUpdate}/></td>
                                     <td>{dxp[3]}</td>
                                 </tr>
                             </tbody>
