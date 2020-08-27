@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { StoreContext } from "../store";
 import { Link } from "react-router-dom";
+import DxpClock from "./DxpClock";
 
 export default function ServersStatus(){
     const store = useContext(StoreContext);
@@ -8,19 +9,18 @@ export default function ServersStatus(){
     return (
         <div id="serversStatus">
             <h2>Transport Tycoon Servers List</h2>
-            
             <table>
                 <tbody>
                 <tr><th>Connect</th><th>Players</th><th>Status</th><th>Uptime</th><th>DXP</th><th>Details</th></tr>
                 {store.state.servers.map((server,index)=>{
-                    if (server.error) {
+                    if (server.error || server.playersData === undefined) {
                         return (
                             <tr key={index}>
                                 <td>{server.ip}<br/><b>{server.name}</b></td>
                                 <td>-/-</td><td className="offline">OFFLINE</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
                             </tr>
                         );
                     } else if (server.isLoaded === false) {
@@ -28,21 +28,13 @@ export default function ServersStatus(){
                             <tr key={index}>
                                 <td>{server.ip}<br/><b>{server.name}</b></td>
                                 <td>-/-</td><td className="loading">Loading</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
                             </tr>
                         );
-                    } else if (server.playersData === undefined) {
-                        return (
-                            <tr key={index}>
-                                <td>{server.ip}<br/><b>{server.name}</b></td>
-                                <td>-/-</td><td className="offline">ERROR</td><td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        );
-                    } else {
+                    } else {//
+                        // <><Link to={"/?serverinfo="+(+index+1)} className="btn btn-primary" title={`Active: Yes, Minutes Left: ${Number(Number(dxp[2])/1000/60).toFixed(1)}, Additional Time: ${dxp[3]}`}>Yes</Link></> : '-'
                         const dxp = server['serverData']['dxp'];
                         const isDxpActive = dxp !== undefined && dxp[0] === true;
                         return (
@@ -54,9 +46,9 @@ export default function ServersStatus(){
                                 <td>{server.playersData.length}/{server.serverData.limit}</td>
                                 <td className="online">ONLINE</td>
                                 <td>{server.serverData ? server.serverData.uptime : '-'}</td>
-                                <td>{isDxpActive ? 
-                                        <><Link to={"/?serverinfo="+(+index+1)} className="btn btn-primary" title={`Active: Yes, Minutes Left: ${Number(Number(dxp[2])/1000/60).toFixed(1)}, Additional Time: ${dxp[3]}`}>Yes</Link></> : '-'}
-                                </td>
+                                {isDxpActive ? 
+                                    <td className="dxp"><DxpClock dxp={dxp} timestamp={server.lastUpdate}/></td> : 
+                                    <td>-</td>}
                                 <td><Link to={"/?serverinfo="+(+index+1)} className="btn btn-primary">Players</Link></td>
                             </tr>
                         );

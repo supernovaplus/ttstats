@@ -90,6 +90,16 @@ table{
     margin: 0;
 }
 
+.dxp {
+    min-width: 100px;
+    cursor: help;
+}
+
+.dxppointer{
+    cursor: help;
+}
+
+
 #header ul{
     display: flex;
     list-style: none;
@@ -275,5 +285,9 @@ th{
 
     #split{
         height: 10px;
+    }
+
+    .dxp {
+        min-width: 0;
     }
 }
