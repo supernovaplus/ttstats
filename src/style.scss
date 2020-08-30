@@ -16,7 +16,7 @@ $globalFontColor: rgb(29, 23, 12);
     box-sizing: border-box;
 }
 
-body, .btn2{
+body, .refresh{
     font-family: 'Spartan',Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
@@ -47,15 +47,15 @@ a:hover{
 }
 
 #header a{
-    background-color: $headerButtonColor;
+    background-color: $color2;
     padding: 2px 5px;
     text-decoration: none;
-    color: $headerButtonTextColor;
+    color: $headerButtonColor;
     border-radius: 2px;
-    box-shadow: black 1px 1px;
+    border-bottom: 1px solid $color4;
 }
 
-h2,h3,#form{
+h2, h3, #form{
     margin: 5px;
     padding: 5px;
     box-shadow: $color1 0 0 10px;
@@ -63,7 +63,8 @@ h2,h3,#form{
     border-radius: 5px;
 }
 
-h2,h3,#form {
+
+h2, h3, #form {
     margin-left: 0;
     margin-right: 0;
     width: 100%;
@@ -82,10 +83,10 @@ table{
     height: 10px;
 }
 
-.btn2 {
-	border: 0;
-	background-color: $color5;
-	color: $color1;
+.refresh {
+    background-color: $color2;
+    border: 0;
+    color: $linkCol;
 	padding: 5px;
     margin: 0;
 }
@@ -210,14 +211,12 @@ th{
     bottom: 0;
     background-color: $color1;
     width: 100%;
+    padding: 5px;
 }
 
-#footer p{
-    max-width: 600px;
-    background-color: red;
-    display: flex;
-    justify-content: center;
-    align-content: center;
+.refresh{
+    border-radius: 3px;
+    border-bottom: 1px solid $color4;
 }
 
 .no-avatar{
@@ -242,7 +241,7 @@ th{
 // }
 
 .gold, .gold *{
-    background-color: $color4 !important;
+    background-color: $headerButtonTextColor !important;
 }
 
 .dark, .dark *{
@@ -252,7 +251,6 @@ th{
 @media(max-width:660px){
     #header ul{
         flex-direction: column;
-        color: red;
     }
     #header a{
         display: block;

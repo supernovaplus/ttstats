@@ -11,19 +11,30 @@ export default function Timer (){
     }
 
     useEffect(() => {
-        setState(s => ({
-            ...s,
-            total: store.state.servers.length,
-            online: store.state.servers.reduce((acc,server)=>server.isLoaded === true && server.serverData ? acc + 1 : acc ,0),
-        }));
+        setState(s => {
+            let servers = 0;
+            let players = 0;
+            
+            (store.state.servers || []).forEach(server => {
+                if(!server.isLoaded || !server.serverData) return;
+                servers++;
+                if(server.playersData) players += server.playersData.length;
+            })
+
+            return ({
+                ...s,
+                total: store.state.servers.length,
+                servers,
+                players
+            });
+
+        });
 
     },[store.state.servers]);
 
     return (
         <div id="footer">
-            <h3>
-                Server data is loaded from {state.online} out of {state.total} servers <input type="button" value="refresh all servers" className="btn2 refresh" onClick={handleOnClickRefresh}/>
-            </h3>
+            <input type="button" value={`Servers Loaded: ${state.servers}/${state.total} | Players Online: ${state.players} | click to refresh`} className="refresh dxpcursor" onClick={handleOnClickRefresh}/>
         </div> 
     )
 }

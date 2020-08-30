@@ -1,7 +1,7 @@
 import servers_list from "./serverslist.json";
 
 const timeout = promise => new Promise(function(resolve, reject) {
-    setTimeout(() => reject(new Error("timeout")), 2000);
+    setTimeout(() => reject(new Error("timeout")), 4000);
     promise.then(resolve, reject);
 });
 

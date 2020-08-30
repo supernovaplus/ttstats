@@ -1,12 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
-import { StoreContext } from "../store";
+import React, { useEffect, useState } from "react";
 
 const VehicleClasses = [
     "Compact Cars","Sedans","SUVs","Coupes", "Muscle Cars","Sports Classics","Sports Cars","Super Cars","Motorcycles","Off-road Cars", "Industrial Vehicles","Utility Vehicles","Vans","Cycles","Boats","Helicopters", "Planes","Service Vehicles","Emergency Vehicles","Military Vehicles","Commercial Vehicles","Trains",
 ];
 
 export default function VehicleStats(){
-    const store = useContext(StoreContext);
     const [state, setState] = useState({
         loading: true,
         error: null,
@@ -81,7 +79,6 @@ export default function VehicleStats(){
                     <h3>Vehicle stats updates every 5 minutes<br/>Last Updated: {new Date(state.timestamp).toTimeString()}</h3>
                     </>
             }
-            <h3>Total Players Online: {store.state.servers.reduce((acc,server)=>server.isLoaded && server.playersData ? acc + server.playersData.length : acc, 0)}</h3>
         </div>
     )
 }

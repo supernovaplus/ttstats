@@ -17,18 +17,20 @@ export default function ServersStatus(){
                         return (
                             <tr key={index}>
                                 <td>{server.ip}<br/><b>{server.name}</b></td>
-                                <td>-/-</td><td className="offline">OFFLINE</td>
+                                <td>-/-</td>
+                                <td className="offline">OFFLINE</td>
                                 <td>-</td>
-                                <td>-</td>
+                                <td className="dxp">-</td>
                             </tr>
                         );
                     } else if (server.isLoaded === false) {
                         return (
                             <tr key={index}>
                                 <td>{server.ip}<br/><b>{server.name}</b></td>
-                                <td>-/-</td><td className="loading">Loading</td>
+                                <td>-/-</td>
+                                <td className="loading">Loading</td>
                                 <td>-</td>
-                                <td>-</td>
+                                <td className="dxp">-</td>
                             </tr>
                         );
                     } else {//
@@ -43,16 +45,13 @@ export default function ServersStatus(){
                                 <td><Link to={"/?serverinfo="+(+index+1)} className="btn btn-primary">{server.playersData.length}/{server.serverData.limit}</Link></td>
                                 <td className="online">ONLINE</td>
                                 <td>{server.serverData ? server.serverData.uptime : '-'}</td>
-                                {isDxpActive ? 
-                                    <td className="dxp"><DxpClock dxp={dxp} timestamp={server.lastUpdate}/></td> : 
-                                    <td>-</td>}
+                                <td className="dxp">{isDxpActive ? <DxpClock dxp={dxp} timestamp={server.lastUpdate}/> : <>-</>}</td>
                             </tr>
                         );
                     }
                 })}
                 </tbody>
             </table>
-            <h3>Total Players Online: {store.state.servers.reduce((acc,server)=>server.isLoaded && server.playersData ? acc + server.playersData.length : acc,0)}</h3>
         </div>
     )
 }

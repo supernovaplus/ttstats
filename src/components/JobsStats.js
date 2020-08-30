@@ -139,9 +139,6 @@ export default function JobsStats () {
             <div>
                 <canvas id="myChart" ref={chartRef}></canvas>
             </div>
-
-            <h3>Total Players Online: {store.state.servers.reduce((acc,server)=>server.isLoaded && server.playersData ? acc + server.playersData.length : acc,0)}</h3>
-
         </div>
     )
 }
