@@ -12,6 +12,7 @@ import JobsStats from "./JobsStats";
 import VehicleStats from "./VehicleStats";
 import Footer from "./Footer";
 import { StoreProvider } from '../store';
+import HighestID from "./HighestID";
 
 
 export default function App() {
@@ -29,7 +30,8 @@ export default function App() {
             <li><Link to="?playerfinder">Player Finder</Link></li>
             <li><Link to="?vehicles">Vehicle Stats</Link></li>
             <li><Link to="?jobs">Job Stats</Link></li>
-            <li><a href="http://ttmap.aca.lt" className="gold">ttmap.aca.lt</a></li>
+            <li><Link to="?highest_id">Highest Player ID</Link></li>
+            {/* <li><a href="http://ttmap.aca.lt" className="gold">ttmap.aca.lt</a></li> */}
           </ul>
         </div>
 
@@ -48,6 +50,8 @@ export default function App() {
                   return <VehicleStats/>;
                 case ("?playerfinder"):
                   return <PlayerFinder url={url}/>;
+                case ("?highest_id"):
+                  return <HighestID/>;
                 default:
                   return <ServersStatus/>;
               }
