@@ -24,7 +24,7 @@ export default function PlayersList (props) {
         jobSelect: jobselectURL || "All Jobs"
     });
 
-    const [jobList,setJobList] = useState([])
+    const [jobList, setJobList] = useState([])
 
     const handlePlayersNameInput = (input) => {
         const value = input.target.value;
@@ -97,6 +97,8 @@ export default function PlayersList (props) {
 
         setJobList(tempJobsList)
         handlePlayerFinderSubmit(false);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[store.state.servers])
   
     return (

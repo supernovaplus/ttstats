@@ -75,7 +75,7 @@ table{
     width: 100%;
 }
 
-#jobsStats td, #carsStats td{
+#jobsStats td, #carsStats td, #top-ten td{
     padding: 5px 50px;
 }
 
@@ -264,7 +264,7 @@ th{
         width: 100%;
     }
 
-    #jobsStats td, #carsStats td, td, tr{
+    td, tr{
         padding: 0;
         margin:0;
     }
@@ -273,7 +273,7 @@ th{
         margin-bottom: 100px;
     }
 
-    td,b{
+    td, b{
         font-size: .8em;
     }
 

@@ -10,6 +10,7 @@ import ServerInfo from "./ServerInfo";
 import PlayerFinder from "./PlayerFinder";
 import JobsStats from "./JobsStats";
 import VehicleStats from "./VehicleStats";
+import TopTen from "./TopTen";
 import Footer from "./Footer";
 import { StoreProvider } from '../store';
 import HighestID from "./HighestID";
@@ -30,6 +31,7 @@ export default function App() {
             <li><Link to="?playerfinder">Player Finder</Link></li>
             <li><Link to="?vehicles">Vehicle Stats</Link></li>
             <li><Link to="?jobs">Job Stats</Link></li>
+            <li><Link to="?top10">Top 10</Link></li>
             <li><Link to="?highest_id">Highest Player ID</Link></li>
             {/* <li><a href="http://ttmap.aca.lt" className="gold">ttmap.aca.lt</a></li> */}
           </ul>
@@ -48,6 +50,8 @@ export default function App() {
                   return <JobsStats/>;
                 case ("?vehicles"):
                   return <VehicleStats/>;
+                case ("?top10"):
+                  return <TopTen/>;
                 case ("?playerfinder"):
                   return <PlayerFinder url={url}/>;
                 case ("?highest_id"):

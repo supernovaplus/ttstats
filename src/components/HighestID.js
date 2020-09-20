@@ -12,13 +12,13 @@ export default function HighestID () {
 
     players_list = players_list
                     .sort((a,b) => b[2] - a[2])
-                    .map((player, index) => ({
+                    .map((data, index) => ({
                             index: index+1, 
-                            name: player[0], 
-                            id: player[2]
+                            name: data[0], 
+                            id: data[2]
                         }));
 
-    let final_list = players_list.length > 25 ? 
+    const final_list = players_list.length > 25 ? 
                         [
                             ...players_list.splice(0, 10),
                             {
@@ -34,7 +34,7 @@ export default function HighestID () {
     }else{
         return (
             <div>
-                <h3>Highest player id based on current players on the server</h3>
+                <h3>Highest and lowest player IDs currently online</h3>
                 <table>
                     <tbody>
                         <tr><th>#</th><th>Name</th><th>ID</th></tr>

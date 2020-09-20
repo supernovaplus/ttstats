@@ -67,6 +67,7 @@ export default function JobsStats () {
                 counter: (sortedEntriesCompany.reduce((acc,val)=>acc+val[1],0))
             }))
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [store.state.servers]); 
 
     useEffect(()=>{
