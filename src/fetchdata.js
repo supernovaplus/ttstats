@@ -29,7 +29,7 @@ export const initAllServers = () => dispatch => {
     dispatch({type: "SERVERSINITED"});
 };
 
-export const fetchServer = (server,index) => dispatch => {
+export const fetchServer = (server, index) => dispatch => {
     timeout( fetch("http://"+server[0]+"/status/widget/players.json").then(res => res.json()) ).then(res => {
             res.players.forEach(player=>{if(player[5] === "") player[5] = "Unemployed";});
             // res.server["dxp"] = [true, 'gasdg', 3600000 + (Math.random()*20000), 1]

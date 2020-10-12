@@ -38,7 +38,7 @@ a:hover{
     color: $headerButtonColor;
 }
 
-#jobsStats, #serversStatus, #playerFinder{
+.with-table, #servers-status, #player-finder{
     min-width: 50%;
 }
 
@@ -75,7 +75,7 @@ table{
     width: 100%;
 }
 
-#jobsStats td, #carsStats td, #top-ten td{
+.with-table td{
     padding: 5px 50px;
 }
 
@@ -155,19 +155,19 @@ th{
     padding: 5px 0px;
 }
 
-// #playerFinder form{
+// #player-finder form{
 //     display: flex;
 //     flex-direction: column;
 //     justify-content: center;
 //     align-content: center;
 // }
 
-#playerFinder #form div *{
+#player-finder #form div *{
     width: 100%;
 }
 
 
-#playerFinder form input, select{
+#player-finder form input, select{
     text-align: center;
     color: white;
     background-color: $color3;
@@ -175,14 +175,14 @@ th{
     border: 0;
 }
 
-#playerFinder form input{
+#player-finder form input{
     width: 100%;
     border: 0;
     text-align: center;
     background-color: $color3;
 }
 
-#playerFinder form input[type="button"]{
+#player-finder form input[type="button"]{
     margin-top:10px;
     background-color: $headerButtonColor;
     color: $headerButtonTextColor;
@@ -277,7 +277,7 @@ th{
         font-size: .8em;
     }
 
-    #playerFinder .avatar, #playerFinder .no-avatar{
+    #player-finder .avatar, #player-finder .no-avatar{
         display: none;
     }
 
@@ -287,5 +287,13 @@ th{
 
     .dxp {
         min-width: 0;
+    }
+
+    .with-table td{
+        padding: 0;
+    }
+
+    .with-table {
+        width: 100%;
     }
 }

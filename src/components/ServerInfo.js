@@ -17,7 +17,7 @@ export default function ServerInfo (props) {
         return <h2>SERVER ERROR</h2>;
     }else{
         return (
-            <div id="serverInfo">
+            <div>
                 <h2>
                     Name: {server.name}<br/>
                     IP: <a href ={"fivem://connect/" + server.ip}>{server.ip}</a><br/>

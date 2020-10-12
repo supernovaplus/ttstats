@@ -35,7 +35,7 @@ export default function VehicleStats(){
 
     
     return (
-        <div id="carsStats">
+        <div class="with-table">
             <h2>Top Vehicles Now</h2>
 
             {state.loading ? <h2>Loading</h2> : 

@@ -99,10 +99,10 @@ export default function PlayersList (props) {
         handlePlayerFinderSubmit(false);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[store.state.servers])
+    }, [store.state.servers])
   
     return (
-        <div id="playerFinder">
+        <div id="player-finder">
             <h2>Online Player Finder</h2>
             <div id="form">
                 <form>
