@@ -232,6 +232,13 @@ th{
     background-color: #222222;
 }
 
+.statsimg-1{
+    filter: invert(1) hue-rotate(-50deg);
+}
+.statsimg-2{
+    filter: grayscale(100%) sepia(100%) hue-rotate(150deg);
+}
+
 // select {
 //     direction: rtl;
 // }
@@ -295,5 +302,9 @@ th{
 
     .with-table {
         width: 100%;
+    }
+
+    .statsimg-2{
+        width: 450px;
     }
 }

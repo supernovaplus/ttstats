@@ -19,7 +19,8 @@ export const initAllServers = () => dispatch => {
                 "playersData": null,
                 "serverData": null,
                 "lastUpdate": null,
-                "vehicleData": null
+                "vehicleData": null,
+                "directIp": server[2]
             },
             index
         })

@@ -21,9 +21,16 @@ export default function ServerInfo (props) {
                 <h2>
                     Name: {server.name}<br/>
                     IP: <a href ={"fivem://connect/" + server.ip}>{server.ip}</a><br/>
-                    Uptime: {server.serverData ? server.serverData.uptime : "?"}<br/>
-                    Players: {server.playersData ? server.playersData.length : 0}/{server.playersData ? server.serverData.limit : 0}<br/>
-                    <Link to="/" className="btn btn-primary">Back</Link>
+                    {server.serverData ? 
+                        <>
+                            Uptime: {server.serverData.uptime}<br/>
+                            Players: {server.playersData ? server.playersData.length : 0}/{server.playersData ? server.serverData.limit : 0}<br/>
+                            <img src={"https://www.game-state.com/" + server.directIp + "/stats.png"} alt="" className="statsimg-1" referrerpolicy="no-referrer"/><br/>
+                            <img src={"https://www.game-state.com/" + server.directIp + "/n-560x95_FFFFFF_FFFFFF_000000_000000.png"} alt="" className="statsimg-2" referrerpolicy="no-referrer"/>
+                        </> :
+                        <>Server Is Offline</>
+                    }<br/>
+                    <Link to="/" className="refresh dxpcursor">Back</Link>
                 </h2>
 
                 {!server.playersData || server.playersData.length === 0 ? <h2>No Players</h2> : <>
