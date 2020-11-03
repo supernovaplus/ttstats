@@ -31,21 +31,26 @@ export default function Top10 () {
     });
 
     useEffect(()=>{
+        let isSubscribed = true;
         fetch("https://novaplus.herokuapp.com/top10")
         .then(res=>res.json())
         .then(res=>{
-            setState(s => ({ ...s, 
-                            loading: false,
-                            ...res}))
+            if (isSubscribed)
+                setState(s => ({ ...s, 
+                                loading: false,
+                                ...res}))
         })
         .catch(err=>{
-            console.log(err);
-            setState(s => ({...s, error: "Failed to load the data"}))
+            if (isSubscribed) {
+                console.log(err);
+                setState(s => ({...s, error: "Failed to load the data"}))
+            }
         })
+        return () => isSubscribed = false;
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     
-    return (<div class="with-table">
+    return (<div className="with-table">
                 <h2>Top 10 Leaderboards</h2>
                 {state.loading && <h2>Loading</h2>}
                 {state.error && <h2>Error {state.error === null ? "" : "- " + state.error} </h2>}

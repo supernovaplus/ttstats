@@ -16,26 +16,32 @@ export default function VehicleStats(){
     });
 
     useEffect(()=>{
+        let isSubscribed = true;
         fetch("https://novaplus.herokuapp.com/vehicles").then(res=>res.json()).then(res=>{
             if(res && res.timestamp > 0){
-                setState(s => ({...s, 
-                                ...res,
-                                total_vehicles: res.sorted_vehicles.reduce((acc, v) => acc + v[1], 0),
-                                total_classes: res.sorted_classes.reduce((acc, v) => acc + v[1], 0),
-                                loading: false
-                            }));
+                if (isSubscribed)
+                    setState(s => ({...s, 
+                                    ...res,
+                                    total_vehicles: res.sorted_vehicles.reduce((acc, v) => acc + v[1], 0),
+                                    total_classes: res.sorted_classes.reduce((acc, v) => acc + v[1], 0),
+                                    loading: false
+                                }));
             }else{
-                setState(s => ({...s, error: "Error while loading the data", loading: false}));
+                if (isSubscribed)
+                    setState(s => ({...s, error: "Error while loading the data", loading: false}));
             }
         }).catch(err=>{
-            console.log(err);
-            setState(s => ({...s, error: "Error while state.loading the data", loading: false}));
+            if (isSubscribed) {
+                console.log(err);
+                setState(s => ({...s, error: "Error while state.loading the data", loading: false}));
+            }
         })
+        return () => isSubscribed = false;
     },[])
 
     
     return (
-        <div class="with-table">
+        <div className="with-table">
             <h2>Top Vehicles Now</h2>
 
             {state.loading ? <h2>Loading</h2> : 
