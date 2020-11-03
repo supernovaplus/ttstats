@@ -107,7 +107,7 @@ export default function JobsStats () {
     },[state]);
 
     return (
-        <div class="with-table">
+        <div className="with-table">
             <h2>Top Jobs Now</h2>
             {state.entries.length === 0 ? <div>Loading...</div> : 
                 <table>
