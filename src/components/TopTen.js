@@ -1,27 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-const top10_job_names = {
-	"firefighter_streak_record": {
-        name: "Firefighter Mission Streak"
-    },
-	"omni_void_leaderboard": {
-        name: "Omni Void",
-        prepend: "$"
-    },
-	"ems_streak_record": {
-        name: "EMS Mission Streak"
-    },
-	"houses_crafted": {
-        name: "Most Houses Constructed"
-    },
-	"toll_paid": {
-        name: "Tolls Paid"
-    },
-	"drops_collected": {
-        name: "Drops Collected"
-    }
-};
-
 export default function Top10 () {
     const [state, setState] = useState({
         loading: true,
@@ -32,13 +10,14 @@ export default function Top10 () {
 
     useEffect(()=>{
         let isSubscribed = true;
-        fetch("https://novaplus.herokuapp.com/top10")
+        fetch("https://aca.lt/api_v1/top10.json")
         .then(res=>res.json())
         .then(res=>{
-            if (isSubscribed)
+            if (isSubscribed){
                 setState(s => ({ ...s, 
-                                loading: false,
-                                ...res}))
+                    loading: false,
+                    ...res}))
+            }
         })
         .catch(err=>{
             if (isSubscribed) {
@@ -46,7 +25,9 @@ export default function Top10 () {
                 setState(s => ({...s, error: "Failed to load the data"}))
             }
         })
-        return () => isSubscribed = false;
+        return () => {
+            isSubscribed = false;
+        };
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
     
@@ -55,35 +36,26 @@ export default function Top10 () {
                 {state.loading && <h2>Loading</h2>}
                 {state.error && <h2>Error {state.error === null ? "" : "- " + state.error} </h2>}
                 {state.data && <> {
-                    Object.entries(state.data).map(leaderboard => <div key={leaderboard[0]}>
-                        <div id="split"/>
-                        <h2>{top10_job_names[leaderboard[0]] ? top10_job_names[leaderboard[0]].name : leaderboard[0]}</h2>
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Player</th>
-                                    <th>Score</th>
-                                </tr>
-
-                                {!leaderboard[1] || leaderboard[1].length === 0 ? 
+                        state.data.map((board, index) => <div key={index}>
+                            <div id="split"/>
+                            <h2>{board.title}</h2>
+                            <table>
+                                <tbody>
                                     <tr>
-                                        <td>-</td>
-                                        <td>N/A</td>
-                                        <td>-</td>
-                                    </tr> : 
+                                        <th>#</th>
+                                        {board.labels.map((label, index2)=><th key={index2}>{label}</th>)}
+                                    </tr>
 
-                                    leaderboard[1].map((player, index) => 
-                                        <tr key={index} title={player.username + "#" + player.user_id}>
-                                            <td>{index+1}</td>
-                                            <td>{player.username}</td>
-                                            <td>{top10_job_names[leaderboard[0]] && top10_job_names[leaderboard[0]].prepend ? top10_job_names[leaderboard[0]].prepend : ""}{Number(player.amount).toLocaleString()}</td>
+                                    {board.rows.map((row, index2) => 
+                                        <tr key={index2} title={row[0]}>
+                                            <td>{index2+1}</td>
+                                            {board.rows[index2].slice(1).map((column, index3) => <td key={index3}>{column}</td>)}
                                         </tr>
-                                    )
-                                }
-                            </tbody>
-                        </table>
-                    </div>)}
+                                    )}
+                                </tbody>
+                            </table>
+                        </div>)
+                        }
                     <h3>Leaderboards updates every hour<br/>Last Updated: {new Date(state.timestamp).toTimeString()}</h3>
                     </>
                 }

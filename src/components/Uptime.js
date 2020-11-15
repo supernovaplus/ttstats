@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 const notify = () => alert("Servers usually restarts every 18 hours");
 

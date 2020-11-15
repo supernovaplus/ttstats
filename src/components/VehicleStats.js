@@ -19,16 +19,18 @@ export default function VehicleStats(){
         let isSubscribed = true;
         fetch("https://novaplus.herokuapp.com/vehicles").then(res=>res.json()).then(res=>{
             if(res && res.timestamp > 0){
-                if (isSubscribed)
+                if (isSubscribed){
                     setState(s => ({...s, 
-                                    ...res,
-                                    total_vehicles: res.sorted_vehicles.reduce((acc, v) => acc + v[1], 0),
-                                    total_classes: res.sorted_classes.reduce((acc, v) => acc + v[1], 0),
-                                    loading: false
-                                }));
+                        ...res,
+                        total_vehicles: res.sorted_vehicles.reduce((acc, v) => acc + v[1], 0),
+                        total_classes: res.sorted_classes.reduce((acc, v) => acc + v[1], 0),
+                        loading: false
+                    }));
+                }
             }else{
-                if (isSubscribed)
+                if (isSubscribed){
                     setState(s => ({...s, error: "Error while loading the data", loading: false}));
+                }
             }
         }).catch(err=>{
             if (isSubscribed) {
@@ -36,7 +38,9 @@ export default function VehicleStats(){
                 setState(s => ({...s, error: "Error while state.loading the data", loading: false}));
             }
         })
-        return () => isSubscribed = false;
+        return () => {
+            isSubscribed = false
+        };
     },[])
 
     

@@ -38,14 +38,18 @@ export default function ServerInfo (props) {
                         <tbody>
                             <tr><th>Avatar</th><th>#</th><th>Name</th><th>ID</th><th>Job</th></tr>
                             {server.playersData.map((player,index) => (
-                            <tr key={index}>
+                            <tr key={index} title={`${player[4] ? "[STAFF]" : ""}${player[6] ? "[DONATOR]" : ""}`}>
                                 <td>
                                     {player[3] ? 
-                                        <a href={player[3]} target="_blank" rel="noopener noreferrer"><img src={player[3] || "#"} height="50px" alt="img" className="avatar"/></a> : 
+                                        <a href={player[3]} target="_blank" rel="noopener noreferrer"><img src={player[3] || "#"} height="50px" alt="img" className="avatar"/></a>: 
                                         <div className="no-avatar"/>}
                                 </td>
                                 <td>#{index+1}</td>
-                                <td><b>{player[0]}</b></td>
+                                <td><b>{player[0]} {
+                                        player[4] && <img src="staff.gif" className="mini-icon" alt=""/>
+                                    } {
+                                        player[6] && <img src="donator.gif" className="mini-icon" alt=""/>
+                                    }</b></td>
                                 <td>{player[2]}</td>
                                 <td>{player[5] || "-"}</td>
                             </tr>
