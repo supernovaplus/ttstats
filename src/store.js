@@ -39,7 +39,12 @@ export const StoreProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
     useEffect(() => {
-        dispatch_list.initAllServers()(dispatch)
+        dispatch_list.initAllServers()(dispatch);
+        const interval = setInterval(()=>{
+            dispatch_list.initAllServers()(dispatch);
+        }, 600000); //every 10 minutes
+
+        return () => clearInterval(interval);
     }, []);
 
     return (

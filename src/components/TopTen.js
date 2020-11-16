@@ -56,7 +56,7 @@ export default function Top10 () {
                             </table>
                         </div>)
                         }
-                    <h3>Leaderboards updates every hour<br/>Last Updated: {new Date(state.timestamp).toTimeString()}</h3>
+                    <h3>Leaderboards updates every hour<br/>Last Updated: {new Date(state.timestamp).toTimeString()}<br/>*Data collected since November 12, 2020</h3>
                     </>
                 }
             </div>);

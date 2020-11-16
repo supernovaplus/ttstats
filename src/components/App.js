@@ -2,8 +2,8 @@ import React from "react";
 import {
   BrowserRouter as Router,
   Route,
-  Link//,
-  // Redirect
+  Link,
+  Redirect
 } from "react-router-dom";
 import ServersStatus from "./ServersStatus";
 import ServerInfo from "./ServerInfo";
@@ -43,6 +43,7 @@ export default function App() {
               const url = props.location.search.split("=");
               switch(url[0]){
                 case ("?status"):
+                case (""):
                   return <ServersStatus/>;
                 case ("?serverinfo"):
                   return <ServerInfo url={url}/>;
@@ -57,7 +58,7 @@ export default function App() {
                 case ("?highest_id"):
                   return <HighestID/>;
                 default:
-                  return <ServersStatus/>;
+                  return <Redirect to="?status"/>;
               }
             }}/>
         </div>
