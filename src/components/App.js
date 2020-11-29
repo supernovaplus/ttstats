@@ -14,6 +14,7 @@ import TopTen from "./TopTen";
 import Footer from "./Footer";
 import { StoreProvider } from '../store';
 import HighestID from "./HighestID";
+import Other from "./Other";
 
 
 export default function App() {
@@ -33,6 +34,7 @@ export default function App() {
             <li><Link to="?jobs">Job Stats</Link></li>
             <li><Link to="?top10">Top 10</Link></li>
             <li><Link to="?highest_id">Highest Player ID</Link></li>
+            <li><Link to="?other">other</Link></li>
             {/* <li><a href="http://ttmap.aca.lt" className="gold">ttmap.aca.lt</a></li> */}
           </ul>
         </div>
@@ -57,6 +59,8 @@ export default function App() {
                   return <PlayerFinder url={url}/>;
                 case ("?highest_id"):
                   return <HighestID/>;
+                case ("?other"):
+                  return <Other/>;
                 default:
                   return <Redirect to="?status"/>;
               }

@@ -16,6 +16,8 @@ export default function ServerInfo (props) {
     }else if(server === undefined){
         return <h2>SERVER ERROR</h2>;
     }else{
+        const currentPlayerCount = server.playersData ? server.playersData.length : 0;
+        const playerCountLimit = server.serverData ? server.serverData.limit : 0;
         return (
             <div>
                 <h2>
@@ -25,7 +27,9 @@ export default function ServerInfo (props) {
                         <>
                             Server Is Online<br/>
                             Uptime: {server.serverData.uptime}<br/>
-                            Players: {server.playersData ? server.playersData.length : 0}/{server.playersData ? server.serverData.limit : 0}
+                            
+                            Players Online: {currentPlayerCount <= playerCountLimit ? currentPlayerCount : playerCountLimit + ` (+${currentPlayerCount-playerCountLimit} in queue)`}<br/>
+                            Max Players Allowed: {playerCountLimit}
                             
                         </> : <>Server Is Offline</>
                     }<br/>

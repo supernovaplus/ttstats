@@ -43,7 +43,11 @@ export default function ServersStatus(){
                                     <b>{server.name}</b>
                                 </td>
                                 <td>
-                                    <Link to={"/?serverinfo="+(+index+1)} className="btn btn-primary" title="Server Info">{server.playersData.length}/{server.serverData.limit}</Link>
+                                    <Link to={"/?serverinfo="+(+index+1)} className="btn btn-primary" title="Server Info">{
+                                        server.playersData.length <= server.serverData.limit ? 
+                                            server.playersData.length : 
+                                                server.serverData.limit + "+"
+                                        }/{server.serverData.limit}</Link>
                                 </td>
                                 <td className="online">ONLINE</td>
                                 <td>{server.serverData ? <Uptime time={server.serverData.uptime}/> : '-'}</td>
