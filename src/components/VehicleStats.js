@@ -37,10 +37,10 @@ export default function VehicleStats(){
                 console.log(err);
                 setState(s => ({...s, error: "Error while state.loading the data", loading: false}));
             }
-        })
+        });
         return () => {
-            isSubscribed = false
-        };
+            isSubscribed = false;
+        }
     },[])
 
     

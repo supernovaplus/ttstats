@@ -69,7 +69,7 @@ export const fetchServer = (server, index) => dispatch => {
 
 export const fetchDetailedServer = (server, index) => dispatch => {
     timeout(
-        fetch("http://"+server.ip+"/status/map/positions.json")
+        fetch("//"+server.ip+"/status/map/positions.json")
         .then(res => res.json()))
         .then(res => {
             dispatch({

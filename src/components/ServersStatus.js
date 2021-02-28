@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { StoreContext } from "../store";
+import { StoreContext } from "../data/store";
 import { Link } from "react-router-dom";
-import DxpClock from "./DxpClock";
-import Uptime from "./Uptime";
+import DxpClock from "../subcomponents/DxpClock";
+import Uptime from "../subcomponents/Uptime";
 
 export default function ServersStatus(){
     const store = useContext(StoreContext);
@@ -18,16 +18,17 @@ export default function ServersStatus(){
                     if (server.error || server.playersData === undefined || server.isLoaded === false) {
                         return (
                             <tr key={index}>
+
                                 <td>{server.ip}<br/><b>{server.name}</b></td>
                                 <td>-/-</td>
                                 {server.isLoaded === false ? 
                                     <td className="loading">Loading</td> : 
-                                        
                                         <td className="offline">
                                             <Link to={"/?serverinfo="+(+index+1)} className="btn btn-primary" title="Server Info">
                                                 OFFLINE
                                             </Link>
-                                        </td>}
+                                        </td>
+                                    }
                                 <td>-</td>
                                 <td className="dxp">-</td>
                             </tr>
@@ -49,9 +50,14 @@ export default function ServersStatus(){
                                                 server.serverData.limit + "+"
                                         }/{server.serverData.limit}</Link>
                                 </td>
+                                {/* <td className="offline">
+                                            <Link to={"/?uptime=0"} className="btn btn-primary" title="Server Info">
+                                                UPTIME
+                                            </Link>
+                                        </td> */}
                                 <td className="online">ONLINE</td>
                                 <td>{server.serverData ? <Uptime time={server.serverData.uptime}/> : '-'}</td>
-                                <td className="dxp">{isDxpActive ? <DxpClock dxp={dxp} timestamp={server.lastUpdate}/> : <>-</>}</td>
+                                <td className="dxp">{isDxpActive ? <DxpClock dxp={dxp} timestamp={server.lastUpdate} clickable={true}/> : <>-</>}</td>
                             </tr>
                         );
                     }

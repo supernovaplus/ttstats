@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { StoreContext } from "../store";
+import { StoreContext } from "../data/store";
 
 export default function HighestID () {
     const store = useContext(StoreContext);

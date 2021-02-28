@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { StoreContext } from "../store";
+import { StoreContext } from "../data/store";
 import { Link } from "react-router-dom";
 
 export default function JobsStats () {
@@ -68,7 +68,7 @@ export default function JobsStats () {
             {state.entries.length === 0 ? <div>Loading...</div> : 
                 <table>
                     <tbody>
-                    <tr><th>%</th><th>Job Name</th><th>Active</th><th>Links</th></tr>
+                    <tr><th>%</th><th>Job Name</th><th>Active</th><th></th></tr>
                     {state.entries.map((job,index)=>{
                         return <tr key={index}><td>{Number(job[1]/state.counter*100).toFixed(1)}%</td><td>{job[0]}</td><td>{job[1]}</td><td><Link to={encodeURI("/?playerfinder=job:" + job[0])}>Players</Link></td></tr>
                     })}

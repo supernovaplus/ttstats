@@ -18,12 +18,13 @@ export default function Top10 () {
                     loading: false,
                     ...res}))
             }
-        })
-        .catch(err=>{
+        }).catch(err=>{
             if (isSubscribed) {
                 console.log(err);
-                setState(s => ({...s, error: "Failed to load the data"}))
-            }
+                setState(s => ({...s, 
+                                error: "Failed to load the data, try again later.", 
+                                loading: false}))
+                }
         })
         return () => {
             isSubscribed = false;
@@ -33,11 +34,12 @@ export default function Top10 () {
     
     return (<div className="with-table">
                 <h2>Top 10 Leaderboards</h2>
+                <div id="split"/>
                 {state.loading && <h2>Loading</h2>}
                 {state.error && <h2>Error {state.error === null ? "" : "- " + state.error} </h2>}
                 {state.data && <> {
                         state.data.map((board, index) => <div key={index}>
-                            <div id="split"/>
+                            {/* <div id="split"/> */}
                             <h2>{board.title}</h2>
                             <table>
                                 <tbody>

@@ -10,13 +10,15 @@
     "react": "^16.14.0",
     "react-app-polyfill": "^1.0.6",
     "react-dom": "^16.14.0",
+    "react-page-visibility": "^6.4.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^3.4.4"
+    "react-scripts": "^4.0.3"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "deploy2": "gh-pages -d build -e ttstats"
   },
   "eslintConfig": {
     "extends": "react-app"

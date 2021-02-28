@@ -11,11 +11,12 @@ import PlayerFinder from "./PlayerFinder";
 import JobsStats from "./JobsStats";
 import VehicleStats from "./VehicleStats";
 import TopTen from "./TopTen";
-import Footer from "./Footer";
-import { StoreProvider } from '../store';
+import Footer from "../subcomponents/Footer";
+import { StoreProvider } from '../data/store';
 import HighestID from "./HighestID";
-import Other from "./Other";
-
+// import Other from "./Other";
+import Uptime from "./UptimeFrame";
+import BackgroundVideo from "../subcomponents/BackgroundVideo";
 
 export default function App() {
   React.useEffect(()=>{
@@ -30,11 +31,11 @@ export default function App() {
           <ul>
             <li><Link to="/">Servers Status</Link></li>
             <li><Link to="?playerfinder">Player Finder</Link></li>
-            <li><Link to="?vehicles">Vehicle Stats</Link></li>
-            <li><Link to="?jobs">Job Stats</Link></li>
+            <li><Link to="?vehicles">Top Vehicles</Link></li>
+            <li><Link to="?jobs">Top Jobs</Link></li>
             <li><Link to="?top10">Top 10</Link></li>
             <li><Link to="?highest_id">Highest Player ID</Link></li>
-            <li><Link to="?other">other</Link></li>
+            {/* <li><Link to="?uptime">Uptime</Link></li> */}
             {/* <li><a href="http://ttmap.aca.lt" className="gold">ttmap.aca.lt</a></li> */}
           </ul>
         </div>
@@ -59,14 +60,15 @@ export default function App() {
                   return <PlayerFinder url={url}/>;
                 case ("?highest_id"):
                   return <HighestID/>;
-                case ("?other"):
-                  return <Other/>;
+                case ("?uptime"):
+                  return <Uptime url={url}/>;
                 default:
                   return <Redirect to="?status"/>;
               }
             }}/>
         </div>
 
+        <BackgroundVideo/>
         <Footer/>
       </StoreProvider>
     </Router>

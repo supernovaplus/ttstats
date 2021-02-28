@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { StoreContext } from "../store";
+import { StoreContext } from "../data/store";
 
 const showAvatar = false;
 
@@ -57,15 +57,15 @@ export default function PlayersList (props) {
                 const playername = (player[0]+"#"+player[2]);
                 if(playername.toLowerCase().includes(input) && 
                     (localState.serverSelect === "All Servers" || localState.serverSelect === server.name) &&
-                    (localState.jobSelect === "All Jobs" || localState.jobSelect === player[5])){
-                        playerFinderFound.push([
-                            playername,
-                            server["ip"],
-                            server["name"],
-                            player[3],
-                            player[5]
-                        ])
-                    }
+                        (localState.jobSelect === "All Jobs" || localState.jobSelect === player[5])){
+                            playerFinderFound.push([
+                                playername,
+                                server["ip"],
+                                server["name"],
+                                player[3],
+                                player[5]
+                            ])
+                        }
             })
         })
 
@@ -125,7 +125,7 @@ export default function PlayersList (props) {
                         </select>
                     </div>
 
-                    <input type="button" value="search" onClick={()=>handlePlayerFinderSubmit()}/>
+                    <input type="button" value="search" className="dxpcursor searchbtn" onClick={()=>handlePlayerFinderSubmit()}/>
                 </form>
             </div>
 
@@ -139,7 +139,7 @@ export default function PlayersList (props) {
                             <tr key={index}>
                                 <td>{player[3] && showAvatar === true ? //todo 
                                     <a href={player[3]} target="_blank" rel="noopener noreferrer"><img src={player[3] || "#"} height="50px" alt="img" className="avatar"/></a> : 
-                                    <div className="no-avatar"/>
+                                    <img className="no-avatar" src="images/no-avatar.gif" alt="-"/>
                                 }</td>
                                 <td>#{index+1}</td>
                                 <td><b>{player[0]}</b></td>
