@@ -6,8 +6,17 @@ export default function Timer (){
     const [state, setState] = useState({total: 0, online: 0});
     const store = useContext(StoreContext);
     
-    function handleOnClickRefresh(){
-        initAllServers()(store.dispatch)
+    const handleOnClickRefresh = () => initAllServers()(store.dispatch);
+
+    const handleToggleBackground = () => {
+        const currentStatus = localStorage.getItem("allowVideo");
+        if(!currentStatus || currentStatus === "true" ){
+            localStorage.setItem("allowVideo", "false")
+        }else{
+            localStorage.setItem("allowVideo", "true")
+        }
+        
+        window.location.reload(); 
     }
 
     useEffect(() => {
@@ -35,6 +44,8 @@ export default function Timer (){
     return (
         <div id="footer">
             <input type="button" value={`Servers Loaded: ${state.servers}/${state.total} | Players Online: ${state.players} | click to refresh`} className="refresh dxpcursor" onClick={handleOnClickRefresh}/>
+
+            {window.innerWidth > 800 && <input type="button" value="🎥" style={{marginLeft: "1px", lineHeight: "1.1"}} className="refresh dxpcursor" title="toggle video background" onClick={handleToggleBackground}/>}
         </div> 
     )
 }

@@ -20,7 +20,11 @@ export default function BackgroundVideo () {
         }
     };
 
-    return  window.innerWidth < 800 ? <div id="myVideo" style={{backgroundImage: "url('media/nova-bg-pic-1.jpg')", backgroundSize: "cover"}}></div> : 
+    const currentStatus = localStorage.getItem("allowVideo");
+    return  window.innerWidth < 800 || (currentStatus && currentStatus === "false") ? 
+
+                <div id="myVideo" style={{backgroundImage: "url('media/nova-bg-pic-1.jpg')", backgroundSize: "cover"}}/> : 
+
                 <PageVisibility onChange={visiblityChanged}>
                     <video autoPlay muted loop id="myVideo" ref={ref}>
                         <source src="media/nova-bg-vid-1.mp4" type="video/mp4"/>
