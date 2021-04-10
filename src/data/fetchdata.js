@@ -66,18 +66,3 @@ export const fetchServer = (server, index) => dispatch => {
             index
         })
 })}
-
-export const fetchDetailedServer = (server, index) => dispatch => {
-    timeout(
-        fetch("//"+server.ip+"/status/map/positions.json")
-        .then(res => res.json()))
-        .then(res => {
-            dispatch({
-                type: "UPDATESERVER",
-                data: {
-                    vehicleData: res.players.map(player=>player[4])
-                },
-                index
-            });
-    }).catch((err)=>console.log(err))
-}

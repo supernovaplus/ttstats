@@ -10,12 +10,12 @@ export default function HighestID () {
         if(server.playersData) players_list.push(...server.playersData);
     });
 
-    players_list = players_list
-                    .sort((a,b) => b[2] - a[2])
-                    .map((data, index) => ({
-                            index: index+1, 
-                            name: data[0], 
-                            id: data[2]
+    players_list =  players_list
+                        .sort((a,b) => b[2] - a[2])
+                        .map((data, index) => ({
+                                index: index+1, 
+                                name: data[0], 
+                                id: data[2]
                         }));
 
     const final_list = players_list.length > 25 ? 
@@ -48,7 +48,6 @@ export default function HighestID () {
                                 </tr>
                             ))
                         }
-
                     </tbody>
                 </table>
             </div>

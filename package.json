@@ -1,27 +1,36 @@
 {
   "name": "ttstats",
   "homepage": "https://ttstats.aca.lt",
-  "version": "0.1.0",
-  "private": true,
+  "version": "1.0.0",
+  "private": false,
   "dependencies": {
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
     "core-js": "^3.7.0",
     "gh-pages": "^2.2.0",
     "node-sass": "^4.14.1",
-    "react": "^16.14.0",
+    "react": "^17.0.1",
     "react-app-polyfill": "^1.0.6",
-    "react-dom": "^16.14.0",
+    "react-dom": "^17.0.1",
     "react-page-visibility": "^6.4.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^4.0.3"
+    "react-scripts": "4.0.3",
+    "web-vitals": "^1.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "deploy": "gh-pages -d build",
-    "deploy2": "gh-pages -d build -e ttstats"
+    "deploy2": "gh-pages -d build -e ttstats",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
     "production": [
@@ -36,5 +45,16 @@
       "last 1 safari version",
       "ie 11"
     ]
-  }
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/supernovaplus/ttstats.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/supernovaplus/ttstats/issues"
+  },
+  "description": ""
 }

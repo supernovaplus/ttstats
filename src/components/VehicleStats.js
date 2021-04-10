@@ -17,7 +17,7 @@ export default function VehicleStats(){
 
     useEffect(()=>{
         let isSubscribed = true;
-        fetch("https://novaplus.herokuapp.com/vehicles").then(res=>res.json()).then(res=>{
+        fetch("https://novaplus-api.herokuapp.com/vehicles").then(res=>res.json()).then(res=>{
             if(res && res.timestamp > 0){
                 if (isSubscribed){
                     setState(s => ({...s, 

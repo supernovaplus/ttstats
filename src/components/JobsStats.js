@@ -8,7 +8,7 @@ export default function JobsStats () {
     const store = useContext(StoreContext);
     
     useEffect(() => {
-        if(store.state.inited && store.state.servers.reduce((acc,server)=>server.isLoaded === true ? acc + 1 : acc,0) === store.state.servers.length){
+        if(store.state.inited && store.state.servers.reduce((acc, server) => server.isLoaded === true ? acc + 1 : acc, 0) === store.state.servers.length){
             const jobs = {}
 
             const companyjobs = {
@@ -65,7 +65,8 @@ export default function JobsStats () {
     return (
         <div className="with-table">
             <h2>Top Jobs Now</h2>
-            {state.entries.length === 0 ? <div>Loading...</div> : 
+
+            {state.counter === 0 ? <h1>No players online</h1> :
                 <table>
                     <tbody>
                     <tr><th>%</th><th>Job Name</th><th>Active</th><th></th></tr>
@@ -80,7 +81,7 @@ export default function JobsStats () {
             
             <h2>Top Company Jobs Now</h2>
 
-            {state2.entries.length === 0 ? <div>Loading...</div> : 
+            {state.counter === 0 ? <h1>No players online</h1> :
                 <table>
                     <tbody>
                     <tr><th>%</th><th>Job Name</th><th>Active</th></tr>
