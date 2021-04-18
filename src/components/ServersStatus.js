@@ -3,6 +3,7 @@ import { StoreContext } from "../data/store";
 import { Link } from "react-router-dom";
 import DxpClock from "../subcomponents/DxpClock";
 import Uptime from "../subcomponents/Uptime";
+import SkillBoost from "../subcomponents/SkillBoost";
 
 export default function ServersStatus(){
     const store = useContext(StoreContext);
@@ -12,7 +13,7 @@ export default function ServersStatus(){
             <h2>Transport Tycoon Servers List</h2>
             <table>
                 <tbody>
-                <tr><th>Connect</th><th>Players</th><th>Status</th><th>Uptime</th><th>DXP</th></tr>
+                <tr><th>Connect</th><th>Players</th><th>Status</th><th>Uptime</th><th>DXP/Skill</th></tr>
                 {store.state.servers.map((server,index)=>{
 
                     if (server.error || server.playersData === undefined || server.isLoaded === false) {
@@ -64,6 +65,7 @@ export default function ServersStatus(){
                 })}
                 </tbody>
             </table>
+            <SkillBoost/>
         </div>
     )
 }

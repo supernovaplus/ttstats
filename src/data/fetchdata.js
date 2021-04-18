@@ -8,7 +8,7 @@ const timeout = promise => new Promise(function(resolve, reject) {
 export const initAllServers = () => dispatch => {
     dispatch({type: "CLEARSERVERSLIST"})
 
-    servers_list.forEach((server,index) => {
+    servers_list.forEach((server, index) => {
         dispatch({
             type: "ADDSERVER",
             data: {
@@ -24,7 +24,7 @@ export const initAllServers = () => dispatch => {
             },
             index
         })
-        fetchServer(server,index)(dispatch);
+        fetchServer(server, index)(dispatch);
     });
 
     dispatch({type: "SERVERSINITED"});
@@ -44,7 +44,7 @@ export const fetchServer = (server, index) => dispatch => {
                 },
                 index
             })
-        },() => {
+        }, () => {
             dispatch({
                 type: "UPDATESERVER",
                 data: {
