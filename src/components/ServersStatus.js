@@ -13,20 +13,23 @@ export default function ServersStatus(){
             <h2>Transport Tycoon Servers List</h2>
             <table>
                 <tbody>
-                <tr><th>Connect</th><th>Players</th><th>Status</th><th>Uptime</th><th>DXP/Skill</th></tr>
-                {store.state.servers.map((server,index)=>{
+                <tr><th>Connect</th><th>Players</th><th>Status</th><th>Uptime</th><th>DXP</th></tr>
+                {store.state.servers.map((server, index)=>{
 
                     if (server.error || server.playersData === undefined || server.isLoaded === false) {
                         return (
                             <tr key={index}>
-
-                                <td>{server.ip}<br/><b>{server.name}</b></td>
+                                <td>
+                                    <b>{server.name}</b><br/><a href={"fivem://connect/cfx.re/join/" + server.endpoint} title="Connect to the server" onClick={()=>setTimeout(() => {
+                                        alert(`If connecting failed try pressing F8 in fivem, then enter the following line:\nconnect ${server.endpoint}`)
+                                    }, 1000)}><small>Connect</small></a>
+                                </td>
                                 <td>-/-</td>
                                 {server.isLoaded === false ? 
                                     <td className="loading">Loading</td> : 
                                         <td className="offline">
-                                            <Link to={"/?serverinfo="+(+index+1)} className="btn btn-primary" title="Server Info">
-                                                OFFLINE
+                                            <Link to={"/?serverinfo=" + parseInt(index + 1)} className="btn btn-primary" title="Server Info">
+                                                OFFLINE {index === 0 ? "?" :""}
                                             </Link>
                                         </td>
                                     }
@@ -41,8 +44,9 @@ export default function ServersStatus(){
                         return (
                             <tr key={index}>
                                 <td>
-                                    <a href ={"fivem://connect/" + server.ip} title="Connect to the server">{server.ip}</a><br/>
-                                    <b>{server.name}</b>
+                                    <b>{server.name}</b><br/><a href={"fivem://connect/cfx.re/join/" + server.endpoint} title="Connect to the server" onClick={()=>setTimeout(() => {
+                                        alert(`If connecting failed try pressing F8 in fivem, then enter the following line:\nconnect ${server.endpoint}`)
+                                    }, 1000)}><small>Connect</small></a>
                                 </td>
                                 <td>
                                     <Link to={"/?serverinfo="+(+index+1)} className="btn btn-primary" title="Server Info">{

@@ -23,7 +23,7 @@ export default function ServerInfo (props) {
             <div>
                 <h2>
                     Name: {server.name}<br/>
-                    IP: <a href ={"fivem://connect/" + server.ip}>{server.ip}</a><br/>
+                    {/* IP: <a href={"fivem://connect/cfx.re/join/" + server.endpoint}>{server.ip}</a><br/> */}
                     {server.serverData ? 
                         <>
                             Server Is Online<br/>

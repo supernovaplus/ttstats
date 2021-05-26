@@ -10,7 +10,7 @@ export default function SkillBoost () {
                 if(!res.data){
                     setState(() => "-");
                 }else{
-                    setState(() => `${res.data.skill} (${res.data.bonus}%)`);
+                    setState(() => `${res.data.skill} +${res.data.bonus}% exp`);
                 }
             }
         }).catch(err=>{
@@ -25,5 +25,5 @@ export default function SkillBoost () {
         }
     }, [])
 
-    return (<h3>Current skill boost: {state || "?"} </h3>)
+    return (<h3>Current skill boost: {state || "?"}</h3>)
 }

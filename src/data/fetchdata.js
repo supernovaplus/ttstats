@@ -16,6 +16,7 @@ export const initAllServers = () => dispatch => {
                 "isLoaded": false,
                 "ip": server[0],
                 "name": server[1],
+                "endpoint": server[3],
                 "playersData": null,
                 "serverData": null,
                 "lastUpdate": null,
@@ -23,7 +24,8 @@ export const initAllServers = () => dispatch => {
                 "directIp": server[2]
             },
             index
-        })
+        });
+
         fetchServer(server, index)(dispatch);
     });
 
@@ -31,7 +33,7 @@ export const initAllServers = () => dispatch => {
 };
 
 export const fetchServer = (server, index) => dispatch => {
-    timeout( fetch("http://"+server[0]+"/status/widget/players.json").then(res => res.json()) ).then(res => {
+    timeout(fetch("http://" + server[0] + "/status/widget/players.json").then(res=>res.json())).then(res => {
             res.players.forEach(player=>{if(player[5] === "") player[5] = "Unemployed";});
             // res.server["dxp"] = [true, 'gasdg', 3600000 + (Math.random()*20000), 1]
             dispatch({

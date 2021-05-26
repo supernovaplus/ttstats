@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { StoreContext } from "../data/store";
 
-const showAvatar = false;
+// const showAvatar = false;
 
 export default function PlayersList (props) {
     const store = useContext(StoreContext);
@@ -137,10 +137,10 @@ export default function PlayersList (props) {
                         {localState.playerFinderFound.map((player,index)=>
                         
                             <tr key={index}>
-                                <td>{player[3] && showAvatar === true ? //todo 
+                                {/* <td>{player[3] && showAvatar === true ? //todo 
                                     <a href={player[3]} target="_blank" rel="noopener noreferrer"><img src={player[3] || "#"} height="50px" alt="img" className="avatar"/></a> : 
                                     <img className="no-avatar" src="images/no-avatar.gif" alt="-"/>
-                                }</td>
+                                }</td> */}
                                 <td>#{index+1}</td>
                                 <td><b>{player[0]}</b></td>
                                 <td>{player[4] || "-"}</td>
