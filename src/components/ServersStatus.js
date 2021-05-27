@@ -21,7 +21,7 @@ export default function ServersStatus(){
                             <tr key={index}>
                                 <td>
                                     <b>{server.name}</b><br/><a href={"fivem://connect/cfx.re/join/" + server.endpoint} title="Connect to the server" onClick={()=>setTimeout(() => {
-                                        alert(`If connecting failed try pressing F8 in fivem, then enter the following line:\nconnect ${server.endpoint}`)
+                                        alert(`If connecting failed try clicking the link again when the fivem is loaded or press F8 in fivem, then enter the following line:\nconnect ${server.endpoint}`)
                                     }, 1000)}><small>Connect</small></a>
                                 </td>
                                 <td>-/-</td>
@@ -29,7 +29,7 @@ export default function ServersStatus(){
                                     <td className="loading">Loading</td> : 
                                         <td className="offline">
                                             <Link to={"/?serverinfo=" + parseInt(index + 1)} className="btn btn-primary" title="Server Info">
-                                                OFFLINE {index === 0 ? "?" :""}
+                                                OFFLINE
                                             </Link>
                                         </td>
                                     }
@@ -45,7 +45,7 @@ export default function ServersStatus(){
                             <tr key={index}>
                                 <td>
                                     <b>{server.name}</b><br/><a href={"fivem://connect/cfx.re/join/" + server.endpoint} title="Connect to the server" onClick={()=>setTimeout(() => {
-                                        alert(`If connecting failed try pressing F8 in fivem, then enter the following line:\nconnect ${server.endpoint}`)
+                                        alert(`If connecting failed try clicking the link again when the fivem is loaded or press F8 in fivem, then enter the following line:\nconnect ${server.endpoint}`)
                                     }, 1000)}><small>Connect</small></a>
                                 </td>
                                 <td>

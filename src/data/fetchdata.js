@@ -14,26 +14,26 @@ export const initAllServers = () => dispatch => {
             data: {
                 "error": null,
                 "isLoaded": false,
-                "ip": server[0],
-                "name": server[1],
-                "endpoint": server[3],
+                "name": server[0],
+                "endpoint": server[1],
                 "playersData": null,
                 "serverData": null,
                 "lastUpdate": null,
                 "vehicleData": null,
-                "directIp": server[2]
             },
             index
         });
 
-        fetchServer(server, index)(dispatch);
+        fetchServer(server[1], index)(dispatch);
     });
 
     dispatch({type: "SERVERSINITED"});
 };
 
-export const fetchServer = (server, index) => dispatch => {
-    timeout(fetch("http://" + server[0] + "/status/widget/players.json").then(res=>res.json())).then(res => {
+export const fetchServer = (server_endpoint, index) => dispatch => {
+    timeout(
+        fetch(`https://tycoon-${server_endpoint}.users.cfx.re/status/widget/players.json`).then(res => res.json())).then(res => {
+            if(res.server === undefined) throw Error();
             res.players.forEach(player=>{if(player[5] === "") player[5] = "Unemployed";});
             // res.server["dxp"] = [true, 'gasdg', 3600000 + (Math.random()*20000), 1]
             dispatch({

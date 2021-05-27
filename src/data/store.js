@@ -1,6 +1,5 @@
 import React, { createContext, useReducer, useEffect } from 'react';
 import * as dispatch_list from "./fetchdata.js"
-import servers_list from "./serverslist.json";
 
 const reducer = (data, action) => {
     switch(action.type){
@@ -24,10 +23,6 @@ const reducer = (data, action) => {
             data.servers = [];
             return {...data};
 
-        case ("UPDATEIP"):
-            data.servers[action.index].ip = action.data.ip;
-            return {...data};
-
         default:
             return data;
     }
@@ -44,21 +39,7 @@ export const StoreProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
     useEffect(() => {
-        const fetch_schedule = setInterval(() => {
-            dispatch_list.initAllServers()(dispatch);
-        }, 500)
-
-        fetch("https://aca.lt/api_v1/overwrite_servers_list.json").then(res=>res.json()).then(res=>{
-            clearTimeout(fetch_schedule);
-
-            for (const index in res) {
-                if(index in servers_list){
-                    servers_list[index][0] = res[index];
-                }
-            }
-            
-            dispatch_list.initAllServers()(dispatch);
-        }).catch(err=>{});
+        dispatch_list.initAllServers()(dispatch);
 
         const interval = setInterval(()=>{
             dispatch_list.initAllServers()(dispatch);

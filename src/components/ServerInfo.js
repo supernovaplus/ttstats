@@ -23,7 +23,6 @@ export default function ServerInfo (props) {
             <div>
                 <h2>
                     Name: {server.name}<br/>
-                    {/* IP: <a href={"fivem://connect/cfx.re/join/" + server.endpoint}>{server.ip}</a><br/> */}
                     {server.serverData ? 
                         <>
                             Server Is Online<br/>
@@ -33,8 +32,9 @@ export default function ServerInfo (props) {
                             Max Players Allowed: {playerCountLimit}
                         </> : <>Server Is Offline</>
                     }<br/>
-                    <img src={"https://www.game-state.com/" + server.directIp + "/stats.png"} alt="" className="statsimg-1" referrerPolicy="no-referrer" style={{"minHeight":"200px"}}/><br/>
-                    <img src={"https://www.game-state.com/" + server.directIp + "/n-560x95_FFFFFF_FFFFFF_000000_000000.png"} alt="" className="statsimg-2" referrerPolicy="no-referrer" style={{"minHeight":"95px"}}/><br/>
+                    <a href={"fivem://connect/cfx.re/join/" + server.endpoint}>Connect to the server</a><br/>
+                    {/* <img src={"https://www.game-state.com/" + server.directIp + "/stats.png"} alt="" className="statsimg-1" referrerPolicy="no-referrer" style={{"minHeight":"200px"}}/><br/>
+                    <img src={"https://www.game-state.com/" + server.directIp + "/n-560x95_FFFFFF_FFFFFF_000000_000000.png"} alt="" className="statsimg-2" referrerPolicy="no-referrer" style={{"minHeight":"95px"}}/><br/> */}
                 </h2>
                 <h2><Link to="/" className="refresh dxpcursor" style={{"boxShadow": "0px 0px 3px black"}}>Back</Link></h2>
                 {/* {server.serverData.dxp = undefined} */}

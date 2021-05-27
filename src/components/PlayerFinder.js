@@ -60,7 +60,7 @@ export default function PlayersList (props) {
                         (localState.jobSelect === "All Jobs" || localState.jobSelect === player[5])){
                             playerFinderFound.push([
                                 playername,
-                                server["ip"],
+                                server["endpoint"],
                                 server["name"],
                                 player[3],
                                 player[5]
@@ -144,7 +144,7 @@ export default function PlayersList (props) {
                                 <td>#{index+1}</td>
                                 <td><b>{player[0]}</b></td>
                                 <td>{player[4] || "-"}</td>
-                                <td><a href ={"fivem://connect/" + player[1]} title="connect">{player[1]}</a><br/><b>{player[2]}</b></td>
+                                <td><b>{player[2]}</b> <a href ={"fivem://connect/cfx.re/join/" + player[1]} title="Connect"><small>Join</small></a></td>
                             </tr>
                         )}
                     </tbody>
