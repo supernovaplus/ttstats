@@ -1,10 +1,5 @@
 import servers_list from "./serverslist.json";
 
-const timeout = promise => new Promise(function(resolve, reject) {
-    setTimeout(() => reject(new Error("timeout")), 4000);
-    promise.then(resolve, reject);
-});
-
 export const initAllServers = () => dispatch => {
     dispatch({type: "CLEARSERVERSLIST"})
 
@@ -30,23 +25,63 @@ export const initAllServers = () => dispatch => {
     dispatch({type: "SERVERSINITED"});
 };
 
-export const fetchServer = (server_endpoint, index) => dispatch => {
-    timeout(
-        fetch(`https://tycoon-${server_endpoint}.users.cfx.re/status/widget/players.json`).then(res => res.json())).then(res => {
-            if(res.server === undefined) throw Error();
-            res.players.forEach(player=>{if(player[5] === "") player[5] = "Unemployed";});
-            // res.server["dxp"] = [true, 'gasdg', 3600000 + (Math.random()*20000), 1]
+export const fetchServer = (server_endpoint, index) => async dispatch => {
+    const controller = new AbortController();
+    setTimeout(() => { controller.abort(); }, 3000)
+
+    fetch(`https://tycoon-${server_endpoint}.users.cfx.re/status/widget/players.json`, { signal: controller.signal })
+    .then(res => res.json())
+    .then(res => {
+        if(!("server" in res)) throw new Error();
+        res.players.forEach(player=>{if(player[5] === "") player[5] = "Unemployed";});
+        
+        dispatch({
+            type: "UPDATESERVER",
+            data: {
+                isLoaded: true,
+                playersData: res.players,
+                serverData: res.server,
+                lastUpdate: Date.now()
+            },
+            index
+        })
+    }).catch(() => {
+        setTimeout(() => { controller.abort(); }, 5000)
+
+        fetch(`https://servers-frontend.fivem.net/api/servers/single/${server_endpoint}`, { signal: controller.signal })
+        .then(res => res.json())
+        .then(res => {
+            if(!("Data" in res)) throw new Error();
+            const data = res["Data"];
             dispatch({
                 type: "UPDATESERVER",
                 data: {
                     isLoaded: true,
-                    playersData: res.players,
-                    serverData: res.server,
+                    playersData: data.players.map(player => [
+                        player.name,
+                        -1,
+                        "?",
+                        null,
+                        false,
+                        "?",
+                        false
+                    ]),
+                    serverData: {
+                        "limit": data["sv_maxclients"],
+                        "beta": "",
+                        "dxp": [false],
+                        "uptime": data["vars"]["Uptime"],
+                        "region": "?",
+                        "number": "?",
+                        "name": "",
+                        "motd": ""
+                    },
                     lastUpdate: Date.now()
                 },
                 index
             })
-        }, () => {
+            
+        }).catch((err) => {
             dispatch({
                 type: "UPDATESERVER",
                 data: {
@@ -56,15 +91,33 @@ export const fetchServer = (server_endpoint, index) => dispatch => {
                 },
                 index
             })
-        }
-    ).catch(() => {
-        dispatch({
-            type: "UPDATESERVER",
-            data: {
-                isLoaded: true,
-                error: true,
-                lastUpdate: Date.now()
-            },
-            index
-        })
-})}
+        });
+    });
+
+
+    // fetch(`https://servers-live.fivem.net/api/servers/single/${server_endpoint}`).then(res=>res.json).then(res=>{
+    //     dispatch({
+    //         type: "UPDATESERVER",
+    //         data: {
+    //             isLoaded: true,
+    //             playersData: [],
+    //             serverData: {"limit":32,"beta":"","dxp":[false],"uptime":"14h 57m","region":"EU","number":"6","name":"","motd":""},
+    //             lastUpdate: Date.now()
+    //         },
+    //         index
+    //     })
+    // }).catch(err=>{
+
+    // })
+
+
+    // dispatch({
+    //     type: "UPDATESERVER",
+    //     data: {
+    //         isLoaded: true,
+    //         error: true,
+    //         lastUpdate: Date.now()
+    //     },
+    //     index
+    // })
+}
