@@ -1,155 +1,171 @@
-import React, { useContext, useState, useEffect } from "react";
-import { StoreContext } from "../data/store";
+import React, { useState, useEffect } from "react";
+import { serversAtom } from "../controllers/dataStore";
+import { useRecoilValue } from 'recoil';
 
-// const showAvatar = false;
+export default function PlayerFinder () {
+	const servers = useRecoilValue(serversAtom);
+	let jobselectURL, serverSelectURL;
 
-export default function PlayersList (props) {
-    const store = useContext(StoreContext);
-    var jobselectURL;
+	for (const [key, value] of new URLSearchParams(window.location.search)) {
+		if(key === "job"){
+			jobselectURL = value;
+		}else if(key === "server"){
+			// serverSelectURL = value;
+		}
+	}
 
-    if(props.url.length>1){
-        props.url.forEach(item=>{
-            const data = item.split(":");
-            if(data[0] === "job"){
-                jobselectURL = decodeURI(data[1]);
-            }
-        })
-    }
+	const [state, setState] = useState({
+		playerFinderMessages: [],
+		playerFinderInputField: "",
+		playerFinderFound: [],
+		serverSelect: serverSelectURL || "All Servers",
+		jobSelect: jobselectURL || "All Jobs"
+	});
 
-    const [localState, setlocalState] = useState({
-        playerFinderMessages: [],
-        playerFinderInputField: "",
-        playerFinderFound: [],
-        serverSelect: "All Servers",
-        jobSelect: jobselectURL || "All Jobs"
-    });
+	const [jobList, setJobList] = useState([])
 
-    const [jobList, setJobList] = useState([])
+	const handlePlayersNameInput = ({target: { value }}) => {
+		setState(s => ({...s, playerFinderInputField: value }));
+	}
 
-    const handlePlayersNameInput = (input) => {
-        const value = input.target.value;
-        setlocalState(s => ({...s, playerFinderInputField: value }));
-    }
+	const handleServerSelect = ({target: { value }}) => {
+		setState(s => ({...s, serverSelect: value }));
+	}
 
-    const handleServerSelect = (input) => {
-        const value = input.target.value;
-        setlocalState(s => ({...s, serverSelect: value }));
-    }
+	const handleJobSelect = ({target: { value }}) => {
+		setState(s => ({...s, jobSelect: value }));
+	}
 
-    const handleJobSelect = (input) => {
-        const value = input.target.value;
-        setlocalState(s => ({...s, jobSelect: value }));
-    }
+	const handleOnKeyDownEnter = (e) => {
+		if (e.key === 'Enter') {
+			e.preventDefault();
+			handlePlayerFinderSubmit();
+		}
+	}
 
-    const _handleKeyDown = (e) => {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            handlePlayerFinderSubmit();
-        }
-    }
+	const handlePlayerFinderSubmit = (isButton = true) => {
+		const input = state.playerFinderInputField.toLowerCase()
+		const playerFinderFound = [];
 
-    const handlePlayerFinderSubmit = (isButton = true) => {
-        const input = localState.playerFinderInputField.toLowerCase()
-        const playerFinderFound = [];
-        store.state.servers.forEach(server=>{
-            if(server.playersData === null)return;
-            server.playersData.forEach(player=>{
-                const playername = (player[0]+"#"+player[2]);
-                if(playername.toLowerCase().includes(input) && 
-                    (localState.serverSelect === "All Servers" || localState.serverSelect === server.name) &&
-                        (localState.jobSelect === "All Jobs" || localState.jobSelect === player[5])){
-                            playerFinderFound.push([
-                                playername,
-                                server["endpoint"],
-                                server["name"],
-                                player[3],
-                                player[5]
-                            ])
-                        }
-            })
-        })
+		for (const key in servers) {
+			if(servers[key].playersData === null) continue;
+			servers[key].playersData.forEach(player=>{
+				const playername = (player[0]+"#"+player[2]);
+				if( playername.toLowerCase().includes(input) && 
+					(state.serverSelect === "All Servers" || state.serverSelect === servers[key].name) &&
+					(state.jobSelect === "All Jobs" || state.jobSelect === player[5])){
+						playerFinderFound.push([
+							playername,
+							servers[key]["endpoint"],
+							servers[key]["sname"],
+							player[3],
+							player[5]
+						])
+					}
+			})
+		};
 
-        setlocalState(s=>(
-            playerFinderFound.length > 0 ? 
-                    {   ...s,
-                        playerFinderMessages: "Found " + playerFinderFound.length + " player" +(playerFinderFound.length === 1 ?"":"s"),
-                        playerFinderFound
-                    } : {
-                        ...s,
-                        playerFinderMessages: isButton ? "Found nothing" : "...",
-                        playerFinderFound: []
-                    }
-            )
-        )
-    }
+		// const playerFinderFound = store.state.servers.reduce((acc, server) => 
+		// [...(server.playersData || []).filter(player => 
+		//     (player[0]+"#"+player[2]).toLowerCase().includes(input) &&     
+		//     state.serverSelect === "All Servers" || state.serverSelect === server.name && 
+		//     (state.jobSelect === "All Jobs" || state.jobSelect === player[5])
+		// ), ...acc]
+		// , []);
 
-    useEffect(()=>{
-        const tempJobsList = []
-        store.state.servers.forEach(server=>{
-            if(server.playersData){
-                server.playersData.forEach(player=>{
-                    if(!tempJobsList.includes(player[5])){
-                        tempJobsList.push(player[5]);
-                    }
-                })
-            }
-        })
+		setState(s=>(
+			playerFinderFound.length > 0 ? 
+				{   ...s,
+					playerFinderMessages: "Found " + playerFinderFound.length + " player" +(playerFinderFound.length === 1 ?"":"s"),
+					playerFinderFound
+				} : {
+					...s,
+					playerFinderMessages: isButton ? "Found nothing" : "...",
+					playerFinderFound: []
+				}
+			)
+		)
+	}
 
-        setJobList(tempJobsList)
-        handlePlayerFinderSubmit(false);
+	useEffect(()=>{
+		const tempJobsList = []
+		for (const key in servers) {
+			if(!servers[key].loaded || !servers[key].playersData) continue;
+			servers[key].playersData.forEach(player=>{
+				if(!tempJobsList.includes(player[5])){
+					tempJobsList.push(player[5]);
+				}
+			})
+		}
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [store.state.servers])
+		setJobList(tempJobsList)
+		handlePlayerFinderSubmit(false);
+
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [ servers ])
   
-    return (
-        <div id="player-finder">
-            <h2>Online Player Finder</h2>
-            <div id="form">
-                <form>
-                    <input type="text" placeholder="Player's name or in-game id" onChange={(input)=>handlePlayersNameInput(input)} onKeyDown={_handleKeyDown}/>
-                    <div>
-                        <label htmlFor="serverSelector">Filter Server</label>
-                        <select id="serverSelector" onChange={handleServerSelect} value={localState.serverSelect}>
-                            <option value="All Servers">All Servers</option>
-                            {store.state.servers.map((server,index)=>
-                                server.isLoaded ? <option key={index} value={server.name}>{server.name}</option> : "")}
-                        </select>
-                    </div>
+	return (
+		<div className="container">
+			<div className="border-start">
+				<div className="border-title">Online Player Finder</div>
+				<div className="border-end text-center text-shadow">
+					<form id="playerFinderForm">
+						<div>
+							<label htmlFor="playerNameSelector">Filter Name Or ID</label>
+							<input type="text" id="playerNameSelector" placeholder="Enter player's name or in-game ID here..." onChange={handlePlayersNameInput} onKeyDown={handleOnKeyDownEnter}/>
+						</div>
+						<div>
+							<label htmlFor="serverSelector">Filter Server</label>
+							<select id="serverSelector" onChange={handleServerSelect} value={state.serverSelect} className="bold cursor">
+								<option value="All Servers" className="bold">All Servers</option>
+								{Object.values(servers).map((server, index) => server.loaded ? <option key={index} value={server.name} className="bold">{server.name}</option> : "")}
+							</select>
 
-                    <div>
-                        <label htmlFor="jobSelector">Filter Job</label>
-                        <select id="jobSelector" onChange={(input)=>handleJobSelect(input)} value={localState.jobSelect}> 
-                            <option value="All Jobs">All Jobs</option>
-                            {jobList.map((job,index)=>
-                                <option key={index} value={job}>{job}</option>)}
-                        </select>
-                    </div>
+							<label htmlFor="jobSelector">Filter Job</label>
+							<select id="jobSelector" onChange={(input)=>handleJobSelect(input)} value={state.jobSelect} className="bold cursor"> 
+								<option value="All Jobs">All Jobs</option>
+								{jobList.map((job,index) => <option key={index} value={job} className="bold">{job}</option> )}
+							</select>
+						</div>
 
-                    <input type="button" value="search" className="dxpcursor searchbtn" onClick={()=>handlePlayerFinderSubmit()}/>
-                </form>
-            </div>
+						<input type="button" value="search" className="pfind-btn cursor" onClick={() => handlePlayerFinderSubmit()}/>
+					</form>
+				</div>
+			</div>
 
-            <h2>{localState.playerFinderMessages}</h2>
-
-            {!localState.playerFinderFound ? "" :
-                <table>
-                    <tbody>
-                        {localState.playerFinderFound.map((player,index)=>
-                        
-                            <tr key={index}>
-                                {/* <td>{player[3] && showAvatar === true ? //todo 
-                                    <a href={player[3]} target="_blank" rel="noopener noreferrer"><img src={player[3] || "#"} height="50px" alt="img" className="avatar"/></a> : 
-                                    <img className="no-avatar" src="images/no-avatar.gif" alt="-"/>
-                                }</td> */}
-                                <td>#{index+1}</td>
-                                <td><b>{player[0]}</b></td>
-                                <td>{player[4] || "-"}</td>
-                                <td><b>{player[2]}</b> <a href ={"fivem://connect/cfx.re/join/" + player[1]} title="Connect"><small>Join</small></a></td>
-                            </tr>
-                        )}
-                    </tbody>
-                </table>
-            }
-    </div>
-    )
+			<div className="border-start">
+				<div className="border-title">{state.playerFinderMessages}</div>
+				<div className="border-end scroll" style={{minHeight: "500px"}}>
+					<table>
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Name</th>
+								<th>Job</th>
+								<th>Server</th>
+							</tr>
+						</thead>
+						<tbody>
+							{state.playerFinderFound.length === 0 ? 
+								<tr>
+									<td>-</td>
+									<td>N/A</td>
+									<td>N/A</td>
+									<td>N/A</td>
+								</tr> : 
+								state.playerFinderFound.map((player,index)=>
+									<tr key={index}>
+										<td data-label="#">#{index+1}</td>
+										<td data-label="Player"><b>{player[0]}</b></td>
+										<td data-label="Job">{player[4] || "-"}</td>
+										<td data-label="Server"><b>{player[2]}</b> <a href ={"fivem://connect/cfx.re/join/" + player[1]} title="Connect" className="smallLink mg">Join</a></td>
+									</tr>
+								)
+							}
+						</tbody>
+					</table>
+				</div>
+			</div>
+	</div>
+	)
 }
