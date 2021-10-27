@@ -25,8 +25,8 @@ export default function PlayersListModal({linkTitle, server}) {
                                     <td data-label="Avatar">
                                         {
                                             player[3] ? 
-                                                <a href={player[3]} target="_blank" rel="noopener noreferrer"><img src={player[3] || "#"} height="50px" alt="img" className="avatar"/></a>: 
-                                                <img className="no-avatar" src="media/no-avatar.gif" alt="-"/>
+                                                <a href={player[3]} target="_blank" rel="noopener noreferrer"><img src={player[3] || "#"} height="50px" alt="img" className="avatar"/></a> : 
+                                                    <img className="no-avatar" src="media/no-avatar.gif" alt="-"/>
                                         }
                                     </td>
                                     <td data-label="#">#{index+1}</td>

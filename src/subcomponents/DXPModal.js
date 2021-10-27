@@ -13,8 +13,10 @@ export default function DXPModal({linkTitle, server}) {
                             <>
                                 Time left: <DxpClock dxp={server.serverData?.dxp} timestamp={server.lastUpdate}/><br/>
                                 Sponsored by: {server.serverData?.dxp?.[1]}<br/>
-                                Next DXP time: {server.serverData?.dxp?.[3] ? Number(Number(server.serverData?.dxp?.[3]/1000/60).toFixed(2)) + " minutes" : "-"}<br/>
-                                Started: {server.serverData?.dxp?.[4] ? Math.floor(server.serverData?.dxp?.[4]/1000/60) + " minutes ago" : "-"}
+                                {/* Next DXP time: {server.serverData?.dxp?.[3] ? Number(Number(server.serverData?.dxp?.[3]/1000/60).toFixed(2)) + " minutes" : "-"}<br/> */}
+                                Started: {server.serverData?.dxp?.[4] ? Math.floor(server.serverData?.dxp?.[4]/1000/60) + " minutes ago" : "-"}<br/>
+                                {/* {server.lastUpdate - server.serverData?.dxp?.[4]/1000/60} */}
+                                {/* <DxpClock dxp={[0, 0, 0, 0]} timestamp={Date.now() - 1000}/> */}
                             </>: 
                             <>No DXP</>}
                     </h2>

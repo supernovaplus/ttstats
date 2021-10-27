@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { serversAtom } from "../controllers/dataStore";
+import { serversAtom } from "../data/dataStore";
 import { useRecoilValue } from 'recoil';
 
 export default function TopJobs () {

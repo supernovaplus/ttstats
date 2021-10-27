@@ -7,8 +7,7 @@ import ServerJoinModal from "../subcomponents/ServerJoinModal";
 import PlayersListModal from "../subcomponents/PlayersListModal"
 import ModalInstance from "../subcomponents/Modal";
 import DXPModal from "../subcomponents/DXPModal";
-
-import { serversAtom } from "../controllers/dataStore";
+import { serversAtom } from "../data/dataStore";
 
 import {
 	// RecoilRoot,
@@ -86,8 +85,9 @@ export default function ServersStatus(){
 									<td className="dxp" data-label="DXP">
 										{
 											isOnline && isDxpActive ? 
-												<DXPModal dxp={dxp} server={server}/>:
-												<>-</>
+												<span style={{display: "inline-block", minWidth: "110px" }}>
+													<DXPModal dxp={dxp} server={server}/>
+												</span> : <>-</>
 										}
 									</td>
 								</tr>

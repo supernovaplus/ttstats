@@ -9,8 +9,9 @@ const customStyles = {
 	border: "1px solid #008cff",
 	maxWidth: "800px",
 	width: "100%",
-	maxHeight: "90vh",
-	// height: "500px",
+	maxHeight: "100vh",
+	minHieght: "500px",
+	minWidth: "350px",
 
 	top: "50%",
 	left: "50%",

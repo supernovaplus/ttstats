@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { serversAtom, fetchAllServers } from "../controllers/dataStore";
+import { serversAtom, fetchAllServers } from "../data/dataStore";
 import { useRecoilState } from 'recoil';
 
 export default function Timer (){

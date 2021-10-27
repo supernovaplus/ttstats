@@ -66,16 +66,21 @@ export default function TopVehicles(){
 						</thead>
 						<tbody>
 							{
-								!state.sorted_vehicles ? <tr><td>-</td><td>N/A</td><td>N/A</td></tr> :
-									<>
-										{state.sorted_vehicles.map((veh, index) => {
-											return (<tr key={index}>
-													<td data-label="%">{Number(veh[1]/state.total_vehicles*100).toFixed(2)}%</td>
-													<td data-label="Name">{veh[0]}</td>
-													<td data-label="Active">{veh[1]}</td>
-												</tr>)
-										})}
-									</>
+								!state.sorted_vehicles || !state.sorted_vehicles.length ?
+									<tr>
+										<td>-</td>
+										<td>No Data</td>
+										<td>N/A</td>
+									</tr> :
+										<>
+											{state.sorted_vehicles.map((veh, index) => {
+												return (<tr key={index}>
+														<td data-label="%">{Number(veh[1]/state.total_vehicles*100).toFixed(2)}%</td>
+														<td data-label="Name">{veh[0]}</td>
+														<td data-label="Active">{veh[1]}</td>
+													</tr>)
+											})}
+										</>
 							}
 						</tbody>
 					</table>
@@ -99,8 +104,12 @@ export default function TopVehicles(){
 						</thead>
 						<tbody>
 							{
-								!state.sorted_classes ? 
-									<tr><td>-</td><td>N/A</td><td>N/A</td></tr> :
+								!state.sorted_classes || !state.sorted_classes.length ? 
+									<tr>
+										<td>-</td>
+										<td>No Data</td>
+										<td>N/A</td>
+									</tr> :
 										<>
 											{state.sorted_classes.map((veh, index) => 
 												<tr key={index}>

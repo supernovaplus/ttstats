@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { serversAtom } from "../controllers/dataStore";
+import { serversAtom } from "../data/dataStore";
 import { useRecoilValue } from 'recoil';
 
 export default function PlayerFinder () {

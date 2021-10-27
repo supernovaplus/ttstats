@@ -1,5 +1,5 @@
 import React from "react";
-import { serversAtom } from "../controllers/dataStore";
+import { serversAtom } from "../data/dataStore";
 import { useRecoilValue } from 'recoil';
 
 export default function HighestID () {
@@ -39,14 +39,19 @@ export default function HighestID () {
 								</tr>
 							</thead>
 							<tbody>
-								{sortedList.length === 0 ? <tr><th></th><th>No Players Found</th><th></th></tr> : 
-									sortedList.map((player, index) => (
-										<tr key={index} style={index === 0 ? {fontSize: '2em'} : {}}>
-											<td data-label="# Place">#{player.index}</td>
-											<td data-label="Player"><b>{player.name ? player.name : "?"}</b></td>
-											<td data-label="ID">{player.id}</td>
-										</tr>
-									))
+								{!sortedList.length ? 
+									<tr>
+										<th></th>
+										<th>No Data</th>
+										<th></th>
+									</tr> : 
+										sortedList.map((player, index) => (
+											<tr key={index} style={index === 0 ? {fontSize: '2em'} : {}}>
+												<td data-label="# Place">#{player.index}</td>
+												<td data-label="Player"><b>{player.name ? player.name : "?"}</b></td>
+												<td data-label="ID">{player.id}</td>
+											</tr>
+										))
 								}
 							</tbody>
 						</table>

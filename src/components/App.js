@@ -12,7 +12,7 @@ import TopVehicles from "./TopVehicles";
 import TopTen from "./TopTen";
 import RefreshButton from "../subcomponents/RefreshButton";
 import HighestID from "./HighestID";
-import { DataStore } from "../controllers/dataStore";
+import { DataStore } from "../data/dataStore";
 import { RecoilRoot } from "recoil";
 
 export default function App() {

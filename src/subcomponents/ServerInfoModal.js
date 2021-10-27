@@ -9,16 +9,16 @@ export default function ServerInfoModal({linkTitle, server}) {
 			<div className="border-start">
 				<div className="border-title">Server Info</div>
 				<div className="border-end">
-					Name: {server.name}<br/>
+					<div>Name: {server.name}</div>
 					{server.serverData ? 
 						<>
-							Server Is Online<br/>
-							Uptime: {server.serverData.uptime}<br/>
-							Players Online: {currentPlayerCount <= playerCountLimit ? currentPlayerCount : playerCountLimit + ` (+${currentPlayerCount-playerCountLimit} in queue)`}<br/>
-							Max Players Allowed: {playerCountLimit}
-						</> : <>Server Is Offline</>
-					}<br/>
-					<a href={"fivem://connect/cfx.re/join/" + server.endpoint} className="normalLink">Connect to the server</a>
+							<div>Server Is Online</div>
+							<div>Uptime: {server.serverData.uptime}</div>
+							<div>Players Online: {currentPlayerCount <= playerCountLimit ? currentPlayerCount : playerCountLimit + ` (+${currentPlayerCount-playerCountLimit} in queue)`}</div>
+							<div>Max Players Allowed: {playerCountLimit}</div>
+						</> : <><div>Server Is Offline</div></>
+					}
+					<div><a href={"fivem://connect/cfx.re/join/" + server.endpoint} className="normalLink">Connect to the server</a></div>
 				</div>
 			</div>
 		</ModalInstance>
