@@ -43,7 +43,7 @@ export const fetchServer = (server, setServer) => {
 	const cancelController = new AbortController();
 	const cancelControllerTimeout = setTimeout(() => {
 		cancelController.abort();
-	}, 5000);
+	}, 6000);
 
 	fetch(`https://tycoon-${server.endpoint}.users.cfx.re/status/widget/players.json`, {
 		signal: cancelController.signal,

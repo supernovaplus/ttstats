@@ -1,65 +1,60 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { serversAtom } from "../data/dataStore";
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue } from "recoil";
 
-export default function TopJobs () {
+/** @type {[startsWith: string, tagInGame: string]} */
+const companyTags = [
+	["COCO", "CollinsCo"],
+	["PIGS", "P.I.G.S."],
+	["RTS", "R.T.S."],
+	["BAT", "BAT"],
+	["FRLLC", "FRLLC"],
+	["IA", "IA "],
+];
+
+export default function TopJobs() {
 	const servers = useRecoilValue(serversAtom);
-	const [state, setState] = useState({entries: [], counter: 0});
-	const [state2, setState2] = useState({entries: [], counter: 0});
-	
+	const [jobsState, setJobsState] = useState({ entries: [], counter: 0 });
+	const [companyJobsState, setCompanyJobsState] = useState({ entries: [], counter: 0 });
+
 	useEffect(() => {
-		const jobs = {}
+		const jobs = {};
+		const companyJobs = {};
+		companyTags.forEach(([jobTitle]) => (companyJobs[jobTitle] = 0));
 
-		const companyJobs = {
-			"COCO": 0,
-			"PIGS": 0,
-			"RTS": 0,
-			"BAT": 0,
-			"FRLLC": 0,
-			"IA": 0
-		}
-
-		Object.values(servers).forEach(server => {
-			if(server.loaded === true && server.playersData !== null){
-				server.playersData.forEach(player => {
-					if(!jobs.hasOwnProperty(player[5])){
+		for (const key in servers) {
+			if (servers[key].loaded === true && servers[key].playersData !== null) {
+				servers[key].playersData.forEach((player) => {
+					if (!jobs.hasOwnProperty(player[5])) {
 						jobs[player[5]] = 1;
-					}else{
+					} else {
 						jobs[player[5]]++;
 					}
 
-					if(player[5].startsWith("P.I.G.S.")){
-						companyJobs["PIGS"]++;
-					}else if(player[5].startsWith("R.T.S.")){
-						companyJobs["RTS"]++;
-					}else if(player[5].startsWith("CollinsCo")){
-						companyJobs["COCO"]++;
-					}else if(player[5].startsWith("IA ")){
-						companyJobs["IA"]++;
-					}else if(player[5].startsWith("BAT")){
-						companyJobs["BAT"]++;
-					}else if(player[5].startsWith("FRLLC")){
-						companyJobs["FRLLC"]++;
+					const companyJobFound = companyTags.find((job) => player[5].startsWith(job[1]));
+					if (companyJobFound) {
+						companyJobs[companyJobFound[0]]++;
 					}
-
-				})
+				});
 			}
-		})
+		}
+
 		const sortedJobs = Object.entries(jobs).sort((item1, item2) => item2[1] - item1[1]);
 		const sortedCompanyJobs = Object.entries(companyJobs).sort((item1, item2) => item2[1] - item1[1]);
-		setState(s => ({
+
+		setJobsState((s) => ({
 			...s,
 			entries: sortedJobs,
-			counter: sortedJobs.reduce((acc, val) => acc + val[1], 0)
-		}))
-		setState2(s => ({
+			counter: sortedJobs.reduce((acc, val) => acc + val[1], 0),
+		}));
+
+		setCompanyJobsState((s) => ({
 			...s,
 			entries: sortedCompanyJobs,
-			counter: sortedCompanyJobs.reduce((acc, val) => acc + val[1], 0)
-		}))
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [servers]); 
+			counter: sortedCompanyJobs.reduce((acc, val) => acc + val[1], 0),
+		}));
+	}, [servers]);
 
 	return (
 		<div className="container">
@@ -68,19 +63,36 @@ export default function TopJobs () {
 				<div className="border-end scroll">
 					<table>
 						<thead>
-							<tr><th>%</th><th>Job Name</th><th>Active</th><th></th></tr>
+							<tr>
+								<th>%</th>
+								<th>Job Name</th>
+								<th>Active</th>
+								<th></th>
+							</tr>
 						</thead>
 						<tbody>
-							{state.counter === 0 ? <tr><td>-</td><td>N/A</td><td>N/A</td></tr> : 
-								state.entries.map((job,index)=>{
-									return <tr key={index}>
-										<td data-label="%">{Number(job[1]/state.counter*100).toFixed(1)}%</td>
-										<td data-label="Job Name">{job[0]}</td>
-										<td data-label="Active">{job[1]}</td>
-										<td data-label="Links"><Link to={encodeURI("/playerfinder?job=" + job[0])} className="smallLink mg">Players</Link></td>
-									</tr>
+							{jobsState.counter === 0 ? (
+								<tr>
+									<td>-</td>
+									<td>No Data</td>
+									<td>N/A</td>
+								</tr>
+							) : (
+								jobsState.entries.map((job, index) => {
+									return (
+										<tr key={index}>
+											<td data-label="%">{Number((job[1] / jobsState.counter) * 100).toFixed(1)}%</td>
+											<td data-label="Job Name">{job[0]}</td>
+											<td data-label="Active">{job[1]}</td>
+											<td data-label="Links">
+												<Link to={encodeURI("/playerfinder?job=" + job[0])} className="smallLink mg">
+													Players
+												</Link>
+											</td>
+										</tr>
+									);
 								})
-							}
+							)}
 						</tbody>
 					</table>
 				</div>
@@ -91,22 +103,34 @@ export default function TopJobs () {
 				<div className="border-end">
 					<table>
 						<thead>
-							<tr><th>%</th><th>Job Name</th><th>Active</th></tr>
+							<tr>
+								<th>%</th>
+								<th>Job Name</th>
+								<th>Active</th>
+							</tr>
 						</thead>
 						<tbody>
-						{state2.counter === 0 ? <tr><td>-</td><td>N/A</td><td>N/A</td></tr> : 
-							state2.entries.map((job,index)=>{
-								return <tr key={index}>
-									<td data-label="%">{Number(job[1]/state2.counter*100).toFixed(1)}%</td>
-									<td data-label="Job Name">{job[0]}</td>
-									<td data-label="Active">{job[1]}</td>
+							{companyJobsState.counter === 0 ? (
+								<tr>
+									<td>-</td>
+									<td>No Data</td>
+									<td>N/A</td>
 								</tr>
-							})
-						}  
+							) : (
+								companyJobsState.entries.map((job, index) => {
+									return (
+										<tr key={index}>
+											<td data-label="%">{Number((job[1] / companyJobsState.counter) * 100).toFixed(1)}%</td>
+											<td data-label="Job Name">{job[0]}</td>
+											<td data-label="Active">{job[1]}</td>
+										</tr>
+									);
+								})
+							)}
 						</tbody>
 					</table>
 				</div>
 			</div>
 		</div>
-	)
+	);
 }
