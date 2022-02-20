@@ -12,8 +12,6 @@ import serversList from "./serverslist.json";
 export const serversAtom = atom({
 	key: "servers",
 	default: serversList.reduce((acc, server, index) => {
-		if(index >= 5) return acc; //remove this if there is servers 6 to A is back
-
 		acc[server[0]] = {
 			name: server[1],
 			endpoint: server[0],
