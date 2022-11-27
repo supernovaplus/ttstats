@@ -158,7 +158,7 @@ export default function PlayerFinder () {
 										<td data-label="#">#{index+1}</td>
 										<td data-label="Player"><b>{player[0]}</b></td>
 										<td data-label="Job">{player[4] || "-"}</td>
-										<td data-label="Server"><b>{player[2]}</b> <a href ={"fivem://connect/cfx.re/join/" + player[1]} title="Connect" className="smallLink mg">Join</a></td>
+										<td data-label="Server"><b>{player[2]}</b> <a href ={`fivem://connect/${player[1]}?pure_1`} title="Connect" className="smallLink mg">Join</a></td>
 									</tr>
 								)
 							}

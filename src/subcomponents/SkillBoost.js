@@ -5,7 +5,7 @@ export default function SkillBoost () {
 
 	useEffect(()=>{
 		let isSubscribed = true;
-		fetch("https://novaplus-api.herokuapp.com/skillboost").then(res=>res.json()).then(res=>{
+		fetch("https://d.ttstats.eu/skillboost").then(res=>res.json()).then(res=>{
 			if (isSubscribed){
 				if(!res.data){
 					setState(() => "-");

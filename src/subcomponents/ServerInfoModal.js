@@ -18,7 +18,7 @@ export default function ServerInfoModal({linkTitle, server}) {
 							<div>Max Players Allowed: {playerCountLimit}</div>
 						</> : <><div>Server Is Offline</div></>
 					}
-					<div><a href={"fivem://connect/cfx.re/join/" + server.endpoint} className="normalLink">Connect to the server</a></div>
+					<div><a href={`fivem://connect/${server.endpoint}?pure_1`} className="normalLink">Connect to the server</a></div>
 				</div>
 			</div>
 		</ModalInstance>

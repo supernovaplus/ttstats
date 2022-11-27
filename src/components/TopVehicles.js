@@ -20,7 +20,7 @@ export default function TopVehicles(){
 		const controller = new AbortController();
 		const signal = controller.signal;
 		let isSubscribed = true;
-		fetch("https://novaplus-api.herokuapp.com/vehicles", { signal }).then(res => res.json()).then(res => {
+		fetch("https://d.ttstats.eu/vehicles", { signal }).then(res => res.json()).then(res => {
 			if(res && res.timestamp > 0){
 				if (isSubscribed){
 					setState(s => ({

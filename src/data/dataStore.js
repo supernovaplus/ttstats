@@ -89,7 +89,7 @@ export const fetchServer = async (server, setServer) => {
 	try {
 		clearTimeout(cancelControllerTimeout);
 		if (success) return;
-		const res = await cancellableJSONFetch({ cancelController, cancelControllerTimeout, url: `https://novaplus-api.herokuapp.com/status/${server.endpoint}` });
+		const res = await cancellableJSONFetch({ cancelController, cancelControllerTimeout, url: `https://d.ttstats.eu/status/${server.endpoint}` });
 		await parseStatusJSON({ res, setServer, server });
 		success = true;
 	} catch (err) {}
