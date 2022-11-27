@@ -23,6 +23,7 @@ export default function SkillBoost () {
 		return () => {
 			isSubscribed = false;
 		}
+		
 	}, [])
 
 	return (<h3>Current skill boost: {state || "?"}</h3>)
