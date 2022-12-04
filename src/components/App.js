@@ -1,72 +1,74 @@
 import React, { useEffect } from "react";
-import {
-	BrowserRouter as Router,
-	Route,
-	Link,
-	Switch
-} from "react-router-dom";
-import ServersStatus from "./ServersStatus";
-import PlayerFinder from "./PlayerFinder";
-import TopJobs from "./TopJobs";
-import TopVehicles from "./TopVehicles";
-import TopTen from "./TopTen";
-import RefreshButton from "../subcomponents/RefreshButton";
-import HighestID from "./HighestID";
-import { DataStore } from "../data/dataStore";
-import { RecoilRoot } from "recoil";
+import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import ServersStatus from "../pages/ServersStatus";
+import PlayerFinder from "../pages/PlayerFinder";
+import TopJobs from "../pages/TopJobs";
+import TopVehicles from "../pages/TopVehicles";
+import TopTen from "../pages/TopTen";
+import HighestID from "../pages/HighestID";
+import Main from "../layouts/main/Main";
+import Content from "../layouts/content/Content";
+import Sidemenu from "../layouts/sidemenu/Sidemenu";
+
+import { NavLink } from "react-router-dom";
+
+import RefreshButton from "../components/RefreshButton";
+import { DataContextProvider } from "../data/dataStore";
 
 export default function App() {
-	useEffect(() => {
-		// const imageId = (new Date()).getSeconds() % 2;
-		// const imageId = (new Date()).getHours() % 3;
-		// document.body.style.backgroundImage = `url("./media/Untitled-${imageId}.jpg")`;
-		document.body.style.backgroundImage = `url("./media/ttstats-bg-0.jpg")`;
-	}, [])
-
 	return (
 		<Router basename="/">
 			{/* <Router basename="ttstats"> */}
-			<RecoilRoot>
-				<DataStore>
-					<div id="header">
-						<div className="container">
-							<div className="border-start">
-								<div className="border-title">
-									<div className="flex">
-										<div>
-											<a href="https://ttstats.eu">ttstats.eu</a>
-										</div>
-										<div>
-											<RefreshButton/>
-										</div>
-									</div>
-								</div>
-								<div className="border-end">
-									<ul>
-										<li><Link to="/">Servers Status</Link></li>
-										<li><Link to="/playerfinder">Player Finder</Link></li>
-										<li><Link to="/vehicles">Top Vehicles</Link></li>
-										<li><Link to="/jobs">Top Jobs</Link></li>
-										<li><Link to="/top10">Top 10</Link></li>
-										<li><Link to="/highest_id">Highest Player ID</Link></li>
-										{/* <li><a href="http://ttmap.aca.lt" className="gold">ttmap.aca.lt</a></li> */}
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div id="content">
+			<DataContextProvider>
+				<Main>
+					<Sidemenu>
+						<RefreshButton />
+						<ul>
+							<li>
+								<NavLink className="potato" to="/">Servers Status</NavLink>
+							</li>
+							<li>
+								<NavLink className="potato" to="/playerfinder">Player Finder</NavLink>
+							</li>
+							<li>
+								<NavLink className="potato" to="/vehicles">Top Vehicles</NavLink>
+							</li>
+							<li>
+								<NavLink className="potato" to="/jobs">Top Jobs</NavLink>
+							</li>
+							<li>
+								<NavLink className="potato" to="/top10">Top 10</NavLink>
+							</li>
+							<li>
+								<NavLink className="potato" to="/highest_id">Highest Player ID</NavLink>
+							</li>
+							{/* <li><a href="http://ttmap.aca.lt" className="gold">ttmap.aca.lt</a></li> */}
+						</ul>
+					</Sidemenu>
+					<Content>
 						<Switch>
-							<Route path="/playerfinder"><PlayerFinder/></Route>
-							<Route path="/jobs"><TopJobs/></Route>
-							<Route path="/vehicles"><TopVehicles/></Route>
-							<Route path="/top10"><TopTen/></Route>
-							<Route path="/highest_id"><HighestID/></Route>
-							<Route path="/"><ServersStatus /></Route>
+							<Route path="/playerfinder">
+								<PlayerFinder />
+							</Route>
+							<Route path="/jobs">
+								<TopJobs />
+							</Route>
+							<Route path="/vehicles">
+								<TopVehicles />
+							</Route>
+							<Route path="/top10">
+								<TopTen />
+							</Route>
+							<Route path="/highest_id">
+								<HighestID />
+							</Route>
+							<Route path="/">
+								<ServersStatus />
+							</Route>
 						</Switch>
-					</div>
-				</DataStore>
-			</RecoilRoot>
+					</Content>
+				</Main>
+			</DataContextProvider>
 		</Router>
 	);
 }

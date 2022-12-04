@@ -1,24 +1,17 @@
 import React from "react";
 // import { Link } from "react-router-dom";
-import Uptime from "../subcomponents/Uptime";
-import SkillBoost from "../subcomponents/SkillBoost";
-import ServerInfoModal from "../subcomponents/ServerInfoModal";
-import ServerJoinModal from "../subcomponents/ServerJoinModal";
-import PlayersListModal from "../subcomponents/PlayersListModal"
-import ModalInstance from "../subcomponents/Modal";
-import DXPModal from "../subcomponents/DXPModal";
-import { serversAtom } from "../data/dataStore";
-
-import {
-	// RecoilRoot,
-	// atom,
-	// selector,
-	// useRecoilState,
-	useRecoilValue,
-} from 'recoil';
+import Uptime from "../components/Uptime";
+import SkillBoost from "../components/SkillBoost";
+import ServerInfoModal from "../components/ServerInfoModal";
+import ServerJoinModal from "../components/ServerJoinModal";
+import PlayersListModal from "../components/PlayersListModal"
+import ModalInstance from "../components/Modal";
+import DXPModal from "../components/DXPModal";
+import { useDataContext } from "../data/dataStore";
+import {AnimatePresence, motion} from "framer-motion/dist/framer-motion";
 
 export default function ServersStatus(){
-	const servers = useRecoilValue(serversAtom);
+	const { servers } = useDataContext();
 
 	return (
 		<div className="container">
@@ -26,6 +19,7 @@ export default function ServersStatus(){
 				<div className="border-title">
 					Transport Tycoon Servers List
 				</div>
+				<motion.input type="button" whileHover={{scale: 1.05}} whileTap={{scale: 1.2}} value={"kebab"}/>
 				<div className="border-end">
 					<table>
 						<thead>

@@ -1,10 +1,12 @@
-import 'react-app-polyfill/ie11';
-import 'react-app-polyfill/stable';
-import 'core-js/stable'
+import "react-app-polyfill/ie11";
+import "react-app-polyfill/stable";
+import "core-js/stable";
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import "./style.scss";
-import App from './components/App';
+import React from "react";
+import App from "./components/App";
+import "./index.scss";
+import { createRoot } from "react-dom/client";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const container = document.getElementById("root");
+const root = createRoot(container);
+root.render(<App />);

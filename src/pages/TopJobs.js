@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { serversAtom } from "../data/dataStore";
-import { useRecoilValue } from "recoil";
+import { useDataContext } from "../data/dataStore";
 
 /** @type {[startsWith: string, tagInGame: string]} */
 const companyTags = [
@@ -14,7 +13,7 @@ const companyTags = [
 ];
 
 export default function TopJobs() {
-	const servers = useRecoilValue(serversAtom);
+	const { servers } = useDataContext();
 	const [jobsState, setJobsState] = useState({ entries: [], counter: 0 });
 	const [companyJobsState, setCompanyJobsState] = useState({ entries: [], counter: 0 });
 

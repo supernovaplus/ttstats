@@ -1,32 +1,22 @@
-import { useEffect } from "react";
-import {
-	// RecoilRoot,
-	atom,
-	// selector,
-	useRecoilState,
-	// useRecoilValue,
-} from "recoil";
-
+import { useEffect, useContext, createContext, useState } from "react";
 import serversList from "./serverslist.json";
 
-export const serversAtom = atom({
-	key: "servers",
-	default: serversList.reduce((acc, server, index) => {
-		acc[server[0]] = {
-			name: server[1],
-			endpoint: server[0],
-			sname: server[2],
-			error: null,
-			serverData: null,
-			playersData: null,
-			lastUpdate: null,
-			loaded: false,
-			// vehicleData: null
-		};
+const initialServersState = serversList.reduce((acc, server) => {
+	acc[server[0]] = {
+		name: server[1],
+		endpoint: server[0],
+		sname: server[2],
+		error: null,
+		serverData: null,
+		playersData: null,
+		lastUpdate: null,
+		loaded: false,
+		// vehicleData: null
+	};
+	return acc;
+}, {});
 
-		return acc;
-	}, {}),
-});
+export const DataContext = createContext({ servers: initialServersState });
 
 const cancellableJSONFetch = async ({ cancelController, url, cancelControllerTimeout }) => {
 	cancelControllerTimeout = setTimeout(() => {
@@ -147,13 +137,15 @@ export const fetchAllServers = (servers, setServers) => {
 	}
 };
 
-export const DataStore = ({ children }) => {
-	const [servers, setServers] = useRecoilState(serversAtom);
+export const DataContextProvider = ({ children }) => {
+	const [servers, setServers] = useState(initialServersState);
 
 	useEffect(() => {
 		fetchAllServers(servers, setServers);
 		// eslint-disable-next-line
 	}, []);
 
-	return <>{children}</>;
+	return <DataContext.Provider value={{ servers, setServers }}>{children}</DataContext.Provider>;
 };
+
+export const useDataContext = () => useContext(DataContext);
