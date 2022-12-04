@@ -1,23 +1,23 @@
 {
 	"name": "ttstats",
 	"homepage": "https://ttstats.eu",
-	"version": "2.0.0",
+	"version": "3.0.0",
 	"private": false,
 	"dependencies": {
 		"@testing-library/jest-dom": "^5.14.1",
 		"@testing-library/react": "^11.2.7",
 		"@testing-library/user-event": "^12.1.10",
 		"core-js": "^3.15.2",
+		"framer-motion": "^7.6.18",
 		"gh-pages": "^2.2.0",
 		"node-sass": "^5.0.0",
-		"react": "^17.0.2",
+		"react": "^18.2.0",
 		"react-app-polyfill": "^1.0.6",
-		"react-dom": "^17.0.2",
+		"react-dom": "^18.2.0",
 		"react-modal": "^3.14.3",
 		"react-query": "^3.18.1",
 		"react-router-dom": "^5.2.0",
 		"react-scripts": "4.0.3",
-		"recoil": "^0.4.0",
 		"web-vitals": "^1.1.2"
 	},
 	"scripts": {
