@@ -1,0 +1,37 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html {
+    overflow-y: scroll;
+}
+
+body {
+    background-color: grey;
+}
+
+.MainContainer {
+    display: flex;
+    width: 1000px;
+    background-color: royalblue;
+    min-height: 90vh;
+    margin: 10px auto;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.Content {
+    background-color: blueviolet;
+    width: 100%;
+}
+
+.container {
+    width: 100%;
+}
+
+.container table {
+    width: 100%;
+    text-align: center;
+}

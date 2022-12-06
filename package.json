@@ -38,19 +38,15 @@
 	},
 	"browserslist": {
 		"production": [
-			">0.2%",
-			"not dead",
-			"not op_mini all",
-			"ie 11"
+			"last 20 chrome version",
+			"last 20 firefox version"
 		],
 		"development": [
-			"last 1 chrome version",
-			"last 1 firefox version",
-			"last 1 safari version",
-			"ie 11"
+			"last 20 chrome version",
+			"last 20 firefox version"
 		]
 	},
-	"main": "index.js",
+	"main": "index.jsx",
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/supernovaplus/ttstats.git"

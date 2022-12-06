@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { fetchAllServers, useDataContext } from "../data/store";
+import React, { useEffect, useState } from 'react';
+import { fetchAllServers, useDataContext } from '../data/store';
 
 export default function RefreshButton() {
 	const [state, setState] = useState({ total: 0, players: 0, servers: 0 });
@@ -31,9 +31,13 @@ export default function RefreshButton() {
 	}, [servers]);
 
 	return (
-		<a href={window.location.href} onClick={handleOnClickRefresh} className="refresh">
-			Servers Loaded: {state.servers}/{state.total} ({state.players} players) | click to refresh
-		</a>
+		<div className='serverCountItem'>
+			Servers Loaded: {state.servers}/{state.total} ({state.players} players)
+			<a href={window.location.href} onClick={handleOnClickRefresh} className="refresh">
+				click to refresh
+			</a>
+		</div>
+
 		// <input
 		//     style={{textAlign:"right"}}
 		//     type="button"
