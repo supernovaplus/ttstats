@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useDataContext } from "../data/dataStore";
+import { useDataContext } from "../data/store";
 
 /** @type {[startsWith: string, tagInGame: string]} */
 const companyTags = [

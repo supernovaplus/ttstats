@@ -3,7 +3,7 @@ import "react-app-polyfill/stable";
 import "core-js/stable";
 
 import React from "react";
-import App from "./components/App";
+import App from "./App";
 import "./index.scss";
 import { createRoot } from "react-dom/client";
 

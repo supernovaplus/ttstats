@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useDataContext } from "../data/dataStore";
+import { useDataContext } from "../data/store";
 
 export default function PlayerFinder() {
 	const { servers } = useDataContext();

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { fetchAllServers, useDataContext } from "../data/dataStore";
+import { fetchAllServers, useDataContext } from "../data/store";
 
 export default function RefreshButton() {
 	const [state, setState] = useState({ total: 0, players: 0, servers: 0 });

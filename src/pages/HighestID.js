@@ -1,5 +1,5 @@
 import React from "react";
-import { useDataContext } from "../data/dataStore";
+import { useDataContext } from "../data/store";
 
 export default function HighestID() {
 	const { servers } = useDataContext();

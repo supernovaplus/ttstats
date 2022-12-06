@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, NavLink, Switch } from "react-router-dom";
 import ServersStatus from "../pages/ServersStatus";
 import PlayerFinder from "../pages/PlayerFinder";
 import TopJobs from "../pages/TopJobs";
@@ -9,11 +9,8 @@ import HighestID from "../pages/HighestID";
 import Main from "../layouts/main/Main";
 import Content from "../layouts/content/Content";
 import Sidemenu from "../layouts/sidemenu/Sidemenu";
-
-import { NavLink } from "react-router-dom";
-
 import RefreshButton from "../components/RefreshButton";
-import { DataContextProvider } from "../data/dataStore";
+import { DataContextProvider } from "../data/store";
 
 export default function App() {
 	return (
@@ -25,22 +22,22 @@ export default function App() {
 						<RefreshButton />
 						<ul>
 							<li>
-								<NavLink className="potato" to="/">Servers Status</NavLink>
+								<NavLink to="/">Servers Status</NavLink>
 							</li>
 							<li>
-								<NavLink className="potato" to="/playerfinder">Player Finder</NavLink>
+								<NavLink to="/playerfinder">Player Finder</NavLink>
 							</li>
 							<li>
-								<NavLink className="potato" to="/vehicles">Top Vehicles</NavLink>
+								<NavLink to="/vehicles">Top Vehicles</NavLink>
 							</li>
 							<li>
-								<NavLink className="potato" to="/jobs">Top Jobs</NavLink>
+								<NavLink to="/jobs">Top Jobs</NavLink>
 							</li>
 							<li>
-								<NavLink className="potato" to="/top10">Top 10</NavLink>
+								<NavLink to="/top10">Top 10</NavLink>
 							</li>
 							<li>
-								<NavLink className="potato" to="/highest_id">Highest Player ID</NavLink>
+								<NavLink to="/highest_id">Highest Player ID</NavLink>
 							</li>
 							{/* <li><a href="http://ttmap.aca.lt" className="gold">ttmap.aca.lt</a></li> */}
 						</ul>
