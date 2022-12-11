@@ -51,7 +51,7 @@ export default function Top10 () {
 		const controller = new AbortController();
 		const signal = controller.signal;
 		let isSubscribed = true;
-		fetch("https://aca.lt/api_v1/top10.json", {signal})
+		fetch("https://api.transporttycoon.eu/top10.json", {signal})
 		.then(res=>res.json())
 		.then(res=>{
 			if (isSubscribed){
