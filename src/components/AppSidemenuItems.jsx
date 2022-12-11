@@ -1,10 +1,11 @@
 import { NavLink } from 'react-router-dom';
+import PropTypes from 'prop-types'
 
 export function AppSidemenuItem({ linkData }) {
 	return <NavLink to={linkData.to} className='NavLinkItem1'>{linkData.name}</NavLink>;
 }
 
-export default function AppSidemenuDisplayItems({ navData }) {
+export default function AppSidemenuItems({ navData }) {
 	return (
 		<div className='NavLinkMenu'>
 			{navData.map((d, index) => {
@@ -13,4 +14,8 @@ export default function AppSidemenuDisplayItems({ navData }) {
 			})}
 		</div>
 	);
+}
+
+AppSidemenuItems.propTypes = {
+	items: PropTypes.arrayOf(PropTypes.any).isRequired,
 }

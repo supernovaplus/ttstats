@@ -9,6 +9,7 @@ import ModalInstance from "../components/Modal";
 import DXPModal from "../components/DXPModal";
 import { useDataContext } from "../data/store";
 import { AnimatePresence, motion } from "framer-motion/dist/framer-motion";
+import Modal from "../components/Modal";
 
 export default function ServersStatus() {
 	const { servers } = useDataContext();
@@ -16,6 +17,7 @@ export default function ServersStatus() {
 	return (
 		<div className="container">
 			<div className="border-start">
+				<Modal dd={<div>kebab</div>}>Potato</Modal>
 				<div className="border-title">Transport Tycoon Servers List</div>
 				<motion.input type="button" whileHover={{ scale: 1.05 }} whileTap={{ scale: 1.2 }} value={"kebab"} />
 				<div className="border-end">

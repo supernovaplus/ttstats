@@ -1,4 +1,4 @@
-import ModalInstance from "./Modal";
+import ModalInstance from "./Modalx";
 import DxpClock from "./DxpClock";
 
 export default function DXPModal({linkTitle, server}) {

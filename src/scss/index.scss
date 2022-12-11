@@ -14,7 +14,8 @@ body {
 
 .MainContainer {
     display: flex;
-    width: 1000px;
+    max-width: 1000px;
+    width: 100%;
     background-color: royalblue;
     min-height: 90vh;
     margin: 10px auto;
@@ -34,4 +35,23 @@ body {
 .container table {
     width: 100%;
     text-align: center;
+}
+
+.modal {
+    color: red;
+    z-index: 9;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.437);
+    position:fixed;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    min-width: 100px;
+    min-height: 100px;
 }

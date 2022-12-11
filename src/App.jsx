@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import RefreshButton from './components/RefreshButton';
 import { DataContextProvider } from './data/store';
-import { AppSidemenu, AppContent, AppMainLayout, AppSidemenuDisplayItems } from './components';
+import { AppSidemenu, AppContent, AppMainLayout, AppSidemenuItems } from './components';
 import _nav from './data/_nav';
 import _routes from './data/_routes';
 
@@ -14,7 +14,7 @@ export default function App() {
 				<AppMainLayout>
 					<AppSidemenu>
 						<RefreshButton />
-						<AppSidemenuDisplayItems navData={_nav} />
+						<AppSidemenuItems navData={_nav} />
 					</AppSidemenu>
 					<AppContent>
 						<Switch>

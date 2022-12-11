@@ -1,6 +1,6 @@
 import AppContent from "./AppContent";
 import AppSidemenu from "./AppSidemenu";
 import AppMainLayout from "./AppMainLayout";
-import AppSidemenuDisplayItems from "./AppSidemenuDisplayItems";
+import AppSidemenuItems from "./AppSidemenuItems";
 
-export { AppContent, AppSidemenu, AppMainLayout, AppSidemenuDisplayItems };
+export { AppContent, AppSidemenu, AppMainLayout, AppSidemenuItems };

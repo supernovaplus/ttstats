@@ -1,4 +1,4 @@
-import ModalInstance from "./Modal";
+import ModalInstance from "./Modalx";
 
 export default function PlayersListModal({linkTitle, server}) {
 
