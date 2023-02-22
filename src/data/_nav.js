@@ -1,4 +1,4 @@
-import { AppSidemenuLink } from '../components';
+// import { AppSidemenuLink } from '../components/index';
 
 const _nav = [
 	{

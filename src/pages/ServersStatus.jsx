@@ -5,10 +5,9 @@ import SkillBoost from "../components/SkillBoost";
 import ServerInfoModal from "../components/ServerInfoModal";
 import ServerJoinModal from "../components/ServerJoinModal";
 import PlayersListModal from "../components/PlayersListModal";
-import ModalInstance from "../components/Modal";
+// import ModalInstance from "../components/Modal";
 import DXPModal from "../components/DXPModal";
 import { useDataContext } from "../data/store";
-import { AnimatePresence, motion } from "framer-motion/dist/framer-motion";
 import Modal from "../components/Modal";
 
 export default function ServersStatus() {
@@ -19,7 +18,6 @@ export default function ServersStatus() {
 			<div className="border-start">
 				<Modal dd={<div>kebab</div>}>Potato</Modal>
 				<div className="border-title">Transport Tycoon Servers List</div>
-				<motion.input type="button" whileHover={{ scale: 1.05 }} whileTap={{ scale: 1.2 }} value={"kebab"} />
 				<div className="border-end">
 					<table>
 						<thead>
@@ -68,7 +66,7 @@ export default function ServersStatus() {
 											</div>
 										</td>
 										<td data-label="Uptime">
-											<div style={{ minWidth: "80px" }}>{isOnline ? <ModalInstance linkTitle={<Uptime time={server.serverData.uptime} />}>Servers usually restarts every 18 hours</ModalInstance> : "-"}</div>
+											{/* <div style={{ minWidth: "80px" }}>{isOnline ? <ModalInstance linkTitle={<Uptime time={server.serverData.uptime} />}>Servers usually restarts every 18 hours</ModalInstance> : "-"}</div> */}
 										</td>
 										<td className="dxp" data-label="DXP">
 											{isOnline && isDxpActive ? (

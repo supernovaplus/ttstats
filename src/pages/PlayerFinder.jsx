@@ -131,7 +131,7 @@ export default function PlayerFinder() {
 							</select>
 						</div>
 
-						<input type="button" value="search" className="pfind-btn cursor" onClick={() => handlePlayerFinderSubmit()} />
+						<input type="button" value="Filter" className="pfind-btn cursor" onClick={() => handlePlayerFinderSubmit()} />
 					</form>
 				</div>
 			</div>

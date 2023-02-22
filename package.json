@@ -1,60 +1,25 @@
 {
-	"name": "ttstats",
-	"homepage": "https://ttstats.eu",
-	"version": "3.0.0",
-	"private": false,
-	"dependencies": {
-		"@testing-library/jest-dom": "^5.14.1",
-		"@testing-library/react": "^11.2.7",
-		"@testing-library/user-event": "^12.1.10",
-		"core-js": "^3.15.2",
-		"framer-motion": "^7.6.18",
-		"gh-pages": "^2.2.0",
-		"node-sass": "^5.0.0",
-		"react": "^18.2.0",
-		"react-app-polyfill": "^1.0.6",
-		"react-dom": "^18.2.0",
-		"react-modal": "^3.14.3",
-		"react-query": "^3.18.1",
-		"react-router-dom": "^5.2.0",
-		"react-scripts": "4.0.3",
-		"web-vitals": "^1.1.2"
-	},
-	"scripts": {
-		"start": "react-scripts start",
-		"build": "set \"GENERATE_SOURCEMAP=false\" && react-scripts build",
-		"deploy": "gh-pages -d build",
-		"deploy2": "gh-pages -d build -e ttstats",
-		"deploy-preview": "gh-pages -d build -b preview-pages",
-		"cleanup": "./node_modules/.bin/gh-pages-clean.cmd",
-		"test": "react-scripts test",
-		"eject": "react-scripts eject"
-	},
-	"eslintConfig": {
-		"extends": [
-			"react-app",
-			"react-app/jest"
-		]
-	},
-	"browserslist": {
-		"production": [
-			"last 20 chrome version",
-			"last 20 firefox version"
-		],
-		"development": [
-			"last 20 chrome version",
-			"last 20 firefox version"
-		]
-	},
-	"main": "index.jsx",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/supernovaplus/ttstats.git"
-	},
-	"author": "",
-	"license": "ISC",
-	"bugs": {
-		"url": "https://github.com/supernovaplus/ttstats/issues"
-	},
-	"description": ""
+  "name": "ttstats",
+  "private": true,
+  "version": "4.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "vite",
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^3.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.8.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.27",
+    "@types/react-dom": "^18.0.10",
+    "sass": "^1.58.0",
+    "typescript": "^4.9.3",
+    "vite": "^4.1.0"
+  }
 }

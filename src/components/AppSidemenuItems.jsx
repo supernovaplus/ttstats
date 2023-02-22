@@ -1,5 +1,4 @@
 import { NavLink } from 'react-router-dom';
-import PropTypes from 'prop-types'
 
 export function AppSidemenuItem({ linkData }) {
 	return <NavLink to={linkData.to} className='NavLinkItem1'>{linkData.name}</NavLink>;
@@ -14,8 +13,4 @@ export default function AppSidemenuItems({ navData }) {
 			})}
 		</div>
 	);
-}
-
-AppSidemenuItems.propTypes = {
-	items: PropTypes.arrayOf(PropTypes.any).isRequired,
 }
