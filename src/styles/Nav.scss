@@ -1,0 +1,30 @@
+.nav1 {
+    background-color: rgb(185, 185, 185);
+    padding: 10px;
+    font-size: 1.2rem;
+}
+
+.nav-links {
+    display: inline;
+    background-color: rgb(207, 207, 207);
+}
+
+.nav-link {
+    display: block;
+    outline: none;
+    padding: 3px 5px;
+    text-decoration: none;
+}
+
+.nav-link:visited {
+    color: inherit;
+}
+
+.nav-link:hover {
+    // color: rgb(61, 61, 61);
+    background-color: rgba(255, 255, 255, 0.331);
+    transition: background 0.5s ease-in;
+    color: black;
+    border-left: 1px solid red;
+}
+
