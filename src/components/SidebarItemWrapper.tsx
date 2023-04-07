@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 type LinksPropType = { links: [{ iconSvgPath: any; text: string; link?: string }, ...{ text: string; link: string }[]] };
 /**
@@ -28,9 +29,9 @@ export default function SidebarItemWrapper({ links: [firstLink, ...rest] }: Link
         <ul id="dropdown-playground" className={`space-y-2 py-2`} hidden={!isOpen}>
           {rest.map(({ text, link }, index) => (
             <li key={index}>
-              <a href={link} className="text-base text-gray-900 rounded-lg flex items-center p-2 group hover:bg-gray-100 transition duration-75 pl-11 dark:text-gray-200 dark:hover:bg-gray-700 ">
+              <NavLink to={link} className="text-base text-gray-900 rounded-lg flex items-center p-2 group hover:bg-gray-100 transition duration-75 pl-11 dark:text-gray-200 dark:hover:bg-gray-700 navlink">
                 {text}
-              </a>
+              </NavLink>
             </li>
           ))}
         </ul>
@@ -40,14 +41,14 @@ export default function SidebarItemWrapper({ links: [firstLink, ...rest] }: Link
     //single link, no dropdown
     return (
       <li>
-        <a href={link || '#'} className="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700">
+        <NavLink to={link || '#'} className="flex items-center p-2 text-base text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700 navlink">
           <svg className="w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
             {iconSvgPath}
           </svg>
           <span className="ml-3" sidebar-toggle-item="">
             {text}
           </span>
-        </a>
+        </NavLink>
       </li>
     );
   }

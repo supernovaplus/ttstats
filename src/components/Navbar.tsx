@@ -4,20 +4,17 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    if (window.localStorage.getItem('isDarkMode')) {
-      document.getElementById('main')?.classList.add('dark');
-    }
+    if (window.localStorage.getItem('isLightMode')) document.body?.classList.remove('dark');
     console.log('useff');
   }, []);
 
   const toggleNightmode = () => {
-    const main = document.getElementById('main');
-    if (main?.classList.contains('dark')) {
-      window.localStorage.removeItem('isDarkMode');
+    if (document.body?.classList.contains('dark')) {
+      window.localStorage.setItem('isLightMode', '1');
     } else {
-      window.localStorage.setItem('isDarkMode', '1');
+      window.localStorage.removeItem('isLightMode');
     }
-    document.getElementById('main')?.classList.toggle('dark');
+    document.body?.classList.toggle('dark');
   };
 
   const toggleMenu = () => {

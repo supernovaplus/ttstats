@@ -21,27 +21,6 @@
   transition: transform 0.2s ease-in-out;
 }
 
-.fading-in-element {
-  height: 0;
-  overflow: hidden;
-  transition: height 0.5s ease-in-out;
-}
-
-.fading-in-element.visible {
-  height: auto;
-}
-
-.foldable-el {
-  transition: all 1s ease-in-out;
-}
-
-.xvisible {
-  opacity: 1;
-  max-height: auto;
-}
-
-.xhidden {
-  opacity: 0;
-  max-height: 0;
-  display: none;
+.navlink.active {
+  color: red !important;
 }

@@ -1,11 +1,6 @@
-import { ReactNode } from 'react';
 import SidebarItemWrapper from './SidebarItemWrapper';
 
 export default function Sidebar() {
-  const repeat = (component: ReactNode, num: number) => {
-    return <>{new Array(num).fill(1).map((item) => component)}</>;
-  };
-
   return (
     <>
       <aside id="sidebar" className="fixed top-0 left-0 z-20 flex flex-col flex-shrink-0 hidden w-64 h-full pt-16 font-normal duration-75 lg:flex transition-width" aria-label="Sidebar">
@@ -13,12 +8,26 @@ export default function Sidebar() {
           <div className="flex flex-col flex-1 pt-5 pb-4 overflow-y-auto">
             <div className="flex-1 px-3 space-y-1 bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
               <ul className="pb-2 space-y-2">
-                
                 <SidebarItemWrapper
                   links={[
                     {
-                      link: '#',
-                      text: 'kebab1',
+                      link: '/',
+                      text: 'home',
+                      iconSvgPath: (
+                        <>
+                          <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
+                          <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
+                        </>
+                      ),
+                    },
+                  ]}
+                />
+
+                <SidebarItemWrapper
+                  links={[
+                    {
+                      link: '/servers',
+                      text: 'servers',
                       iconSvgPath: (
                         <>
                           <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
@@ -41,12 +50,12 @@ export default function Sidebar() {
                       ),
                     },
                     {
-                      link: '#',
-                      text: 'kebab',
+                      link: '/potato',
+                      text: 'potato',
                     },
                     {
-                      link: '#',
-                      text: 'kebab',
+                      link: '/burok',
+                      text: 'burok',
                     },
                   ]}
                 />
@@ -393,7 +402,7 @@ export default function Sidebar() {
         </div>
       </aside>
 
-      <div className="fixed inset-0 z-10 hidden bg-gray-900/50 dark:bg-gray-900/90" id="sidebarBackdrop"></div>
+      {/* <div className="fixed inset-0 z-10 hidden bg-gray-900/50 dark:bg-gray-900/90" id="sidebarBackdrop"></div> */}
     </>
   );
 }
