@@ -1,20 +1,20 @@
-import { useState } from 'react';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import Sidebar from './components/Sidebar';
-import Home from './pages/Home';
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import Sidebar from "../components/Sidebar";
 
-function App() {
+export default function Home() {
   return (
     <>
       <div className="bg-gray-50 dark:bg-gray-800 ">
-        <Navbar />
+        <Navbar/>
         <div className="flex pt-16 overflow-hidden bg-gray-50 dark:bg-gray-900">
-          <Sidebar />
+          <Sidebar/>
           <div id="main-content" className="relative w-full h-full overflow-y-auto bg-gray-50 lg:ml-64 dark:bg-gray-900">
-            <Home />
+            <main>
+              
+            </main>
             {/* //footer */}
-            <Footer />
+            <Footer/>
           </div>
         </div>
 
@@ -27,5 +27,3 @@ function App() {
     </>
   );
 }
-
-export default App;
