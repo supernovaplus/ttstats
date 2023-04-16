@@ -1,7 +1,5 @@
+import PageWrapper from '../components/PageWrapper';
+
 export default function ServersListPage() {
-    return (
-        <>
-        servers list page
-        </>
-    )
-};
+  return <PageWrapper title="servers list">servers list</PageWrapper>;
+}

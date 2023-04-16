@@ -10,10 +10,7 @@
 * MIT License
 * Copyright (c) Tailwind Labs, Inc.
 
-## Flowbite Admin Dashboard
-
-* https://github.com/themesberg/flowbite-admin-dashboard
-* [Zoltán Szőgyényi](https://twitter.com/zoltanszogyenyi)
-* [Robert Tanislav](https://twitter.com/roberttanislav)
-* MIT License
-* Copyright (c) 2023 Bergside Inc.
+## Others
+* Vite - https://vitejs.dev/
+* React - https://react.dev/
+* React Router - https://reactrouter.com/
