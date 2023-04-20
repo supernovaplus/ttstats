@@ -18,7 +18,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="flex justify-between h-[50px] bg-cyan-600 p-2">
+    <nav className="flex justify-between h-[50px] bg-cyan-600 p-2 rounded items-center shadow-sm">
       <div id="left-nav" className="">
         <div id="site-logo">
           <a href="#">ttstats.eu</a>

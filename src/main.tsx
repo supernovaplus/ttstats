@@ -5,9 +5,9 @@ import './styles/index.scss';
 import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.createRoot(document.getElementById('main') as HTMLElement).render(
-  <React.StrictMode>
+  //<React.StrictMode> //causes double fetch in dev mode
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </React.StrictMode>
+  //</React.StrictMode>
 );

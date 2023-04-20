@@ -1,5 +1,5 @@
+import { useState, useEffect, startTransition } from 'react';
 import PageWrapper from '../components/PageWrapper';
-import { useState, useEffect, useRef } from 'react';
 import { shortenLargeMoney } from '../components/Misc';
 
 const localStorageKey = 'ttstats-stacks-price';
@@ -7,47 +7,64 @@ const localStorageKey = 'ttstats-stacks-price';
 export default function StacksCalculatorPage() {
   const [stackAmountString, setStackAmountString] = useState('');
   const savedPrice = window.localStorage.getItem(localStorageKey);
-  const [singleStackPrice, setSingleStackPrice] = useState(savedPrice ? parseInt(savedPrice) : 1000);
+  const [singleStackPrice, setSingleStackPrice] = useState(savedPrice || '1000');
   const [result, setResult] = useState(0);
 
-  function calculateAmount() {
-    try {
-      let multiplier = 1;
-      const parsedStackAmountString = stackAmountString.toLocaleLowerCase().replace(',', '.').replace(/[_-]/g, '');
-      if (parsedStackAmountString.includes('tril')) multiplier = 1_000_000_000_000;
-      else if (parsedStackAmountString.includes('bil')) multiplier = 1_000_000_000;
-      else if (parsedStackAmountString.includes('mil')) multiplier = 1_000_000;
-      else if (parsedStackAmountString.includes('k')) multiplier = 1_000;
+  const handleStackPriceChange = (value: string) => {
+    startTransition(() => {
+      let price = parseInt(value) || 0;
+      if (price < 0) price = 0;
+      if (price > 1000) price = 1000;
+      setSingleStackPrice(price === 0 ? '' : String(price));
+    });
+  };
 
-      if (singleStackPrice && parsedStackAmountString) {
-        const [amount] = parsedStackAmountString.match(/[0-9.]+/) || ['0'];
-        if (amount) {
-          const fullAmount = parseFloat(amount) * multiplier * singleStackPrice;
-          setResult(Math.round(fullAmount));
-          console.log([amount, fullAmount]);
-        }
-      }
-    } catch (err) {
-      setResult(-1);
-    }
-  }
-
+  //if any value changed, calculate the price with a delay
   useEffect(() => {
-    if (singleStackPrice > 1000) {
-      setSingleStackPrice(1000);
-    }
+    let subStatus = { subscribed: true };
+    //calculate the total price
+    const calculateAmountTimeout = window.setTimeout(() => {
+      try {
+        let multiplier = 1;
+        const parsedStackAmountString = stackAmountString
+          .toLocaleLowerCase()
+          .replace(',', '.')
+          .replace(/[_-]/g, '');
+        if (parsedStackAmountString.includes('tril')) multiplier = 1_000_000_000_000;
+        else if (parsedStackAmountString.includes('bil')) multiplier = 1_000_000_000;
+        else if (parsedStackAmountString.includes('m')) multiplier = 1_000_000;
+        else if (parsedStackAmountString.includes('k')) multiplier = 1_000;
 
-    const calculateAmountTimeout = window.setTimeout(calculateAmount, 100);
+        if (singleStackPrice && parsedStackAmountString) {
+          const [amount] = parsedStackAmountString.match(/[0-9.]+/) || ['0'];
+          if (amount) {
+            startTransition(() => {
+              const fullAmount = parseFloat(amount) * multiplier * (parseInt(singleStackPrice) || 0);
+              if (subStatus.subscribed) setResult(Math.round(fullAmount));
+            });
+          } else {
+            if (subStatus.subscribed) setResult(0);
+          }
+        } else {
+          if (subStatus.subscribed) setResult(0);
+        }
+      } catch (err) {
+        if (subStatus.subscribed) setResult(0);
+      }
+    }, 100);
+
     return () => {
+      subStatus.subscribed = false;
       window.clearTimeout(calculateAmountTimeout);
     };
   }, [stackAmountString, singleStackPrice]);
 
+  //save single stack price to localStorage with a delay
   useEffect(() => {
     const saveSingleStackTimeout = window.setTimeout(() => {
-      if (singleStackPrice) window.localStorage.setItem(localStorageKey, String(singleStackPrice));
+      window.localStorage.setItem(localStorageKey, String(singleStackPrice) || '1000');
+      console.log('single stack price saved');
     }, 1000);
-    console.log(singleStackPrice + '?');
 
     return () => {
       window.clearTimeout(saveSingleStackTimeout);
@@ -58,14 +75,40 @@ export default function StacksCalculatorPage() {
     <PageWrapper title="stacks sell/buy calculator">
       <div className="flex flex-col justify-center items-center">
         <label htmlFor="stackAmountString">Stacks amount (eg. 1.2mil)</label>
-        <input id="stackAmountString" name="stackAmountString" type="text" onChange={(e) => setStackAmountString(e.target.value)} value={stackAmountString} className="block px-2 w-full max-w-sm py-1 text-center" placeholder="..." />
+        <input
+          id="stackAmountString"
+          name="stackAmountString"
+          type="text"
+          onChange={(e) => setStackAmountString(e.target.value)}
+          value={stackAmountString}
+          className="block px-2 w-full max-w-sm py-1 text-center"
+          placeholder="..."
+        />
         <label htmlFor="singleStackPrice">Price for each (1 stack converts to 1000$)</label>
-        <input id="singleStackPrice" name="singleStackPrice" type="number" onChange={(e) => setSingleStackPrice(parseInt(e.target.value) || 0)} value={singleStackPrice} className="block px-2 w-full max-w-sm py-1 text-center" min="0" max={1000} />
+        <input
+          id="singleStackPrice"
+          name="singleStackPrice"
+          type="text"
+          onChange={(e) => handleStackPriceChange(e.target.value)}
+          value={singleStackPrice}
+          className="block px-2 w-full max-w-sm py-1 text-center spin"
+          placeholder="..."
+        />
         <hr className="border-1 mt-2 border-white w-full" />
         <div>Copy/Paste To Chat:</div>
-        <textarea value={`send ${shortenLargeMoney(result)} [${result.toLocaleString('us')}]`} readOnly className="block shadow-md p-1 w-full max-w-sm resize-none text-center bg-blue-200  border border-black outline-none" rows={1} />
-        <div>Copy/Paste To Inventory Input:</div>
-        <textarea value={result} readOnly className="block shadow-md p-1 w-full max-w-sm resize-none my-1 text-center bg-blue-200 border border-black outline-none" rows={1} />
+        <textarea
+          value={!result ? '-' : `send ${shortenLargeMoney(result)} [${result.toLocaleString('us')}]`}
+          readOnly
+          className="block shadow-md p-1 w-full max-w-sm resize-none text-center bg-blue-200  border border-black outline-none"
+          rows={1}
+        />
+        <div>Copy/Paste To "Give Money" Input:</div>
+        <textarea
+          value={result || '-'}
+          readOnly
+          className="block shadow-md p-1 w-full max-w-sm resize-none my-1 text-center bg-blue-200 border border-black outline-none"
+          rows={1}
+        />
       </div>
     </PageWrapper>
   );
