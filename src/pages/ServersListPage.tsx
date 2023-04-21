@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react';
 import ContentBlock from '../components/ContentBlock';
 import { useDataContext } from '../store/DataContext';
 import Modal from '../components/Modal';
 import ServerConnectModal from '../components/ServersListPage/ServerConnectModal';
-
-const trClass = 'border-collapse text-center bg-red-100';
+import PlayersListModal from '../components/ServersListPage/PlayersListModal';
+import ServerInfoModal from '../components/ServersListPage/ServerInfoModal';
+import DXPClock from '../components/ServersListPage/DXPClock';
+import DXPModal from '../components/ServersListPage/DXPModal';
+import Uptime from '../components/ServersListPage/Uptime';
 
 export default function ServersListPage() {
   const { servers } = useDataContext();
@@ -28,7 +30,7 @@ export default function ServersListPage() {
             const isDxpActive = dxp !== undefined && dxp[0] === true;
 
             return (
-              <tr key={index} className={!server.loaded ? 'cgp-lightgrey' : isOnline ? '' : 'cgp-grey'}>
+              <tr key={index} className={!server.loaded ? 'text-yellow-200' : isOnline ? '' : 'text-white'}>
                 <td data-label="Server">
                   <b>{server.name}</b>
                   <div>
@@ -41,20 +43,24 @@ export default function ServersListPage() {
                   </div>
                 </td>
                 <td data-label="Players">
-                  <div style={{ minWidth: '60px' }}>
+                  <div
+                    style={{ minWidth: '60px' }}
+                    className="inline text-shadow-1 margin-0 hover:text-gray-300">
                     {
-                      !isOnline
-                        ? '-/-'
-                        : //   <PlayersListModal
-                          // server={server}
-                          // linkTitle={
-                          (server.playersData!.length <= server.serverData!.limit
-                            ? server.playersData!.length
-                            : server.serverData!.limit + '+') +
-                          '/' +
-                          server.serverData!.limit
-                      // }
-                      //   />
+                      !isOnline ? (
+                        '-/-'
+                      ) : (
+                        <Modal
+                          buttonValue={
+                            (server.playersData!.length <= server.serverData!.limit
+                              ? server.playersData!.length
+                              : server.serverData!.limit + '+') +
+                            '/' +
+                            server.serverData!.limit
+                          }>
+                          <PlayersListModal server={server} />
+                        </Modal>
+                      )
                       // <Link to={`/playerfinder?server=${encodeURI(server.name)}`} className="btn" title="Server Info">
                       // 	{server.playersData.length <= server.serverData.limit ? server.playersData.length : server.serverData.limit + "+"}/{server.serverData.limit}
                       // </Link>
@@ -66,10 +72,9 @@ export default function ServersListPage() {
                     {!server.loaded ? (
                       'Loading'
                     ) : isOnline ? (
-                      <>
-                        {/* <ServerInfoModal server={server} linkTitle="Online" /> */}
-                        online
-                      </>
+                      <Modal buttonValue={<span>Online</span>}>
+                        <ServerInfoModal server={server} />
+                      </Modal>
                     ) : (
                       'Offline'
                     )}
@@ -77,19 +82,24 @@ export default function ServersListPage() {
                 </td>
                 <td data-label="Uptime">
                   <div style={{ minWidth: '80px' }}>
-                    {isOnline
-                      ? server.serverData!.uptime
-                      : // <ModalInstance linkTitle={<Uptime time={server.serverData.uptime} />}>
-                        //   Servers usually restarts every 18 hours
-                        // </ModalInstance>
-                        '-'}
+                    {isOnline && server.serverData ? (
+                      <Modal buttonValue={<Uptime time={server.serverData!.uptime} />}>
+                        <span>Servers usually restarts every 18 hours</span>
+                      </Modal>
+                    ) : (
+                      '-'
+                    )}
                   </div>
                 </td>
-                <td className="dxp" data-label="DXP">
+                <td className="" data-label="DXP">
                   {isOnline && isDxpActive ? (
                     <span style={{ display: 'inline-block', minWidth: '110px' }}>
-                      dxp
-                      {/* <DXPModal dxp={dxp} server={server} /> */}
+                      <Modal
+                        buttonValue={
+                          <DXPClock dxp={server.serverData?.dxp} timestamp={server.lastUpdated} />
+                        }>
+                        <DXPModal server={server} />
+                      </Modal>
                     </span>
                   ) : (
                     <>-</>

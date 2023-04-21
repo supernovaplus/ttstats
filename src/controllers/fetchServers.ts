@@ -67,8 +67,9 @@ const parseStatusJSON = async ({
       ...server,
       loaded: true,
       playersData: res.players,
-      serverData: res.server,
-      lastUpdate: Date.now(),
+      // serverData: res.server,
+      serverData: { ...res.server, dxp: [true, 'FAKENAME', 5000, 5000, 5000] }, // for debug
+      lastUpdated: Date.now(),
       error: false,
     },
   }));
@@ -137,14 +138,14 @@ export const fetchServer = async (server: ServerDataObject, setServer: SetServer
           limit: data?.['sv_maxclients'] || 32,
           beta: '',
           dxp: [false],
-          // "dxp": [true,"FAKENAME",5000,5000,5000],
+          // "dxp": [true,"FAKENAME",5000,5000,5000], // for debug
           uptime: data?.['vars']?.['Uptime'] || '1m',
           region: '?',
           number: '?',
           name: '',
           motd: '',
         },
-        lastUpdate: Date.now(),
+        lastUpdated: Date.now(),
       },
     }));
 
@@ -160,7 +161,7 @@ export const fetchServer = async (server: ServerDataObject, setServer: SetServer
       ...server,
       loaded: true,
       error: true,
-      lastUpdate: Date.now(),
+      lastUpdated: Date.now(),
     },
   }));
 };

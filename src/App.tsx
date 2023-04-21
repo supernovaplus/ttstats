@@ -1,15 +1,9 @@
-import React, { useState, lazy } from 'react';
-import {
-  createBrowserRouter,
-  createRoutesFromElements,
-  Route,
-  RouterProvider,
-  Routes,
-} from 'react-router-dom';
-import { DataContextProvider } from './store/DataContext';
-
+import { lazy } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
+
+import { DataContextProvider } from './store/DataContext';
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';

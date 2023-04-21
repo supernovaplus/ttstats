@@ -15,9 +15,12 @@ export interface MainAPIPlayer {
   5: string; //job name
   6: boolean; //is donator
 }
+
+export type DXP = [boolean, string?, number?, number?, number?];
+
 export interface MainAPIServer {
   beta: string;
-  dxp: [boolean, string?, number?, number?, number?];
+  dxp: DXP;
   number: string;
   limit: number;
   motd: string;
@@ -40,7 +43,7 @@ export interface ServerDataObject {
   error: boolean;
   serverData: null | MainAPIServer;
   playersData: null | MainAPIPlayer[];
-  lastUpdated: null;
+  lastUpdated: null | number;
   loaded: boolean;
 }
 
