@@ -21,6 +21,8 @@ import PageWrapper from './components/PageWrapper';
 import ServersListPage from './pages/ServersListPage';
 import ServersRawPage from './pages/ServersRawPage';
 import PlayerFinderPage from './pages/PlayerFinderPage';
+import Page404 from './components/Page404';
+
 const LazyPage = React.lazy(() => import('./pages/LazyPage'));
 const ChartPage = React.lazy(() => import('./pages/ChartPage'));
 const ChartPage2 = React.lazy(() => import('./pages/ChartPage2'));
@@ -41,33 +43,24 @@ export default function App() {
           <DataContextProvider>
             <Sidebar />
             <div className="w-full min-h-[500px]">
-              <Routes>
-                {/* static */}
-                <Route path="/" element={<ServersListPage />} />
-                <Route path="/ServersRawPage" element={<ServersRawPage />} />
-                <Route path="/playerfinder" element={<PlayerFinderPage />} />
-                {/* dynamic/lazy */}
-                <Route path="/chart" element={<LazyLoadingWrapper component={ChartPage2} />} />
-                <Route path="/lazy" element={<LazyLoadingWrapper component={LazyPage} />} />
-                <Route path="/ServersRawPage" element={<LazyLoadingWrapper component={LazyPage} />} />
-                <Route
-                  path="/stacks-calculator"
-                  element={<LazyLoadingWrapper component={StacksCalculatorPage} />}
-                />
-                {/* 404 */}
-                <Route
-                  path="*"
-                  element={
-                    <PageWrapper title="Error 404">
-                      <p className="w-full flex justify-center py-20 text-center">
-                        Error 404
-                        <br />
-                        Page not found
-                      </p>
-                    </PageWrapper>
-                  }
-                />
-              </Routes>
+              <div className="min-w-[300px] max-w-full">
+                <Routes>
+                  {/* static */}
+                  <Route path="/" element={<ServersListPage />} />
+                  <Route path="/ServersRawPage" element={<ServersRawPage />} />
+                  <Route path="/playerfinder" element={<PlayerFinderPage />} />
+                  {/* dynamic/lazy */}
+                  <Route path="/chart" element={<LazyLoadingWrapper component={ChartPage2} />} />
+                  <Route path="/lazy" element={<LazyLoadingWrapper component={LazyPage} />} />
+                  <Route path="/ServersRawPage" element={<LazyLoadingWrapper component={LazyPage} />} />
+                  <Route
+                    path="/stacks-calculator"
+                    element={<LazyLoadingWrapper component={StacksCalculatorPage} />}
+                  />
+                  {/* 404 */}
+                  <Route path="*" element={<Page404 />} />
+                </Routes>
+              </div>
             </div>
           </DataContextProvider>
         </div>

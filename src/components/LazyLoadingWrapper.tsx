@@ -1,5 +1,5 @@
 import React, { Suspense } from 'react';
-import PageWrapper from './PageWrapper';
+import ContentBlock from './ContentBlock';
 
 // const gagasdgasdg = React.lazy(() => import(filePath));
 
@@ -9,7 +9,7 @@ interface Props {
 
 export default function LazyLoadingWrapper({ component: Component }: Props) {
   return (
-    <Suspense fallback={<PageWrapper title="Loading..."></PageWrapper>}>
+    <Suspense fallback={<ContentBlock title="Loading..."></ContentBlock>}>
       <Component />
     </Suspense>
   );

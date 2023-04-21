@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import PageWrapper from '../components/PageWrapper';
+import ContentBlock from '../components/ContentBlock';
 import { useDataContext } from '../store/DataContext';
 // https://d.transporttycoon.eu/main/players.json
 
@@ -9,15 +9,15 @@ export default function ServersListPage() {
   const { servers } = useDataContext();
 
   return (
-    <PageWrapper title="Transpoty Tycoon Servers list">
-      <table className='w-full text-center'>
+    <ContentBlock title="Transport Tycoon Servers List">
+      <table className="w-full text-center dyntable text-shadow-1">
         <thead>
           <tr>
-            <th className='max-w-[200px]'>Server Name</th>
+            <th>Server Name</th>
             <th>Players</th>
             <th>Status</th>
             <th>Uptime</th>
-            <th>DXP</th>
+            <th className="min-w-[100px]">DXP</th>
           </tr>
         </thead>
         <tbody>
@@ -28,10 +28,12 @@ export default function ServersListPage() {
 
             return (
               <tr key={index} className={!server.loaded ? 'cgp-lightgrey' : isOnline ? '' : 'cgp-grey'}>
-                <td data-label="Server" className='w-[200px]'>
+                <td data-label="Server">
                   <b>{server.name}</b>
-                  <br />
-                  {/* <ServerJoinModal server={server} /> */}
+                  <div className="connect-btn">
+                    Connect
+                    {/* <ServerJoinModal server={server} /> */}
+                  </div>
                 </td>
                 <td data-label="Players">
                   <div style={{ minWidth: '60px' }}>
@@ -93,9 +95,9 @@ export default function ServersListPage() {
           })}
         </tbody>
       </table>
-      <div className="border-start">
-        <div className="border-end text-center text-shadow">{/* <SkillBoost /> */}</div>
-      </div>
-    </PageWrapper>
+      {/* <div className="border-start">
+        <div className="border-end text-center text-shadow"><SkillBoost /></div>
+      </div> */}
+    </ContentBlock>
   );
 }

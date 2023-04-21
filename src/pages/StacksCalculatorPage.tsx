@@ -1,5 +1,5 @@
 import { useState, useEffect, startTransition } from 'react';
-import PageWrapper from '../components/PageWrapper';
+import ContentBlock from '../components/ContentBlock';
 import { shortenLargeMoney } from '../components/Misc';
 
 const localStorageKey = 'ttstats-stacks-price';
@@ -72,7 +72,7 @@ export default function StacksCalculatorPage() {
   }, [singleStackPrice]);
 
   return (
-    <PageWrapper title="stacks sell/buy calculator">
+    <ContentBlock title="stacks sell/buy calculator">
       <div className="flex flex-col justify-center items-center">
         <label htmlFor="stackAmountString">Stacks amount (eg. 1.2mil)</label>
         <input
@@ -110,6 +110,6 @@ export default function StacksCalculatorPage() {
           rows={1}
         />
       </div>
-    </PageWrapper>
+    </ContentBlock>
   );
 }

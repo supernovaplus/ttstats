@@ -1,6 +1,6 @@
 import { createChart, ColorType } from 'lightweight-charts';
 import React, { useEffect, useRef } from 'react';
-import PageWrapper from '../components/PageWrapper';
+import ContentBlock from '../components/ContentBlock';
 
 const initialData = [
   { time: '2018-12-22', value: 32.51 },
@@ -55,5 +55,5 @@ export default function ChartPage2() {
     };
   }, []);
 
-  return <PageWrapper title="chart">{<div ref={ref} className="cursor-pointer"></div>}</PageWrapper>;
+  return <ContentBlock title="chart">{<div ref={ref} className="cursor-pointer"></div>}</ContentBlock>;
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDataContext } from '../store/DataContext';
 import { PlayerFoundList, PlayerFoundState } from '../types/serverTypes';
-import PageWrapper from '../components/PageWrapper';
+import ContentBlock from '../components/ContentBlock';
 
 type InputTargetValue = { target: { value: string } };
 
@@ -112,7 +112,7 @@ export default function PlayerFinderPage() {
   }, [servers]);
 
   return (
-    <PageWrapper title="Online Player Finder">
+    <ContentBlock title="Online Player Finder">
       <form className="w-full flex flex-col">
         <div>
           <label htmlFor="playerNameSelector">Filter Name Or ID</label>
@@ -172,7 +172,7 @@ export default function PlayerFinderPage() {
       <div className="bg-blue-300 p-1 my-1 ronded">{state.playerFinderMessages}</div>
 
       <div className="w-full overflow-y-scroll max-h-[500px] shadow-lg bg-white">
-        <table className="w-full text-center">
+        <table className="w-full text-center dyntable">
           <thead>
             <tr>
               <th className='w-1'>#</th>
@@ -209,6 +209,6 @@ export default function PlayerFinderPage() {
           </tbody>
         </table>
       </div>
-    </PageWrapper>
+    </ContentBlock>
   );
 }

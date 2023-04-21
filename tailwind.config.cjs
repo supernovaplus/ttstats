@@ -4,16 +4,16 @@ module.exports = {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     screens: {
-      'sm': '640px',
+      sm: '640px',
       // => @media (min-width: 640px) { ... }
 
-      'md': '640px',
+      md: '640px',
       // => @media (min-width: 768px) { ... }
 
-      'lg': '800px',
+      lg: '800px',
       // => @media (min-width: 1024px) { ... }
 
-      'xl': '1280px',
+      xl: '1280px',
       // => @media (min-width: 1280px) { ... }
 
       '2xl': '1536px',
@@ -22,7 +22,30 @@ module.exports = {
     extend: {
       colors: {
         'regal-blue': '#5394ea',
-        primary: { 50: '#eff6ff', 100: '#dbeafe', 200: '#bfdbfe', 300: '#93c5fd', 400: '#60a5fa', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8', 800: '#1e40af', 900: '#1e3a8a' },
+        primary: {
+          50: '#eff6ff',
+          100: '#dbeafe',
+          200: '#bfdbfe',
+          300: '#93c5fd',
+          400: '#60a5fa',
+          500: '#3b82f6',
+          600: '#2563eb',
+          700: '#1d4ed8',
+          800: '#1e40af',
+          900: '#1e3a8a',
+        },
+        kebab: {
+          bg: '#0a1e3f',
+          bg2: 'rgba(0, 0, 0, 0.315)',
+          border: '#005daa',
+          border2: '#008cff',
+          border3: '#008cff9c',
+          border4: '#008cff6b',
+          border5: '#008cff34',
+          link: '#008cff',
+          find: 'rgb(212, 212, 212)',
+          th: '#00285c'
+        },
       },
       transitionProperty: {
         width: 'width',

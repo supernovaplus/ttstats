@@ -115,4 +115,12 @@ export interface PlayerFoundList {
   4: string; //job
 }
 
+export interface PlayerFoundState {
+  playerFinderMessages: string,
+  playerFinderInputField: string,
+  playerFinderFound: PlayerFoundList[],
+  serverSelect: string;
+  jobSelect: string;
+}
+
 export type SetServerDispatchType = React.Dispatch<React.SetStateAction<ServerDataObjectList>>;
