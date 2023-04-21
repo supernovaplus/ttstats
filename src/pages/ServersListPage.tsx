@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import ContentBlock from '../components/ContentBlock';
 import { useDataContext } from '../store/DataContext';
 import Modal from '../components/Modal';
+import ServerConnectModal from '../components/ServersListPage/ServerConnectModal';
 
 const trClass = 'border-collapse text-center bg-red-100';
 
@@ -30,12 +31,14 @@ export default function ServersListPage() {
               <tr key={index} className={!server.loaded ? 'cgp-lightgrey' : isOnline ? '' : 'cgp-grey'}>
                 <td data-label="Server">
                   <b>{server.name}</b>
-                  <Modal>
-                    <div className="connect-btn">
-                      Connect
-                      {/* <ServerJoinModal server={server} /> */}
-                    </div>
-                  </Modal>
+                  <div>
+                    <Modal
+                      buttonValue={
+                        <div className="inline text-shadow-1 margin-0 hover:text-gray-300">Connect</div>
+                      }>
+                      <ServerConnectModal server={server} />
+                    </Modal>
+                  </div>
                 </td>
                 <td data-label="Players">
                   <div style={{ minWidth: '60px' }}>

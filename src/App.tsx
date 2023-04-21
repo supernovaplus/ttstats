@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, lazy } from 'react';
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -22,10 +22,10 @@ import ServersRawPage from './pages/ServersRawPage';
 import PlayerFinderPage from './pages/PlayerFinderPage';
 import Page404 from './components/Page404';
 
-const LazyPage = React.lazy(() => import('./pages/LazyPage'));
-const ChartPage = React.lazy(() => import('./pages/ChartPage'));
-const ChartPage2 = React.lazy(() => import('./pages/ChartPage2'));
-const StacksCalculatorPage = React.lazy(() => import('./pages/StacksCalculatorPage'));
+const LazyPage = lazy(() => import('./pages/LazyPage'));
+const ChartPage = lazy(() => import('./pages/ChartPage'));
+const ChartPage2 = lazy(() => import('./pages/ChartPage2'));
+const StacksCalculatorPage = lazy(() => import('./pages/StacksCalculatorPage'));
 
 export default function App() {
   const history = useLocation();
