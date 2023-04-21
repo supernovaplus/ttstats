@@ -16,7 +16,6 @@ import Footer from './components/Footer';
 import Sidebar from './components/Sidebar';
 
 import LazyLoadingWrapper from './components/LazyLoadingWrapper';
-import PageWrapper from './components/PageWrapper';
 
 import ServersListPage from './pages/ServersListPage';
 import ServersRawPage from './pages/ServersRawPage';

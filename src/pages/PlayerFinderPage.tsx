@@ -175,10 +175,10 @@ export default function PlayerFinderPage() {
         <table className="w-full text-center dyntable">
           <thead>
             <tr>
-              <th className='w-1'>#</th>
-              <th className='w-1/3'>Name</th>
-              <th className='w-1/3'>Job</th>
-              <th className='w-1/4'>Server</th>
+              <th className="w-1">#</th>
+              <th className="w-1/3">Name</th>
+              <th className="w-1/3">Job</th>
+              <th className="w-1/4">Server</th>
             </tr>
           </thead>
           <tbody className="">

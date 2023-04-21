@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import ContentBlock from '../components/ContentBlock';
 import { useDataContext } from '../store/DataContext';
-// https://d.transporttycoon.eu/main/players.json
+import Modal from '../components/Modal';
 
 const trClass = 'border-collapse text-center bg-red-100';
 
@@ -30,10 +30,12 @@ export default function ServersListPage() {
               <tr key={index} className={!server.loaded ? 'cgp-lightgrey' : isOnline ? '' : 'cgp-grey'}>
                 <td data-label="Server">
                   <b>{server.name}</b>
-                  <div className="connect-btn">
-                    Connect
-                    {/* <ServerJoinModal server={server} /> */}
-                  </div>
+                  <Modal>
+                    <div className="connect-btn">
+                      Connect
+                      {/* <ServerJoinModal server={server} /> */}
+                    </div>
+                  </Modal>
                 </td>
                 <td data-label="Players">
                   <div style={{ minWidth: '60px' }}>
