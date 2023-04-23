@@ -1,13 +1,15 @@
 import React, { useState, useEffect, ReactNode, ButtonHTMLAttributes } from 'react';
 import ReactDOM from 'react-dom';
+import ContentBlock from './ContentBlock';
 
 interface props {
   children: ReactNode;
   buttonValue: ReactNode;
   buttonProps?: ButtonHTMLAttributes<HTMLButtonElement>;
+  title?: string;
 }
 
-function Modal({ children, buttonProps = {}, buttonValue }: props) {
+export default function Modal({ children, buttonProps = {}, buttonValue, title }: props) {
   const modalRoot = document.getElementById('modal-root')!;
   const [isOpen, setIsOpen] = useState(false);
 
@@ -24,15 +26,16 @@ function Modal({ children, buttonProps = {}, buttonValue }: props) {
       {ReactDOM.createPortal(
         isOpen && (
           <>
-          {console.log("gasdgasdgasd")}
             <div className="modal-overlay" onClick={toggleOpen}></div>
-            <div className="modal-container bg-kebab-bg p-2 rounded text-white">
-              <div>{children}</div>
-              <div className="flex justify-end">
-                <button onClick={toggleOpen} className="bg-white p-1 rounded text-black">
-                  Close Modal
-                </button>
-              </div>
+            <div className="modal-container">
+              <ContentBlock title={title}>
+                <div>{children}</div>
+                <div className="flex justify-end">
+                  <button onClick={toggleOpen} className="bg-white px-3 py-1 rounded text-black mt-2">
+                    close
+                  </button>
+                </div>
+              </ContentBlock>
             </div>
           </>
         ),
@@ -41,33 +44,3 @@ function Modal({ children, buttonProps = {}, buttonValue }: props) {
     </>
   );
 }
-
-export default Modal;
-
-// export default function Modal({ children }: { children: React.ReactNode }) {
-//   const [isOpen, setIsOpen] = useState(false);
-
-//   const toggleOpen = () => setIsOpen((s) => !s);
-
-//   return (
-//     <>
-//       <div onClick={toggleOpen} className='cursor-pointer'>{children}</div>
-//       {isOpen && (
-//         <>
-//           <div className="modal-overlay" onClick={toggleOpen}></div>
-//           <div className="modal-container">
-//             <div>{children}</div>
-//             <div>
-//               <input
-//                 type="button"
-//                 value="close"
-//                 onClick={toggleOpen}
-//                 className="hover:bg-slate-400 p-1 rounded cursor-pointer text-black border-1 border-black"
-//               />
-//             </div>
-//           </div>
-//         </>
-//       )}
-//     </>
-//   );
-// }

@@ -35,6 +35,7 @@ module.exports = {
           900: '#1e3a8a',
         },
         kebab: {
+          'bg-dm': '#12538b',
           bg: '#0a1e3f',
           bg2: 'rgba(0, 0, 0, 0.315)',
           border: '#005daa',
@@ -44,7 +45,7 @@ module.exports = {
           border5: '#008cff34',
           link: '#008cff',
           find: 'rgb(212, 212, 212)',
-          th: '#00285c'
+          th: '#00285c',
         },
       },
       transitionProperty: {

@@ -67,8 +67,8 @@ const parseStatusJSON = async ({
       ...server,
       loaded: true,
       playersData: res.players,
-      // serverData: res.server,
-      serverData: { ...res.server, dxp: [true, 'FAKENAME', 5000, 5000, 5000] }, // for debug
+      serverData: res.server,
+      // serverData: { ...res.server, dxp: [true, 'FAKENAME', 5000, 5000, 5000] }, // for debug
       lastUpdated: Date.now(),
       error: false,
     },

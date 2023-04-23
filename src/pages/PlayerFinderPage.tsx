@@ -122,7 +122,7 @@ export default function PlayerFinderPage() {
             placeholder="Enter player's name or in-game ID here..."
             onChange={handlePlayersNameInput}
             onKeyDown={handleOnKeyDownEnter}
-            className="block w-full p-1 my-1"
+            className="block w-full p-1 my-1 text-black"
           />
         </div>
         <div>
@@ -131,13 +131,13 @@ export default function PlayerFinderPage() {
             id="serverSelector"
             onChange={handleServerSelect}
             value={state.serverSelect}
-            className="block w-full p-1 my-1 bg-white cursor-pointer">
-            <option value="All Servers" className="cursor-pointer0">
+            className="block w-full p-1 my-1 bg-white cursor-pointer text-black">
+            <option value="All Servers" className="cursor-pointer text-black">
               All Servers
             </option>
             {Object.values(servers).map((server, index) =>
               server.loaded ? (
-                <option key={index} value={server.name} className="cursor-pointer">
+                <option key={index} value={server.name} className="cursor-pointer text-black">
                   {server.name}
                 </option>
               ) : (
@@ -151,10 +151,10 @@ export default function PlayerFinderPage() {
             id="jobSelector"
             onChange={(input) => handleJobSelect(input)}
             value={state.jobSelect}
-            className="block w-full p-1 my-1 bg-white cursor-pointer">
+            className="block w-full p-1 my-1 bg-white cursor-pointer text-black">
             <option value="All Jobs">All Jobs</option>
             {jobList.map((job, index) => (
-              <option key={index} value={job} className="bold">
+              <option key={index} value={job} className="bg-kebab-border2 text-white">
                 {job}
               </option>
             ))}
@@ -164,14 +164,14 @@ export default function PlayerFinderPage() {
         <input
           type="button"
           value="search"
-          className="cursor-pointer bg-green-100 p-2 px-5 hover:bg-slate-200 active:bg-slate-500"
+          className="cursor-pointer bg-green-100 p-2 px-5 hover:bg-slate-200 active:bg-slate-500 text-black"
           onClick={() => handlePlayerFinderSubmit()}
         />
       </form>
 
-      <div className="bg-blue-300 p-1 my-1 ronded">{state.playerFinderMessages}</div>
+      <div className="p-1 my-1 ronded text-white text-center">{state.playerFinderMessages}</div>
 
-      <div className="w-full overflow-y-scroll max-h-[500px] shadow-lg bg-white">
+      <div className="w-full overflow-y-scroll max-h-[500px] shadow-lg ">
         <table className="w-full text-center dyntable">
           <thead>
             <tr>

@@ -15,6 +15,10 @@ import ServersListPage from './pages/ServersListPage';
 import ServersRawPage from './pages/ServersRawPage';
 import PlayerFinderPage from './pages/PlayerFinderPage';
 import Page404 from './components/Page404';
+import TopVehicles from './pages/TopVehiclesPage';
+import Top10 from './pages/TopTenPage';
+import HighestIDPage from './pages/HighestIDPage';
+import TopJobs from './pages/TopJobsPage';
 
 const LazyPage = lazy(() => import('./pages/LazyPage'));
 const ChartPage = lazy(() => import('./pages/ChartPage'));
@@ -30,7 +34,7 @@ export default function App() {
 
   return (
     <>
-      <div className="max-w-[1000px] w-full mx-auto my-0 min-h-screen p-1">
+      <div className="max-w-[1000px] w-full mx-auto my-0 min-h-screen p-1 bgbg">
         <Navbar />
         <div className="flex mt-3">
           <DataContextProvider>
@@ -46,6 +50,10 @@ export default function App() {
                   <Route path="/chart" element={<LazyLoadingWrapper component={ChartPage2} />} />
                   <Route path="/lazy" element={<LazyLoadingWrapper component={LazyPage} />} />
                   <Route path="/ServersRawPage" element={<LazyLoadingWrapper component={LazyPage} />} />
+                  <Route path="/topvehicles" element={<LazyLoadingWrapper component={TopVehicles} />} />
+                  <Route path="/highestid" element={<LazyLoadingWrapper component={HighestIDPage} />} />
+                  <Route path="/top10" element={<LazyLoadingWrapper component={Top10} />} />
+                  <Route path="/topjobs" element={<LazyLoadingWrapper component={TopJobs} />} />
                   <Route
                     path="/stacks-calculator"
                     element={<LazyLoadingWrapper component={StacksCalculatorPage} />}

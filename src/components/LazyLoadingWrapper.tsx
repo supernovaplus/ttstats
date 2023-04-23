@@ -9,7 +9,7 @@ interface Props {
 
 export default function LazyLoadingWrapper({ component: Component }: Props) {
   return (
-    <Suspense fallback={<ContentBlock title="Loading..."></ContentBlock>}>
+    <Suspense fallback={<ContentBlock title="Loading..."/>}>
       <Component />
     </Suspense>
   );

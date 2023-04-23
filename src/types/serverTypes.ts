@@ -7,8 +7,8 @@ export interface ServerListRawInterface {
 }
 
 export interface MainAPIPlayer {
-  0: string; //player id
-  1: number; //session id
+  0: string; //player name
+  1: number; //Source ID (FiveM assigned player ID)
   2: number; //player id
   3: string; //avatar link
   4: boolean; //is staff
@@ -119,11 +119,63 @@ export interface PlayerFoundList {
 }
 
 export interface PlayerFoundState {
-  playerFinderMessages: string,
-  playerFinderInputField: string,
-  playerFinderFound: PlayerFoundList[],
+  playerFinderMessages: string;
+  playerFinderInputField: string;
+  playerFinderFound: PlayerFoundList[];
   serverSelect: string;
   jobSelect: string;
+}
+
+export interface SkillBoostData {
+  data: {
+    bonus: number;
+    skill: string;
+    aptitude: string;
+    short: string;
+  };
+  timestamp: number;
+}
+
+export interface TopVehicleData {
+  fetching: boolean;
+  timestamp: number;
+  sorted_vehicles: [string, number][] | null;
+  sorted_classes: [number, number][] | null;
+}
+
+export interface TopVehicleDataState {
+  loading: boolean;
+  error: null | string;
+  timestamp: number;
+  total_vehicles: number;
+  total_classes: number;
+  sorted_vehicles: null | [string, number][];
+  sorted_classes: null | [number, number][];
+}
+
+export interface TopTenData {
+  title: string;
+  labels: string[];
+  rows: (string | number)[][];
+}
+
+export interface TopTenDataResponse {
+  timestamp: number;
+  data: TopTenData[];
+  info: string;
+}
+
+export interface TopTenDataState {
+  loading: boolean;
+  error: string | null;
+  data: TopTenData[] | null;
+  timestamp: number;
+}
+
+export interface HighestIDList {
+  index: number;
+  name: string;
+  id: number;
 }
 
 export type SetServerDispatchType = React.Dispatch<React.SetStateAction<ServerDataObjectList>>;
