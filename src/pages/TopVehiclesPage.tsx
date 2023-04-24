@@ -3,7 +3,7 @@ import { VehicleClasses } from '../data/vehicleData';
 import { TopVehicleData, TopVehicleDataState } from '../types/serverTypes';
 import ContentBlock from '../components/ContentBlock';
 
-export default function TopVehicles() {
+export default function TopVehiclesPage() {
   const [state, setState] = useState<TopVehicleDataState>({
     loading: true,
     error: null,

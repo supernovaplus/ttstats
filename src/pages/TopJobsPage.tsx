@@ -13,7 +13,7 @@ interface JobState {
   counter: number;
 }
 
-export default function TopJobs() {
+export default function TopJobsPage() {
   const { servers } = useDataContext();
   const [jobsState, setJobsState] = useState<JobState>({ entries: [], counter: 0 });
   const [companyJobsState, setCompanyJobsState] = useState<JobState>({ entries: [], counter: 0 });
@@ -42,7 +42,6 @@ export default function TopJobs() {
 
     const sortedJobs = Object.entries(jobs).sort((item1, item2) => item2[1] - item1[1]);
     const sortedCompanyJobs = Object.entries(companyJobs).sort((item1, item2) => item2[1] - item1[1]);
-    console.log(sortedJobs);
 
     setJobsState((s) => ({
       entries: sortedJobs,

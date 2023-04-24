@@ -15,15 +15,15 @@ import ServersListPage from './pages/ServersListPage';
 import ServersRawPage from './pages/ServersRawPage';
 import PlayerFinderPage from './pages/PlayerFinderPage';
 import Page404 from './components/Page404';
-import TopVehicles from './pages/TopVehiclesPage';
-import Top10 from './pages/TopTenPage';
-import HighestIDPage from './pages/HighestIDPage';
-import TopJobs from './pages/TopJobsPage';
 
-const LazyPage = lazy(() => import('./pages/LazyPage'));
+const TopJobs = lazy(() => import('./pages/TopJobsPage'));
+const HighestIDPage = lazy(() => import('./pages/HighestIDPage'));
+const Top10 = lazy(() => import('./pages/TopTenPage'));
+const TopVehicles = lazy(() => import('./pages/TopVehiclesPage'));
 const ChartPage = lazy(() => import('./pages/ChartPage'));
 const ChartPage2 = lazy(() => import('./pages/ChartPage2'));
 const StacksCalculatorPage = lazy(() => import('./pages/StacksCalculatorPage'));
+const LazyPage = lazy(() => import('./pages/LazyPage'));
 
 export default function App() {
   const history = useLocation();
@@ -36,7 +36,7 @@ export default function App() {
     <>
       <div className="max-w-[1000px] w-full mx-auto my-0 min-h-screen p-1 bgbg">
         <Navbar />
-        <div className="flex mt-3">
+        <div className="flex mt-3 flex-col sm:flex-row items-center sm:items-start">
           <DataContextProvider>
             <Sidebar />
             <div className="w-full min-h-[500px]">
@@ -51,7 +51,7 @@ export default function App() {
                   <Route path="/lazy" element={<LazyLoadingWrapper component={LazyPage} />} />
                   <Route path="/ServersRawPage" element={<LazyLoadingWrapper component={LazyPage} />} />
                   <Route path="/topvehicles" element={<LazyLoadingWrapper component={TopVehicles} />} />
-                  <Route path="/highestid" element={<LazyLoadingWrapper component={HighestIDPage} />} />
+                  <Route path="/highest_id" element={<LazyLoadingWrapper component={HighestIDPage} />} />
                   <Route path="/top10" element={<LazyLoadingWrapper component={Top10} />} />
                   <Route path="/topjobs" element={<LazyLoadingWrapper component={TopJobs} />} />
                   <Route

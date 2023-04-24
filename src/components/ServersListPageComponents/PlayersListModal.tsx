@@ -7,7 +7,7 @@ export default function PlayersListModal({ server }: { server: ServerDataObject 
         <h2>No Players</h2>
       ) : (
         <div className="overflow-y-scroll" style={{ maxHeight: '80vh' }}>
-          <table className="w-full">
+          <table className="w-full dyntable">
             <thead>
               <tr>
                 <th>Avatar</th>
@@ -21,8 +21,8 @@ export default function PlayersListModal({ server }: { server: ServerDataObject 
                 <tr key={index}>
                   <td data-label="Avatar">
                     {player[3] ? (
-                      <a href={player[3]} target="_blank" rel="noopener noreferrer">
-                        <img src={player[3] || '#'} height="50px" alt="img" className="h-[50px]" />
+                      <a href={player[3]} target="_blank" rel="noopener noreferrer" className='inline-block'>
+                        <img src={player[3] || '#'} height="50px" alt="img" className="h-[50px] block" />
                       </a>
                     ) : (
                       // <img className="no-avatar" src="media/no-avatar.gif" alt="-" />

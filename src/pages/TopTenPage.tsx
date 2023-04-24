@@ -36,7 +36,7 @@ function TopTenBlock({ board, index }: TopTenBlockProps) {
   );
 }
 
-export default function Top10() {
+export default function TopTenPage() {
   const [state, setState] = useState<TopTenDataState>({
     loading: true,
     error: null,

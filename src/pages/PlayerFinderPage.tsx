@@ -194,12 +194,12 @@ export default function PlayerFinderPage() {
                 <tr key={index}>
                   <td data-label="#">#{index + 1}</td>
                   <td data-label="Player">
-                    <b>{player[0]}</b>
+                    {player[0]}
                   </td>
                   <td data-label="Job">{player[4] || '-'}</td>
                   <td data-label="Server">
-                    <b>{player[2]}</b>{' '}
-                    <a href={`fivem://connect/${player[1]}?pure_1`} title="Connect" className="smallLink mg">
+                    {player[2]}{' '}
+                    <a href={`fivem://connect/${player[1]}?pure_1`} title="Connect" className="conn-link">
                       Join
                     </a>
                   </td>

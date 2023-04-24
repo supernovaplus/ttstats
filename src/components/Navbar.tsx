@@ -5,7 +5,7 @@ export default function Navbar() {
 
   useEffect(() => {
     if (window.localStorage.getItem('isLightMode')) document.body?.classList.remove('dark');
-    console.log('useff');
+    // console.log('useff');
   }, []);
 
   const toggleNightmode = () => {

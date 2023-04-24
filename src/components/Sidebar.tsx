@@ -17,7 +17,7 @@ const OneItem = ({ children, to = '/404' }: any) => (
 export default function Sidebar() {
   return (
     <>
-      <aside className="w-fullbox-border rounded bg-kebab-bg-dm w-full min-w-[140px] max-w-[200px] py-5 text-white h-fit shdw text-shadow-1 text-center">
+      <aside className="w-fullbox-border rounded bg-kebab-bg-dm w-full min-w-[140px] sm:max-w-[200px] py-5 text-white h-fit shdw text-shadow-1 text-center mb-3">
         {/* <aside className="w-fullbox-border rounded bg-kebab-bg-dm w-full min-w-[140px] max-w-[200px] py-5 text-white h-fit shdw text-shadow-1"> */}
         <ul className="">
           <li className="font-sans bg-blue-400">Live</li>
@@ -27,7 +27,7 @@ export default function Sidebar() {
           <OneItem to="/topjobs">Top Jobs</OneItem>
           <OneItem to="/topvehicles">Top Vehicles</OneItem>
           <OneItem to="/top10">Top 10</OneItem>
-          <OneItem to="/highestid">Highest ID</OneItem>
+          <OneItem to="/highest_id">Highest ID</OneItem>
           <li className="font-sans bg-blue-400 mt-2">Tools</li>
           <OneItem to="/stacks-calculator">Stacks Calculator</OneItem>
           <OneItem to="/lazy">lazy</OneItem>

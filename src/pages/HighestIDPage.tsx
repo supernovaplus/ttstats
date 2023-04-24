@@ -55,7 +55,7 @@ export default function HighestIDPage() {
               <tr key={index} style={index === 0 ? { fontSize: '2em' } : {}}>
                 <td data-label="# Place">#{player.index}</td>
                 <td data-label="Player">
-                  <b>{player.name ? player.name : '?'}</b>
+                  {player.name ? player.name : '?'}
                 </td>
                 <td data-label="ID">{player.id}</td>
               </tr>

@@ -53,7 +53,9 @@ body {
   font-family: 'Merienda', cursive;
 }
 
-//hide input arrows
+
+
+//hide input arrows----------------
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -72,15 +74,16 @@ input[type='number'] {
   // --tw-border-opacity: 1;
   // border-color: rgb(71 85 105 / var(--tw-border-opacity));
 }
+//----------------------------------
 
 // .navlink.active::after {
 //   content: ' <';
 // }
 
-/* !important is needed sometimes */
-::-webkit-scrollbar {
-  width: 12px !important;
-}
+// /* !important is needed sometimes */
+// ::-webkit-scrollbar {
+//   width: 12px !important;
+// }
 
 // /* Track */
 // ::-webkit-scrollbar-track {
@@ -139,12 +142,12 @@ input[type='number'] {
 
   .dyntable tr {
     display: block;
-    margin: 2px;
-
+    margin: 4px;
     margin-bottom: 30px;
     // border-bottom: 5px dashed black;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.488);
-    border: 5px solid white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.515), 0 5px 2px rgba(0, 0, 0, 0.332);
+    border: 1px solid white;
+    padding: 2pxx;
   }
 
   .dyntable td {
@@ -158,6 +161,7 @@ input[type='number'] {
   .dyntable td:before {
     content: attr(data-label);
     float: left;
-    font-weight: bold;
+    // display: block;
+    // font-weight: bold;
   }
 }

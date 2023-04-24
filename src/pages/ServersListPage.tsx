@@ -1,13 +1,13 @@
 import ContentBlock from '../components/ContentBlock';
 import { useDataContext } from '../store/DataContext';
 import Modal from '../components/Modal';
-import ServerConnectModal from '../components/ServersListPage/ServerConnectModal';
-import PlayersListModal from '../components/ServersListPage/PlayersListModal';
-import ServerInfoModal from '../components/ServersListPage/ServerInfoModal';
-import DXPClock from '../components/ServersListPage/DXPClock';
-import DXPModal from '../components/ServersListPage/DXPModal';
-import Uptime from '../components/ServersListPage/Uptime';
-import Skillboost from '../components/ServersListPage/Skillboost';
+import ServerConnectModal from '../components/ServersListPageComponents/ServerConnectModal';
+import PlayersListModal from '../components/ServersListPageComponents/PlayersListModal';
+import ServerInfoModal from '../components/ServersListPageComponents/ServerInfoModal';
+import DXPClock from '../components/ServersListPageComponents/DXPClock';
+import DXPModal from '../components/ServersListPageComponents/DXPModal';
+import Uptime from '../components/ServersListPageComponents/Uptime';
+import Skillboost from '../components/ServersListPageComponents/Skillboost';
 
 export default function ServersListPage() {
   const { servers } = useDataContext();
@@ -34,7 +34,7 @@ export default function ServersListPage() {
               return (
                 <tr key={index} className={!server.loaded ? 'text-yellow-200' : isOnline ? '' : 'text-white'}>
                   <td data-label="Server">
-                    <b>{server.name}</b>
+                    {server.name}
                     <div>
                       <Modal
                         buttonValue={
