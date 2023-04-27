@@ -132,7 +132,9 @@ export default function PlayerFinderPage() {
             onChange={handleServerSelect}
             value={state.serverSelect}
             className="block w-full p-1 my-1 bg-white cursor-pointer text-black border-5">
-            <option value="All Servers" className="cursor-pointer text-white py-5 dark:bg-kebab-bg-dm border-5">
+            <option
+              value="All Servers"
+              className="cursor-pointer text-white py-5 dark:bg-kebab-bg-dm border-5">
               All Servers
             </option>
             {Object.values(servers).map((server, index) =>
@@ -171,12 +173,14 @@ export default function PlayerFinderPage() {
             e.preventDefault();
             handlePlayerFinderSubmit();
           }}
-          className="cursor-pointer p-2 px-5 active:bg-slate-500 bg-gray-600 dark:bg-kebab-btn text-black text-white btn-lnk">
+          className="cursor-pointer p-2 px-5 active:bg-slate-500 bg-gray-600 dark:bg-kebab-btn text-white btn-lnk active:bg-kebab-dk">
           search
         </button>
       </form>
 
-      <div className="p-1 my-1 ronded text-black dark:text-white text-center">{state.playerFinderMessages}</div>
+      <div className="p-1 my-1 ronded text-black dark:text-white text-center">
+        {state.playerFinderMessages}
+      </div>
 
       <div className="w-full overflow-y-auto max-h-[500px] shadow-lg">
         <table className="w-full text-center dyntable">
@@ -198,7 +202,7 @@ export default function PlayerFinderPage() {
               </tr>
             ) : (
               state.playerFinderFound.map((player, index) => (
-                <tr key={index}>
+                <tr key={index} className="odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk">
                   <td data-label="#">#{index + 1}</td>
                   <td data-label="Player">{player[0]}</td>
                   <td data-label="Job">{player[4] || '-'}</td>

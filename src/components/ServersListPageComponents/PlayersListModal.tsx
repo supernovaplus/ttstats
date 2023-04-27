@@ -30,7 +30,7 @@ export default function PlayersListModal({ server }: { server: ServerDataObject 
                   <td data-label="#">#{index + 1}</td>
                   <td data-label="Name #ID">
                     {player[0]} <span className={'text-xs text-white bg-black p-1 rounded'}>#{player[2]}</span>
-                    {player[4] && <span className={'p-1 bg-black ml-1 rounded text-xs'}>Staff</span>}
+                    {player[4] && <span className={'p-1 bg-red-800 ml-1 rounded text-xs'}>Staff</span>}
                     {player[6] && <span className={'bg-orange-700 p-1 rounded ml-1 text-xs'}>Donator</span>}
                   </td>
                   <td data-label="Job">{player[5] || '-'}</td>

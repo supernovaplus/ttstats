@@ -69,9 +69,9 @@ select {
   font-family: 'Josefin Sans', sans-serif;
 }
 
-#main {
+body.dark {
   // background-color: #283780;
-  background-image: url('https://cdn.cloudflare.steamstatic.com/apps/csgo/images/csgo_react/cs2/bgDarkBlue.svg');
+  background-image: url('../assets/images/bgDark1.svg');
   background-size: cover;
   background-attachment: fixed;
 }

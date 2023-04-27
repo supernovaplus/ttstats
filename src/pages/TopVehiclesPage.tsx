@@ -63,7 +63,7 @@ export default function TopVehiclesPage() {
         ) : (
           <div className="max-h-[500px] overflow-y-auto">
             <table className="w-full text-center">
-              <thead>
+              <thead className='sticky top-0 dark:bg-kebab-bg-dm'>
                 <tr>
                   <th>%</th>
                   <th>Name</th>
@@ -81,7 +81,7 @@ export default function TopVehiclesPage() {
                   <>
                     {state.sorted_vehicles.map((veh, index) => {
                       return (
-                        <tr key={index} className='odd:bg-kebab-odd even:bg-kebab-even hover:bg-kebab-dk'>
+                        <tr key={index} className="odd:bg-kebab-odd even:bg-kebab-even hover:bg-kebab-dk">
                           <td data-label="%">{Number((veh[1] / state.total_vehicles) * 100).toFixed(2)}%</td>
                           <td data-label="Name">{veh[0]}</td>
                           <td data-label="Active">{veh[1]}</td>
@@ -98,12 +98,14 @@ export default function TopVehiclesPage() {
       <ContentBlock title="Top Vehicle Classes Now">
         <div className="max-h-[500px] overflow-y-auto">
           {state.loading ? (
-            <div className='text-center'>Loading...</div>
+            <div className="text-center">Loading...</div>
           ) : state.error ? (
-            <div className='bg-red-600 p-2 text-center'>{state.error === null ? '' : 'Error: ' + state.error}</div>
+            <div className="bg-red-600 p-2 text-center">
+              {state.error === null ? '' : 'Error: ' + state.error}
+            </div>
           ) : (
             <table className="w-full text-center">
-              <thead>
+              <thead className='sticky top-0 dark:bg-kebab-bg-dm'>
                 <tr>
                   <th>%</th>
                   <th>Name</th>
@@ -120,7 +122,7 @@ export default function TopVehiclesPage() {
                 ) : (
                   <>
                     {state.sorted_classes.map((veh, index) => (
-                      <tr key={index} className='odd:bg-kebab-odd even:bg-kebab-even hover:bg-kebab-dk'>
+                      <tr key={index} className="odd:bg-kebab-odd even:bg-kebab-even hover:bg-kebab-dk">
                         <td data-label="%">{Number((veh[1] / state.total_vehicles) * 100).toFixed(2)}%</td>
                         <td data-label="Name">
                           {veh[0] === -1 ? 'On Foot' : VehicleClasses[Math.round(veh[0])] || '?'}
@@ -134,13 +136,8 @@ export default function TopVehiclesPage() {
             </table>
           )}
         </div>
-      </ContentBlock>
-      <ContentBlock>
-        <div className="text-center">
-          <div>Vehicle stats updates every 5 minutes</div>
-          <div>
-            Last Updated: {new Date(state.timestamp).toLocaleString('en-GB', { timeZone: 'UTC' })} (UTC)
-          </div>
+        <div className="text-right text-xs mt-2">
+          Last Updated: {new Date(state.timestamp).toLocaleString('en-GB', { timeZone: 'UTC' })} (UTC)
         </div>
       </ContentBlock>
     </>

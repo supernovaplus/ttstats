@@ -34,9 +34,9 @@ export default function App() {
     if (window.localStorage.getItem('isLightMode')) document.body?.classList.remove('dark');
   }, []);
 
-  useEffect(() => {
-    console.log('> Router', history.pathname);
-  }, [history.pathname]);
+  // useEffect(() => {
+  //   console.log('> Router', history.pathname);
+  // }, [history.pathname]);
 
   return (
     <DataContextProvider>
