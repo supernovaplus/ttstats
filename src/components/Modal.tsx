@@ -31,8 +31,8 @@ export default function Modal({ children, buttonProps = {}, buttonValue, title }
               <ContentBlock title={title}>
                 <div>{children}</div>
                 <div className="flex justify-end">
-                  <button onClick={toggleOpen} className="bg-white px-3 py-1 rounded text-black mt-2">
-                    close
+                  <button onClick={toggleOpen} className="inline-flex items-center px-3 py-1 text-white bg-kebab-btn mt-2 hover:bg-kebab-bg lnk-btn">
+                    CLOSE
                   </button>
                 </div>
               </ContentBlock>

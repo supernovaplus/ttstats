@@ -5,7 +5,7 @@ export default function ServerInfoModal({ server }: { server: ServerDataObject }
   const playerCountLimit = server.serverData ? server.serverData.limit : 0;
 
   return (
-    <div className="text-center">
+    <div className="text-center bg-kebab-even py-2">
       <div className="flex flex-col items-center">
         <div>Name: {server.name}</div>
         {server.serverData ? (
@@ -24,8 +24,8 @@ export default function ServerInfoModal({ server }: { server: ServerDataObject }
           <div>Server Is Offline</div>
         )}
         <div>
-          <a href={`fivem://connect/${server.endpoint}?pure_1`} className="my-2 block p-2 bg-black text-white rounded">
-            Connect to the server
+          <a href={`fivem://connect/${server.endpoint}?pure_1`} className="my-2 block px-2 py-1 text-white bg-kebab-btn">
+            Connect To The Server
           </a>
         </div>
       </div>

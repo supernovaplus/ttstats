@@ -161,12 +161,11 @@ export default function PlayerFinderPage() {
           </select>
         </div>
 
-        <input
-          type="button"
-          value="search"
-          className="cursor-pointer bg-green-100 p-2 px-5 hover:bg-slate-200 active:bg-slate-500 text-black"
+        <button
           onClick={() => handlePlayerFinderSubmit()}
-        />
+          className="cursor-pointer p-2 px-5 active:bg-slate-500 bg-kebab-btn text-white hover:bg-black">
+          search
+        </button>
       </form>
 
       <div className="p-1 my-1 ronded text-white text-center">{state.playerFinderMessages}</div>
@@ -191,11 +190,9 @@ export default function PlayerFinderPage() {
               </tr>
             ) : (
               state.playerFinderFound.map((player, index) => (
-                <tr key={index}>
+                <tr key={index} className=''>
                   <td data-label="#">#{index + 1}</td>
-                  <td data-label="Player">
-                    {player[0]}
-                  </td>
+                  <td data-label="Player">{player[0]}</td>
                   <td data-label="Job">{player[4] || '-'}</td>
                   <td data-label="Server">
                     {player[2]}{' '}

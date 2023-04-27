@@ -8,6 +8,7 @@ interface TopTenBlockProps {
 }
 
 function TopTenBlock({ board, index }: TopTenBlockProps) {
+  console.log(index);
   return (
     <ContentBlock title={board.title}>
       <table className="w-full text-center">
@@ -55,22 +56,23 @@ export default function TopTenPage() {
       .then((res) => res.json())
       .then((res: TopTenDataResponse) => {
         if (isSubscribed) {
-          setState((s) => ({
-            ...s,
+          setState({
             loading: false,
+            error: null,
             data: res.data,
             timestamp: res.timestamp,
-          }));
+          });
         }
       })
       .catch((err) => {
         if (isSubscribed) {
           console.log(err);
-          setState((s) => ({
-            ...s,
-            error: 'Failed to load the data, try again later.',
+          setState({
             loading: false,
-          }));
+            error: 'Failed to load the data, try again later.',
+            data: null,
+            timestamp: 0,
+          });
         }
       });
     return () => {
@@ -80,12 +82,24 @@ export default function TopTenPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  if (!state.loading && state.data && !state.data.length) {
+    setState({
+      loading: false,
+      error: 'Failed to load the data, try again later.',
+      data: null,
+      timestamp: 0,
+    });
+  }
+
   return (
     <>
-      <ContentBlock title="Top 10 Leaderboards">
-        {state.loading && <div className="border-title">Loading...</div>}
+      <ContentBlock>
+        <div className="text-center text-lg">Top 10 Leaderboards</div>
+        {state.loading && <div className="p-2 text-center">Loading...</div>}
         {state.error && (
-          <div className="border-title">{state.error === null ? '' : 'Error - ' + state.error}</div>
+          <div className="bg-red-600 p-2 text-center">
+            {state.error === null ? '' : 'Error: ' + state.error}
+          </div>
         )}
       </ContentBlock>
       {state.data && (

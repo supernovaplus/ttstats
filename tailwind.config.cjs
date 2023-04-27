@@ -46,6 +46,9 @@ module.exports = {
           link: '#008cff',
           find: 'rgb(212, 212, 212)',
           th: '#00285c',
+          odd: 'rgba(0, 0, 0, 0.1)',
+          even: 'rgba(0, 0, 0, 0.05)',
+          btn: '#092d4b',
         },
       },
       transitionProperty: {

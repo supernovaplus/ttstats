@@ -13,8 +13,8 @@ export default function ServerConnectModal({ server }: { server: ServerDataObjec
         Sometimes connecting doesnt work on first try, click the link again below if that happens
       </div>
       <div>
-        <a href={`fivem://connect/${server.endpoint}?pure_1`} className="my-2 block p-2 bg-black text-white rounded">
-          Connect again
+        <a href={`fivem://connect/${server.endpoint}?pure_1`} className="my-2 block px-2 py-1 text-white bg-kebab-btn">
+          Connect Again
         </a>
       </div>
     </div>

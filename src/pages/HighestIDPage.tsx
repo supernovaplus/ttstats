@@ -52,7 +52,7 @@ export default function HighestIDPage() {
             </tr>
           ) : (
             sortedList.map((player, index) => (
-              <tr key={index} style={index === 0 ? { fontSize: '2em' } : {}}>
+              <tr key={index} style={index === 0 ? { fontSize: '2em' } : {}} className='odd:bg-kebab-odd even:bg-kebab-even'>
                 <td data-label="# Place">#{player.index}</td>
                 <td data-label="Player">
                   {player.name ? player.name : '?'}

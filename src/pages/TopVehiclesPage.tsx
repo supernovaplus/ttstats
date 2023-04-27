@@ -81,7 +81,7 @@ export default function TopVehiclesPage() {
                   <>
                     {state.sorted_vehicles.map((veh, index) => {
                       return (
-                        <tr key={index}>
+                        <tr key={index} className='shadow-inner hover:bg-kebab-odd'>
                           <td data-label="%">{Number((veh[1] / state.total_vehicles) * 100).toFixed(2)}%</td>
                           <td data-label="Name">{veh[0]}</td>
                           <td data-label="Active">{veh[1]}</td>
@@ -98,9 +98,9 @@ export default function TopVehiclesPage() {
       <ContentBlock title="Top Vehicle Classes Now">
         <div className="">
           {state.loading ? (
-            <div>Loading...</div>
+            <div className='text-center'>Loading...</div>
           ) : state.error ? (
-            <div>{state.error === null ? '' : 'Error - ' + state.error}</div>
+            <div className='bg-red-600 p-2 text-center'>{state.error === null ? '' : 'Error: ' + state.error}</div>
           ) : (
             <table className="w-full text-center">
               <thead>
@@ -120,7 +120,7 @@ export default function TopVehiclesPage() {
                 ) : (
                   <>
                     {state.sorted_classes.map((veh, index) => (
-                      <tr key={index}>
+                      <tr key={index} className='shadow-inner hover:bg-kebab-odd'>
                         <td data-label="%">{Number((veh[1] / state.total_vehicles) * 100).toFixed(2)}%</td>
                         <td data-label="Name">
                           {veh[0] === -1 ? 'On Foot' : VehicleClasses[Math.round(veh[0])] || '?'}

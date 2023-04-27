@@ -1,31 +1,27 @@
 import { useEffect, useState } from 'react';
+import DarkModeButton from './NavBarComponents/DarkModeButton';
+import RefreshServersButton from './NavBarComponents/RefreshServersButton';
+import ttLogo from '../assets/images/tt_logov2_small.png';
 
 export default function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  useEffect(() => {
-    if (window.localStorage.getItem('isLightMode')) document.body?.classList.remove('dark');
-    // console.log('useff');
-  }, []);
-
-  const toggleNightmode = () => {
-    if (document.body?.classList.contains('dark')) {
-      window.localStorage.setItem('isLightMode', '1');
-    } else {
-      window.localStorage.removeItem('isLightMode');
-    }
-    document.body?.classList.toggle('dark');
-  };
-
   return (
-    <nav className="flex justify-between h-[50px] bg-cyan-600 p-2 rounded items-center shadow-sm">
+    <nav className="flex justify-between min-h-[50px] shadow-inner py-2 items-center px-4">
+      {/* <nav className="flex justify-between h-[50px] bg-kebab-bg-dm shadow-inner py-2 items-center px-4"> */}
       <div id="left-nav" className="">
-        <div id="site-logo">
-          <a href="#">ttstats.eu</a>
+        <div id="site-logo" className="block">
+          <a href="#" title="ttstats.eu" className="w-7">
+            <img src={ttLogo} className='block w-full'/>
+          </a>
         </div>
       </div>
-      <div id="right-nav" className="">
-        <button onClick={toggleNightmode}>TOGGLE THEME</button>
+      <div
+        id="mid-nav"
+        className="text-white
+      p-2">
+        <RefreshServersButton />
+      </div>
+      <div id="right-nav" className="flex items-center">
+        <DarkModeButton />
       </div>
     </nav>
   );

@@ -15,9 +15,9 @@ export default function ServersListPage() {
   return (
     <>
       <ContentBlock title="Transport Tycoon Servers List">
-        <table className="w-full text-center dyntable text-shadow-1 mb-40">
+        <table className="w-full text-center dyntable mb-40">
           <thead>
-            <tr>
+            <tr className="text-lg">
               <th>Server Name</th>
               <th>Players</th>
               <th>Status</th>
@@ -32,24 +32,24 @@ export default function ServersListPage() {
               const isDxpActive = dxp !== undefined && dxp[0] === true;
 
               return (
-                <tr key={index} className={!server.loaded ? 'text-yellow-200' : isOnline ? '' : 'text-white'}>
+                <tr
+                  key={index}
+                  className={
+                    (!server.loaded ? 'text-gray-400' : isOnline ? '' : 'text-white') + ' hover:bg-kebab-odd'
+                  }>
                   <td data-label="Server">
                     {server.name}
                     <div>
                       <Modal
                         buttonValue={
-                          <div className="inline text-shadow-1 margin-0 hover:text-gray-300 conn-link">
-                            Connect
-                          </div>
+                          <div className="inline margin-0 hover:text-gray-300 lnk-btn ">Connect</div>
                         }>
                         <ServerConnectModal server={server} />
                       </Modal>
                     </div>
                   </td>
                   <td data-label="Players">
-                    <div
-                      style={{ minWidth: '60px' }}
-                      className="inline text-shadow-1 margin-0 hover:text-gray-300">
+                    <div style={{ minWidth: '60px' }} className="inline margin-0 hover:text-gray-300">
                       {
                         !isOnline ? (
                           '-/-'
@@ -62,7 +62,8 @@ export default function ServersListPage() {
                                 : server.serverData!.limit + '+') +
                               '/' +
                               server.serverData!.limit
-                            }>
+                            }
+                            buttonProps={{ className: 'lnk-btn' }}>
                             <PlayersListModal server={server} />
                           </Modal>
                         )
@@ -77,7 +78,10 @@ export default function ServersListPage() {
                       {!server.loaded ? (
                         'Loading'
                       ) : isOnline ? (
-                        <Modal buttonValue={<span>Online</span>} title="Server Info">
+                        <Modal
+                          buttonValue={<span>Online</span>}
+                          buttonProps={{ className: 'lnk-btn' }}
+                          title="Server Info">
                           <ServerInfoModal server={server} />
                         </Modal>
                       ) : (
@@ -88,7 +92,9 @@ export default function ServersListPage() {
                   <td data-label="Uptime">
                     <div style={{ minWidth: '80px' }}>
                       {isOnline && server.serverData ? (
-                        <Modal buttonValue={<Uptime time={server.serverData!.uptime} />}>
+                        <Modal
+                          buttonValue={<Uptime time={server.serverData!.uptime} />}
+                          buttonProps={{ className: 'lnk-btn' }}>
                           <div className="text-center">Servers usually restarts every 18 hours</div>
                         </Modal>
                       ) : (
@@ -103,7 +109,8 @@ export default function ServersListPage() {
                           title="DXP INFO"
                           buttonValue={
                             <DXPClock dxp={server.serverData?.dxp} timestamp={server.lastUpdated} />
-                          }>
+                          }
+                          buttonProps={{ className: 'lnk-btn' }}>
                           <DXPModal server={server} />
                         </Modal>
                       </span>
@@ -120,7 +127,7 @@ export default function ServersListPage() {
         <div className="border-end text-center text-shadow"><SkillBoost /></div>
       </div> */}
       </ContentBlock>
-      <ContentBlock title={<Skillboost />}/>
+      <ContentBlock title={<Skillboost />} />
     </>
   );
 }

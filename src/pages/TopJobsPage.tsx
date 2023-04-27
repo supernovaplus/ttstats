@@ -81,7 +81,7 @@ export default function TopJobsPage() {
                     <td data-label="Job Name">{job[0]}</td>
                     <td data-label="Active">{job[1]}</td>
                     <td data-label="Links">
-                      <Link to={encodeURI('/playerfinder?job=' + job[0])} className="">
+                      <Link to={encodeURI('/playerfinder?job=' + job[0])} className="lnk-btn">
                         Players
                       </Link>
                     </td>
