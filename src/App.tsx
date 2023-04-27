@@ -15,6 +15,7 @@ import ServersListPage from './pages/ServersListPage';
 import ServersRawPage from './pages/ServersRawPage';
 import PlayerFinderPage from './pages/PlayerFinderPage';
 import Page404 from './components/Page404';
+import UptimePage from './pages/UptimePage';
 
 const TopJobs = lazy(() => import('./pages/TopJobsPage'));
 const HighestIDPage = lazy(() => import('./pages/HighestIDPage'));
@@ -39,9 +40,10 @@ export default function App() {
 
   return (
     <DataContextProvider>
-      <div className="max-w-[1000px] w-full mx-auto my-0 min-h-screen p-1 bgbg">
+      <div className="max-w-[1000px] w-full mx-auto my-0 min-h-screen px-1">
+        {/* <div className="max-w-[1000px] w-full mx-auto my-0 min-h-screen p-1 bgbg"> */}
         <Navbar />
-        <div className="flex mt-3 flex-col sm:flex-row items-center sm:items-start">
+        <div className="flex flex-col sm:flex-row items-center sm:items-start">
           <Sidebar />
           <div className="w-full min-h-[500px]">
             <div className="min-w-[300px] max-w-full">
@@ -50,6 +52,7 @@ export default function App() {
                 <Route path="/" element={<ServersListPage />} />
                 <Route path="/ServersRawPage" element={<ServersRawPage />} />
                 <Route path="/playerfinder" element={<PlayerFinderPage />} />
+                <Route path="/uptime" element={<UptimePage />} />
                 {/* dynamic/lazy */}
                 <Route path="/chart" element={<LazyLoadingWrapper component={ChartPage2} />} />
                 <Route path="/lazy" element={<LazyLoadingWrapper component={LazyPage} />} />

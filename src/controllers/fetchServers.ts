@@ -77,7 +77,6 @@ const parseStatusJSON = async ({
 
 export const fetchServer = async (server: ServerDataObject, setServer: SetServerDispatchType) => {
   // set server loading status when refreshing
-  console.log("setting")
   setServer((s) => ({
     ...s,
     [server.endpoint]: {

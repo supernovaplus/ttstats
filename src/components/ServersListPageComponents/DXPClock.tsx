@@ -19,6 +19,7 @@ export default function DxpClock({ dxp, timestamp }: { dxp?: DXP; timestamp: num
   const divisor_for_minutes = time % 3600;
   const MM = Math.floor(divisor_for_minutes / 60);
   const SS = Math.ceil(divisor_for_minutes % 60);
+
   return (
     <>
       {time < 1 ? (

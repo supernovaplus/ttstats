@@ -61,21 +61,24 @@ html {
 //   transition: transform 0.2s ease-in-out;
 // }
 
-body {
+body,
+button,
+select {
   // font-family: 'Spartan', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   // font-family: 'Merienda', cursive;
   font-family: 'Josefin Sans', sans-serif;
 }
 
 #main {
-  background-color: #283780;
+  // background-color: #283780;
   background-image: url('https://cdn.cloudflare.steamstatic.com/apps/csgo/images/csgo_react/cs2/bgDarkBlue.svg');
   background-size: cover;
   background-attachment: fixed;
 }
 
-body,
-button {
+body.dark,
+button.dark,
+#mid-nav {
   // text-shadow: 2px 2px 1px black, 0 0 5px black;
   text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.411), 0 0 5px rgba(0, 0, 0, 0.411);
 }
@@ -95,7 +98,6 @@ input[type='number'] {
 .navlink.active {
   // odd: 'rgba(0, 0, 0, 0.1)',
   // even: 'rgba(0, 0, 0, 0.05)',
-
   background-color: rgba(0, 0, 0, 0.2);
   border-left: 2px solid black;
   // margin-left: -1px;
@@ -179,23 +181,30 @@ input[type='number'] {
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.176);
 }
 
+.lnk-btn:active {
+  box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.668) inset;
+}
+
 @media screen and (max-width: 700px) {
   .dyntable thead,
   .conn-link {
     display: none;
   }
 
-  .dyntable tr {
+  .dyntable tr:not(.undyntable) {
     display: block;
     margin: 4px;
-    margin-bottom: 30px;
+    margin-bottom: 5px;
     // border-bottom: 5px dashed black;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.515), 0 5px 2px rgba(0, 0, 0, 0.332);
-    border: 1px solid white;
-    padding: 2pxx;
+    // box-shadow: 0 0 10px rgba(0, 0, 0, 0.515), 0 5px 2px rgba(0, 0, 0, 0.332);
+    // border-top: 1px solid #092d4b;
+    border: 1px solid #092d4b;
+    // border-bottom: 5px solid #092d4b;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.637);
+    padding: 2px;
   }
 
-  .dyntable td {
+  .dyntable td:not(.undyntable) {
     display: block;
     text-align: right;
     padding: 2px 10px;

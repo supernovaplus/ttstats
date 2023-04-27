@@ -11,7 +11,6 @@ export default function RefreshServersButton() {
   };
 
   useEffect(() => {
-    console.log('new server');
     let serversCounter = 0;
     let playersCounter = 0;
     let totalCounter = 0;

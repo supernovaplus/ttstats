@@ -131,13 +131,16 @@ export default function PlayerFinderPage() {
             id="serverSelector"
             onChange={handleServerSelect}
             value={state.serverSelect}
-            className="block w-full p-1 my-1 bg-white cursor-pointer text-black">
-            <option value="All Servers" className="cursor-pointer text-black">
+            className="block w-full p-1 my-1 bg-white cursor-pointer text-black border-5">
+            <option value="All Servers" className="cursor-pointer text-white py-5 dark:bg-kebab-bg-dm border-5">
               All Servers
             </option>
             {Object.values(servers).map((server, index) =>
               server.loaded ? (
-                <option key={index} value={server.name} className="cursor-pointer text-black">
+                <option
+                  key={index}
+                  value={server.name}
+                  className="cursor-pointer text-white py-5 dark:bg-kebab-bg-dm border-5">
                   {server.name}
                 </option>
               ) : (
@@ -152,9 +155,11 @@ export default function PlayerFinderPage() {
             onChange={(input) => handleJobSelect(input)}
             value={state.jobSelect}
             className="block w-full p-1 my-1 bg-white cursor-pointer text-black">
-            <option value="All Jobs">All Jobs</option>
+            <option value="All Jobs" className="cursor-pointer text-white py-5 dark:bg-kebab-bg-dm">
+              All Jobs
+            </option>
             {jobList.map((job, index) => (
-              <option key={index} value={job} className="bg-kebab-border2 text-white">
+              <option key={index} value={job} className="cursor-pointer text-white py-5 dark:bg-kebab-bg-dm">
                 {job}
               </option>
             ))}
@@ -162,17 +167,20 @@ export default function PlayerFinderPage() {
         </div>
 
         <button
-          onClick={() => handlePlayerFinderSubmit()}
-          className="cursor-pointer p-2 px-5 active:bg-slate-500 bg-kebab-btn text-white hover:bg-black">
+          onClick={(e) => {
+            e.preventDefault();
+            handlePlayerFinderSubmit();
+          }}
+          className="cursor-pointer p-2 px-5 active:bg-slate-500 bg-gray-600 dark:bg-kebab-btn text-black text-white btn-lnk">
           search
         </button>
       </form>
 
-      <div className="p-1 my-1 ronded text-white text-center">{state.playerFinderMessages}</div>
+      <div className="p-1 my-1 ronded text-black dark:text-white text-center">{state.playerFinderMessages}</div>
 
-      <div className="w-full overflow-y-scroll max-h-[500px] shadow-lg ">
+      <div className="w-full overflow-y-auto max-h-[500px] shadow-lg">
         <table className="w-full text-center dyntable">
-          <thead>
+          <thead className="sticky top-0 bg-gray-400 dark:bg-kebab-bg-dm">
             <tr>
               <th className="w-1">#</th>
               <th className="w-1/3">Name</th>
@@ -180,7 +188,7 @@ export default function PlayerFinderPage() {
               <th className="w-1/4">Server</th>
             </tr>
           </thead>
-          <tbody className="">
+          <tbody className="text-black dark:text-white">
             {state.playerFinderFound.length === 0 ? (
               <tr>
                 <td>-</td>
@@ -190,13 +198,13 @@ export default function PlayerFinderPage() {
               </tr>
             ) : (
               state.playerFinderFound.map((player, index) => (
-                <tr key={index} className=''>
+                <tr key={index}>
                   <td data-label="#">#{index + 1}</td>
                   <td data-label="Player">{player[0]}</td>
                   <td data-label="Job">{player[4] || '-'}</td>
                   <td data-label="Server">
                     {player[2]}{' '}
-                    <a href={`fivem://connect/${player[1]}?pure_1`} title="Connect" className="conn-link">
+                    <a href={`fivem://connect/${player[1]}?pure_1`} title="Connect" className="lnk-btn">
                       Join
                     </a>
                   </td>

@@ -110,7 +110,7 @@ export default function StacksCalculatorPage() {
           rows={1}
         />
         <hr />
-        <p className='max-w-md text-center bg-black rounded p-2 my-3'>This tool is made for lazy people who don't want to count zeroes when selling/buying stacks.<br/>Single stack price is saved for later.</p>
+        <p className='max-w-md text-center dark:bg-black rounded p-2 my-3'>This tool is made for lazy people who don't want to count zeroes when selling/buying stacks.<br/>Single stack price is saved for later.</p>
       </div>
     </ContentBlock>
   );

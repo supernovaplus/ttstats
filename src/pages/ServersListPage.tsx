@@ -18,40 +18,40 @@ export default function ServersListPage() {
         <table className="w-full text-center dyntable mb-40">
           <thead>
             <tr className="text-lg">
-              <th>Server Name</th>
+              <th>Server</th>
               <th>Players</th>
               <th>Status</th>
               <th>Uptime</th>
               <th className="min-w-[100px]">DXP</th>
             </tr>
           </thead>
-          <tbody>
-            {Object.values(servers).map((server, index) => {
-              const isOnline = server.loaded && !!server.serverData;
-              const dxp = server?.['serverData']?.['dxp'];
-              const isDxpActive = dxp !== undefined && dxp[0] === true;
+          {Object.values(servers).map((server, index) => {
+            const isOnline = server.loaded && !!server.serverData;
+            const dxp = server?.['serverData']?.['dxp'];
+            const isDxpActive = dxp !== undefined && dxp[0] === true;
 
-              return (
+            return (
+              <tbody key={index}>
+                <tr className='undyntable'>
+                  <td colSpan={5}>
+                    <div className="mt-1 text-left block pt-2">{server.name}</div>
+                  </td>
+                </tr>
                 <tr
-                  key={index}
                   className={
-                    (!server.loaded ? 'text-gray-400' : isOnline ? '' : 'text-white') + ' hover:bg-kebab-odd'
+                    (!server.loaded ? 'text-gray-400' : isOnline ? '' : 'text-white') + ' md:hover:bg-kebab-dk'
                   }>
                   <td data-label="Server">
-                    {server.name}
                     <div>
-                      <Modal
-                        buttonValue={
-                          <div className="inline margin-0 hover:text-gray-300 lnk-btn ">Connect</div>
-                        }>
+                      <Modal buttonValue="Connect" buttonProps={{ className: 'lnk-btn w-full m-0' }}>
                         <ServerConnectModal server={server} />
                       </Modal>
                     </div>
                   </td>
                   <td data-label="Players">
-                    <div style={{ minWidth: '60px' }} className="inline margin-0 hover:text-gray-300">
+                    <div style={{ minWidth: '60px' }} className="">
                       {
-                        !isOnline ? (
+                        !isOnline || !server.playersData ? (
                           '-/-'
                         ) : (
                           <Modal
@@ -63,7 +63,7 @@ export default function ServersListPage() {
                               '/' +
                               server.serverData!.limit
                             }
-                            buttonProps={{ className: 'lnk-btn' }}>
+                            buttonProps={{ className: 'lnk-btn w-full' }}>
                             <PlayersListModal server={server} />
                           </Modal>
                         )
@@ -75,18 +75,17 @@ export default function ServersListPage() {
                   </td>
                   <td data-label="Status">
                     <div style={{ minWidth: '66px' }}>
-                      {!server.loaded ? (
-                        'Loading'
-                      ) : isOnline ? (
-                        <Modal
-                          buttonValue={<span>Online</span>}
-                          buttonProps={{ className: 'lnk-btn' }}
-                          title="Server Info">
-                          <ServerInfoModal server={server} />
-                        </Modal>
-                      ) : (
-                        'Offline'
-                      )}
+                      {!server.loaded
+                        ? 'Loading'
+                        : isOnline
+                        ? 'Online'
+                        : // <Modal
+                          //   buttonValue={<span>Online</span>}
+                          //   buttonProps={{ className: 'lnk-btn w-full' }}
+                          //   title="Server Info">
+                          //   <ServerInfoModal server={server} />
+                          // </Modal>
+                          'Offline'}
                     </div>
                   </td>
                   <td data-label="Uptime">
@@ -94,8 +93,19 @@ export default function ServersListPage() {
                       {isOnline && server.serverData ? (
                         <Modal
                           buttonValue={<Uptime time={server.serverData!.uptime} />}
-                          buttonProps={{ className: 'lnk-btn' }}>
-                          <div className="text-center">Servers usually restarts every 18 hours</div>
+                          buttonProps={{ className: 'lnk-btn w-full' }}>
+                          <div className="text-center">
+                            <div>Servers usually restarts every 18 hours</div>
+                            <div>
+                              <a
+                                href={`https://uptime.ttstats.eu/report/uptime/${server.uptimeid}/`}
+                                target="_blank"
+                                referrerPolicy="no-referrer"
+                                className="lnk-btn text-black dark:text-blue-200">
+                                Click here for {server.name} downtime stats
+                              </a>
+                            </div>
+                          </div>
                         </Modal>
                       ) : (
                         '-'
@@ -110,7 +120,7 @@ export default function ServersListPage() {
                           buttonValue={
                             <DXPClock dxp={server.serverData?.dxp} timestamp={server.lastUpdated} />
                           }
-                          buttonProps={{ className: 'lnk-btn' }}>
+                          buttonProps={{ className: 'lnk-btn w-full' }}>
                           <DXPModal server={server} />
                         </Modal>
                       </span>
@@ -119,9 +129,9 @@ export default function ServersListPage() {
                     )}
                   </td>
                 </tr>
-              );
-            })}
-          </tbody>
+              </tbody>
+            );
+          })}
         </table>
         {/* <div className="border-start">
         <div className="border-end text-center text-shadow"><SkillBoost /></div>

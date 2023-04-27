@@ -61,7 +61,7 @@ export default function TopVehiclesPage() {
         ) : state.error ? (
           <div>{state.error === null ? '' : 'Error - ' + state.error}</div>
         ) : (
-          <div className="max-h-[500px] overflow-y-scroll">
+          <div className="max-h-[500px] overflow-y-auto">
             <table className="w-full text-center">
               <thead>
                 <tr>
@@ -81,7 +81,7 @@ export default function TopVehiclesPage() {
                   <>
                     {state.sorted_vehicles.map((veh, index) => {
                       return (
-                        <tr key={index} className='shadow-inner hover:bg-kebab-odd'>
+                        <tr key={index} className='odd:bg-kebab-odd even:bg-kebab-even hover:bg-kebab-dk'>
                           <td data-label="%">{Number((veh[1] / state.total_vehicles) * 100).toFixed(2)}%</td>
                           <td data-label="Name">{veh[0]}</td>
                           <td data-label="Active">{veh[1]}</td>
@@ -96,7 +96,7 @@ export default function TopVehiclesPage() {
         )}
       </ContentBlock>
       <ContentBlock title="Top Vehicle Classes Now">
-        <div className="">
+        <div className="max-h-[500px] overflow-y-auto">
           {state.loading ? (
             <div className='text-center'>Loading...</div>
           ) : state.error ? (
@@ -120,7 +120,7 @@ export default function TopVehiclesPage() {
                 ) : (
                   <>
                     {state.sorted_classes.map((veh, index) => (
-                      <tr key={index} className='shadow-inner hover:bg-kebab-odd'>
+                      <tr key={index} className='odd:bg-kebab-odd even:bg-kebab-even hover:bg-kebab-dk'>
                         <td data-label="%">{Number((veh[1] / state.total_vehicles) * 100).toFixed(2)}%</td>
                         <td data-label="Name">
                           {veh[0] === -1 ? 'On Foot' : VehicleClasses[Math.round(veh[0])] || '?'}

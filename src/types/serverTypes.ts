@@ -4,6 +4,7 @@ export interface ServerListRawInterface {
   sname: string;
   enabled: boolean;
   apiname: string;
+  uptimeid: string;
 }
 
 export interface MainAPIPlayer {
@@ -40,6 +41,7 @@ export interface ServerDataObject {
   sname: string;
   enabled: boolean;
   apiname: string;
+  uptimeid: string;
   error: boolean;
   serverData: null | MainAPIServer;
   playersData: null | MainAPIPlayer[];
@@ -170,6 +172,7 @@ export interface TopTenDataState {
   error: string | null;
   data: TopTenData[] | null;
   timestamp: number;
+  selected: number[];
 }
 
 export interface HighestIDList {

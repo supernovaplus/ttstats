@@ -48,6 +48,7 @@ module.exports = {
           th: '#00285c',
           odd: 'rgba(0, 0, 0, 0.1)',
           even: 'rgba(0, 0, 0, 0.05)',
+          dk: 'rgba(0, 0, 0, 0.2)',
           btn: '#092d4b',
         },
       },
