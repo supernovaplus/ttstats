@@ -69,11 +69,20 @@ select {
   font-family: 'Josefin Sans', sans-serif;
 }
 
-body.dark {
+body {
   // background-color: #283780;
-  background-image: url('../assets/images/bgDark1.svg');
   background-size: cover;
   background-attachment: fixed;
+}
+
+body.dark {
+  background-image: url('../assets/images/bgDark1.svg');
+  background-color: #004070;
+}
+
+body:not(.dark) {
+  background-image: url('../assets/images/bgWhite1.svg');
+  background-color: #727272;
 }
 
 body.dark,

@@ -10,7 +10,7 @@ export default function Navbar() {
       {/* <nav className="flex justify-between h-[50px] bg-kebab-bg-dm shadow-inner py-2 items-center px-4"> */}
       <div id="left-nav" className="">
         <div id="site-logo" className="block">
-          <a href="#" title="ttstats.eu" className="w-7">
+          <a href="https://ttstats.eu" title="ttstats.eu" className="w-7">
             <img src={ttLogo} className='block w-full'/>
           </a>
         </div>

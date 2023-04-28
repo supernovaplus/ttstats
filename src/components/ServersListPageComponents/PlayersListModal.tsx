@@ -18,7 +18,7 @@ export default function PlayersListModal({ server }: { server: ServerDataObject 
             </thead>
             <tbody>
               {server.playersData.map((player, index) => (
-                <tr key={index} className="even:bg-kebab-even odd:bg-kebab-odd">
+                <tr key={index} className="odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk">
                   <td data-label="Avatar">
                     {player[3] ? (
                       <img src={player[3] || '#'} height="50px" alt="img" className="h-[50px] block" />
