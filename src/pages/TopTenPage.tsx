@@ -4,10 +4,10 @@ import ContentBlock from '../components/ContentBlock';
 
 interface TopTenBlockProps {
   board: TopTenData;
-  index: number;
+  state: TopTenDataState;
 }
 
-function TopTenBlock({ board, index }: TopTenBlockProps) {
+function TopTenBlock({ board, state }: TopTenBlockProps) {
   return (
     <ContentBlock title={board.title}>
       <table className="w-full text-center">
@@ -20,19 +20,23 @@ function TopTenBlock({ board, index }: TopTenBlockProps) {
           </tr>
         </thead>
         <tbody>
-          {board.rows.map((row, index2) => (
-            <tr
-              key={index2}
-              title={`Player ID: ${String(row[0])}`}
-              className="odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk">
-              <td data-label="# Place">{index2 + 1}</td>
-              {board.rows[index2].slice(1).map((column, index3) => (
-                <td key={index3} data-label={board.labels[index3]}>
-                  {column}
-                </td>
-              ))}
-            </tr>
-          ))}
+          {board.rows
+            // .filter((row) => !state.banned_players.has(Number(String(row[0]).slice(1))))
+            .map((row, index2) => (
+              <tr
+                key={index2}
+                title={`Player ID: ${String(row[0])}`}
+                className={`odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk ${
+                  state.banned_players.has(Number(String(row[0]).slice(1))) ? 'line-through text-gray-400 dark:text-gray-600' : ''
+                }`}>
+                <td data-label="# Place">{index2 + 1}</td>
+                {board.rows[index2].slice(1).map((column, index3) => (
+                  <td key={index3} data-label={board.labels[index3]}>
+                    {column}
+                  </td>
+                ))}
+              </tr>
+            ))}
         </tbody>
       </table>
     </ContentBlock>
@@ -46,6 +50,7 @@ export default function TopTenPage() {
     data: null,
     timestamp: 0,
     selected: [],
+    banned_players: new Set(),
   });
 
   const onChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -63,29 +68,44 @@ export default function TopTenPage() {
     const controller = new AbortController();
     const signal = controller.signal;
     let isSubscribed = true;
+
+    fetch('https://api.transporttycoon.eu/banned-top.json')
+      .then((res) => res.json())
+      .then((res: number[]) => {
+        if (res && Array.isArray(res) && isSubscribed) {
+          setState((s) => ({
+            ...s,
+            banned_players: new Set(res),
+          }));
+        }
+      })
+      .catch(() => {});
+
     fetch('https://api.transporttycoon.eu/top10.json', { signal })
       .then((res) => res.json())
       .then((res: TopTenDataResponse) => {
         if (isSubscribed) {
-          setState({
+          setState((s) => ({
+            ...s,
             loading: false,
             error: null,
             data: res.data,
             timestamp: res.timestamp,
             selected: [0],
-          });
+          }));
         }
       })
       .catch((err) => {
         if (isSubscribed) {
           console.log(err);
-          setState({
+          setState((s) => ({
+            ...s,
             loading: false,
             error: 'Failed to load the data, try again later.',
             data: null,
             timestamp: 0,
             selected: [],
-          });
+          }));
         }
       });
     return () => {
@@ -96,13 +116,14 @@ export default function TopTenPage() {
   }, []);
 
   if (!state.loading && state.data && !state.data.length) {
-    setState({
+    setState((s) => ({
+      ...s,
       loading: false,
       error: 'Failed to load the data, try again later.',
       data: null,
       timestamp: 0,
       selected: [],
-    });
+    }));
   }
 
   return (
@@ -144,7 +165,7 @@ export default function TopTenPage() {
         <>
           {state.selected.map((index) => (
             // <TopTenBlock key={index} board={board} index={index} savedTop10Statuses={savedTop10Statuses} />
-            <TopTenBlock key={index} board={state.data![index]} index={index} />
+            <TopTenBlock key={index} board={state.data![index]} state={state} />
           ))}
 
           {/* {state.data.map((board, index) => (

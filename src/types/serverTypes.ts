@@ -158,7 +158,7 @@ export interface TopVehicleDataState {
 export interface TopTenData {
   title: string;
   labels: string[];
-  rows: (string | number)[][];
+  rows: string[][];
 }
 
 export interface TopTenDataResponse {
@@ -173,6 +173,7 @@ export interface TopTenDataState {
   data: TopTenData[] | null;
   timestamp: number;
   selected: number[];
+  banned_players: Set<Number>;
 }
 
 export interface HighestIDList {
