@@ -34,10 +34,10 @@ export default function Sidebar() {
           <OneItem to="/highest_id">Highest ID</OneItem>
           <Category>Tools</Category>
           <OneItem to="/stacks-calculator">Stacks Calculator</OneItem>
-          <OneItem to="/lazy">lazy</OneItem>
-          <OneItem to="/chart">chart</OneItem>
-          <OneItem to="/404">404</OneItem>
-          <OneItem to="/ServersRawPage">ServersRawPage</OneItem>
+          {/* <OneItem to="/lazy">lazy</OneItem> */}
+          {/* <OneItem to="/chart">chart</OneItem> */}
+          {/* <OneItem to="/404">404</OneItem> */}
+          {/* <OneItem to="/ServersRawPage">ServersRawPage</OneItem> */}
         </ul>
       </aside>
     </>
