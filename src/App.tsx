@@ -16,6 +16,7 @@ import ServersRawPage from './pages/ServersRawPage';
 import PlayerFinderPage from './pages/PlayerFinderPage';
 import Page404 from './components/Page404';
 import UptimePage from './pages/UptimePage';
+import LinksPage from './pages/LinksPage';
 
 const TopJobs = lazy(() => import('./pages/TopJobsPage'));
 const HighestIDPage = lazy(() => import('./pages/HighestIDPage'));
@@ -24,7 +25,6 @@ const TopVehicles = lazy(() => import('./pages/TopVehiclesPage'));
 const ChartPage = lazy(() => import('./pages/ChartPage'));
 const ChartPage2 = lazy(() => import('./pages/ChartPage2'));
 const StacksCalculatorPage = lazy(() => import('./pages/StacksCalculatorPage'));
-const LazyPage = lazy(() => import('./pages/LazyPage'));
 
 export default function App() {
   const history = useLocation();
@@ -55,12 +55,11 @@ export default function App() {
                 <Route path="/uptime" element={<UptimePage />} />
                 {/* dynamic/lazy */}
                 <Route path="/chart" element={<LazyLoadingWrapper component={ChartPage2} />} />
-                <Route path="/lazy" element={<LazyLoadingWrapper component={LazyPage} />} />
-                <Route path="/ServersRawPage" element={<LazyLoadingWrapper component={LazyPage} />} />
                 <Route path="/topvehicles" element={<LazyLoadingWrapper component={TopVehicles} />} />
                 <Route path="/highest_id" element={<LazyLoadingWrapper component={HighestIDPage} />} />
                 <Route path="/top10" element={<LazyLoadingWrapper component={Top10} />} />
                 <Route path="/topjobs" element={<LazyLoadingWrapper component={TopJobs} />} />
+                <Route path="/links" element={<LazyLoadingWrapper component={LinksPage} />} />
                 <Route
                   path="/stacks-calculator"
                   element={<LazyLoadingWrapper component={StacksCalculatorPage} />}

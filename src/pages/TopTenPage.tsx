@@ -7,42 +7,6 @@ interface TopTenBlockProps {
   state: TopTenDataState;
 }
 
-function TopTenBlock({ board, state }: TopTenBlockProps) {
-  return (
-    <ContentBlock title={board.title}>
-      <table className="w-full text-center">
-        <thead>
-          <tr>
-            <th>#</th>
-            {board.labels.map((label, index2) => (
-              <th key={index2}>{label}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {board.rows
-            // .filter((row) => !state.banned_players.has(Number(String(row[0]).slice(1))))
-            .map((row, index2) => (
-              <tr
-                key={index2}
-                title={`Player ID: ${String(row[0])}`}
-                className={`odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk ${
-                  state.banned_players.has(Number(String(row[0]).slice(1))) ? 'line-through text-gray-400 dark:text-gray-600' : ''
-                }`}>
-                <td data-label="# Place">{index2 + 1}</td>
-                {board.rows[index2].slice(1).map((column, index3) => (
-                  <td key={index3} data-label={board.labels[index3]}>
-                    {column}
-                  </td>
-                ))}
-              </tr>
-            ))}
-        </tbody>
-      </table>
-    </ContentBlock>
-  );
-}
-
 export default function TopTenPage() {
   const [state, setState] = useState<TopTenDataState>({
     loading: true,
@@ -112,7 +76,6 @@ export default function TopTenPage() {
       controller.abort();
       isSubscribed = false;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!state.loading && state.data && !state.data.length) {
@@ -144,17 +107,18 @@ export default function TopTenPage() {
               name="top-ten-selector"
               multiple
               defaultValue={['0']}
-              className="w-full cursor-pointer text-center min-h-[250px] bg-gray-50  text-gray-900 focus:ring-blue-500  block  dark:bg-kebab-bg-dm  dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500">
+              className="w-full cursor-pointer text-center sm:min-h-[250px] bg-gray-50  text-gray-900  block dark:bg-kebab-bg-dm  dark:placeholder-gray-400 dark:text-white border-t border-b border-white mt-2 outline-none">
               {state.data.map(({ title }, index) => (
                 <option
                   key={index}
                   value={index}
-                  className="odd:bg-kebab-odd even:bg-kebab-even dark:text-white hover:bg-kebab-dk">
+                  className="odd:bg-kebab-odd even:bg-kebab-even dark:text-white hover:bg-kebab-dk py-1">
+                  {/* className="odd:bg-kebab-odd even:bg-kebab-even dark:text-white hover:bg-kebab-dk border-b  border-gray-400 border-dashed"> */}
                   {title}
                 </option>
               ))}
             </select>
-            <div className="text-right text-xs">
+            <div className="text-right text-xs mt-4">
               Last Updated: {new Date(state.timestamp).toLocaleString('en-GB', { timeZone: 'UTC' })} (UTC)
             </div>
           </>
@@ -163,20 +127,45 @@ export default function TopTenPage() {
 
       {state.data && (
         <>
-          {state.selected.map((index) => (
-            // <TopTenBlock key={index} board={board} index={index} savedTop10Statuses={savedTop10Statuses} />
-            <TopTenBlock key={index} board={state.data![index]} state={state} />
-          ))}
-
-          {/* {state.data.map((board, index) => (
-              // <TopTenBlock key={index} board={board} index={index} savedTop10Statuses={savedTop10Statuses} />
-              <TopTenBlock key={index} board={board} index={index} />
-            ))} */}
-          {/* <ContentBlock>
-            <div className="text-center text-xs">
-                Last Updated: {new Date(state.timestamp).toLocaleString('en-GB', { timeZone: 'UTC' })} (UTC)
-            </div>
-          </ContentBlock> */}
+          {state.selected.map((index) => {
+            const board = state.data?.[index];
+            if (!board) return <></>;
+            return (
+              <ContentBlock title={board.title} key={index}>
+                <table className="w-full text-center">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      {board.labels.map((label, index2) => (
+                        <th key={index2}>{label}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {board.rows
+                      // .filter((row) => !state.banned_players.has(Number(String(row[0]).slice(1))))
+                      .map((row, index2) => (
+                        <tr
+                          key={index2}
+                          title={`Player ID: ${String(row[0])}`}
+                          className={`odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk ${
+                            state.banned_players.has(Number(String(row[0]).slice(1)))
+                              ? 'line-through text-gray-400 dark:text-gray-600'
+                              : ''
+                          }`}>
+                          <td data-label="# Place">{index2 + 1}</td>
+                          {board.rows[index2].slice(1).map((column, index3) => (
+                            <td key={index3} data-label={board.labels[index3]}>
+                              {column}
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
+                  </tbody>
+                </table>
+              </ContentBlock>
+            );
+          })}
         </>
       )}
     </>

@@ -17,6 +17,13 @@ export interface MainAPIPlayer {
   6: boolean; //is donator
 }
 
+export interface MainAPIPlayerHighest {
+  index: number;
+  name: string;
+  id: number;
+  sname: string;
+}
+
 export type DXP = [boolean, string?, number?, number?, number?];
 
 export interface MainAPIServer {
@@ -180,6 +187,7 @@ export interface HighestIDList {
   index: number;
   name: string;
   id: number;
+  server: string;
 }
 
 export type SetServerDispatchType = React.Dispatch<React.SetStateAction<ServerDataObjectList>>;

@@ -1,6 +1,6 @@
 import { ServerListRawInterface } from '../types/serverTypes';
 
-const serversList: ServerListRawInterface[] = [
+export const serversList: ServerListRawInterface[] = [
   {
     endpoint: '2epova',
     name: 'Server NY-1',
@@ -18,5 +18,3 @@ const serversList: ServerListRawInterface[] = [
     uptimeid: '676134ceb12cdf3fb6e2272f37ff5455',
   },
 ];
-
-export default serversList;

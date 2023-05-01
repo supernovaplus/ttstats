@@ -151,9 +151,13 @@ input[type='number'] {
 // }
 
 // .text-shadow-1 {
-//   // text-shadow: 3px 3px 4px black, 1px 1px 0 black;
-//   // text-shadow: 1px 1px 1px black;
+//   text-shadow: 3px 3px 4px black, 1px 1px 0 black;
+//   text-shadow: 1px 1px 1px black;
 // }
+
+.text-shadow-2 {
+  text-shadow: 0px 0px 3px black, 1px 1px 2px black;
+}
 
 .modal-overlay {
   position: fixed;
@@ -194,7 +198,7 @@ input[type='number'] {
   box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.668) inset;
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 640px) {
   .dyntable thead,
   .conn-link {
     display: none;

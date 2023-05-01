@@ -1,4 +1,4 @@
-import serversList from '../data/serversList';
+import { serversList } from '../data/serversList';
 import {
   ServerDataObject,
   ServerDataObjectList,
@@ -165,7 +165,7 @@ export const fetchServer = async (server: ServerDataObject, setServer: SetServer
     },
   }));
 };
-``
+``;
 export const fetchAllServers = (servers: ServerDataObjectList, setServers: SetServerDispatchType) => {
   for (const key in servers) {
     fetchServer(servers[key], setServers);
