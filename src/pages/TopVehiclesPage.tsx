@@ -63,7 +63,7 @@ export default function TopVehiclesPage() {
         ) : (
           <div className="max-h-[500px] overflow-y-auto">
             <table className="w-full text-center">
-              <thead className="sticky top-0 dark:bg-kebab-bg-dm">
+              <thead className="sticky top-0 bg-gray-400 dark:bg-kebab-bg-dm">
                 <tr>
                   <th>%</th>
                   <th>Name</th>
@@ -105,7 +105,7 @@ export default function TopVehiclesPage() {
             </div>
           ) : (
             <table className="w-full text-center">
-              <thead className="sticky top-0 dark:bg-kebab-bg-dm">
+              <thead className="sticky top-0 bg-gray-400 dark:bg-kebab-bg-dm">
                 <tr>
                   <th>%</th>
                   <th>Name</th>

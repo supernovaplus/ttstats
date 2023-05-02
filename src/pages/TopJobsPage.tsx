@@ -96,7 +96,7 @@ export default function TopJobsPage() {
       </ContentBlock>
       <ContentBlock title="Top Company Jobs Now">
         <table className="w-full text-center">
-          <thead>
+          <thead className='sticky top-0 bg-gray-400 dark:bg-kebab-bg-dm'>
             <tr>
               <th>%</th>
               <th>Job Name</th>

@@ -133,7 +133,7 @@ export default function TopTenPage() {
             return (
               <ContentBlock title={board.title} key={index}>
                 <table className="w-full text-center">
-                  <thead>
+                  <thead className='sticky top-0 bg-gray-400 dark:bg-kebab-bg-dm'>
                     <tr>
                       <th>#</th>
                       {board.labels.map((label, index2) => (
