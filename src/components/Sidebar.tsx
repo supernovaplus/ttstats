@@ -22,8 +22,8 @@ const OneItem = ({ children, to = '/404' }: any) => (
 export default function Sidebar() {
   return (
     <>
-      <aside className="w-fullbox-border bg-white dark:bg-kebab-bg-dm w-full min-w-[140px] sm:max-w-[200px] text-black dark:text-white h-fit dark:shdw text-center my-3 rounded-tl-md overflow-hidden border-r border-r-kebab-bg">
-      {/* <aside className="w-fullbox-border bg-white dark:bg-kebab-bg-dm w-full min-w-[140px] sm:max-w-[200px] text-black dark:text-white h-fit dark:shdw text-center my-3 rounded-tl-md overflow-hidden border-r border-r-kebab-bg pb-1"> */}
+      <aside className="w-fullbox-border bg-white dark:bg-kebab-bg-dm w-full min-w-[140px] sm:max-w-[200px] text-black dark:text-white h-fit dark:shdw text-center my-3 rounded-tl-md overflow-hidden border-r border-r-gray-400 dark:border-r-kebab-bg">
+        {/* <aside className="w-fullbox-border bg-white dark:bg-kebab-bg-dm w-full min-w-[140px] sm:max-w-[200px] text-black dark:text-white h-fit dark:shdw text-center my-3 rounded-tl-md overflow-hidden border-r border-r-kebab-bg pb-1"> */}
         {/* <aside className="w-fullbox-border rounded bg-kebab-bg-dm w-full min-w-[140px] max-w-[200px] py-5 text-white h-fit shdw"> */}
         <ul className="">
           <Category>Live</Category>

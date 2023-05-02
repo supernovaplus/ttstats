@@ -8,7 +8,7 @@ import DXPClock from '../components/ServersListPageComponents/DXPClock';
 import DXPModal from '../components/ServersListPageComponents/DXPModal';
 import Uptime from '../components/ServersListPageComponents/Uptime';
 import Skillboost from '../components/ServersListPageComponents/Skillboost';
-//TODO: fix shadow
+
 export default function ServersListPage() {
   const { servers } = useDataContext();
 
@@ -95,7 +95,7 @@ export default function ServersListPage() {
                               href={`https://uptime.ttstats.eu/report/uptime/${server.uptimeid}/`}
                               target="_blank"
                               referrerPolicy="no-referrer"
-                              className="lnk-btn text-black dark:text-blue-200">
+                              className="my-2 block px-2 py-1 lnk-btn">
                               Click here for {server.name} downtime stats
                             </a>
                           </div>

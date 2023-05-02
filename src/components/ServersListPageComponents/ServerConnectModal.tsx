@@ -15,9 +15,7 @@ export default function ServerConnectModal({ server }: { server: ServerDataObjec
         </span>
       </div>
       <div>
-        <a
-          href={`fivem://connect/${server.endpoint}?pure_1`}
-          className="my-2 block px-2 py-1 text-white bg-kebab-btn">
+        <a href={`fivem://connect/${server.endpoint}?pure_1`} className="my-2 block px-2 py-1 lnk-btn">
           Connect Again
         </a>
       </div>

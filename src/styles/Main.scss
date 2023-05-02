@@ -155,10 +155,6 @@ input[type='number'] {
 //   text-shadow: 1px 1px 1px black;
 // }
 
-.text-shadow-2 {
-  text-shadow: 0px 0px 3px black, 1px 1px 2px black;
-}
-
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -177,25 +173,6 @@ input[type='number'] {
   width: 100%;
   max-width: 600px;
   z-index: 10;
-}
-
-.shdw {
-  box-shadow: rgba(0, 0, 0, 0.42) 2px 2px 30px;
-}
-
-.lnk-btn {
-  border: 1px solid #092d4b;
-  border-top-color: rgba(255, 255, 255, 0.084);
-  border-left-color: rgba(255, 255, 255, 0.084);
-  padding: 3px 5px;
-}
-
-.lnk-btn:hover {
-  box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.176);
-}
-
-.lnk-btn:active {
-  box-shadow: 2px 2px 1px rgba(0, 0, 0, 0.668) inset;
 }
 
 @media screen and (max-width: 640px) {
