@@ -8,7 +8,7 @@ export default function PlayersListModal({ server }: { server: ServerDataObject 
       ) : (
         <div className="overflow-y-auto" style={{ maxHeight: '80vh' }}>
           <table className="w-full dyntable">
-            <thead className='sticky top-0 dark:bg-kebab-bg-dm'>
+            <thead className='sticky top-0 bg-gray-400 dark:bg-kebab-bg-dm'>
               <tr>
                 <th>Avatar</th>
                 <th>#</th>
@@ -21,7 +21,7 @@ export default function PlayersListModal({ server }: { server: ServerDataObject 
                 <tr key={index} className="odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk">
                   <td data-label="Avatar">
                     {player[3] ? (
-                      <img src={player[3] || '#'} height="50px" alt="img" className="h-[50px] block" />
+                      <img loading="lazy" src={player[3] || '#'} height="50px" alt="img" className="h-[50px] block" />
                     ) : (
                       // <img className="no-avatar" src="media/no-avatar.gif" alt="-" />
                       <div style={{ width: '50px', height: '50px' }} className="bg-black block"></div>

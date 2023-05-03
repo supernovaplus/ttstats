@@ -16,7 +16,7 @@ export default function ContentBlock({ title, children }: props) {
           </div>
         )}
         {children && (
-          <article className="p-2 bg-gray-300 dark:bg-kebab-bg-dm text-black dark:text-white dark:shdw mb-3 shadow-lg border-b border-black">
+          <article className="p-2 bg-gray-300 dark:bg-kebab-bg-dm text-black dark:text-white dark:shdw mb-1 shadow-lg border-b border-black">
             {children}
           </article>
         )}
