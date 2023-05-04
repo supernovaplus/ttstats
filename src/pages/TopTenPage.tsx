@@ -1,18 +1,12 @@
 import React, { useState, useEffect, ChangeEvent } from 'react';
-import { TopTenData, TopTenDataState, TopTenDataResponse } from '../types/serverTypes';
+import { TopTenDataState, TopTenDataResponse } from '../types/serverTypes';
 import ContentBlock from '../components/ContentBlock';
-
-interface TopTenBlockProps {
-  board: TopTenData;
-  state: TopTenDataState;
-}
 
 export default function TopTenPage() {
   const [state, setState] = useState<TopTenDataState>({
     loading: true,
     error: null,
     data: null,
-    timestamp: 0,
     selected: [],
     banned_players: new Set(),
   });
@@ -45,16 +39,15 @@ export default function TopTenPage() {
       })
       .catch(() => {});
 
-    fetch('https://api.transporttycoon.eu/top10.json', { signal })
+    fetch('https://d3.ttstats.eu/data/top10.json', { signal })
       .then((res) => res.json())
-      .then((res: TopTenDataResponse) => {
+      .then((data: TopTenDataResponse[]) => {
         if (isSubscribed) {
           setState((s) => ({
             ...s,
             loading: false,
             error: null,
-            data: res.data,
-            timestamp: res.timestamp,
+            data,
             selected: [0],
           }));
         }
@@ -67,7 +60,6 @@ export default function TopTenPage() {
             loading: false,
             error: 'Failed to load the data, try again later.',
             data: null,
-            timestamp: 0,
             selected: [],
           }));
         }
@@ -84,7 +76,6 @@ export default function TopTenPage() {
       loading: false,
       error: 'Failed to load the data, try again later.',
       data: null,
-      timestamp: 0,
       selected: [],
     }));
   }
@@ -108,19 +99,16 @@ export default function TopTenPage() {
               multiple
               defaultValue={['0']}
               className="w-full cursor-pointer text-center sm:min-h-[250px] bg-gray-50  text-gray-900  block dark:bg-kebab-bg-dm  dark:placeholder-gray-400 dark:text-white border-t border-b border-white mt-2 outline-none">
-              {state.data.map(({ title }, index) => (
+              {state.data.map(({ nice_name }, index) => (
                 <option
                   key={index}
                   value={index}
                   className="odd:bg-kebab-odd even:bg-kebab-even dark:text-white hover:bg-kebab-dk py-1">
                   {/* className="odd:bg-kebab-odd even:bg-kebab-even dark:text-white hover:bg-kebab-dk border-b  border-gray-400 border-dashed"> */}
-                  {title}
+                  {nice_name}
                 </option>
               ))}
             </select>
-            <div className="text-right text-xs mt-4">
-              Last Updated: {new Date(state.timestamp).toLocaleString('en-GB', { timeZone: 'UTC' })} (UTC)
-            </div>
           </>
         )}
       </ContentBlock>
@@ -131,38 +119,53 @@ export default function TopTenPage() {
             const board = state.data?.[index];
             if (!board) return <></>;
             return (
-              <ContentBlock title={board.title} key={index}>
+              <ContentBlock title={board.nice_name} key={index}>
                 <table className="w-full text-center">
-                  <thead className='sticky top-0 bg-gray-400 dark:bg-kebab-bg-dm'>
+                  <thead className="sticky top-0 bg-gray-400 dark:bg-kebab-bg-dm">
                     <tr>
                       <th>#</th>
-                      {board.labels.map((label, index2) => (
-                        <th key={index2}>{label}</th>
-                      ))}
+                      <th>Player</th>
+                      <th>Amount</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {board.rows
-                      // .filter((row) => !state.banned_players.has(Number(String(row[0]).slice(1))))
-                      .map((row, index2) => (
-                        <tr
-                          key={index2}
-                          title={`Player ID: ${String(row[0])}`}
-                          className={`odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk ${
-                            state.banned_players.has(Number(String(row[0]).slice(1)))
-                              ? 'line-through text-gray-400 dark:text-gray-600'
-                              : ''
-                          }`}>
-                          <td data-label="# Place">{index2 + 1}</td>
-                          {board.rows[index2].slice(1).map((column, index3) => (
-                            <td key={index3} data-label={board.labels[index3]}>
-                              {column}
-                            </td>
-                          ))}
-                        </tr>
-                      ))}
+                    {board.json_data.map((row, index2) => (
+                      <tr
+                        key={index2}
+                        className={`odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk ${
+                          state.banned_players.has(row.user_id)
+                            ? 'line-through text-gray-400 dark:text-gray-600'
+                            : ''
+                        }`}>
+                        <td data-label="# Place">{index2 + 1}</td>
+                        <td data-label="Player">
+                          {row.username}{' '}
+                          <span className={'text-xs bg-gray-400 dark:text-white dark:bg-black p-1 rounded'}>
+                            #{row.user_id}
+                          </span>
+                        </td>
+                        <td data-label="Amount">
+                          {board.prefix} {row.amount.toLocaleString('en-us')} {board.suffix}
+                        </td>
+                      </tr>
+                    ))}
                   </tbody>
                 </table>
+                <div className="text-right text-xs mt-4">
+                  Updated:{' '}
+                  {new Date(board.updated_at)
+                    .toLocaleString('en-GB', {
+                      timeZone: 'UTC',
+                      weekday: undefined,
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                      hour: 'numeric',
+                      minute: 'numeric',
+                      hour12: false,
+                    })
+                    .replace(' at', ',') + ' (UTC)'}
+                </div>
               </ContentBlock>
             );
           })}

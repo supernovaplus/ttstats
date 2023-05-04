@@ -162,23 +162,23 @@ export interface TopVehicleDataState {
   sorted_classes: null | [number, number][];
 }
 
-export interface TopTenData {
-  title: string;
-  labels: string[];
-  rows: string[][];
-}
-
 export interface TopTenDataResponse {
-  timestamp: number;
-  data: TopTenData[];
-  info: string;
+  stat_name: string;
+  nice_name: string;
+  updated_at: number;
+  prefix: string;
+  suffix: string;
+  json_data: {
+    username: string;
+    user_id: number;
+    amount: number;
+  }[];
 }
 
 export interface TopTenDataState {
   loading: boolean;
   error: string | null;
-  data: TopTenData[] | null;
-  timestamp: number;
+  data: TopTenDataResponse[] | null;
   selected: number[];
   banned_players: Set<Number>;
 }

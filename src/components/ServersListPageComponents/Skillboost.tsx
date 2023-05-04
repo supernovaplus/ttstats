@@ -6,6 +6,7 @@ export default function Skillboost() {
 
   useEffect(() => {
     let isSubscribed = true;
+
     fetch('https://d.ttstats.eu/skillboost')
       .then((res) => res.json())
       .then((res: SkillBoostData) => {
