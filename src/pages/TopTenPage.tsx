@@ -139,7 +139,10 @@ export default function TopTenPage() {
                         }`}>
                         <td data-label="# Place">{index2 + 1}</td>
                         <td data-label="Player">
-                          {row.username} <span className={'text-xs text-white bg-black p-1 rounded'}>#{row.user_id}</span>
+                          {row.username}{' '}
+                          <span className={'text-xs bg-gray-400 dark:text-white dark:bg-black p-1 rounded'}>
+                            #{row.user_id}
+                          </span>
                         </td>
                         <td data-label="Amount">
                           {board.prefix} {row.amount.toLocaleString('en-us')} {board.suffix}
@@ -149,8 +152,19 @@ export default function TopTenPage() {
                   </tbody>
                 </table>
                 <div className="text-right text-xs mt-4">
-                  Updated: {new Date(board.updated_at).toLocaleString('en-GB', { timeZone: 'UTC' })}{' '}
-                  (UTC)
+                  Updated:{' '}
+                  {new Date(board.updated_at)
+                    .toLocaleString('en-GB', {
+                      timeZone: 'UTC',
+                      weekday: undefined,
+                      year: 'numeric',
+                      month: 'long',
+                      day: 'numeric',
+                      hour: 'numeric',
+                      minute: 'numeric',
+                      hour12: false,
+                    })
+                    .replace(' at', ',') + ' (UTC)'}
                 </div>
               </ContentBlock>
             );
