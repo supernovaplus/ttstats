@@ -34,6 +34,7 @@ export default function Sidebar() {
           <OneItem to="/topvehicles">Top Vehicles</OneItem>
           <OneItem to="/top10">Top 10</OneItem>
           <OneItem to="/highest_id">Highest ID</OneItem>
+          <OneItem to="/economy">Economy</OneItem>
           <Category>Tools</Category>
           <OneItem to="/stacks-calculator">Stacks Calculator</OneItem>
           <Category>Info</Category>

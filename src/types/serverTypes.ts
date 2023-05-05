@@ -8,13 +8,20 @@ export interface ServerListRawInterface {
 }
 
 export interface MainAPIPlayer {
-  0: string; //player name
-  1: number; //Source ID (FiveM assigned player ID)
-  2: number; //player id
-  3: string; //avatar link
-  4: boolean; //is staff
-  5: string; //job name
-  6: boolean; //is donator
+  /** Player Name */
+  0: string;
+  /** Source ID (FiveM assigned player ID) */
+  1: number;
+  /** Player ID */
+  2: number;
+  /** Avatar Link */
+  3: string;
+  /** Is Staff */
+  4: boolean;
+  /** Job Name, eg. Airline Pilot */
+  5: string;
+  /** Is Donator */
+  6: boolean;
 }
 
 export interface MainAPIPlayerHighest {
@@ -120,11 +127,9 @@ export interface ServerFallbackAPIResponse {
 }
 
 export interface PlayerFoundList {
-  0: string; //player name
-  1: string; //server endpoint
-  2: string; //server short name
-  3: string; //avatar link
-  4: string; //job
+  playerNameWithId: string; //player name
+  server: ServerDataObject; //server data
+  player: MainAPIPlayer; //player data
 }
 
 export interface PlayerFoundState {

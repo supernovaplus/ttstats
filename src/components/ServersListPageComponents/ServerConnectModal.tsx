@@ -1,9 +1,10 @@
 import { ServerDataObject } from '../../types/serverTypes';
 import { useEffect } from 'react';
+import { generateJoinLink } from '../../controllers/misc';
 
 export default function ServerConnectModal({ server }: { server: ServerDataObject }) {
   useEffect(() => {
-    window.location.href = `fivem://connect/${server.endpoint}?pure_1`;
+    window.location.href = generateJoinLink(server);
   }, []);
 
   return (
@@ -15,7 +16,7 @@ export default function ServerConnectModal({ server }: { server: ServerDataObjec
         </span>
       </div>
       <div>
-        <a href={`fivem://connect/${server.endpoint}?pure_1`} className="my-2 block px-2 py-1 lnk-btn">
+        <a href={generateJoinLink(server)} className="my-2 block px-2 py-1 lnk-btn">
           Connect Again
         </a>
       </div>

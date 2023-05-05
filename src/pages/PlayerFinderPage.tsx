@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useDataContext } from '../store/DataContext';
 import { PlayerFoundList, PlayerFoundState } from '../types/serverTypes';
 import ContentBlock from '../components/ContentBlock';
+import { generateJoinLink } from '../controllers/misc';
 
 type InputTargetValue = { target: { value: string } };
 
@@ -53,19 +54,17 @@ export default function PlayerFinderPage() {
     for (const key in servers) {
       if (servers[key].playersData === null) continue;
       servers[key].playersData!.forEach((player) => {
-        const playername = player[0] + '#' + player[2];
+        const playerNameWithId = player[0] + '#' + player[2];
         if (
-          playername.toLowerCase().includes(input) &&
+          playerNameWithId.toLowerCase().includes(input) &&
           (state.serverSelect === 'All Servers' || state.serverSelect === servers[key].name) &&
           (state.jobSelect === 'All Jobs' || state.jobSelect === player[5])
         ) {
-          playerFinderFound.push([
-            playername,
-            servers[key]['endpoint'],
-            servers[key]['sname'],
-            player[3],
-            player[5],
-          ]);
+          playerFinderFound.push({
+            playerNameWithId,
+            server: servers[key],
+            player,
+          });
         }
       });
     }
@@ -201,14 +200,23 @@ export default function PlayerFinderPage() {
                 <td>N/A</td>
               </tr>
             ) : (
-              state.playerFinderFound.map((player, index) => (
+              state.playerFinderFound.map((pData, index) => (
                 <tr key={index} className="odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk">
                   <td data-label="#">#{index + 1}</td>
-                  <td data-label="Player">{player[0]}</td>
-                  <td data-label="Job">{player[4] || '-'}</td>
+                  <td data-label="Player">
+                    {pData.player[0]}{' '}
+                    <span className={'text-xs text-white bg-black p-1 rounded'}>#{pData.player[2]}</span>
+                    {pData.player[4] && (
+                      <span className={'p-1 bg-red-800 ml-1 rounded text-xs text-white'}>Staff</span>
+                    )}
+                    {pData.player[6] && (
+                      <span className={'bg-orange-700 p-1 rounded ml-1 text-xs text-white'}>Donator</span>
+                    )}
+                  </td>
+                  <td data-label="Job">{pData.player[5] || '-'}</td>
                   <td data-label="Server">
-                    {player[2]}{' '}
-                    <a href={`fivem://connect/${player[1]}?pure_1`} title="Connect" className="lnk-btn">
+                    {pData.server.sname}{' '}
+                    <a href={generateJoinLink(pData.server)} title="Connect" className="lnk-btn">
                       Join
                     </a>
                   </td>
