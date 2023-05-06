@@ -30,6 +30,20 @@ export default function ServersListPage() {
             const dxp = server?.['serverData']?.['dxp'];
             const isDxpActive = dxp !== undefined && dxp[0] === true;
 
+            let trClass = 'md:hover:bg-kebab-dk dark:border-b-black ';
+            if (!server.loaded) {
+              trClass += 'text-gray-400';
+            } else if (isOnline) {
+              //color gray if event server has low amount people
+              if (!server.apiname && (!server.playersData || server.playersData.length < 5)) {
+                trClass += 'text-gray-400';
+              } else {
+                trClass += 'text-black dark:text-white';
+              }
+            } else {
+              trClass += 'text-gray-500';
+            }
+
             return (
               <tbody key={index}>
                 <tr className="undyntable">
@@ -37,11 +51,11 @@ export default function ServersListPage() {
                     <div className="mt-1 text-left block pt-2">{server.name}</div>
                   </td>
                 </tr>
-                <tr
-                  className={
-                    (!server.loaded ? 'text-gray-400' : isOnline ? '' : 'text-white') +
-                    ' md:hover:bg-kebab-dk'
-                  }>
+                <tr className={trClass}>
+                  {/* // className={
+                  //   (!server.loaded ? 'text-gray-400' : isOnline ? server.apiname && server.playersData && server.playersData.length < 4 ? "text-gray-500" : "" ?  : 'text-gray-500 dark:text-white') +
+                  //   ' md:hover:bg-kebab-dk border-b border-b-gray-400 dark:border-b-black'
+                  // }> */}
                   <td data-label="Server" className="md:w-1/5">
                     <Modal buttonValue="Connect" buttonProps={{ className: 'lnk-btn w-full m-0' }}>
                       <ServerConnectModal server={server} />
@@ -86,19 +100,27 @@ export default function ServersListPage() {
                   <td data-label="Uptime" className="md:w-1/5">
                     {isOnline && server.serverData ? (
                       <Modal
-                        buttonValue={<Uptime time={server.serverData!.uptime} />}
+                        buttonValue={
+                          !server.apiname ? (
+                            server.serverData!.uptime
+                          ) : (
+                            <Uptime time={server.serverData!.uptime} />
+                          )
+                        }
                         buttonProps={{ className: 'lnk-btn w-full' }}>
                         <div className="text-center">
                           <div>Servers usually restarts every 18 hours</div>
-                          <div>
-                            <a
-                              href={`https://uptime.ttstats.eu/report/uptime/${server.uptimeid}/`}
-                              target="_blank"
-                              referrerPolicy="no-referrer"
-                              className="my-2 block px-2 py-1 lnk-btn">
-                              Click here for {server.name} downtime stats
-                            </a>
-                          </div>
+                          {server.uptimeid && (
+                            <div>
+                              <a
+                                href={`https://uptime.ttstats.eu/report/uptime/${server.uptimeid}/`}
+                                target="_blank"
+                                referrerPolicy="no-referrer"
+                                className="my-2 block px-2 py-1 lnk-btn">
+                                Click here for {server.name} downtime stats
+                              </a>
+                            </div>
+                          )}
                         </div>
                       </Modal>
                     ) : (
@@ -114,7 +136,7 @@ export default function ServersListPage() {
                         <DXPModal server={server} />
                       </Modal>
                     ) : (
-                      <div className="w-full block">No DXP</div>
+                      <div className="w-full block">{server.apiname ? 'No DXP' : 'No Info'}</div>
                     )}
                   </td>
                 </tr>

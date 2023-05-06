@@ -12,7 +12,6 @@ import Sidebar from './components/Sidebar';
 import LazyLoadingWrapper from './components/LazyLoadingWrapper';
 
 import ServersListPage from './pages/ServersListPage';
-import ServersRawPage from './pages/ServersRawPage';
 import PlayerFinderPage from './pages/PlayerFinderPage';
 import Page404 from './components/Page404';
 import UptimePage from './pages/UptimePage';
@@ -51,7 +50,6 @@ export default function App() {
               <Routes>
                 {/* static */}
                 <Route path="/" element={<ServersListPage />} />
-                <Route path="/ServersRawPage" element={<ServersRawPage />} />
                 <Route path="/playerfinder" element={<PlayerFinderPage />} />
                 <Route path="/uptime" element={<UptimePage />} />
                 {/* dynamic/lazy */}

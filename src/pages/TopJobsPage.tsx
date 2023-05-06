@@ -24,7 +24,7 @@ export default function TopJobsPage() {
     companyTags.forEach(([jobTitle]) => (companyJobs[jobTitle] = 0));
 
     for (const key in servers) {
-      if (servers[key].loaded === true && servers[key].playersData !== null) {
+      if (servers[key].loaded === true && servers[key].playersData !== null && servers[key].apiname) {
         servers[key].playersData!.forEach((player) => {
           if (!jobs.hasOwnProperty(player[5])) {
             jobs[player[5]] = 1;
@@ -77,7 +77,7 @@ export default function TopJobsPage() {
               ) : (
                 jobsState.entries.map((job, index) => {
                   return (
-                    <tr key={index} className='odd:bg-kebab-odd even:bg-kebab-even hover:bg-kebab-dk'>
+                    <tr key={index} className="odd:bg-kebab-odd even:bg-kebab-even hover:bg-kebab-dk">
                       <td data-label="%">{Number((job[1] / jobsState.counter) * 100).toFixed(1)}%</td>
                       <td data-label="Job Name">{job[0]}</td>
                       <td data-label="Active">{job[1]}</td>
@@ -96,7 +96,7 @@ export default function TopJobsPage() {
       </ContentBlock>
       <ContentBlock title="Top Company Jobs Now">
         <table className="w-full text-center">
-          <thead className='sticky top-0 bg-gray-400 dark:bg-kebab-bg-dm'>
+          <thead className="sticky top-0 bg-gray-400 dark:bg-kebab-bg-dm">
             <tr>
               <th>%</th>
               <th>Job Name</th>
@@ -113,7 +113,7 @@ export default function TopJobsPage() {
             ) : (
               companyJobsState.entries.map((job, index) => {
                 return (
-                  <tr key={index} className='odd:bg-kebab-odd even:bg-kebab-even hover:bg-kebab-dk'>
+                  <tr key={index} className="odd:bg-kebab-odd even:bg-kebab-even hover:bg-kebab-dk">
                     <td data-label="%">{Number((job[1] / companyJobsState.counter) * 100).toFixed(1)}%</td>
                     <td data-label="Job Name">{job[0]}</td>
                     <td data-label="Active">{job[1]}</td>

@@ -8,7 +8,7 @@ export default function HighestIDPage() {
 
   for (const key in servers) {
     const server = servers[key];
-    if (!server.loaded || !server.playersData) continue;
+    if (!server.loaded || !server.playersData || !server.apiname) continue;
     server.playersData.forEach((player) => {
       playersList.push({
         index: -1,
@@ -33,7 +33,7 @@ export default function HighestIDPage() {
   return (
     <ContentBlock title="Highest and lowest player IDs currently online">
       <table className="w-full text-center">
-        <thead className='sticky top-0 bg-gray-400 dark:bg-kebab-bg-dm'>
+        <thead className="sticky top-0 bg-gray-400 dark:bg-kebab-bg-dm">
           <tr>
             <th>#</th>
             <th>Server</th>
@@ -49,17 +49,26 @@ export default function HighestIDPage() {
               <th></th>
             </tr>
           ) : (
-            playersList.map((player, index) => (
-              <tr
-                key={index}
-                style={index === 0 ? { fontSize: '2em' } : {}}
-                className="odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk">
-                <td data-label="# Place">#{player.index}</td>
-                <td data-label="Server">{player.sname}</td>
-                <td data-label="Player">{player.name || '?'}</td>
-                <td data-label="ID">{player.id}</td>
-              </tr>
-            ))
+            playersList.map((player, index) =>
+              index === 10 ? (
+                <tr key={index} className="odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-d select-none">
+                  <td>⠀</td>
+                  <td>⠀</td>
+                  <td>⠀</td>
+                  <td>⠀</td>
+                </tr>
+              ) : (
+                <tr
+                  key={index}
+                  style={index === 0 ? { fontSize: '2em' } : {}}
+                  className="odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk">
+                  <td data-label="# Place">#{player.index}</td>
+                  <td data-label="Server">{player.sname}</td>
+                  <td data-label="Player">{player.name || '?'}</td>
+                  <td data-label="ID">{player.id}</td>
+                </tr>
+              )
+            )
           )}
         </tbody>
       </table>
