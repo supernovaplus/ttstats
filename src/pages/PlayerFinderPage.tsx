@@ -205,12 +205,20 @@ export default function PlayerFinderPage() {
                   <td data-label="#">#{index + 1}</td>
                   <td data-label="Player">
                     {pData.player[0]}{' '}
-                    <span className={'text-xs bg-gray-400 dark:text-white dark:bg-black p-1 rounded'}>#{pData.player[2]}</span>
+                    {!!pData.player[2] && (
+                      <span className={'text-xs bg-gray-400 dark:text-white dark:bg-black p-1 rounded'}>
+                        #{pData.player[2]}
+                      </span>
+                    )}
                     {pData.player[4] && (
-                      <span className={'p-1 bg-red-800 ml-1 rounded text-xs text-white select-none'}>Staff</span>
+                      <span className={'p-1 bg-red-800 ml-1 rounded text-xs text-white select-none'}>
+                        Staff
+                      </span>
                     )}
                     {pData.player[6] && (
-                      <span className={'bg-orange-700 p-1 rounded ml-1 text-xs text-white select-none'}>Donator</span>
+                      <span className={'bg-orange-700 p-1 rounded ml-1 text-xs text-white select-none'}>
+                        Donator
+                      </span>
                     )}
                   </td>
                   <td data-label="Job">{pData.player[5] || '-'}</td>

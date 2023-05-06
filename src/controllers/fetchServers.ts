@@ -130,13 +130,28 @@ export const fetchServer = async (server: ServerDataObject, setServer: SetServer
     if (!('Data' in res)) throw new Error('offline');
     const data = res['Data'];
 
+  //     /** Player Name */
+      // 0: string;
+      // /** Source ID (FiveM assigned player ID) */
+      // 1: number;
+      // /** Player ID */
+      // 2: number;
+      // /** Avatar Link */
+      // 3: string;
+      // /** Is Staff */
+      // 4: boolean;
+      // /** Job Name, eg. Airline Pilot */
+      // 5: string;
+      // /** Is Donator */
+      // 6: boolean;
+
     setServer((s) => ({
       ...s,
       [server.endpoint]: {
         ...server,
         loaded: true,
         error: false,
-        playersData: data.players.map((player) => [player.name || '?', -1, '?', null, false, '?', false]),
+        playersData: data.players.map((player) => [player.name || '?', -1, 0, "", false, '?', false]),
         serverData: {
           limit: data?.['sv_maxclients'] || 32,
           beta: '',
