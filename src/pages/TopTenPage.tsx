@@ -130,7 +130,7 @@ export default function TopTenPage() {
 
 function Board({ state }: { state: TopTenDataState }) {
   let { statId = 'test' } = useParams();
-  console.log({ statId, s: state.data });
+  // console.log({ statId, s: state.data });
   const selectedBoard = (state.data || []).find((board) => board.stat_name === statId);
   if (!selectedBoard) return <ContentBlock title="No Data" />;
 
