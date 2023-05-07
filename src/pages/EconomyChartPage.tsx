@@ -60,7 +60,7 @@ const data = [
   },
 ];
 
-export default function EconomyPage() {
+export default function EconomyChartPage() {
   const [state, setState] = useState(undefined);
 
   useEffect(() => {
