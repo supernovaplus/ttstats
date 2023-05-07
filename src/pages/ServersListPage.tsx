@@ -30,13 +30,13 @@ export default function ServersListPage() {
             const dxp = server?.['serverData']?.['dxp'];
             const isDxpActive = dxp !== undefined && dxp[0] === true;
 
-            let trClass = 'md:hover:bg-kebab-dk dark:border-b-black ';
+            let trClass = '';
             if (!server.loaded) {
               trClass += 'text-gray-400';
             } else if (isOnline) {
               //color gray if event server has low amount people
               if (!server.apiname && (!server.playersData || server.playersData.length < 5)) {
-                trClass += 'text-gray-400';
+                trClass += 'text-gray-400 dark:text-gray-500';
               } else {
                 trClass += 'text-black dark:text-white';
               }
@@ -45,13 +45,13 @@ export default function ServersListPage() {
             }
 
             return (
-              <tbody key={index}>
+              <tbody key={index} className={trClass}>
                 <tr className="undyntable">
                   <td colSpan={5}>
                     <div className="mt-1 text-left block pt-2">{server.name}</div>
                   </td>
                 </tr>
-                <tr className={trClass}>
+                <tr className={`md:hover:bg-kebab-dk dark:border-b-black ${trClass}`}>
                   {/* // className={
                   //   (!server.loaded ? 'text-gray-400' : isOnline ? server.apiname && server.playersData && server.playersData.length < 4 ? "text-gray-500" : "" ?  : 'text-gray-500 dark:text-white') +
                   //   ' md:hover:bg-kebab-dk border-b border-b-gray-400 dark:border-b-black'
@@ -99,30 +99,34 @@ export default function ServersListPage() {
                   </td>
                   <td data-label="Uptime" className="md:w-1/5">
                     {isOnline && server.serverData ? (
-                      <Modal
-                        buttonValue={
-                          !server.apiname ? (
-                            server.serverData!.uptime
-                          ) : (
-                            <Uptime time={server.serverData!.uptime} />
-                          )
-                        }
-                        buttonProps={{ className: 'lnk-btn w-full' }}>
-                        <div className="text-center">
-                          <div>Servers usually restarts every 18 hours</div>
-                          {server.uptimeid && (
-                            <div>
-                              <a
-                                href={`https://uptime.ttstats.eu/report/uptime/${server.uptimeid}/`}
-                                target="_blank"
-                                referrerPolicy="no-referrer"
-                                className="my-2 block px-2 py-1 lnk-btn">
-                                Click here for {server.name} downtime stats
-                              </a>
-                            </div>
-                          )}
-                        </div>
-                      </Modal>
+                      server.apiname ? (
+                        <Modal
+                          buttonValue={
+                            !server.apiname ? (
+                              server.serverData!.uptime
+                            ) : (
+                              <Uptime time={server.serverData!.uptime} />
+                            )
+                          }
+                          buttonProps={{ className: 'lnk-btn w-full' }}>
+                          <div className="text-center">
+                            <div>Servers usually restarts every 18 hours</div>
+                            {server.uptimeid && (
+                              <div>
+                                <a
+                                  href={`https://uptime.ttstats.eu/report/uptime/${server.uptimeid}/`}
+                                  target="_blank"
+                                  referrerPolicy="no-referrer"
+                                  className="my-2 block px-2 py-1 lnk-btn">
+                                  Click here for {server.name} downtime stats
+                                </a>
+                              </div>
+                            )}
+                          </div>
+                        </Modal>
+                      ) : (
+                        server.serverData!.uptime
+                      )
                     ) : (
                       '-'
                     )}

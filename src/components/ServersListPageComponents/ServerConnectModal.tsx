@@ -8,13 +8,10 @@ export default function ServerConnectModal({ server }: { server: ServerDataObjec
   }, []);
 
   return (
-    <div className="text-center">
+    <div className="text-center flex flex-col">
       <div>Joining {server.name}</div>
-      <div>
-        <span className="max-w-sm">
-          Sometimes connecting doesn't work on first try, click the link again below if that happens
-        </span>
-      </div>
+      <div>Sometimes connecting doesn't work on first try</div>
+      <div>click the link again if that happens</div>
       <div>
         <a href={generateJoinLink(server)} className="my-2 block px-2 py-1 lnk-btn">
           Connect Again

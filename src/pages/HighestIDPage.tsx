@@ -1,5 +1,5 @@
 import { useDataContext } from '../store/DataContext';
-import { HighestIDList, MainAPIPlayer, MainAPIPlayerHighest } from '../types/serverTypes';
+import { MainAPIPlayerHighest } from '../types/serverTypes';
 import ContentBlock from '../components/ContentBlock';
 
 export default function HighestIDPage() {
@@ -32,7 +32,7 @@ export default function HighestIDPage() {
 
   return (
     <ContentBlock title="Highest and lowest player IDs currently online">
-      <table className="w-full text-center">
+      <table className="w-full text-center dyntable">
         <thead className="sticky top-0 bg-gray-400 dark:bg-kebab-bg-dm">
           <tr>
             <th>#</th>
@@ -51,7 +51,9 @@ export default function HighestIDPage() {
           ) : (
             playersList.map((player, index) =>
               index === 10 ? (
-                <tr key={index} className="odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-d select-none">
+                <tr
+                  key={index}
+                  className="odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-d select-none">
                   <td>⠀</td>
                   <td>⠀</td>
                   <td>⠀</td>

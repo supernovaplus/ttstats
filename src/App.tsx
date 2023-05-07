@@ -1,6 +1,5 @@
 import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 
 import { DataContextProvider } from './store/DataContext';
@@ -27,8 +26,6 @@ const StacksCalculatorPage = lazy(() => import('./pages/StacksCalculatorPage'));
 const EconomyPage = lazy(() => import('./pages/EconomyPage'));
 
 export default function App() {
-  const history = useLocation();
-
   //dark mode set on inital load
   useEffect(() => {
     if (window.localStorage.getItem('isLightMode')) document.body?.classList.remove('dark');
@@ -56,7 +53,7 @@ export default function App() {
                 <Route path="/chart" element={<LazyLoadingWrapper component={ChartPage2} />} />
                 <Route path="/topvehicles" element={<LazyLoadingWrapper component={TopVehicles} />} />
                 <Route path="/highest_id" element={<LazyLoadingWrapper component={HighestIDPage} />} />
-                <Route path="/top10" element={<LazyLoadingWrapper component={Top10} />} />
+                <Route path="/top10/*" element={<LazyLoadingWrapper component={Top10} />} />
                 <Route path="/topjobs" element={<LazyLoadingWrapper component={TopJobs} />} />
                 <Route path="/links" element={<LazyLoadingWrapper component={LinksPage} />} />
                 <Route path="/economy" element={<LazyLoadingWrapper component={EconomyPage} />} />

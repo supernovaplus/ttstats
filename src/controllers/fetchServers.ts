@@ -90,13 +90,14 @@ export const fetchServer = async (server: ServerDataObject, setServer: SetServer
   let cancelControllerTimeout;
   let success = false;
 
-  //fetch fivem reverse proxy
   if (server.apiname) {
     try {
       const res: MainAPIPlayersResponse = await cancellableJSONFetch({
         cancelController,
         cancelControllerTimeout,
+        //fetch fivem reverse proxy
         // url: `https://tycoon-${server.endpoint}.users.cfx.re/status/widget/players.json`,
+        //fetch via server's nginx server
         url: `https://d.transporttycoon.eu/${server.apiname}/widget/players.json`,
       });
       await parseStatusJSON({ res, setServer, server });
@@ -104,17 +105,17 @@ export const fetchServer = async (server: ServerDataObject, setServer: SetServer
     } catch (err) {}
 
     //else fetch ttstats reverse proxy
-    try {
-      clearTimeout(cancelControllerTimeout);
-      if (success) return;
-      const res = await cancellableJSONFetch({
-        cancelController,
-        cancelControllerTimeout,
-        url: `https://d.ttstats.eu/status/${server.endpoint}`,
-      });
-      await parseStatusJSON({ res, setServer, server });
-      success = true;
-    } catch (err) {}
+    // try {
+    //   clearTimeout(cancelControllerTimeout);
+    //   if (success) return;
+    //   const res = await cancellableJSONFetch({
+    //     cancelController,
+    //     cancelControllerTimeout,
+    //     url: `https://d.ttstats.eu/status/${server.endpoint}`,
+    //   });
+    //   await parseStatusJSON({ res, setServer, server });
+    //   success = true;
+    // } catch (err) {}
   }
 
   //else fetch fivem server status api
@@ -130,28 +131,13 @@ export const fetchServer = async (server: ServerDataObject, setServer: SetServer
     if (!('Data' in res)) throw new Error('offline');
     const data = res['Data'];
 
-  //     /** Player Name */
-      // 0: string;
-      // /** Source ID (FiveM assigned player ID) */
-      // 1: number;
-      // /** Player ID */
-      // 2: number;
-      // /** Avatar Link */
-      // 3: string;
-      // /** Is Staff */
-      // 4: boolean;
-      // /** Job Name, eg. Airline Pilot */
-      // 5: string;
-      // /** Is Donator */
-      // 6: boolean;
-
     setServer((s) => ({
       ...s,
       [server.endpoint]: {
         ...server,
         loaded: true,
         error: false,
-        playersData: data.players.map((player) => [player.name || '?', -1, 0, "", false, '?', false]),
+        playersData: data.players.map((player) => [player.name || '?', -1, 0, '', false, '?', false]),
         serverData: {
           limit: data?.['sv_maxclients'] || 32,
           beta: '',

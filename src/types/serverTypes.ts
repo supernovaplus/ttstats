@@ -184,8 +184,8 @@ export interface TopTenDataState {
   loading: boolean;
   error: string | null;
   data: TopTenDataResponse[] | null;
-  selected: number[];
-  banned_players: Set<Number>;
+  selectedStatName: string;
+  bannedPlayersList: Set<Number>;
 }
 
 export interface HighestIDList {
