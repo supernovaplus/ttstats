@@ -198,17 +198,20 @@ export interface HighestIDList {
 export type SetServerDispatchType = React.Dispatch<React.SetStateAction<ServerDataObjectList>>;
 
 export interface EconomyResponse {
-  date: number;
-  debt: number;
-  money: number;
-  debts: number;
-  mil: number;
-  bil: number;
-  users: number;
+  updated_at: number;
+  data: {
+    date: number;
+    debt: number;
+    money: number;
+    debts: number;
+    mil: number;
+    bil: number;
+    users: number;
+  }[];
 }
 
 export interface EconomyTableState {
   loading: boolean;
-  data: null | EconomyResponse[];
+  data: null | EconomyResponse;
   error: null | string;
 }

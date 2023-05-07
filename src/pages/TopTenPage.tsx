@@ -42,6 +42,8 @@ export default function TopTenPage() {
     fetch('https://d3.ttstats.eu/data/top10.json')
       .then((res) => res.json())
       .then((data: TopTenDataResponse[]) => {
+        if (!data || !Array.isArray(data)) throw new Error('no data received');
+
         if (isSubscribed) {
           setState((s) => ({
             ...s,
@@ -69,16 +71,6 @@ export default function TopTenPage() {
     };
   }, []);
 
-  if (!state.loading && (!state.data || !state.data.length)) {
-    setState((s) => ({
-      ...s,
-      loading: false,
-      error: 'Failed to load the data, try again later.',
-      data: null,
-      selectedStatName: '',
-    }));
-  }
-
   return (
     <>
       <ContentBlock>
@@ -98,7 +90,7 @@ export default function TopTenPage() {
                   to={`/top10/${stat_name}`}
                   key={index}
                   className={({ isActive }) =>
-                    `odd:bg-kebab-odd even:bg-kebab-even dark:text-white hover:bg-kebab-dk py-1 block text-center ${
+                    `odd:bg-kebab-odd even:bg-kebab-even dark:text-white hover:bg-kebab-dk py-1 block text-center select-none ${
                       isActive ? 'underline' : ''
                     }`
                   }>
@@ -129,7 +121,7 @@ export default function TopTenPage() {
 }
 
 function Board({ state }: { state: TopTenDataState }) {
-  let { statId = 'test' } = useParams();
+  let { statId } = useParams();
   // console.log({ statId, s: state.data });
   const selectedBoard = (state.data || []).find((board) => board.stat_name === statId);
   if (!selectedBoard) return <ContentBlock title="No Data" />;
