@@ -23,7 +23,7 @@ const TopVehicles = lazy(() => import('./pages/TopVehiclesPage'));
 const ChartPage = lazy(() => import('./pages/ChartPage'));
 const ChartPage2 = lazy(() => import('./pages/ChartPage2'));
 const StacksCalculatorPage = lazy(() => import('./pages/StacksCalculatorPage'));
-const EconomyPage = lazy(() => import('./pages/EconomyPage'));
+const EconomyTablePage = lazy(() => import('./pages/EconomyTablePage'));
 
 export default function App() {
   //dark mode set on inital load
@@ -56,7 +56,7 @@ export default function App() {
                 <Route path="/top10/*" element={<LazyLoadingWrapper component={Top10} />} />
                 <Route path="/topjobs" element={<LazyLoadingWrapper component={TopJobs} />} />
                 <Route path="/links" element={<LazyLoadingWrapper component={LinksPage} />} />
-                <Route path="/economy" element={<LazyLoadingWrapper component={EconomyPage} />} />
+                <Route path="/economy" element={<LazyLoadingWrapper component={EconomyTablePage} />} />
                 <Route
                   path="/stacks-calculator"
                   element={<LazyLoadingWrapper component={StacksCalculatorPage} />}
