@@ -105,37 +105,37 @@ export default function EconomyTablePage() {
                       <td data-label="Debt" className="text-right">
                         ${shortenLargeMoney(row.debt)}
                       </td>
-                      <td data-label="(change)" className="text-left">
+                      <td className="text-left">
                         <DifferenceTab value={debtChange} shorten={true} />
                       </td>
                       <td data-label="Money" className="text-right">
                         {shortenLargeMoney(row.money)}
                       </td>
-                      <td data-label="(change)" className="text-left">
+                      <td className="text-left">
                         <DifferenceTab value={moneyChange} shorten={true} />
                       </td>
                       <td data-label="Debts" className="text-right">
                         {row.debts.toLocaleString('en-us')}
                       </td>
-                      <td data-label="(change)" className="text-left">
+                      <td className="text-left">
                         <DifferenceTab value={debtsChange} />
                       </td>
                       <td data-label="Millionaires" className="text-right">
                         {row.mil.toLocaleString('en-us')}
                       </td>
-                      <td data-label="(change)" className="text-left">
+                      <td className="text-left">
                         <DifferenceTab value={milChange} />
                       </td>
                       <td data-label="Billionaires" className="text-right">
                         <span className="inline-block flex-grow-0">{row.bil.toLocaleString('en-us')}</span>
                       </td>
-                      <td data-label="(change)" className="text-left">
+                      <td className="text-left">
                         <DifferenceTab value={bilChange} />
                       </td>
                       <td data-label="Users" className="text-right">
                         <span className="inline-block flex-grow-0">{row.users.toLocaleString('en-us')}</span>
                       </td>
-                      <td data-label="(change)" className="text-left">
+                      <td className="text-left">
                         <DifferenceTab value={usersChange} />
                       </td>
                     </tr>
