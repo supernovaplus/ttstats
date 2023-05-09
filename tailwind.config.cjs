@@ -4,20 +4,27 @@ module.exports = {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     screens: {
-      sm: '550px',
-      // => @media (min-width: 640px) { ... }
+      //mobile first
+      // sm: '550px',
+      // // => @media (min-width: 640px) { ... }
 
-      md: '640px',
-      // => @media (min-width: 768px) { ... }
+      // md: '640px',
+      // // => @media (min-width: 768px) { ... }
 
-      // lg: '800px',
-      // => @media (min-width: 1024px) { ... }
 
-      // xl: '1280px',
-      // => @media (min-width: 1280px) { ... }
+      //desktop first
 
-      // '2xl': '1536px',
-      // => @media (min-width: 1536px) { ... }
+      // xl: { max: "1279px" },
+			// => @media (max-width: 1279px) { ... }
+
+			lg: { max: "950px" },
+			// => @media (max-width: 950px) { ... }
+
+			md: { max: "660px" },
+			// => @media (max-width: 640px) { ... }
+
+			sm: { max: "550px" },
+			// => @media (max-width: 550px) { ... }
     },
     extend: {
       colors: {

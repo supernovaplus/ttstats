@@ -90,29 +90,33 @@ export const fetchServer = async (server: ServerDataObject, setServer: SetServer
   let cancelControllerTimeout;
   let success = false;
 
-  //fetch fivem reverse proxy
-  try {
-    const res: MainAPIPlayersResponse = await cancellableJSONFetch({
-      cancelController,
-      cancelControllerTimeout,
-      url: `https://tycoon-${server.endpoint}.users.cfx.re/status/widget/players.json`,
-    });
-    await parseStatusJSON({ res, setServer, server });
-    success = true;
-  } catch (err) {}
+  if (server.apiname) {
+    try {
+      const res: MainAPIPlayersResponse = await cancellableJSONFetch({
+        cancelController,
+        cancelControllerTimeout,
+        //fetch fivem reverse proxy
+        // url: `https://tycoon-${server.endpoint}.users.cfx.re/status/widget/players.json`,
+        //fetch via server's nginx server
+        url: `https://d.transporttycoon.eu/${server.apiname}/widget/players.json`,
+      });
+      await parseStatusJSON({ res, setServer, server });
+      success = true;
+    } catch (err) {}
 
-  //else fetch ttstats reverse proxy
-  try {
-    clearTimeout(cancelControllerTimeout);
-    if (success) return;
-    const res = await cancellableJSONFetch({
-      cancelController,
-      cancelControllerTimeout,
-      url: `https://d.ttstats.eu/status/${server.endpoint}`,
-    });
-    await parseStatusJSON({ res, setServer, server });
-    success = true;
-  } catch (err) {}
+    //else fetch ttstats reverse proxy
+    // try {
+    //   clearTimeout(cancelControllerTimeout);
+    //   if (success) return;
+    //   const res = await cancellableJSONFetch({
+    //     cancelController,
+    //     cancelControllerTimeout,
+    //     url: `https://d.ttstats.eu/status/${server.endpoint}`,
+    //   });
+    //   await parseStatusJSON({ res, setServer, server });
+    //   success = true;
+    // } catch (err) {}
+  }
 
   //else fetch fivem server status api
   try {
@@ -133,7 +137,7 @@ export const fetchServer = async (server: ServerDataObject, setServer: SetServer
         ...server,
         loaded: true,
         error: false,
-        // playersData: data.players.map((player) => [player.name || '?', -1, '?', null, false, '?', false]),
+        playersData: data.players.map((player) => [player.name || '?', -1, 0, '', false, '?', false]),
         serverData: {
           limit: data?.['sv_maxclients'] || 32,
           beta: '',

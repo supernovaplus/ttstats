@@ -7,11 +7,14 @@ export default function LinksPage() {
       <div className="flex flex-col items-center min-h-[100px] my-5">
         <table className="w-full max-w-[500px] text-center">
           <tbody>
-            {links.map(({ url, title, domain }) => (
-              <tr className='odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk'>
+            {links.map(({ url, title, domain }, index) => (
+              <tr className="odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk" key={index}>
                 <td className="w-1/2 p-2">{title}</td>
                 <td className="w-1/2 p-2">
-                  <a href={url} target="_blank" className="underline underline-offset-8 hover:text-blue-700 dark:hover:text-blue-300">
+                  <a
+                    href={url}
+                    target="_blank"
+                    className="underline underline-offset-8 hover:text-blue-700 dark:hover:text-blue-300">
                     {domain}
                   </a>
                 </td>

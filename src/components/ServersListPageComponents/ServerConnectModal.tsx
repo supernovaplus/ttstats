@@ -1,21 +1,19 @@
 import { ServerDataObject } from '../../types/serverTypes';
 import { useEffect } from 'react';
+import { generateJoinLink } from '../../controllers/misc';
 
 export default function ServerConnectModal({ server }: { server: ServerDataObject }) {
   useEffect(() => {
-    window.location.href = `fivem://connect/${server.endpoint}?pure_1`;
+    window.location.href = generateJoinLink(server);
   }, []);
 
   return (
-    <div className="text-center">
+    <div className="text-center flex flex-col">
       <div>Joining {server.name}</div>
+      <div>Sometimes connecting doesn't work on first try</div>
+      <div>click the link again if that happens</div>
       <div>
-        <span className="max-w-sm">
-          Sometimes connecting doesn't work on first try, click the link again below if that happens
-        </span>
-      </div>
-      <div>
-        <a href={`fivem://connect/${server.endpoint}?pure_1`} className="my-2 block px-2 py-1 lnk-btn">
+        <a href={generateJoinLink(server)} className="my-2 block px-2 py-1 lnk-btn">
           Connect Again
         </a>
       </div>

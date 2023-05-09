@@ -17,4 +17,20 @@ export const serversList: ServerListRawInterface[] = [
     apiname: 'beta',
     uptimeid: '676134ceb12cdf3fb6e2272f37ff5455',
   },
+  {
+    endpoint: 'w8j4eb',
+    name: 'Server EVENT',
+    sname: 'EVENT',
+    enabled: true,
+    apiname: "",
+    uptimeid: "",
+  },
+  // {
+  //   endpoint: 'dgpvx3',
+  //   name: 'Lite Transportation',
+  //   sname: 'LITE',
+  //   enabled: true,
+  //   apiname: "",
+  //   uptimeid: "",
+  // },
 ];

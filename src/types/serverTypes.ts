@@ -8,13 +8,20 @@ export interface ServerListRawInterface {
 }
 
 export interface MainAPIPlayer {
-  0: string; //player name
-  1: number; //Source ID (FiveM assigned player ID)
-  2: number; //player id
-  3: string; //avatar link
-  4: boolean; //is staff
-  5: string; //job name
-  6: boolean; //is donator
+  /** Player Name */
+  0: string;
+  /** Source ID (FiveM assigned player ID) */
+  1: number;
+  /** Player ID */
+  2: number;
+  /** Avatar Link */
+  3: string;
+  /** Is Staff */
+  4: boolean;
+  /** Job Name, eg. Airline Pilot */
+  5: string;
+  /** Is Donator */
+  6: boolean;
 }
 
 export interface MainAPIPlayerHighest {
@@ -120,11 +127,9 @@ export interface ServerFallbackAPIResponse {
 }
 
 export interface PlayerFoundList {
-  0: string; //player name
-  1: string; //server endpoint
-  2: string; //server short name
-  3: string; //avatar link
-  4: string; //job
+  playerNameWithId: string; //player name
+  server: ServerDataObject; //server data
+  player: MainAPIPlayer; //player data
 }
 
 export interface PlayerFoundState {
@@ -163,24 +168,27 @@ export interface TopVehicleDataState {
 }
 
 export interface TopTenDataResponse {
-  stat_name: string;
-  nice_name: string;
-  updated_at: number;
-  prefix: string;
-  suffix: string;
-  json_data: {
-    username: string;
-    user_id: number;
-    amount: number;
+  created_at: number;
+  data: {
+    stat_name: string;
+    nice_name: string;
+    updated_at: number;
+    prefix: string;
+    suffix: string;
+    json_data: {
+      username: string;
+      user_id: number;
+      amount: number;
+    }[];
   }[];
 }
 
 export interface TopTenDataState {
   loading: boolean;
   error: string | null;
-  data: TopTenDataResponse[] | null;
-  selected: number[];
-  banned_players: Set<Number>;
+  data: TopTenDataResponse["data"] | null;
+  selectedStatName: string;
+  bannedPlayersList: Set<Number>;
 }
 
 export interface HighestIDList {
@@ -191,3 +199,22 @@ export interface HighestIDList {
 }
 
 export type SetServerDispatchType = React.Dispatch<React.SetStateAction<ServerDataObjectList>>;
+
+export interface EconomyResponse {
+  updated_at: number;
+  data: {
+    date: number;
+    debt: number;
+    money: number;
+    debts: number;
+    mil: number;
+    bil: number;
+    users: number;
+  }[];
+}
+
+export interface EconomyTableState {
+  loading: boolean;
+  data: null | EconomyResponse;
+  error: null | string;
+}

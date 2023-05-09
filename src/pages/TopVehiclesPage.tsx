@@ -61,7 +61,7 @@ export default function TopVehiclesPage() {
         ) : state.error ? (
           <div>{state.error === null ? '' : 'Error - ' + state.error}</div>
         ) : (
-          <div className="max-h-[500px] overflow-y-auto">
+          <div className="max-h-[380px] overflow-y-auto">
             <table className="w-full text-center">
               <thead className="sticky top-0 bg-gray-400 dark:bg-kebab-bg-dm">
                 <tr>
@@ -96,7 +96,7 @@ export default function TopVehiclesPage() {
         )}
       </ContentBlock>
       <ContentBlock title="Top Vehicle Classes Now">
-        <div className="max-h-[500px] overflow-y-auto">
+        <div className="max-h-[380px] overflow-y-auto">
           {state.loading ? (
             <div className="text-center">Loading...</div>
           ) : state.error ? (
@@ -137,7 +137,19 @@ export default function TopVehiclesPage() {
           )}
         </div>
         <div className="text-right text-xs mt-2">
-          Last Updated: {new Date(state.timestamp).toLocaleString('en-GB', { timeZone: 'UTC' })} (UTC)
+          Last Updated:{' '}
+          {new Date(state.timestamp)
+            .toLocaleString('en-GB', {
+              timeZone: 'UTC',
+              weekday: undefined,
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric',
+              hour: 'numeric',
+              minute: 'numeric',
+              hour12: false,
+            })
+            .replace(' at', ',') + ' (UTC)'}
         </div>
       </ContentBlock>
     </>

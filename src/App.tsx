@@ -1,6 +1,5 @@
 import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 
 import { DataContextProvider } from './store/DataContext';
@@ -12,7 +11,6 @@ import Sidebar from './components/Sidebar';
 import LazyLoadingWrapper from './components/LazyLoadingWrapper';
 
 import ServersListPage from './pages/ServersListPage';
-import ServersRawPage from './pages/ServersRawPage';
 import PlayerFinderPage from './pages/PlayerFinderPage';
 import Page404 from './components/Page404';
 import UptimePage from './pages/UptimePage';
@@ -25,10 +23,9 @@ const TopVehicles = lazy(() => import('./pages/TopVehiclesPage'));
 const ChartPage = lazy(() => import('./pages/ChartPage'));
 const ChartPage2 = lazy(() => import('./pages/ChartPage2'));
 const StacksCalculatorPage = lazy(() => import('./pages/StacksCalculatorPage'));
+const EconomyTablePage = lazy(() => import('./pages/EconomyTablePage'));
 
 export default function App() {
-  const history = useLocation();
-
   //dark mode set on inital load
   useEffect(() => {
     if (window.localStorage.getItem('isLightMode')) document.body?.classList.remove('dark');
@@ -40,34 +37,31 @@ export default function App() {
 
   return (
     <DataContextProvider>
-      <div className="max-w-[1000px] w-full mx-auto my-0 min-h-screen px-1">
-        {/* <div className="max-w-[1000px] w-full mx-auto my-0 min-h-screen p-1 bgbg"> */}
+      <div className="max-w-[1000px] w-full mx-auto my-0 min-h-screen px-1 min-w-[400px]">
         <Navbar />
-        <div className="flex flex-col sm:flex-row items-center sm:items-start">
+        <div className="flex md:flex-col items-start md:items-center">
           <Sidebar />
-          <div className="w-full min-h-[500px]">
-            <div className="min-w-[300px] max-w-full">
-              <Routes>
-                {/* static */}
-                <Route path="/" element={<ServersListPage />} />
-                <Route path="/ServersRawPage" element={<ServersRawPage />} />
-                <Route path="/playerfinder" element={<PlayerFinderPage />} />
-                <Route path="/uptime" element={<UptimePage />} />
-                {/* dynamic/lazy */}
-                <Route path="/chart" element={<LazyLoadingWrapper component={ChartPage2} />} />
-                <Route path="/topvehicles" element={<LazyLoadingWrapper component={TopVehicles} />} />
-                <Route path="/highest_id" element={<LazyLoadingWrapper component={HighestIDPage} />} />
-                <Route path="/top10" element={<LazyLoadingWrapper component={Top10} />} />
-                <Route path="/topjobs" element={<LazyLoadingWrapper component={TopJobs} />} />
-                <Route path="/links" element={<LazyLoadingWrapper component={LinksPage} />} />
-                <Route
-                  path="/stacks-calculator"
-                  element={<LazyLoadingWrapper component={StacksCalculatorPage} />}
-                />
-                {/* 404 */}
-                <Route path="*" element={<Page404 />} />
-              </Routes>
-            </div>
+          <div className=" w-full">
+            <Routes>
+              {/* static */}
+              <Route path="/" element={<ServersListPage />} />
+              <Route path="/playerfinder" element={<PlayerFinderPage />} />
+              <Route path="/uptime" element={<UptimePage />} />
+              {/* dynamic/lazy */}
+              <Route path="/chart" element={<LazyLoadingWrapper component={ChartPage2} />} />
+              <Route path="/topvehicles" element={<LazyLoadingWrapper component={TopVehicles} />} />
+              <Route path="/highest_id" element={<LazyLoadingWrapper component={HighestIDPage} />} />
+              <Route path="/top10/*" element={<LazyLoadingWrapper component={Top10} />} />
+              <Route path="/topjobs" element={<LazyLoadingWrapper component={TopJobs} />} />
+              <Route path="/links" element={<LazyLoadingWrapper component={LinksPage} />} />
+              <Route path="/economy" element={<LazyLoadingWrapper component={EconomyTablePage} />} />
+              <Route
+                path="/stacks-calculator"
+                element={<LazyLoadingWrapper component={StacksCalculatorPage} />}
+              />
+              {/* 404 */}
+              <Route path="*" element={<Page404 />} />
+            </Routes>
           </div>
         </div>
         <Footer />

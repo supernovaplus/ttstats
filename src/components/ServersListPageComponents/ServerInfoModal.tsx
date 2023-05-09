@@ -1,4 +1,5 @@
 import { ServerDataObject } from '../../types/serverTypes';
+import { generateJoinLink } from '../../controllers/misc';
 
 export default function ServerInfoModal({ server }: { server: ServerDataObject }) {
   const currentPlayerCount = server.playersData ? server.playersData.length : 0;
@@ -24,7 +25,7 @@ export default function ServerInfoModal({ server }: { server: ServerDataObject }
           <div>Server Is Offline</div>
         )}
         <div>
-          <a href={`fivem://connect/${server.endpoint}?pure_1`} className="my-2 block px-2 py-1 text-white bg-kebab-btn">
+          <a href={generateJoinLink(server)} className="my-2 block px-2 py-1 text-white bg-kebab-btn">
             Connect To The Server
           </a>
         </div>
