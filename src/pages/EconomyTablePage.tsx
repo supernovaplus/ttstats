@@ -67,7 +67,7 @@ export default function EconomyTablePage() {
       {state.data && state.data.data && (
         <div>
           <div className="max-h-[600px] overflow-auto">
-            <table className="text-center w-full text-sm dyntable min-w-full">
+            <table className="text-center w-full text-sm min-w-full resp-table md:full-table">
               <thead>
                 {/* <thead className="sticky top-0 bg-gray-400 dark:bg-kebab-bg-dm text-center"> */}
                 <tr>
@@ -97,7 +97,7 @@ export default function EconomyTablePage() {
                           timeZone: 'UTC',
                           weekday: undefined,
                           year: 'numeric',
-                          month: 'long',
+                          month: 'short',
                           day: 'numeric',
                           hour12: false,
                         })}

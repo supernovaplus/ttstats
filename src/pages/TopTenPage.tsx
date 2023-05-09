@@ -39,17 +39,17 @@ export default function TopTenPage() {
       })
       .catch(() => {});
 
-    fetch('https://d3.ttstats.eu/data/top10.json')
+    fetch('https://d3.ttstats.eu/data/top10_v2.json')
       .then((res) => res.json())
-      .then((data: TopTenDataResponse[]) => {
-        if (!data || !Array.isArray(data)) throw new Error('no data received');
+      .then((res: TopTenDataResponse) => {
+        if (!res || !res.data || !Array.isArray(res.data)) throw new Error('no data received');
 
         if (isSubscribed) {
           setState((s) => ({
             ...s,
             loading: false,
             error: null,
-            data,
+            data: res.data,
             selectedStatName: '',
           }));
         }
@@ -66,6 +66,7 @@ export default function TopTenPage() {
           }));
         }
       });
+      
     return () => {
       isSubscribed = false;
     };
