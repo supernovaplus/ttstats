@@ -5,7 +5,7 @@ import ttLogo from '../assets/images/tt_logov2_small.png';
 
 export default function Navbar() {
   return (
-    <nav className="flex justify-between min-h-[50px] items-center px-4">
+    <nav className="flex justify-between min-h-[50px] items-center px-4 md:min-h-[70px]">
     {/* <nav className="flex justify-between min-h-[50px] shadow-inner py-2 items-center px-4"> */}
       {/* <nav className="flex justify-between h-[50px] bg-kebab-bg-dm shadow-inner py-2 items-center px-4"> */}
       <div id="left-nav" className="">

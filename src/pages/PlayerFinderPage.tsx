@@ -204,7 +204,7 @@ export default function PlayerFinderPage() {
                 <tr key={index} className="odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk">
                   <td data-label="#">#{index + 1}</td>
                   <td data-label="Player">
-                    {pData.player[0]}{' '}
+                    <span className='break-all'>{pData.player[0]}</span>{' '}
                     {!!pData.player[2] && (
                       <span className={'text-xs bg-gray-400 dark:text-white dark:bg-black p-1 rounded'}>
                         #{pData.player[2]}

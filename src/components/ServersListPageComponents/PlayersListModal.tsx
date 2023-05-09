@@ -7,8 +7,8 @@ export default function PlayersListModal({ server }: { server: ServerDataObject 
         <div>No Players</div>
       ) : (
         <div className="overflow-y-auto" style={{ maxHeight: '80vh' }}>
-          <table className="w-full dyntable">
-            <thead className="sticky top-0 bg-gray-400 dark:bg-kebab-bg-dm">
+          <table className="w-full">
+            <thead className="sticky z-1 top-0 bg-gray-400 dark:bg-kebab-bg-dm">
               <tr>
                 <th>Avatar</th>
                 <th>#</th>

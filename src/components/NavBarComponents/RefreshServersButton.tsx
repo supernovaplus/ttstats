@@ -31,11 +31,11 @@ export default function RefreshServersButton() {
 
   return (
     <button onClick={handleOnClickRefresh} className="hover:text-gray-300 text-shadow-2">
-      <div className="block md:inline">
+      <span className="sm:block">
         Servers Loaded: {state.servers}/{state.total} ({state.players} players)
-      </div>
-      <div className="hidden md:inline"> | </div>
-      <div className="block md:inline">click to refresh</div>
+      </span>
+      <span className="sm:hidden"> | </span>
+      <span>click to refresh</span>
     </button>
   );
 }

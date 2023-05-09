@@ -37,34 +37,31 @@ export default function App() {
 
   return (
     <DataContextProvider>
-      <div className="max-w-[1000px] w-full mx-auto my-0 min-h-screen px-1">
-        {/* <div className="max-w-[1000px] w-full mx-auto my-0 min-h-screen p-1 bgbg"> */}
+      <div className="max-w-[1000px] w-full mx-auto my-0 min-h-screen px-1 min-w-[400px]">
         <Navbar />
-        <div className="flex flex-col sm:flex-row items-center sm:items-start">
+        <div className="flex md:flex-col items-start md:items-center">
           <Sidebar />
-          <div className="w-full min-h-[500px]">
-            <div className="min-w-[300px] max-w-full">
-              <Routes>
-                {/* static */}
-                <Route path="/" element={<ServersListPage />} />
-                <Route path="/playerfinder" element={<PlayerFinderPage />} />
-                <Route path="/uptime" element={<UptimePage />} />
-                {/* dynamic/lazy */}
-                <Route path="/chart" element={<LazyLoadingWrapper component={ChartPage2} />} />
-                <Route path="/topvehicles" element={<LazyLoadingWrapper component={TopVehicles} />} />
-                <Route path="/highest_id" element={<LazyLoadingWrapper component={HighestIDPage} />} />
-                <Route path="/top10/*" element={<LazyLoadingWrapper component={Top10} />} />
-                <Route path="/topjobs" element={<LazyLoadingWrapper component={TopJobs} />} />
-                <Route path="/links" element={<LazyLoadingWrapper component={LinksPage} />} />
-                <Route path="/economy" element={<LazyLoadingWrapper component={EconomyTablePage} />} />
-                <Route
-                  path="/stacks-calculator"
-                  element={<LazyLoadingWrapper component={StacksCalculatorPage} />}
-                />
-                {/* 404 */}
-                <Route path="*" element={<Page404 />} />
-              </Routes>
-            </div>
+          <div className=" w-full">
+            <Routes>
+              {/* static */}
+              <Route path="/" element={<ServersListPage />} />
+              <Route path="/playerfinder" element={<PlayerFinderPage />} />
+              <Route path="/uptime" element={<UptimePage />} />
+              {/* dynamic/lazy */}
+              <Route path="/chart" element={<LazyLoadingWrapper component={ChartPage2} />} />
+              <Route path="/topvehicles" element={<LazyLoadingWrapper component={TopVehicles} />} />
+              <Route path="/highest_id" element={<LazyLoadingWrapper component={HighestIDPage} />} />
+              <Route path="/top10/*" element={<LazyLoadingWrapper component={Top10} />} />
+              <Route path="/topjobs" element={<LazyLoadingWrapper component={TopJobs} />} />
+              <Route path="/links" element={<LazyLoadingWrapper component={LinksPage} />} />
+              <Route path="/economy" element={<LazyLoadingWrapper component={EconomyTablePage} />} />
+              <Route
+                path="/stacks-calculator"
+                element={<LazyLoadingWrapper component={StacksCalculatorPage} />}
+              />
+              {/* 404 */}
+              <Route path="*" element={<Page404 />} />
+            </Routes>
           </div>
         </div>
         <Footer />

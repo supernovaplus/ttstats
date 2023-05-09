@@ -67,9 +67,8 @@ export default function EconomyTablePage() {
       {state.data && state.data.data && (
         <div>
           <div className="max-h-[600px] overflow-auto">
-            <table className="text-center w-full text-sm min-w-full resp-table md:full-table">
-              <thead>
-                {/* <thead className="sticky top-0 bg-gray-400 dark:bg-kebab-bg-dm text-center"> */}
+            <table className="text-center w-full text-sm min-w-full lg:resp-table">
+              <thead className="sticky top-0 bg-gray-400 dark:bg-kebab-bg-dm text-center">
                 <tr>
                   <th>Date</th>
                   <th colSpan={2}>Debt</th>
@@ -91,7 +90,7 @@ export default function EconomyTablePage() {
                   const usersChange = nextRow ? row.users - nextRow.users : 0;
 
                   return (
-                    <tr key={index} className="odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk">
+                    <tr key={index} className="odd:bg-kebab-odd even:bg-kebab-even">
                       <td data-label="Date" className="px-1">
                         {new Date(row.date).toLocaleString('en-GB', {
                           timeZone: 'UTC',

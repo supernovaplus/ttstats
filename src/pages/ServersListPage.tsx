@@ -51,51 +51,32 @@ export default function ServersListPage() {
                     <div className="mt-1 text-left block pt-2">{server.name}</div>
                   </td>
                 </tr>
-                <tr className={`md:hover:bg-kebab-dk dark:border-b-black ${trClass}`}>
-                  {/* // className={
-                  //   (!server.loaded ? 'text-gray-400' : isOnline ? server.apiname && server.playersData && server.playersData.length < 4 ? "text-gray-500" : "" ?  : 'text-gray-500 dark:text-white') +
-                  //   ' md:hover:bg-kebab-dk border-b border-b-gray-400 dark:border-b-black'
-                  // }> */}
-                  <td data-label="Server" className="md:w-1/5">
+                <tr className={`dark:border-b-black ${trClass}`}>
+                  <td data-label="Server" className="w-1/5">
                     <Modal buttonValue="Connect" buttonProps={{ className: 'lnk-btn w-full m-0' }}>
                       <ServerConnectModal server={server} />
                     </Modal>
                   </td>
-                  <td data-label="Players" className="md:w-1/5">
-                    {
-                      !isOnline || !server.playersData ? (
-                        '-/-'
-                      ) : (
-                        <Modal
-                          title={`Players on ${server.name}`}
-                          buttonValue={
-                            (server.playersData!.length <= server.serverData!.limit
-                              ? server.playersData!.length
-                              : server.serverData!.limit + '+') +
-                            '/' +
-                            server.serverData!.limit
-                          }
-                          buttonProps={{ className: 'lnk-btn w-full' }}>
-                          <PlayersListModal server={server} />
-                        </Modal>
-                      )
-                      // <Link to={`/playerfinder?server=${encodeURI(server.name)}`} className="btn" title="Server Info">
-                      // 	{server.playersData.length <= server.serverData.limit ? server.playersData.length : server.serverData.limit + "+"}/{server.serverData.limit}
-                      // </Link>
-                    }
+                  <td data-label="Players" className="w-1/5">
+                    {!isOnline || !server.playersData ? (
+                      '-/-'
+                    ) : (
+                      <Modal
+                        title={`Players on ${server.name}`}
+                        buttonValue={
+                          (server.playersData!.length <= server.serverData!.limit
+                            ? server.playersData!.length
+                            : server.serverData!.limit + '+') +
+                          '/' +
+                          server.serverData!.limit
+                        }
+                        buttonProps={{ className: 'lnk-btn w-full' }}>
+                        <PlayersListModal server={server} />
+                      </Modal>
+                    )}
                   </td>
                   <td data-label="Status" className="md:w-1/5">
-                    {!server.loaded
-                      ? 'Loading'
-                      : isOnline
-                      ? 'Online'
-                      : // <Modal
-                        //   buttonValue={<span>Online</span>}
-                        //   buttonProps={{ className: 'lnk-btn w-full' }}
-                        //   title="Server Info">
-                        //   <ServerInfoModal server={server} />
-                        // </Modal>
-                        'Offline'}
+                    {!server.loaded ? 'Loading' : isOnline ? 'Online' : 'Offline'}
                   </td>
                   <td data-label="Uptime" className="md:w-1/5">
                     {isOnline && server.serverData ? (
