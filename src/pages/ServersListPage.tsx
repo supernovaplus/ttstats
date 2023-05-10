@@ -75,10 +75,10 @@ export default function ServersListPage() {
                       </Modal>
                     )}
                   </td>
-                  <td data-label="Status" className="md:w-1/5">
+                  <td data-label="Status" className="w-1/5">
                     {!server.loaded ? 'Loading' : isOnline ? 'Online' : 'Offline'}
                   </td>
-                  <td data-label="Uptime" className="md:w-1/5">
+                  <td data-label="Uptime" className="w-1/5">
                     {isOnline && server.serverData ? (
                       server.apiname ? (
                         <Modal
@@ -112,7 +112,7 @@ export default function ServersListPage() {
                       '-'
                     )}
                   </td>
-                  <td data-label="DXP" className="md:w-1/5">
+                  <td data-label="DXP" className="w-1/5">
                     {isOnline && isDxpActive ? (
                       <Modal
                         title="DXP INFO"
