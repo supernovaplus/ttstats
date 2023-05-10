@@ -162,7 +162,7 @@ input[type='number'] {
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.8);
-  z-index: 5;
+  z-index: 10;
 }
 
 .modal-container {
@@ -172,5 +172,5 @@ input[type='number'] {
   transform: translate(-50%, -50%);
   width: 100%;
   max-width: 600px;
-  z-index: 6;
+  z-index: 11;
 }
