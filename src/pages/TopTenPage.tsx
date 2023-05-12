@@ -1,8 +1,9 @@
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TopTenDataState, TopTenDataResponse } from '../types/serverTypes';
 import ContentBlock from '../components/ContentBlock';
-import { Routes, Route, useParams, useNavigate } from 'react-router-dom';
+import { Routes, Route, useParams } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
+import { utcDate } from '../controllers/misc';
 
 // function ProfilePage() {
 //   // Get the userId param from the URL.
@@ -12,7 +13,7 @@ import { NavLink } from 'react-router-dom';
 // }
 
 export default function TopTenPage() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   // const navParams = useParams();
   // let { userId } = useParams();
 
@@ -66,7 +67,7 @@ export default function TopTenPage() {
           }));
         }
       });
-      
+
     return () => {
       isSubscribed = false;
     };
@@ -160,21 +161,7 @@ function Board({ state }: { state: TopTenDataState }) {
           ))}
         </tbody>
       </table>
-      <div className="text-right text-xs mt-4">
-        Updated:{' '}
-        {new Date(selectedBoard.updated_at)
-          .toLocaleString('en-GB', {
-            timeZone: 'UTC',
-            weekday: undefined,
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            hour: 'numeric',
-            minute: 'numeric',
-            hour12: false,
-          })
-          .replace(' at', ',') + ' (UTC)'}
-      </div>
+      <div className="text-right text-xs mt-4">Updated: {utcDate(selectedBoard.updated_at)}</div>
     </ContentBlock>
   );
 }

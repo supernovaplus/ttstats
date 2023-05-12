@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ContentBlock from '../components/ContentBlock';
 import { EconomyTableState, EconomyResponse } from '../types/serverTypes';
 import { shortenLargeMoney } from '../controllers/misc';
+import { utcDate } from '../controllers/misc';
 
 const DifferenceTab = ({ value, shorten = false }: { value: number; shorten?: boolean }) => {
   if (value > 0) {
@@ -92,14 +93,7 @@ export default function EconomyTablePage() {
                   return (
                     <tr key={index} className="odd:bg-kebab-odd even:bg-kebab-even">
                       <td data-label="Date" className="px-1">
-                        {new Date(row.date).toLocaleString('en-GB', {
-                          timeZone: 'UTC',
-                          weekday: undefined,
-                          year: 'numeric',
-                          month: 'short',
-                          day: 'numeric',
-                          hour12: false,
-                        })}
+                        {utcDate(row.date, true)}
                       </td>
                       <td data-label="Debt" className="text-right">
                         ${shortenLargeMoney(row.debt)}
@@ -143,21 +137,7 @@ export default function EconomyTablePage() {
               </tbody>
             </table>
           </div>
-          <div className="text-right text-xs mt-4">
-            Updated:{' '}
-            {new Date(state.data.updated_at)
-              .toLocaleString('en-GB', {
-                timeZone: 'UTC',
-                weekday: undefined,
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: 'numeric',
-                minute: 'numeric',
-                hour12: false,
-              })
-              .replace(' at', ',') + ' (UTC)'}
-          </div>
+          <div className="text-right text-xs mt-4">Updated: {utcDate(state.data.updated_at)}</div>
         </div>
       )}
     </ContentBlock>

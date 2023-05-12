@@ -73,7 +73,7 @@ export default function Sidebar() {
               Economy
             </OneItem>
             <Category>Tools</Category>
-            <OneItem to="/stacks-calculator" setForceOpen={setForceOpen}>
+            <OneItem to="/stacks_calculator" setForceOpen={setForceOpen}>
               Stacks Calculator
             </OneItem>
             <Category>Info</Category>

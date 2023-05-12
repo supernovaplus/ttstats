@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { VehicleClasses } from '../data/vehicleData';
 import { TopVehicleData, TopVehicleDataState } from '../types/serverTypes';
 import ContentBlock from '../components/ContentBlock';
+import { utcDate } from '../controllers/misc';
 
 export default function TopVehiclesPage() {
   const [state, setState] = useState<TopVehicleDataState>({
@@ -136,21 +137,7 @@ export default function TopVehiclesPage() {
             </table>
           )}
         </div>
-        <div className="text-right text-xs mt-2">
-          Last Updated:{' '}
-          {new Date(state.timestamp)
-            .toLocaleString('en-GB', {
-              timeZone: 'UTC',
-              weekday: undefined,
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-              hour: 'numeric',
-              minute: 'numeric',
-              hour12: false,
-            })
-            .replace(' at', ',') + ' (UTC)'}
-        </div>
+        <div className="text-right text-xs mt-2">Updated: {utcDate(state.timestamp)}</div>
       </ContentBlock>
     </>
   );

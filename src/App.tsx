@@ -56,7 +56,7 @@ export default function App() {
               <Route path="/links" element={<LazyLoadingWrapper component={LinksPage} />} />
               <Route path="/economy" element={<LazyLoadingWrapper component={EconomyTablePage} />} />
               <Route
-                path="/stacks-calculator"
+                path="/stacks_calculator"
                 element={<LazyLoadingWrapper component={StacksCalculatorPage} />}
               />
               {/* 404 */}

@@ -27,6 +27,7 @@ export default function PlayersListModal({ server }: { server: ServerDataObject 
                         height="50px"
                         alt="img"
                         className="h-[50px] inline-block"
+                        referrerPolicy="no-referrer"
                       />
                     ) : (
                       // <img className="no-avatar" src="media/no-avatar.gif" alt="-" />

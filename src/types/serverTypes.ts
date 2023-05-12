@@ -186,7 +186,7 @@ export interface TopTenDataResponse {
 export interface TopTenDataState {
   loading: boolean;
   error: string | null;
-  data: TopTenDataResponse["data"] | null;
+  data: TopTenDataResponse['data'] | null;
   selectedStatName: string;
   bannedPlayersList: Set<Number>;
 }
@@ -217,4 +217,30 @@ export interface EconomyTableState {
   loading: boolean;
   data: null | EconomyResponse;
   error: null | string;
+}
+
+export interface TopJobsHistoryResponse {
+  updated_at: number;
+  data: {
+    top_20_month: {
+      group_name: string;
+      name: string;
+      hours: number;
+      percentage: number;
+    }[];
+    top_10_two_days: {
+      group_name: string;
+      name: string;
+      hours: number;
+      percentage: number;
+    }[];
+  };
+  fetch_time: number;
+}
+
+export interface TopJobsHistoryState {
+  loading: boolean;
+  data: null | TopJobsHistoryResponse['data'];
+  error: null | string;
+  updated_at: number;
 }
