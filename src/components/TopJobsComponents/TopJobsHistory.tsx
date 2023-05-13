@@ -106,7 +106,7 @@ export default function TopJobsHistory() {
                       <td>{hours} h</td>
                     </tr>
                   ))}
-                  <tr className="text-gray-600 dark:text-gray-400">
+                  <tr className="text-gray-600 dark:text-gray-400 odd:bg-kebab-odd even:bg-kebab-even hover:bg-kebab-dk">
                     <td>...</td>
                     <td>{roundFixed(restTop10TwoDays.percentage, 1)}%</td>
                     <td>Other Jobs</td>
@@ -137,7 +137,7 @@ export default function TopJobsHistory() {
                       <td>{hours} h</td>
                     </tr>
                   ))}
-                  <tr className="text-gray-600 dark:text-gray-400">
+                  <tr className="text-gray-600 dark:text-gray-400 odd:bg-kebab-odd even:bg-kebab-even hover:bg-kebab-dk">
                     <td>...</td>
                     <td>{roundFixed(restTop20Month.percentage, 1)}%</td>
                     <td>Other Jobs</td>

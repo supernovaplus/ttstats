@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { VehicleClasses } from '../data/vehicleData';
-import { TopVehicleData, TopVehicleDataState } from '../types/serverTypes';
-import ContentBlock from '../components/ContentBlock';
-import { utcDate } from '../controllers/misc';
+import { VehicleClasses } from '../../data/vehicleData';
+import { TopVehicleData, TopVehicleDataState } from '../../types/serverTypes';
+import ContentBlock from '../../components/ContentBlock';
+import { utcDate } from '../../controllers/misc';
 
-export default function TopVehiclesPage() {
+export default function TopVehiclesLive() {
   const [state, setState] = useState<TopVehicleDataState>({
     loading: true,
     error: null,
