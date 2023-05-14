@@ -222,13 +222,7 @@ export interface EconomyTableState {
 export interface TopJobsHistoryResponse {
   updated_at: number;
   data: {
-    top_20_month: {
-      group_name: string;
-      name: string;
-      hours: number;
-      percentage: number;
-    }[];
-    top_10_two_days: {
+    [key: string]: {
       group_name: string;
       name: string;
       hours: number;
@@ -241,6 +235,25 @@ export interface TopJobsHistoryResponse {
 export interface TopJobsHistoryState {
   loading: boolean;
   data: null | TopJobsHistoryResponse['data'];
+  error: null | string;
+  updated_at: number;
+}
+
+export interface TopVehiclesHistoryResponse {
+  updated_at: number;
+  data: {
+    [key: string]: {
+      name: string;
+      hours: number;
+      percentage: number;
+    }[];
+  };
+  fetch_time: number;
+}
+
+export interface TopVehiclesHistoryState {
+  loading: boolean;
+  data: null | TopVehiclesHistoryResponse['data'];
   error: null | string;
   updated_at: number;
 }

@@ -3,6 +3,7 @@ import ContentBlock from '../components/ContentBlock';
 import { EconomyTableState, EconomyResponse } from '../types/serverTypes';
 import { shortenLargeMoney } from '../controllers/misc';
 import { utcDate } from '../controllers/misc';
+import TimeUpdatedRow from '../components/TimeUpdatedRow';
 
 const DifferenceTab = ({ value, shorten = false }: { value: number; shorten?: boolean }) => {
   if (value > 0) {
@@ -137,7 +138,7 @@ export default function EconomyTablePage() {
               </tbody>
             </table>
           </div>
-          <div className="text-right text-xs mt-4">Updated: {utcDate(state.data.updated_at)}</div>
+          <TimeUpdatedRow updated_at={state.data.updated_at} />
         </div>
       )}
     </ContentBlock>

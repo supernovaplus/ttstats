@@ -3,7 +3,7 @@ import { TopTenDataState, TopTenDataResponse } from '../types/serverTypes';
 import ContentBlock from '../components/ContentBlock';
 import { Routes, Route, useParams } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
-import { utcDate } from '../controllers/misc';
+import TimeUpdatedRow from '../components/TimeUpdatedRow';
 
 // function ProfilePage() {
 //   // Get the userId param from the URL.
@@ -161,7 +161,7 @@ function Board({ state }: { state: TopTenDataState }) {
           ))}
         </tbody>
       </table>
-      <div className="text-right text-xs mt-4">Updated: {utcDate(selectedBoard.updated_at)}</div>
+      <TimeUpdatedRow updated_at={selectedBoard.updated_at} />
     </ContentBlock>
   );
 }

@@ -30,6 +30,7 @@ export const utcDate = (timestamp: number, dateOnly = false): string =>
           day: 'numeric',
           hour: 'numeric',
           minute: 'numeric',
+          second: 'numeric',
           hour12: false,
         })
         .replace(' at', ',') + ' (UTC)'
