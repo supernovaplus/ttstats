@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import ContentBlock from '../components/ContentBlock';
 import { EconomyTableState, EconomyResponse } from '../types/serverTypes';
 import { shortenLargeMoney } from '../controllers/misc';
+import { utcDate } from '../controllers/misc';
+import { TimeUpdatedRow, ErrorRow } from '../components/MiscComponents';
+import { LoadingRow } from '../components/MiscComponents';
 
 const DifferenceTab = ({ value, shorten = false }: { value: number; shorten?: boolean }) => {
   if (value > 0) {
@@ -48,7 +51,7 @@ export default function EconomyTablePage() {
           setState((s) => ({
             ...s,
             loading: false,
-            error: 'Failed to load the economy data',
+            error: 'Loading data failed, try again later.',
           }));
         }
       });
@@ -62,13 +65,13 @@ export default function EconomyTablePage() {
 
   return (
     <ContentBlock title="Economy">
-      {state.loading && <div>Loading...</div>}
-      {state.error && <div>{'Error - ' + state.error}</div>}
+      {state.loading && <LoadingRow />}
+      {state.error && <ErrorRow>{state.error}</ErrorRow>}
       {state.data && state.data.data && (
-        <div>
-          <div className="max-h-[600px] overflow-auto">
+        <>
+          <div className="max-h-[600px] overflow-auto border-2 border-nova-c1 dark:border-nova-c3">
             <table className="text-center w-full text-sm min-w-full lg:resp-table">
-              <thead className="sticky top-0 bg-gray-400 dark:bg-kebab-bg-dm text-center">
+              <thead className="sticky top-0 text-white bg-nova-c1 dark:bg-nova-c3 text-center">
                 <tr>
                   <th>Date</th>
                   <th colSpan={2}>Debt</th>
@@ -90,16 +93,9 @@ export default function EconomyTablePage() {
                   const usersChange = nextRow ? row.users - nextRow.users : 0;
 
                   return (
-                    <tr key={index} className="odd:bg-kebab-odd even:bg-kebab-even">
+                    <tr key={index} className="odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk">
                       <td data-label="Date" className="px-1">
-                        {new Date(row.date).toLocaleString('en-GB', {
-                          timeZone: 'UTC',
-                          weekday: undefined,
-                          year: 'numeric',
-                          month: 'short',
-                          day: 'numeric',
-                          hour12: false,
-                        })}
+                        {utcDate(row.date, true)}
                       </td>
                       <td data-label="Debt" className="text-right">
                         ${shortenLargeMoney(row.debt)}
@@ -143,22 +139,8 @@ export default function EconomyTablePage() {
               </tbody>
             </table>
           </div>
-          <div className="text-right text-xs mt-4">
-            Updated:{' '}
-            {new Date(state.data.updated_at)
-              .toLocaleString('en-GB', {
-                timeZone: 'UTC',
-                weekday: undefined,
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-                hour: 'numeric',
-                minute: 'numeric',
-                hour12: false,
-              })
-              .replace(' at', ',') + ' (UTC)'}
-          </div>
-        </div>
+          <TimeUpdatedRow updated_at={state.data.updated_at} />
+        </>
       )}
     </ContentBlock>
   );

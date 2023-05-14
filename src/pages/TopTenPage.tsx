@@ -1,8 +1,9 @@
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import React, { useState, useEffect } from 'react';
 import { TopTenDataState, TopTenDataResponse } from '../types/serverTypes';
 import ContentBlock from '../components/ContentBlock';
-import { Routes, Route, useParams, useNavigate } from 'react-router-dom';
+import { Routes, Route, useParams } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
+import { TimeUpdatedRow, LoadingRow, ErrorRow } from '../components/MiscComponents';
 
 // function ProfilePage() {
 //   // Get the userId param from the URL.
@@ -12,7 +13,7 @@ import { NavLink } from 'react-router-dom';
 // }
 
 export default function TopTenPage() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   // const navParams = useParams();
   // let { userId } = useParams();
 
@@ -66,7 +67,7 @@ export default function TopTenPage() {
           }));
         }
       });
-      
+
     return () => {
       isSubscribed = false;
     };
@@ -74,25 +75,22 @@ export default function TopTenPage() {
 
   return (
     <>
-      <ContentBlock>
-        <div className="text-center text-lg">Top 10 Leaderboards</div>
-        {state.loading && <div className="p-2 text-center">Loading...</div>}
-        {state.error && (
-          <div className="bg-red-600 p-2 text-center">
-            {state.error === null ? '' : 'Error: ' + state.error}
-          </div>
-        )}
+      <ContentBlock title="Top 10 Leaderboards">
+        {state.loading && <LoadingRow />}
+        {state.error && <ErrorRow>{state.error}</ErrorRow>}
         {state.data && (
           <>
-            <div className="text-sm text-center">Select Top 10 Categories</div>
-            <div className="max-h-52 overflow-y-auto flex flex-col">
+            <div className="text-center dark:bg-nova-c3 select-none text-sm py-1">
+              Select Top 10 Categories
+            </div>
+            <div className="max-h-52 overflow-y-auto flex flex-col border-2 border-nova-c3">
               {state.data.map(({ nice_name, stat_name }, index) => (
                 <NavLink
                   to={`/top10/${stat_name}`}
                   key={index}
                   className={({ isActive }) =>
-                    `odd:bg-kebab-odd even:bg-kebab-even dark:text-white hover:bg-kebab-dk py-1 block text-center select-none ${
-                      isActive ? 'underline' : ''
+                    ` dark:text-white hover:underline py-1 block text-center select-none border-b border-nova-c2 ${
+                      isActive ? 'bg-nova-c1 dark:bg-nova-c2 text-white' : ''
                     }`
                   }>
                   {nice_name}
@@ -129,52 +127,40 @@ function Board({ state }: { state: TopTenDataState }) {
 
   return (
     <ContentBlock title={selectedBoard.nice_name}>
-      <table className="w-full text-center">
-        <thead className="sticky top-0 bg-gray-400 dark:bg-kebab-bg-dm">
-          <tr>
-            <th>#</th>
-            <th>Player</th>
-            <th>Amount</th>
-          </tr>
-        </thead>
-        <tbody>
-          {selectedBoard.json_data.map((row, index2) => (
-            <tr
-              key={index2}
-              className={`odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk ${
-                state.bannedPlayersList.has(row.user_id)
-                  ? 'line-through text-gray-400 dark:text-gray-600'
-                  : ''
-              }`}>
-              <td data-label="# Place">{index2 + 1}</td>
-              <td data-label="Player">
-                {row.username}{' '}
-                <span className={'text-xs bg-gray-400 dark:text-white dark:bg-black p-1 rounded'}>
-                  #{row.user_id}
-                </span>
-              </td>
-              <td data-label="Amount">
-                {selectedBoard.prefix} {row.amount.toLocaleString('en-us')} {selectedBoard.suffix}
-              </td>
+      <div className="border-2 border-nova-c1 dark:border-nova-c3">
+        <table className="w-full text-center">
+          <thead className="sticky top-0 text-white bg-nova-c1 dark:bg-nova-c3 z-0">
+            <tr>
+              <th>#</th>
+              <th>Player</th>
+              <th>Amount</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className="text-right text-xs mt-4">
-        Updated:{' '}
-        {new Date(selectedBoard.updated_at)
-          .toLocaleString('en-GB', {
-            timeZone: 'UTC',
-            weekday: undefined,
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            hour: 'numeric',
-            minute: 'numeric',
-            hour12: false,
-          })
-          .replace(' at', ',') + ' (UTC)'}
+          </thead>
+          <tbody>
+            {selectedBoard.json_data.map((row, index2) => (
+              <tr
+                key={index2}
+                className={`odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk ${
+                  state.bannedPlayersList.has(row.user_id)
+                    ? 'line-through text-gray-400 dark:text-gray-600'
+                    : ''
+                }`}>
+                <td data-label="# Place">{index2 + 1}</td>
+                <td data-label="Player">
+                  {row.username}{' '}
+                  <span className={'text-xs bg-gray-400 dark:text-white dark:bg-black p-1 rounded'}>
+                    #{row.user_id}
+                  </span>
+                </td>
+                <td data-label="Amount">
+                  {selectedBoard.prefix} {row.amount.toLocaleString('en-us')} {selectedBoard.suffix}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
+      <TimeUpdatedRow updated_at={selectedBoard.updated_at} />
     </ContentBlock>
   );
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect, startTransition } from 'react';
 import ContentBlock from '../components/ContentBlock';
-import { shortenLargeMoney } from '../components/Misc';
+import { shortenLargeMoney } from '../controllers/misc';
 
 const localStorageKey = 'ttstats-stacks-price';
 

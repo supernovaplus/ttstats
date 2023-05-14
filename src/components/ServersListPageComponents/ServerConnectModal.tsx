@@ -13,7 +13,7 @@ export default function ServerConnectModal({ server }: { server: ServerDataObjec
       <div>Sometimes connecting doesn't work on first try</div>
       <div>click the link again if that happens</div>
       <div>
-        <a href={generateJoinLink(server)} className="my-2 block px-2 py-1 lnk-btn">
+        <a href={generateJoinLink(server)} className="my-2 block px-2 py-1 lnk-btn bg-nova-c1 text-white dark:bg-nova-c3">
           Connect Again
         </a>
       </div>

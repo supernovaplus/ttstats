@@ -108,7 +108,7 @@ input[type='number'] {
   // odd: 'rgba(0, 0, 0, 0.1)',
   // even: 'rgba(0, 0, 0, 0.05)',
   background-color: rgba(0, 0, 0, 0.2);
-  border-left: 2px solid black;
+  // border-left: 10px solid #12538b;
   // margin-left: -1px;
 
   // text-decoration: underline;
@@ -155,22 +155,3 @@ input[type='number'] {
 //   text-shadow: 1px 1px 1px black;
 // }
 
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8);
-  z-index: 10;
-}
-
-.modal-container {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  max-width: 600px;
-  z-index: 11;
-}
