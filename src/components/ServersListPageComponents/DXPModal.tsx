@@ -1,6 +1,5 @@
 import { ServerDataObject } from '../../types/serverTypes';
 import DXPClock from './DXPClock';
-import ContentBlock from '../ContentBlock';
 
 export default function DXPModal({ server }: { server: ServerDataObject }) {
   return (

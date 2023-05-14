@@ -243,6 +243,7 @@ export interface TopVehiclesHistoryResponse {
   updated_at: number;
   data: {
     [key: string]: {
+      vclass: string;
       name: string;
       hours: number;
       percentage: number;

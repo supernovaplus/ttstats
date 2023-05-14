@@ -16,7 +16,7 @@ export default function ServersListPage() {
     <>
       <ContentBlock title="Transport Tycoon Servers List">
         <table className="w-full text-center dyntable mb-40">
-          <thead>
+          <thead className="bg-nova-opa1">
             <tr className="text-lg">
               <th>Server</th>
               <th>Players</th>
@@ -53,7 +53,9 @@ export default function ServersListPage() {
                 </tr>
                 <tr className={`dark:border-b-black ${trClass}`}>
                   <td data-label="Server" className="w-1/5">
-                    <Modal buttonValue="Connect" buttonProps={{ className: 'lnk-btn w-full m-0' }}>
+                    <Modal
+                      buttonValue="Connect"
+                      buttonProps={{ className: 'lnk-btn w-full m-0 text-black dark:text-white' }}>
                       <ServerConnectModal server={server} />
                     </Modal>
                   </td>
@@ -70,7 +72,7 @@ export default function ServersListPage() {
                           '/' +
                           server.serverData!.limit
                         }
-                        buttonProps={{ className: 'lnk-btn w-full' }}>
+                        buttonProps={{ className: 'lnk-btn w-full m-0 text-black dark:text-white' }}>
                         <PlayersListModal server={server} />
                       </Modal>
                     )}
@@ -82,6 +84,7 @@ export default function ServersListPage() {
                     {isOnline && server.serverData ? (
                       server.apiname ? (
                         <Modal
+                          title={server.name}
                           buttonValue={
                             !server.apiname ? (
                               server.serverData!.uptime
@@ -89,7 +92,7 @@ export default function ServersListPage() {
                               <Uptime time={server.serverData!.uptime} />
                             )
                           }
-                          buttonProps={{ className: 'lnk-btn w-full' }}>
+                          buttonProps={{ className: 'lnk-btn w-full m-0 text-black dark:text-white' }}>
                           <div className="text-center">
                             <div>Servers usually restarts every 18 hours</div>
                             {server.uptimeid && (
@@ -98,7 +101,7 @@ export default function ServersListPage() {
                                   href={`https://uptime.ttstats.eu/report/uptime/${server.uptimeid}/`}
                                   target="_blank"
                                   referrerPolicy="no-referrer"
-                                  className="my-2 block px-2 py-1 lnk-btn">
+                                  className="my-2 block px-2 py-1 lnk-btn bg-nova-c1 text-white dark:bg-nova-c3">
                                   Click here for {server.name} downtime stats
                                 </a>
                               </div>
@@ -115,7 +118,7 @@ export default function ServersListPage() {
                   <td data-label="DXP" className="w-1/5">
                     {isOnline && isDxpActive ? (
                       <Modal
-                        title="DXP INFO"
+                        title="DXP Info"
                         buttonValue={<DXPClock dxp={server.serverData?.dxp} timestamp={server.lastUpdated} />}
                         buttonProps={{ className: 'lnk-btn w-full' }}>
                         <DXPModal server={server} />
@@ -130,7 +133,9 @@ export default function ServersListPage() {
           })}
         </table>
       </ContentBlock>
-      <ContentBlock><Skillboost /></ContentBlock>
+      <ContentBlock>
+        <Skillboost />
+      </ContentBlock>
     </>
   );
 }

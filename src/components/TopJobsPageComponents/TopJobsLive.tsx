@@ -59,7 +59,7 @@ export default function TopJobsLive() {
       <ContentBlock title="Top Jobs Now (Live Data)">
         <div className="text-center max-h-[300px] overflow-y-auto">
           <table className="w-full">
-            <thead className="sticky top-0 bg-gray-400 dark:bg-kebab-bg-dm">
+            <thead className="sticky top-0 text-white bg-nova-c1  dark:bg-nova-c3">
               <tr>
                 <th>%</th>
                 <th>Job Name</th>
@@ -82,7 +82,9 @@ export default function TopJobsLive() {
                       <td data-label="Job Name">{job[0]}</td>
                       <td data-label="Active">{job[1]}</td>
                       <td data-label="Links">
-                        <Link to={encodeURI('/playerfinder?job=' + job[0])} className="lnk-btn">
+                        <Link
+                          to={encodeURI('/playerfinder?job=' + job[0])}
+                          className="lnk-btn text-white bg-nova-c1 dark:bg-nova-c3 px-1 text-sm">
                           Players
                         </Link>
                       </td>
@@ -96,7 +98,7 @@ export default function TopJobsLive() {
       </ContentBlock>
       <ContentBlock title="Top Company Jobs Now (Live Data)">
         <table className="w-full text-center">
-          <thead className="sticky top-0 bg-gray-400 dark:bg-kebab-bg-dm">
+          <thead className="sticky top-0 text-white bg-nova-c1  dark:bg-nova-c3">
             <tr>
               <th>%</th>
               <th>Job Name</th>

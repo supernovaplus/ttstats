@@ -65,7 +65,7 @@ export default function TopVehiclesLive() {
         ) : (
           <div className="max-h-[300px] overflow-y-auto">
             <table className="w-full text-center">
-              <thead className="sticky top-0 bg-gray-400 dark:bg-kebab-bg-dm">
+              <thead className="sticky top-0 text-white bg-nova-c1  dark:bg-nova-c3">
                 <tr>
                   <th>%</th>
                   <th>Name</th>
@@ -106,7 +106,7 @@ export default function TopVehiclesLive() {
             <ErrorRow>{state.error}</ErrorRow>
           ) : (
             <table className="w-full text-center">
-              <thead className="sticky top-0 bg-gray-400 dark:bg-kebab-bg-dm">
+              <thead className="sticky top-0 text-white bg-nova-c1  dark:bg-nova-c3">
                 <tr>
                   <th>%</th>
                   <th>Name</th>

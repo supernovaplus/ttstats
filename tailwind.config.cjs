@@ -58,6 +58,16 @@ module.exports = {
           dk: 'rgba(0, 0, 0, 0.2)',
           btn: '#092d4b',
         },
+        nova: {
+          c1: '#1f2937',
+          c2: '#1a1f26',
+          c3: '#39506d',
+          c4: '#1b2430',
+
+          hov1: '#374151',
+
+          opa1: '#0000001f'
+        }
       },
       transitionProperty: {
         width: 'width',

@@ -80,15 +80,17 @@ export default function TopTenPage() {
         {state.error && <ErrorRow>{state.error}</ErrorRow>}
         {state.data && (
           <>
-            <div className="text-sm text-center">Select Top 10 Categories</div>
-            <div className="max-h-52 overflow-y-auto flex flex-col">
+            <div className="text-center dark:bg-nova-c3 select-none text-sm py-1">
+              Select Top 10 Categories
+            </div>
+            <div className="max-h-52 overflow-y-auto flex flex-col border-2 border-nova-c3">
               {state.data.map(({ nice_name, stat_name }, index) => (
                 <NavLink
                   to={`/top10/${stat_name}`}
                   key={index}
                   className={({ isActive }) =>
-                    `odd:bg-kebab-odd even:bg-kebab-even dark:text-white hover:bg-kebab-dk py-1 block text-center select-none ${
-                      isActive ? 'underline' : ''
+                    ` dark:text-white hover:underline py-1 block text-center select-none border-b border-nova-c2 ${
+                      isActive ? 'bg-nova-c1 dark:bg-nova-c2 text-white' : ''
                     }`
                   }>
                   {nice_name}
@@ -125,37 +127,39 @@ function Board({ state }: { state: TopTenDataState }) {
 
   return (
     <ContentBlock title={selectedBoard.nice_name}>
-      <table className="w-full text-center">
-        <thead className="sticky top-0 bg-gray-400 dark:bg-kebab-bg-dm z-0">
-          <tr>
-            <th>#</th>
-            <th>Player</th>
-            <th>Amount</th>
-          </tr>
-        </thead>
-        <tbody>
-          {selectedBoard.json_data.map((row, index2) => (
-            <tr
-              key={index2}
-              className={`odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk ${
-                state.bannedPlayersList.has(row.user_id)
-                  ? 'line-through text-gray-400 dark:text-gray-600'
-                  : ''
-              }`}>
-              <td data-label="# Place">{index2 + 1}</td>
-              <td data-label="Player">
-                {row.username}{' '}
-                <span className={'text-xs bg-gray-400 dark:text-white dark:bg-black p-1 rounded'}>
-                  #{row.user_id}
-                </span>
-              </td>
-              <td data-label="Amount">
-                {selectedBoard.prefix} {row.amount.toLocaleString('en-us')} {selectedBoard.suffix}
-              </td>
+      <div className="border-2 border-nova-c1 dark:border-nova-c3">
+        <table className="w-full text-center">
+          <thead className="sticky top-0 text-white bg-nova-c1 dark:bg-nova-c3 z-0">
+            <tr>
+              <th>#</th>
+              <th>Player</th>
+              <th>Amount</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {selectedBoard.json_data.map((row, index2) => (
+              <tr
+                key={index2}
+                className={`odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk ${
+                  state.bannedPlayersList.has(row.user_id)
+                    ? 'line-through text-gray-400 dark:text-gray-600'
+                    : ''
+                }`}>
+                <td data-label="# Place">{index2 + 1}</td>
+                <td data-label="Player">
+                  {row.username}{' '}
+                  <span className={'text-xs bg-gray-400 dark:text-white dark:bg-black p-1 rounded'}>
+                    #{row.user_id}
+                  </span>
+                </td>
+                <td data-label="Amount">
+                  {selectedBoard.prefix} {row.amount.toLocaleString('en-us')} {selectedBoard.suffix}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <TimeUpdatedRow updated_at={selectedBoard.updated_at} />
     </ContentBlock>
   );

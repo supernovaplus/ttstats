@@ -32,48 +32,50 @@ export default function HighestIDPage() {
 
   return (
     <ContentBlock title="Highest and lowest player IDs online">
-      <table className="w-full text-center dyntable">
-        <thead className="sticky top-0 bg-gray-400 dark:bg-kebab-bg-dm">
-          <tr>
-            <th>#</th>
-            <th>Server</th>
-            <th>Name</th>
-            <th>ID</th>
-          </tr>
-        </thead>
-        <tbody>
-          {!playersList.length ? (
+      <div className="border-2 border-nova-c1 dark:border-nova-c3">
+        <table className="w-full text-center dyntable">
+          <thead className="sticky top-0 text-white bg-nova-c1  dark:bg-nova-c3">
             <tr>
-              <th></th>
-              <th>No Data</th>
-              <th></th>
+              <th>#</th>
+              <th>Server</th>
+              <th>Name</th>
+              <th>ID</th>
             </tr>
-          ) : (
-            playersList.map((player, index) =>
-              index === 10 ? (
-                <tr
-                  key={index}
-                  className="odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-d select-none">
-                  <td>⠀</td>
-                  <td>⠀</td>
-                  <td>⠀</td>
-                  <td>⠀</td>
-                </tr>
-              ) : (
-                <tr
-                  key={index}
-                  style={index === 0 ? { fontSize: '2em' } : {}}
-                  className="odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk">
-                  <td data-label="# Place">#{player.index}</td>
-                  <td data-label="Server">{player.sname}</td>
-                  <td data-label="Player">{player.name || '?'}</td>
-                  <td data-label="ID">{player.id}</td>
-                </tr>
+          </thead>
+          <tbody>
+            {!playersList.length ? (
+              <tr>
+                <th></th>
+                <th>No Data</th>
+                <th></th>
+              </tr>
+            ) : (
+              playersList.map((player, index) =>
+                index === 10 ? (
+                  <tr
+                    key={index}
+                    className="odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-d select-none">
+                    <td>⠀</td>
+                    <td>⠀</td>
+                    <td>⠀</td>
+                    <td>⠀</td>
+                  </tr>
+                ) : (
+                  <tr
+                    key={index}
+                    style={index === 0 ? { fontSize: '2em' } : {}}
+                    className="odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk">
+                    <td data-label="# Place">#{player.index}</td>
+                    <td data-label="Server">{player.sname}</td>
+                    <td data-label="Player">{player.name || '?'}</td>
+                    <td data-label="ID">{player.id}</td>
+                  </tr>
+                )
               )
-            )
-          )}
-        </tbody>
-      </table>
+            )}
+          </tbody>
+        </table>
+      </div>
     </ContentBlock>
   );
 }

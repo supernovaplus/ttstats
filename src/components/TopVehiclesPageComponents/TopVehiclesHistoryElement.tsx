@@ -45,7 +45,7 @@ export default function TopVehiclesHistoryElement({ state, title, dataKey }: pro
         <>
           <div className="text-center max-h-[300px] overflow-y-auto">
             <table className="w-full text-center">
-              <thead className="sticky top-0 bg-gray-400 dark:bg-kebab-bg-dm">
+              <thead className="sticky top-0 text-white bg-nova-c1  dark:bg-nova-c3">
                 <tr>
                   <th>Place</th>
                   <th>%</th>
@@ -54,11 +54,11 @@ export default function TopVehiclesHistoryElement({ state, title, dataKey }: pro
                 </tr>
               </thead>
               <tbody>
-                {state.data![dataKey].map(({ name, hours, percentage }, index) => (
+                {state.data![dataKey].map(({ name, hours, percentage, vclass }, index) => (
                   <tr key={index} className="odd:bg-kebab-odd even:bg-kebab-even hover:bg-kebab-dk">
                     <td>#{index + 1}</td>
                     <td>{percentage}%</td>
-                    <td>{name}</td>
+                    <td>{name} <span className='inline-block text-sm bg-nova-c1 dark:bg-nova-c3 text-white text-shadow-1 rounded px-1'>{vclass}</span></td>
                     <td>{hours.toLocaleString('en-us')} h</td>
                   </tr>
                 ))}

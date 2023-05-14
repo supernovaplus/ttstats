@@ -131,9 +131,7 @@ export default function PlayerFinderPage() {
             onChange={handleServerSelect}
             value={state.serverSelect}
             className="block w-full p-1 my-1 bg-white cursor-pointer text-black border-5">
-            <option
-              value="All Servers"
-              className="cursor-pointer text-white py-5 dark:bg-kebab-bg-dm border-5">
+            <option value="All Servers" className="cursor-pointer text-white py-5 dark:bg-nova-c1 border-5">
               All Servers
             </option>
             {Object.values(servers).map((server, index) =>
@@ -141,7 +139,7 @@ export default function PlayerFinderPage() {
                 <option
                   key={index}
                   value={server.name}
-                  className="cursor-pointer text-white py-5 dark:bg-kebab-bg-dm border-5">
+                  className="cursor-pointer text-white py-5 dark:bg-nova-c1 border-5">
                   {server.name}
                 </option>
               ) : (
@@ -156,11 +154,11 @@ export default function PlayerFinderPage() {
             onChange={(input) => handleJobSelect(input)}
             value={state.jobSelect}
             className="block w-full p-1 my-1 bg-white cursor-pointer text-black">
-            <option value="All Jobs" className="cursor-pointer text-white py-5 dark:bg-kebab-bg-dm">
+            <option value="All Jobs" className="cursor-pointer text-white py-5 dark:bg-nova-c1">
               All Jobs
             </option>
             {jobList.map((job, index) => (
-              <option key={index} value={job} className="cursor-pointer text-white py-5 dark:bg-kebab-bg-dm">
+              <option key={index} value={job} className="cursor-pointer text-white py-5 dark:bg-nova-c1">
                 {job}
               </option>
             ))}
@@ -172,7 +170,7 @@ export default function PlayerFinderPage() {
             e.preventDefault();
             handlePlayerFinderSubmit();
           }}
-          className="cursor-pointer p-2 px-5 active:bg-slate-500 bg-gray-600 dark:bg-kebab-btn text-white btn-lnk active:bg-kebab-dk">
+          className="cursor-pointer p-2 px-5 text-white lnk-btn bg-nova-c1 dark:bg-nova-c3">
           search
         </button>
       </form>
@@ -181,9 +179,9 @@ export default function PlayerFinderPage() {
         {state.playerFinderMessages}
       </div>
 
-      <div className="w-full overflow-y-auto max-h-[500px] shadow-lg">
+      <div className="w-full overflow-y-auto max-h-[500px] shadow-lg border-2 border-nova-c1 dark:border-nova-c3">
         <table className="w-full text-center dyntable">
-          <thead className="sticky top-0 bg-gray-400 dark:bg-kebab-bg-dm">
+          <thead className="sticky top-0 text-white bg-nova-c1  dark:bg-nova-c3">
             <tr>
               <th className="w-1">#</th>
               <th className="w-1/3">Name</th>
@@ -195,7 +193,7 @@ export default function PlayerFinderPage() {
             {state.playerFinderFound.length === 0 ? (
               <tr>
                 <td>-</td>
-                <td>N/A</td>
+                <td className='p-2 block'>N/A</td>
                 <td>N/A</td>
                 <td>N/A</td>
               </tr>
@@ -227,7 +225,7 @@ export default function PlayerFinderPage() {
                     <a
                       href={generateJoinLink(pData.server)}
                       title={`Connect to ${pData.server.sname}`}
-                      className="lnk-btn">
+                      className="lnk-btn text-sm bg-nova-c1 dark:bg-nova-c3 text-white px-2">
                       Join
                     </a>
                   </td>

@@ -37,7 +37,7 @@ export default function TopJobHistoryElement({ state, title, dataKey }: props) {
     <>
       {state.loading && (
         <ContentBlock title={title}>
-          <div className="text-center flex justify-center items-center" style={{ height: '386px' }}>
+          <div className="text-center flex justify-center items-center" style={{ height: '375px' }}>
             Loading
           </div>
         </ContentBlock>
@@ -47,7 +47,7 @@ export default function TopJobHistoryElement({ state, title, dataKey }: props) {
         <ContentBlock title={title}>
           <div className="text-center max-h-[300px] overflow-y-auto">
             <table className="w-full text-center">
-              <thead className="sticky top-0 bg-gray-400 dark:bg-kebab-bg-dm">
+              <thead className="sticky top-0 text-white bg-nova-c1  dark:bg-nova-c3">
                 <tr>
                   <th>Place</th>
                   <th>%</th>

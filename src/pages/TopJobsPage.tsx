@@ -1,5 +1,5 @@
-import TopJobsHistory from '../components/TopJobsComponents/TopJobsHistory';
-import TopJobsLive from '../components/TopJobsComponents/TopJobsLive';
+import TopJobsHistory from '../components/TopJobsPageComponents/TopJobsHistory';
+import TopJobsLive from '../components/TopJobsPageComponents/TopJobsLive';
 
 export default function TopJobsPage() {
   return (

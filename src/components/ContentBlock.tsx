@@ -8,18 +8,12 @@ interface props {
 export default function ContentBlock({ title, children }: props) {
   return (
     <>
-      <div className="shadow-lg">
+      <div className='box-shadow-1 mb-3'>
         {title && (
           <>
-            <div className="relative text-lg font-bold dark:bg-kebab-bg-dm bg-gray-300 dark:text-white text-center before:w-3 pb-6 mt-4">
-            {/* <div className="relative text-lg p-2 font-bold dark:bg-kebab-bg-dm bg-gray-300 dark:text-white text-center border-b border-gray-400 dark:border-black dark: shadow-lg before:w-3"> */}
-              {/* <div className="h-1 bg-gray-300"></div> */}
-              {/* <div className="absolute left-0 right-0 h-[2px] bg-gray-700" style={{"top": "15px"}}></div> */}
-              {/* <div className="absolute left-0 right-0 h-[1px] bg-black" style={{"top": "20px"}}></div> */}
-              {/* <div className="absolute left-0 right-0 h-[2px] bg-white border-b border-black" style={{"top": "16px"}}></div> */}
-              <div className="abs-center text-white inline-block px-3 bg-gray-800 text-shadow-1 md:w-full box-shadow-1 text-shadow-1" style={{"marginTop": "-10px"}}>{title}</div>
-              
-              {/* <div className="relative z-2 dark:bg-kebab-bg-dm bg-gray-300 inline-block px-2">{title}</div> */}
+            <div className="text-lg font-bold  dark:text-white text-center before:w-3 text-shadow-1 text-white px-3 bg-nova-c1 dark:bg-nova-c2 pt-1">
+              {/* <div className="text-white inline-block px-3 bg-nova-c1 dark:bg-nova-c2 text-shadow-1 w-full box-shadow-1 text-shadow-1">/div> */}
+              {title}
             </div>
 
             {/* <div className="text-lg p-2 font-bold dark:bg-kebab-bg-dm bg-gray-300 dark:text-white text-center border-b border-gray-400 dark:border-black dark: shadow-lg before:w-3"> */}
@@ -30,7 +24,7 @@ export default function ContentBlock({ title, children }: props) {
           </>
         )}
         {children && (
-          <article className="p-2 bg-gray-300 dark:bg-kebab-bg-dm text-black dark:text-white dark:shdw mb-1 shadow-lg border-b border-black">
+          <article className="p-2 bg-gray-300 dark:bg-nova-c1 text-black dark:text-white border-2 border-nova-c1 dark:border-nova-c2">
             {children}
           </article>
         )}
