@@ -28,16 +28,17 @@
     padding: 2px;
     // border-left-color: rgba(255, 255, 255, 0.084);
     // margin: 5px;
-    box-shadow: 2px 2px 1px black;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.693);
     // border-color: rgba(255, 255, 255, 0.076);
   }
 
   .dark .lnk-btn {
+    box-shadow: 2px 2px 1px black;
     border-color: rgba(255, 255, 255, 0.076);
   }
 
   .lnk-btn:hover {
-    box-shadow: inset 1px 1px 1px rgb(0, 0, 0);
+    box-shadow: inset 1px 1px 3px rgb(0, 0, 0);
   }
 
   .dark .lnk-btn:hover {

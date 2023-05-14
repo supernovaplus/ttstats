@@ -55,7 +55,7 @@ export default function ServersListPage() {
                   <td data-label="Server" className="w-1/5">
                     <Modal
                       buttonValue="Connect"
-                      buttonProps={{ className: 'lnk-btn w-full m-0 text-black dark:text-white' }}>
+                      buttonProps={{ className: 'lnk-btn w-full m-0' }}>
                       <ServerConnectModal server={server} />
                     </Modal>
                   </td>
@@ -72,7 +72,7 @@ export default function ServersListPage() {
                           '/' +
                           server.serverData!.limit
                         }
-                        buttonProps={{ className: 'lnk-btn w-full m-0 text-black dark:text-white' }}>
+                        buttonProps={{ className: 'lnk-btn w-full m-0' }}>
                         <PlayersListModal server={server} />
                       </Modal>
                     )}
@@ -92,7 +92,7 @@ export default function ServersListPage() {
                               <Uptime time={server.serverData!.uptime} />
                             )
                           }
-                          buttonProps={{ className: 'lnk-btn w-full m-0 text-black dark:text-white' }}>
+                          buttonProps={{ className: 'lnk-btn w-full m-0' }}>
                           <div className="text-center">
                             <div>Servers usually restarts every 18 hours</div>
                             {server.uptimeid && (
