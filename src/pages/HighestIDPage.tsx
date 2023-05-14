@@ -31,7 +31,7 @@ export default function HighestIDPage() {
   }
 
   return (
-    <ContentBlock title="Highest and lowest player IDs currently online">
+    <ContentBlock title="Highest and lowest player IDs online">
       <table className="w-full text-center dyntable">
         <thead className="sticky top-0 bg-gray-400 dark:bg-kebab-bg-dm">
           <tr>

@@ -204,7 +204,7 @@ export default function PlayerFinderPage() {
                 <tr key={index} className="odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk">
                   <td data-label="#">#{index + 1}</td>
                   <td data-label="Player">
-                    <span className='break-all'>{pData.player[0]}</span>{' '}
+                    <span className="break-all">{pData.player[0]}</span>{' '}
                     {!!pData.player[2] && (
                       <span className={'text-xs bg-gray-400 dark:text-white dark:bg-black p-1 rounded'}>
                         #{pData.player[2]}
@@ -224,7 +224,10 @@ export default function PlayerFinderPage() {
                   <td data-label="Job">{pData.player[5] || '-'}</td>
                   <td data-label="Server">
                     {pData.server.sname}{' '}
-                    <a href={generateJoinLink(pData.server)} title="Connect" className="lnk-btn">
+                    <a
+                      href={generateJoinLink(pData.server)}
+                      title={`Connect to ${pData.server.sname}`}
+                      className="lnk-btn">
                       Join
                     </a>
                   </td>

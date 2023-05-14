@@ -3,7 +3,8 @@ import ContentBlock from '../components/ContentBlock';
 import { EconomyTableState, EconomyResponse } from '../types/serverTypes';
 import { shortenLargeMoney } from '../controllers/misc';
 import { utcDate } from '../controllers/misc';
-import TimeUpdatedRow from '../components/TimeUpdatedRow';
+import { TimeUpdatedRow, ErrorRow } from '../components/MiscComponents';
+import { LoadingRow } from '../components/MiscComponents';
 
 const DifferenceTab = ({ value, shorten = false }: { value: number; shorten?: boolean }) => {
   if (value > 0) {
@@ -50,7 +51,7 @@ export default function EconomyTablePage() {
           setState((s) => ({
             ...s,
             loading: false,
-            error: 'Failed to load the economy data',
+            error: 'Loading data failed, try again later.',
           }));
         }
       });
@@ -64,10 +65,10 @@ export default function EconomyTablePage() {
 
   return (
     <ContentBlock title="Economy">
-      {state.loading && <div>Loading...</div>}
-      {state.error && <div>{'Error - ' + state.error}</div>}
+      {state.loading && <LoadingRow />}
+      {state.error && <ErrorRow>{state.error}</ErrorRow>}
       {state.data && state.data.data && (
-        <div>
+        <>
           <div className="max-h-[600px] overflow-auto">
             <table className="text-center w-full text-sm min-w-full lg:resp-table">
               <thead className="sticky top-0 bg-gray-400 dark:bg-kebab-bg-dm text-center">
@@ -139,7 +140,7 @@ export default function EconomyTablePage() {
             </table>
           </div>
           <TimeUpdatedRow updated_at={state.data.updated_at} />
-        </div>
+        </>
       )}
     </ContentBlock>
   );

@@ -39,7 +39,7 @@ export default function Sidebar() {
   return (
     <>
       <button
-        className="w-[70px] h-[60px] fixed top-0 left-0 items-center z-12 hidden md:block rounded-br-lg bg-white text-black dark:text-white dark:bg-black "
+        className="w-[70px] h-[60px] fixed top-0 left-0 items-center z-15 hidden md:block rounded-br-lg bg-white text-black dark:text-white dark:bg-black "
         onClick={toggleMenu}>
         Menu
       </button>

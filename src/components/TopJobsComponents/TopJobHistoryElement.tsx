@@ -1,7 +1,7 @@
 import ContentBlock from '../ContentBlock';
 import { TopJobsHistoryState } from '../../types/serverTypes';
 import { roundFixed } from '../../controllers/misc';
-import TimeUpdatedRow from '../TimeUpdatedRow';
+import { TimeUpdatedRow } from '../MiscComponents';
 
 type props = {
   state: TopJobsHistoryState;
@@ -36,13 +36,13 @@ export default function TopJobHistoryElement({ state, title, dataKey }: props) {
   return (
     <>
       {state.loading && (
-        <ContentBlock>
+        <ContentBlock title={title}>
           <div className="text-center flex justify-center items-center" style={{ height: '386px' }}>
             Loading
           </div>
         </ContentBlock>
       )}
-      {state.error && <ContentBlock>Error: {state.error}</ContentBlock>}
+      {state.error && <ContentBlock title={title}>Error: {state.error}</ContentBlock>}
       {dataExists && (
         <ContentBlock title={title}>
           <div className="text-center max-h-[300px] overflow-y-auto">

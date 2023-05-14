@@ -3,7 +3,7 @@ import { TopTenDataState, TopTenDataResponse } from '../types/serverTypes';
 import ContentBlock from '../components/ContentBlock';
 import { Routes, Route, useParams } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
-import TimeUpdatedRow from '../components/TimeUpdatedRow';
+import { TimeUpdatedRow, LoadingRow, ErrorRow } from '../components/MiscComponents';
 
 // function ProfilePage() {
 //   // Get the userId param from the URL.
@@ -75,14 +75,9 @@ export default function TopTenPage() {
 
   return (
     <>
-      <ContentBlock>
-        <div className="text-center text-lg">Top 10 Leaderboards</div>
-        {state.loading && <div className="p-2 text-center">Loading...</div>}
-        {state.error && (
-          <div className="bg-red-600 p-2 text-center">
-            {state.error === null ? '' : 'Error: ' + state.error}
-          </div>
-        )}
+      <ContentBlock title="Top 10 Leaderboards">
+        {state.loading && <LoadingRow />}
+        {state.error && <ErrorRow>{state.error}</ErrorRow>}
         {state.data && (
           <>
             <div className="text-sm text-center">Select Top 10 Categories</div>
@@ -131,7 +126,7 @@ function Board({ state }: { state: TopTenDataState }) {
   return (
     <ContentBlock title={selectedBoard.nice_name}>
       <table className="w-full text-center">
-        <thead className="sticky top-0 bg-gray-400 dark:bg-kebab-bg-dm">
+        <thead className="sticky top-0 bg-gray-400 dark:bg-kebab-bg-dm z-0">
           <tr>
             <th>#</th>
             <th>Player</th>

@@ -25,7 +25,7 @@ export default function TopVehiclesHistory() {
       .catch((err) => {
         console.error(err);
         if (isSubscribed) {
-          setState({ loading: false, data: null, error: 'Failed to load the data', updated_at: 0 });
+          setState({ loading: false, data: null, error: 'Loading data failed, try again later.', updated_at: 0 });
         }
       });
 

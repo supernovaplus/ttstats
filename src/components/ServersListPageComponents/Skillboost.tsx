@@ -30,5 +30,5 @@ export default function Skillboost() {
     };
   }, []);
 
-  return <h3>Current skill boost: {state || '?'}</h3>;
+  return <div className='text-center text-lg'>Current skill boost: {state || '?'}</div>;
 }

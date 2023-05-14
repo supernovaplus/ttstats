@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { VehicleClasses } from '../../data/vehicleData';
 import { TopVehicleData, TopVehicleDataState } from '../../types/serverTypes';
 import ContentBlock from '../../components/ContentBlock';
-import { utcDate } from '../../controllers/misc';
-import TimeUpdatedRow from '../TimeUpdatedRow';
+import { ErrorRow, TimeUpdatedRow, LoadingRow } from '../MiscComponents';
 
 export default function TopVehiclesLive() {
   const [state, setState] = useState<TopVehicleDataState>({
@@ -24,23 +23,24 @@ export default function TopVehiclesLive() {
     fetch('https://d.ttstats.eu/vehicles', { signal })
       .then((res) => res.json())
       .then((res: TopVehicleData) => {
-        if (res && res.timestamp > 0) {
-          if (isSubscribed) {
-            setState((s) => ({
-              ...s,
-              error: null,
-              timestamp: res.timestamp,
-              total_vehicles: res.sorted_vehicles!.reduce((acc, v) => acc + v[1], 0),
-              total_classes: res.sorted_classes!.reduce((acc, v) => acc + v[1], 0),
-              sorted_vehicles: res.sorted_vehicles,
-              sorted_classes: res.sorted_classes,
-              loading: false,
-            }));
-          }
-        } else {
-          if (isSubscribed) {
-            setState((s) => ({ ...s, error: 'Loading data failed, try again later.', loading: false }));
-          }
+        if (
+          !res ||
+          !res.timestamp ||
+          !Object.prototype.hasOwnProperty.call(res, 'sorted_classes') ||
+          !Object.prototype.hasOwnProperty.call(res, 'sorted_vehicles')
+        )
+          throw new Error('No data');
+        if (isSubscribed) {
+          setState((s) => ({
+            ...s,
+            error: null,
+            timestamp: res.timestamp,
+            total_vehicles: res.sorted_vehicles!.reduce((acc, v) => acc + v[1], 0),
+            total_classes: res.sorted_classes!.reduce((acc, v) => acc + v[1], 0),
+            sorted_vehicles: res.sorted_vehicles,
+            sorted_classes: res.sorted_classes,
+            loading: false,
+          }));
         }
       })
       .catch((err) => {
@@ -59,9 +59,9 @@ export default function TopVehiclesLive() {
     <>
       <ContentBlock title="Top Vehicles Now">
         {state.loading ? (
-          <div>Loading...</div>
+          <LoadingRow />
         ) : state.error ? (
-          <div>{state.error === null ? '' : 'Error - ' + state.error}</div>
+          <ErrorRow>{state.error}</ErrorRow>
         ) : (
           <div className="max-h-[300px] overflow-y-auto">
             <table className="w-full text-center">
@@ -103,9 +103,7 @@ export default function TopVehiclesLive() {
           {state.loading ? (
             <div className="text-center">Loading...</div>
           ) : state.error ? (
-            <div className="bg-red-600 p-2 text-center">
-              {state.error === null ? '' : 'Error: ' + state.error}
-            </div>
+            <ErrorRow>{state.error}</ErrorRow>
           ) : (
             <table className="w-full text-center">
               <thead className="sticky top-0 bg-gray-400 dark:bg-kebab-bg-dm">

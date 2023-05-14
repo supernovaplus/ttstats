@@ -1,7 +1,7 @@
 import ContentBlock from '../ContentBlock';
 import { TopVehiclesHistoryState } from '../../types/serverTypes';
 import { roundFixed } from '../../controllers/misc';
-import TimeUpdatedRow from '../TimeUpdatedRow';
+import { TimeUpdatedRow, ErrorRow } from '../MiscComponents';
 
 type props = {
   state: TopVehiclesHistoryState;
@@ -34,17 +34,15 @@ export default function TopVehiclesHistoryElement({ state, title, dataKey }: pro
   }
 
   return (
-    <>
+    <ContentBlock title={title}>
       {state.loading && (
-        <ContentBlock>
-          <div className="text-center flex justify-center items-center" style={{ height: '386px' }}>
-            Loading
-          </div>
-        </ContentBlock>
+        <div className="text-center flex justify-center items-center" style={{ height: '386px' }}>
+          Loading
+        </div>
       )}
-      {state.error && <ContentBlock>Error: {state.error}</ContentBlock>}
+      {state.error && <ErrorRow>{state.error}</ErrorRow>}
       {dataExists && (
-        <ContentBlock title={title}>
+        <>
           <div className="text-center max-h-[300px] overflow-y-auto">
             <table className="w-full text-center">
               <thead className="sticky top-0 bg-gray-400 dark:bg-kebab-bg-dm">
@@ -74,8 +72,8 @@ export default function TopVehiclesHistoryElement({ state, title, dataKey }: pro
             </table>
           </div>
           <TimeUpdatedRow updated_at={state.updated_at} />
-        </ContentBlock>
+        </>
       )}
-    </>
+    </ContentBlock>
   );
 }

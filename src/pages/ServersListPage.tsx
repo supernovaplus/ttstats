@@ -130,7 +130,7 @@ export default function ServersListPage() {
           })}
         </table>
       </ContentBlock>
-      <ContentBlock title={<Skillboost />} />
+      <ContentBlock><Skillboost /></ContentBlock>
     </>
   );
 }
