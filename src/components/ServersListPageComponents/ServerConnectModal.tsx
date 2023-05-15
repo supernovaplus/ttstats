@@ -9,7 +9,6 @@ export default function ServerConnectModal({ server }: { server: ServerDataObjec
 
   return (
     <div className="text-center flex flex-col">
-      <div>Joining {server.name}</div>
       <div>Sometimes connecting doesn't work on first try</div>
       <div>click the link again if that happens</div>
       <div>

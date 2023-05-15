@@ -80,10 +80,10 @@ export default function TopTenPage() {
         {state.error && <ErrorRow>{state.error}</ErrorRow>}
         {state.data && (
           <>
-            <div className="text-center dark:bg-nova-c3 select-none text-sm py-1">
+            <div className="text-center bg-nova-c1 text-white dark:bg-nova-c3 select-none text-sm py-1">
               Select Top 10 Categories
             </div>
-            <div className="max-h-52 overflow-y-auto flex flex-col border-2 border-nova-c3">
+            <div className="max-h-52 overflow-y-auto flex flex-col border-b-2 border-nova-c1 dark:border-nova-c3 box-shadow-1">
               {state.data.map(({ nice_name, stat_name }, index) => (
                 <NavLink
                   to={`/top10/${stat_name}`}
@@ -127,7 +127,7 @@ function Board({ state }: { state: TopTenDataState }) {
 
   return (
     <ContentBlock title={selectedBoard.nice_name}>
-      <div className="border-2 border-nova-c1 dark:border-nova-c3">
+      <div className=" border-b-2 border-nova-c1 dark:border-nova-c3">
         <table className="w-full text-center">
           <thead className="sticky top-0 text-white bg-nova-c1 dark:bg-nova-c3 z-0">
             <tr>
@@ -148,7 +148,7 @@ function Board({ state }: { state: TopTenDataState }) {
                 <td data-label="# Place">{index2 + 1}</td>
                 <td data-label="Player">
                   {row.username}{' '}
-                  <span className={'text-xs bg-gray-400 dark:text-white dark:bg-black p-1 rounded'}>
+                  <span className={'text-xs bg-gray-400 dark:text-white dark:bg-nova-c3 p-1 rounded'}>
                     #{row.user_id}
                   </span>
                 </td>

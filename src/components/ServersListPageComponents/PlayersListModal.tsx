@@ -6,7 +6,7 @@ export default function PlayersListModal({ server }: { server: ServerDataObject 
       {!server.playersData || !server.playersData.length ? (
         <div>No Players</div>
       ) : (
-        <div className="overflow-y-auto" style={{ maxHeight: '80vh' }}>
+        <div className="overflow-y-auto border-b-2 border-nova-c1 dark:border-nova-c3 box-shadow-1" style={{ maxHeight: '80vh' }}>
           <table className="w-full">
             <thead className="sticky top-0 text-white bg-nova-c1 dark:bg-nova-c3 z-1">
               <tr>
@@ -42,19 +42,19 @@ export default function PlayersListModal({ server }: { server: ServerDataObject 
                   <td data-label="Name #ID">
                     {player[0]}{' '}
                     {!!player[2] && (
-                      <span className={'text-xs bg-gray-400 dark:text-white dark:bg-black p-1 rounded'}>
+                      <span className={'text-xs bg-nova-c1 text-white dark:bg-nova-c3 p-1 rounded text-shadow-1'}>
                         #{player[2]}
                       </span>
                     )}
                     {player[4] && (
-                      <span className={'p-1 bg-red-800 ml-1 rounded text-xs text-white select-none'}>
+                      <span className={'p-1 bg-red-800 ml-1 rounded text-xs text-white select-none text-shadow-1'}>
                         Staff
                       </span>
                     )}
                     {player[6] && (
                       <span
                         className={
-                          'bg-orange-700 p-1 rounded ml-1 text-xs text-black dark:text-white select-none'
+                          'bg-orange-700 p-1 rounded ml-1 text-xs text-white select-none text-shadow-1'
                         }>
                         Donator
                       </span>

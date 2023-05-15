@@ -43,13 +43,13 @@ export default function TopVehiclesHistoryElement({ state, title, dataKey }: pro
       {state.error && <ErrorRow>{state.error}</ErrorRow>}
       {dataExists && (
         <>
-          <div className="text-center max-h-[300px] overflow-y-auto">
+          <div className="text-center max-h-[300px] overflow-y-auto border-b-2 border-nova-c1 dark:border-nova-c3 box-shadow-1">
             <table className="w-full text-center">
               <thead className="sticky top-0 text-white bg-nova-c1  dark:bg-nova-c3">
                 <tr>
                   <th>Place</th>
                   <th>%</th>
-                  <th>Vehicle</th>
+                  <th>Vehicle / Class</th>
                   <th>Hours</th>
                 </tr>
               </thead>
@@ -58,7 +58,12 @@ export default function TopVehiclesHistoryElement({ state, title, dataKey }: pro
                   <tr key={index} className="odd:bg-kebab-odd even:bg-kebab-even hover:bg-kebab-dk">
                     <td>#{index + 1}</td>
                     <td>{percentage}%</td>
-                    <td>{name} <span className='inline-block text-sm bg-nova-c1 dark:bg-nova-c3 text-white text-shadow-1 rounded px-1'>{vclass}</span></td>
+                    <td>
+                      {name}{' '}
+                      <span className="inline-block text-xs bg-nova-c1 dark:bg-nova-c3 text-white text-shadow-1 rounded px-1">
+                        {vclass}
+                      </span>
+                    </td>
                     <td>{hours.toLocaleString('en-us')} h</td>
                   </tr>
                 ))}

@@ -54,6 +54,7 @@ export default function ServersListPage() {
                 <tr className={`dark:border-b-black ${trClass}`}>
                   <td data-label="Server" className="w-1/5">
                     <Modal
+                      title={`Joining ${server.name}`}
                       buttonValue="Connect"
                       buttonProps={{ className: 'lnk-btn w-full m-0' }}>
                       <ServerConnectModal server={server} />

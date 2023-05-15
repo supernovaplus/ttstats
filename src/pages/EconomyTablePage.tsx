@@ -69,7 +69,7 @@ export default function EconomyTablePage() {
       {state.error && <ErrorRow>{state.error}</ErrorRow>}
       {state.data && state.data.data && (
         <>
-          <div className="max-h-[600px] overflow-auto border-2 border-nova-c1 dark:border-nova-c3">
+          <div className="max-h-[600px] overflow-auto border-b-2 border-nova-c1 dark:border-nova-c3 box-shadow-1">
             <table className="text-center w-full text-sm min-w-full lg:resp-table">
               <thead className="sticky top-0 text-white bg-nova-c1 dark:bg-nova-c3 text-center">
                 <tr>
