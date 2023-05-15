@@ -179,7 +179,7 @@ export default function PlayerFinderPage() {
         {state.playerFinderMessages}
       </div>
 
-      <div className="w-full overflow-y-auto max-h-[500px] shadow-lg border-2 border-nova-c1 dark:border-nova-c3">
+      <div className="w-full overflow-y-auto max-h-[500px] box-shadow-1 border-b-2 border-nova-c1 dark:border-nova-c3">
         <table className="w-full text-center dyntable">
           <thead className="sticky top-0 text-white bg-nova-c1  dark:bg-nova-c3">
             <tr>
@@ -204,17 +204,17 @@ export default function PlayerFinderPage() {
                   <td data-label="Player">
                     <span className="break-all">{pData.player[0]}</span>{' '}
                     {!!pData.player[2] && (
-                      <span className={'text-xs bg-gray-400 dark:text-white dark:bg-black p-1 rounded'}>
+                      <span className={'text-xs bg-nova-c1  dark:bg-nova-c3 text-white p-1 rounded text-shadow-1'}>
                         #{pData.player[2]}
                       </span>
                     )}
                     {pData.player[4] && (
-                      <span className={'p-1 bg-red-800 ml-1 rounded text-xs text-white select-none'}>
+                      <span className={'p-1 bg-red-800 ml-1 rounded text-xs text-white select-none text-shadow-1'}>
                         Staff
                       </span>
                     )}
                     {pData.player[6] && (
-                      <span className={'bg-orange-700 p-1 rounded ml-1 text-xs text-white select-none'}>
+                      <span className={'bg-orange-700 p-1 rounded ml-1 text-xs text-white select-none text-shadow-1'}>
                         Donator
                       </span>
                     )}

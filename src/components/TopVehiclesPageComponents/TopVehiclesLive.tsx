@@ -63,7 +63,7 @@ export default function TopVehiclesLive() {
         ) : state.error ? (
           <ErrorRow>{state.error}</ErrorRow>
         ) : (
-          <div className="max-h-[300px] overflow-y-auto">
+          <div className="max-h-[300px] overflow-y-auto border-b-2 border-nova-c1 dark:border-nova-c3 box-shadow-1">
             <table className="w-full text-center">
               <thead className="sticky top-0 text-white bg-nova-c1  dark:bg-nova-c3">
                 <tr>
@@ -99,7 +99,7 @@ export default function TopVehiclesLive() {
         <TimeUpdatedRow updated_at={state.timestamp} />
       </ContentBlock>
       <ContentBlock title="Top Vehicle Classes Now">
-        <div className="max-h-[300px] overflow-y-auto">
+        <div className="max-h-[300px] overflow-y-auto border-b-2 border-nova-c1 dark:border-nova-c3 box-shadow-1">
           {state.loading ? (
             <div className="text-center">Loading...</div>
           ) : state.error ? (

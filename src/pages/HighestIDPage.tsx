@@ -32,9 +32,9 @@ export default function HighestIDPage() {
 
   return (
     <ContentBlock title="Highest and lowest player IDs online">
-      <div className="border-2 border-nova-c1 dark:border-nova-c3">
+      <div className="border-b-2 border-nova-c1 dark:border-nova-c3 box-shadow-1">
         <table className="w-full text-center dyntable">
-          <thead className="sticky top-0 text-white bg-nova-c1  dark:bg-nova-c3">
+          <thead className="sticky top-0 text-white bg-nova-c1 dark:bg-nova-c3">
             <tr>
               <th>#</th>
               <th>Server</th>

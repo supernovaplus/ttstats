@@ -45,7 +45,7 @@ export default function TopJobHistoryElement({ state, title, dataKey }: props) {
       {state.error && <ContentBlock title={title}>Error: {state.error}</ContentBlock>}
       {dataExists && (
         <ContentBlock title={title}>
-          <div className="text-center max-h-[300px] overflow-y-auto">
+          <div className="text-center max-h-[300px] overflow-y-auto border-b-2 border-nova-c1 dark:border-nova-c3 box-shadow-1">
             <table className="w-full text-center">
               <thead className="sticky top-0 text-white bg-nova-c1  dark:bg-nova-c3">
                 <tr>

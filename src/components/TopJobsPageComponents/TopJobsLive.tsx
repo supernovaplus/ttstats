@@ -57,7 +57,7 @@ export default function TopJobsLive() {
   return (
     <>
       <ContentBlock title="Top Jobs Now (Live Data)">
-        <div className="text-center max-h-[300px] overflow-y-auto">
+        <div className="text-center max-h-[300px] overflow-y-auto border-b-2 border-nova-c1 dark:border-nova-c3 box-shadow-1">
           <table className="w-full">
             <thead className="sticky top-0 text-white bg-nova-c1  dark:bg-nova-c3">
               <tr>
@@ -97,34 +97,36 @@ export default function TopJobsLive() {
         </div>
       </ContentBlock>
       <ContentBlock title="Top Company Jobs Now (Live Data)">
-        <table className="w-full text-center">
-          <thead className="sticky top-0 text-white bg-nova-c1  dark:bg-nova-c3">
-            <tr>
-              <th>%</th>
-              <th>Job Name</th>
-              <th>Active</th>
-            </tr>
-          </thead>
-          <tbody>
-            {companyJobsState.counter === 0 ? (
+        <div className="border-b-2 border-nova-c1 dark:border-nova-c3 box-shadow-1">
+          <table className="w-full text-center">
+            <thead className="sticky top-0 text-white bg-nova-c1  dark:bg-nova-c3">
               <tr>
-                <td>-</td>
-                <td>No Data</td>
-                <td>N/A</td>
+                <th>%</th>
+                <th>Job Name</th>
+                <th>Active</th>
               </tr>
-            ) : (
-              companyJobsState.entries.map((job, index) => {
-                return (
-                  <tr key={index} className="odd:bg-kebab-odd even:bg-kebab-even hover:bg-kebab-dk">
-                    <td data-label="%">{Number((job[1] / companyJobsState.counter) * 100).toFixed(1)}%</td>
-                    <td data-label="Job Name">{job[0]}</td>
-                    <td data-label="Active">{job[1]}</td>
-                  </tr>
-                );
-              })
-            )}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {companyJobsState.counter === 0 ? (
+                <tr>
+                  <td>-</td>
+                  <td>No Data</td>
+                  <td>N/A</td>
+                </tr>
+              ) : (
+                companyJobsState.entries.map((job, index) => {
+                  return (
+                    <tr key={index} className="odd:bg-kebab-odd even:bg-kebab-even hover:bg-kebab-dk">
+                      <td data-label="%">{Number((job[1] / companyJobsState.counter) * 100).toFixed(1)}%</td>
+                      <td data-label="Job Name">{job[0]}</td>
+                      <td data-label="Active">{job[1]}</td>
+                    </tr>
+                  );
+                })
+              )}
+            </tbody>
+          </table>
+        </div>
       </ContentBlock>
     </>
   );
