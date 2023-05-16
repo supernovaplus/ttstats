@@ -21,7 +21,7 @@ export default function StacksCalculatorPage() {
 
   //if any value changed, calculate the price with a delay
   useEffect(() => {
-    let subStatus = { subscribed: true };
+    let isSubscribed = true;
     //calculate the total price
     const calculateAmountTimeout = window.setTimeout(() => {
       try {
@@ -40,21 +40,21 @@ export default function StacksCalculatorPage() {
           if (amount) {
             startTransition(() => {
               const fullAmount = parseFloat(amount) * multiplier * (parseInt(singleStackPrice) || 0);
-              if (subStatus.subscribed) setResult(Math.round(fullAmount));
+              if (isSubscribed) setResult(Math.round(fullAmount));
             });
           } else {
-            if (subStatus.subscribed) setResult(0);
+            if (isSubscribed) setResult(0);
           }
         } else {
-          if (subStatus.subscribed) setResult(0);
+          if (isSubscribed) setResult(0);
         }
       } catch (err) {
-        if (subStatus.subscribed) setResult(0);
+        if (isSubscribed) setResult(0);
       }
     }, 100);
 
     return () => {
-      subStatus.subscribed = false;
+      isSubscribed = false;
       window.clearTimeout(calculateAmountTimeout);
     };
   }, [stackAmountString, singleStackPrice]);
@@ -110,7 +110,11 @@ export default function StacksCalculatorPage() {
           rows={1}
         />
         <hr />
-        <p className='max-w-md text-center dark:bg-black rounded p-2 my-3'>This tool is made for lazy people who don't want to count zeroes when selling/buying stacks.<br/>Single stack price is saved for later.</p>
+        <p className="max-w-md text-center dark:bg-black rounded p-2 my-3">
+          This tool is made for lazy people who don't want to count zeroes when selling/buying stacks.
+          <br />
+          Single stack price is saved for later.
+        </p>
       </div>
     </ContentBlock>
   );

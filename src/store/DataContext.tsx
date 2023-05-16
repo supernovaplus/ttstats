@@ -7,6 +7,7 @@ const DataContext = createContext<{
   setServers: SetServerDispatchType;
 }>({
   servers: defaultServersState,
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   setServers: () => {},
 });
 

@@ -7,7 +7,7 @@ import {
   SetServerDispatchType,
 } from '../types/serverTypes';
 
-export const defaultServersState = serversList.reduce((acc: ServerDataObjectList, server, index) => {
+export const defaultServersState = serversList.reduce((acc: ServerDataObjectList, server) => {
   acc[server.endpoint] = {
     ...server,
     error: false,

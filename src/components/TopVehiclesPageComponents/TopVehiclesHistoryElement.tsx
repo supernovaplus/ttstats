@@ -18,7 +18,7 @@ export default function TopVehiclesHistoryElement({ state, title, dataKey }: pro
   let totalPercentage = 0;
   let totalHours = 0;
 
-  let dataExists =
+  const dataExists =
     !state.loading &&
     state.data &&
     Object.prototype.hasOwnProperty.call(state.data, dataKey) &&

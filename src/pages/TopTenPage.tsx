@@ -38,6 +38,7 @@ export default function TopTenPage() {
           }));
         }
       })
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
       .catch(() => {});
 
     fetch('https://d3.ttstats.eu/data/top10_v2.json')
@@ -120,7 +121,7 @@ export default function TopTenPage() {
 }
 
 function Board({ state }: { state: TopTenDataState }) {
-  let { statId } = useParams();
+  const { statId } = useParams();
   // console.log({ statId, s: state.data });
   const selectedBoard = (state.data || []).find((board) => board.stat_name === statId);
   if (!selectedBoard) return <ContentBlock title="No Data" />;
