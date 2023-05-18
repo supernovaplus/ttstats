@@ -33,9 +33,22 @@
     </style>
   </head>
   <!-- <body> -->
-    <body class="dark">
+  <body class="dark">
     <div id="main"></div>
     <div id="modal-root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script type="text/javascript">
+      if (window.location.host.includes('ttstats.')) {
+        setTimeout(() => {
+          window.ybug_settings = { id: '16bd61hfh8p9cc4ft97d' };
+          var ybug = document.createElement('script');
+          ybug.type = 'text/javascript';
+          ybug.async = true;
+          ybug.src = 'https://widget.ybug.io/button/' + window.ybug_settings.id + '.js';
+          var s = document.getElementsByTagName('script')[0];
+          s.parentNode.insertBefore(ybug, s);
+        }, 1000);
+      }
+    </script>
   </body>
 </html>
