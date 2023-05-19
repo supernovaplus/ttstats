@@ -19,9 +19,9 @@ export default function PlayersListModal({ server }: { server: ServerDataObject 
             <tbody>
               {server.playersData.map((player, index) => (
                 <tr key={index} className="odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk z-0">
-                  <td data-label="Avatar" className="relative">
+                  <td data-label="Avatar" className="relative w-[50px]">
                     <div style={{ maxHeight: '50px', minHeight: '50px' }} className="inline-flex text-left">
-                      <div className="relative float-left top-0 left-10 bg-black text-white text-xs px-1 rounded z-1 max-h-3  ">
+                      <div className="relative float-left bg-transparent text-white text-xs px-1 pt-9 rounded z-1 left-[50%] text-center text-shadow-2  " style={{ width: '50px', height: '50px' }}>
                         #{index + 1}
                       </div>
                       {player[3] ? (
@@ -37,7 +37,7 @@ export default function PlayersListModal({ server }: { server: ServerDataObject 
                         // <img className="no-avatar" src="media/no-avatar.gif" alt="-" />
                         <div
                           style={{ width: '50px', height: '50px' }}
-                          className="bg-black items-center justify-center text-gray-700 select-none">
+                          className="bg-black items-center flex justify-center text-gray-700 select-none">
                           ?
                         </div>
                       )}

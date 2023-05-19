@@ -1,5 +1,11 @@
 import { ServerListRawInterface } from '../types/serverTypes';
 
+export const ServerTypes = {
+  NORMAL: 0,
+  EVENT: 1,
+  LITE: 2,
+};
+
 export const serversList: ServerListRawInterface[] = [
   {
     endpoint: '2epova',
@@ -8,6 +14,7 @@ export const serversList: ServerListRawInterface[] = [
     enabled: true,
     apiname: 'main',
     uptimeid: '43c6a237ee1b867f13cd5ccb5731926f',
+    servertype: ServerTypes.NORMAL,
   },
   {
     endpoint: 'njyvop',
@@ -16,21 +23,24 @@ export const serversList: ServerListRawInterface[] = [
     enabled: true,
     apiname: 'beta',
     uptimeid: '676134ceb12cdf3fb6e2272f37ff5455',
+    servertype: ServerTypes.NORMAL,
   },
   {
     endpoint: 'w8j4eb',
     name: 'Server EVENT',
     sname: 'EVENT',
     enabled: true,
-    apiname: "",
-    uptimeid: "",
+    apiname: '',
+    uptimeid: '',
+    servertype: ServerTypes.EVENT,
   },
-  // {
-  //   endpoint: 'dgpvx3',
-  //   name: 'Lite Transportation',
-  //   sname: 'LITE',
-  //   enabled: true,
-  //   apiname: "",
-  //   uptimeid: "",
-  // },
+  {
+    endpoint: 'dgpvx3',
+    name: 'Server [LITE] Transportation',
+    sname: 'LITE',
+    enabled: true,
+    apiname: '',
+    uptimeid: '',
+    servertype: ServerTypes.LITE,
+  },
 ];
