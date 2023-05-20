@@ -1,5 +1,3 @@
-
-
 import { test, expect } from '@playwright/test';
 import { testingFindText } from '../../src/controllers/misc.ts';
 
