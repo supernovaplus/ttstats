@@ -1,7 +1,6 @@
 import ContentBlock from '../ContentBlock';
 import { useEffect, useState } from 'react';
 import { TopJobsHistoryResponse, TopJobsHistoryState } from '../../types/serverTypes';
-import ErrorBoundary from '../ErrorBoundary';
 import TopJobHistoryElement from './TopJobHistoryElement';
 
 export default function TopJobsHistory() {

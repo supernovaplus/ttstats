@@ -1,3 +1,4 @@
+/* eslint-disable no-empty */
 import { serversList } from '../data/serversList';
 import {
   ServerDataObject,

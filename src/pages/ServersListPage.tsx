@@ -8,6 +8,7 @@ import DXPClock from '../components/ServersListPageComponents/DXPClock';
 import DXPModal from '../components/ServersListPageComponents/DXPModal';
 import Uptime from '../components/ServersListPageComponents/Uptime';
 import Skillboost from '../components/ServersListPageComponents/Skillboost';
+import { ServerTypes } from '../data/serversList';
 
 export default function ServersListPage() {
   const { servers } = useDataContext();
@@ -35,8 +36,13 @@ export default function ServersListPage() {
               trClass += 'text-gray-400';
             } else if (isOnline) {
               //color gray if event server has low amount people
-              if (!server.apiname && (!server.playersData || server.playersData.length < 5)) {
+              if (
+                server.servertype === ServerTypes.EVENT &&
+                (!server.playersData || server.playersData.length < 5)
+              ) {
                 trClass += 'text-gray-400 dark:text-gray-500';
+              } else if (server.servertype === ServerTypes.LITE) {
+                trClass += 'text-gray-600 dark:text-gray-300';
               } else {
                 trClass += 'text-black dark:text-white';
               }
@@ -125,7 +131,9 @@ export default function ServersListPage() {
                         <DXPModal server={server} />
                       </Modal>
                     ) : (
-                      <div className="w-full block">{server.apiname ? 'No DXP' : 'No Info'}</div>
+                      <div className="w-full block">
+                        {server.servertype === ServerTypes.LITE ? '-' : server.apiname ? 'No DXP' : 'No Info'}
+                      </div>
                     )}
                   </td>
                 </tr>

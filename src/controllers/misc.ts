@@ -42,3 +42,10 @@ export const utcDate = (timestamp: number, dateOnly = false): string =>
         day: 'numeric',
         hour12: false,
       });
+
+export const testingFindText = (haystack: string, needleArray: string[], label = '') => {
+  for (let i = 0; i < needleArray.length; i++) {
+    const needle = needleArray[i];
+    if (!haystack.includes(needle)) throw new Error(`"${needle}" not found${label ? ' in ' + label : ''}`);
+  }
+};

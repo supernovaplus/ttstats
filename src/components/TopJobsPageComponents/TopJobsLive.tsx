@@ -62,7 +62,7 @@ export default function TopJobsLive() {
             <thead className="sticky top-0 text-white bg-nova-c1  dark:bg-nova-c3">
               <tr>
                 <th>%</th>
-                <th>Job Name</th>
+                <th>Job</th>
                 <th>Active</th>
                 <th></th>
               </tr>
@@ -79,7 +79,7 @@ export default function TopJobsLive() {
                   return (
                     <tr key={index} className="odd:bg-kebab-odd even:bg-kebab-even hover:bg-kebab-dk">
                       <td data-label="%">{Number((job[1] / jobsState.counter) * 100).toFixed(1)}%</td>
-                      <td data-label="Job Name">{job[0]}</td>
+                      <td data-label="Job">{job[0]}</td>
                       <td data-label="Active">{job[1]}</td>
                       <td data-label="Links">
                         <Link
@@ -102,7 +102,7 @@ export default function TopJobsLive() {
             <thead className="sticky top-0 text-white bg-nova-c1  dark:bg-nova-c3">
               <tr>
                 <th>%</th>
-                <th>Job Name</th>
+                <th>Job</th>
                 <th>Active</th>
               </tr>
             </thead>
@@ -118,7 +118,7 @@ export default function TopJobsLive() {
                   return (
                     <tr key={index} className="odd:bg-kebab-odd even:bg-kebab-even hover:bg-kebab-dk">
                       <td data-label="%">{Number((job[1] / companyJobsState.counter) * 100).toFixed(1)}%</td>
-                      <td data-label="Job Name">{job[0]}</td>
+                      <td data-label="Job">{job[0]}</td>
                       <td data-label="Active">{job[1]}</td>
                     </tr>
                   );

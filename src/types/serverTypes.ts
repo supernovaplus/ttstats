@@ -5,6 +5,7 @@ export interface ServerListRawInterface {
   enabled: boolean;
   apiname: string;
   uptimeid: string;
+  servertype: number;
 }
 
 export interface MainAPIPlayer {
@@ -56,6 +57,7 @@ export interface ServerDataObject {
   enabled: boolean;
   apiname: string;
   uptimeid: string;
+  servertype: number;
   error: boolean;
   serverData: null | MainAPIServer;
   playersData: null | MainAPIPlayer[];
