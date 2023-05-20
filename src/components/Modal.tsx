@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ReactNode, ButtonHTMLAttributes } from 'react';
+import { useState, ReactNode, ButtonHTMLAttributes } from 'react';
 import ReactDOM from 'react-dom';
 import ContentBlock from './ContentBlock';
 
