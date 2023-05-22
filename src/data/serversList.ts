@@ -1,3 +1,5 @@
+import { ServerListRawInterface } from '../types/serverTypes';
+
 export const serversList: ServerListRawInterface[] = [
   {
     endpoint: '2epova',
