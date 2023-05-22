@@ -8,7 +8,6 @@ import DXPClock from '../components/ServersListPageComponents/DXPClock';
 import DXPModal from '../components/ServersListPageComponents/DXPModal';
 import Uptime from '../components/ServersListPageComponents/Uptime';
 import Skillboost from '../components/ServersListPageComponents/Skillboost';
-import { ServerTypes } from '../data/serversList';
 
 export default function ServersListPage() {
   const { servers } = useDataContext();
@@ -36,12 +35,13 @@ export default function ServersListPage() {
               trClass += 'text-gray-400';
             } else if (isOnline) {
               //color gray if event server has low amount people
-              if (
-                server.servertype === ServerTypes.EVENT &&
-                (!server.playersData || server.playersData.length < 5)
-              ) {
-                trClass += 'text-gray-400 dark:text-gray-500';
-              } else if (server.servertype === ServerTypes.LITE) {
+              if (server.sname === 'EVENT') {
+                if (!server.playersData || server.playersData.length < 5) {
+                  trClass += 'text-gray-400 dark:text-gray-500';
+                } else {
+                  trClass += 'text-red-900 dark:text-yellow-500';
+                }
+              } else if (server.sname === 'LITE') {
                 trClass += 'text-gray-600 dark:text-gray-300';
               } else {
                 trClass += 'text-black dark:text-white';
@@ -54,13 +54,13 @@ export default function ServersListPage() {
               <tbody key={index} className={trClass}>
                 <tr className="undyntable">
                   <td colSpan={5}>
-                    <div className="mt-1 text-left block pt-2">{server.name}</div>
+                    <div className="mt-1 text-left block pt-2">Server {server.name}</div>
                   </td>
                 </tr>
                 <tr className={`dark:border-b-black ${trClass}`}>
                   <td data-label="Server" className="w-1/5">
                     <Modal
-                      title={`Joining ${server.name}`}
+                      title={`Joining ${server.name} server`}
                       buttonValue="Connect"
                       buttonProps={{ className: 'lnk-btn w-full m-0' }}>
                       <ServerConnectModal server={server} />
@@ -71,7 +71,7 @@ export default function ServersListPage() {
                       '-/-'
                     ) : (
                       <Modal
-                        title={`Players on ${server.name}`}
+                        title={`Players on ${server.name} server`}
                         buttonValue={
                           (server.playersData!.length <= server.serverData!.limit
                             ? server.playersData!.length
@@ -91,7 +91,7 @@ export default function ServersListPage() {
                     {isOnline && server.serverData ? (
                       server.apiname ? (
                         <Modal
-                          title={server.name}
+                          title={`${server.name} server`}
                           buttonValue={
                             !server.apiname ? (
                               server.serverData!.uptime
@@ -131,9 +131,7 @@ export default function ServersListPage() {
                         <DXPModal server={server} />
                       </Modal>
                     ) : (
-                      <div className="w-full block">
-                        {server.servertype === ServerTypes.LITE ? '-' : server.apiname ? 'No DXP' : 'No Info'}
-                      </div>
+                      <div className="w-full block">{server.apiname ? 'No DXP' : ''}</div>
                     )}
                   </td>
                 </tr>
