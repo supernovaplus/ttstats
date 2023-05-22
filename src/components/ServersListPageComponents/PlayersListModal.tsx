@@ -28,7 +28,7 @@ export default function PlayersListModal({ server }: { server: ServerDataObject 
                         <img
                           loading="lazy"
                           src={player[3] || '#'}
-                          alt="img"
+                          alt=""
                           className="w-full"
                           referrerPolicy="no-referrer"
                           style={{ width: '50px', height: '50px' }}

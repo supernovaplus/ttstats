@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { generateJoinLink } from '../../controllers/misc';
 
 export default function ServerConnectModal({ server }: { server: ServerDataObject }) {
-  const handleTextareaSelect = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleSelect = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.target.select();
   };
 
@@ -25,12 +25,12 @@ export default function ServerConnectModal({ server }: { server: ServerDataObjec
       </div>
       <div>or open the game, press F8, copy the text below then click ENTER</div>
       <div>
-        <textarea
+        <input
+          type="text"
           className="bg-black text-white rounded w-full resize-none text-center"
           defaultValue={`connect ${server.endpoint}`}
-          rows={1}
           readOnly
-          onSelect={handleTextareaSelect}></textarea>
+          onSelect={handleSelect}></input>
       </div>
     </div>
   );
