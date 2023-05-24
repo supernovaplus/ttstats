@@ -21,7 +21,9 @@ export default function PlayersListModal({ server }: { server: ServerDataObject 
                 <tr key={index} className="odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk z-0">
                   <td data-label="Avatar" className="relative w-[50px]">
                     <div style={{ maxHeight: '50px', minHeight: '50px' }} className="inline-flex text-left">
-                      <div className="relative float-left bg-transparent text-white text-xs px-1 pt-9 rounded z-1 left-[50%] text-center text-shadow-2  " style={{ width: '50px', height: '50px' }}>
+                      <div
+                        className="relative float-left bg-transparent text-white text-xs px-1 pt-9 rounded z-1 left-[50%] text-center text-shadow-2  "
+                        style={{ width: '50px', height: '50px' }}>
                         #{index + 1}
                       </div>
                       {player[3] ? (
@@ -44,7 +46,7 @@ export default function PlayersListModal({ server }: { server: ServerDataObject 
                     </div>
                   </td>
                   <td data-label="Name #ID">
-                    {player[0]}{' '}
+                    <span>{player[0]}</span>{' '}
                     {!!player[2] && (
                       <span
                         className={'text-xs bg-nova-c1 text-white dark:bg-nova-c3 p-1 rounded text-shadow-1'}>

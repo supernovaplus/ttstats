@@ -19,7 +19,8 @@
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "test": "playwright test"
+    "test": "tsc && vite build && playwright test",
+    "pw": "playwright test"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^3.1.0",
