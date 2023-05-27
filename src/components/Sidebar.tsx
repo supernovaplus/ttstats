@@ -66,15 +66,18 @@ export default function Sidebar() {
             <OneItem to="/top10" setForceOpen={setForceOpen}>
               Top 10
             </OneItem>
-            <OneItem to="/highest_id" setForceOpen={setForceOpen}>
+            <OneItem to="/highest-id" setForceOpen={setForceOpen}>
               Highest ID
             </OneItem>
             <OneItem to="/economy" setForceOpen={setForceOpen}>
               Economy
             </OneItem>
             <Category>Tools</Category>
-            <OneItem to="/stacks_calculator" setForceOpen={setForceOpen}>
+            <OneItem to="/stacks-calculator" setForceOpen={setForceOpen}>
               Stacks Calculator
+            </OneItem>
+            <OneItem to="/exp-calculator" setForceOpen={setForceOpen}>
+              EXP Calculator
             </OneItem>
             <Category>Info</Category>
             <OneItem to="/links" setForceOpen={setForceOpen}>

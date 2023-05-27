@@ -104,10 +104,12 @@ input[type='number'] {
   -moz-appearance: textfield;
 }
 
-.navlink.active {
+.navlink.active:not(.dark) {
   // odd: 'rgba(0, 0, 0, 0.1)',
   // even: 'rgba(0, 0, 0, 0.05)',
-  background-color: rgba(0, 0, 0, 0.2);
+  // background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgb(55 65 81);
+  color: white;
   // border-left: 10px solid #12538b;
   // margin-left: -1px;
 
