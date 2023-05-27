@@ -22,7 +22,8 @@ const Top10 = lazy(() => import('./pages/TopTenPage'));
 const TopVehicles = lazy(() => import('./pages/TopVehiclesPage'));
 const ChartPage = lazy(() => import('./pages/ChartPage'));
 const ChartPage2 = lazy(() => import('./pages/ChartPage2'));
-const StacksCalculatorPage = lazy(() => import('./pages/StacksCalculatorPage'));
+const StacksCalculatorPage = lazy(() => import('./pages/tools/StacksCalculatorPage'));
+const EXPCalculatorPage = lazy(() => import('./pages/tools/EXPCalculatorPage'));
 const EconomyTablePage = lazy(() => import('./pages/EconomyTablePage'));
 
 export default function App() {
@@ -50,15 +51,16 @@ export default function App() {
               {/* dynamic/lazy */}
               <Route path="/chart" element={<LazyLoadingWrapper component={ChartPage2} />} />
               <Route path="/topvehicles" element={<LazyLoadingWrapper component={TopVehicles} />} />
-              <Route path="/highest_id" element={<LazyLoadingWrapper component={HighestIDPage} />} />
+              <Route path="/highest-id" element={<LazyLoadingWrapper component={HighestIDPage} />} />
               <Route path="/top10/*" element={<LazyLoadingWrapper component={Top10} />} />
               <Route path="/topjobs" element={<LazyLoadingWrapper component={TopJobs} />} />
               <Route path="/links" element={<LazyLoadingWrapper component={LinksPage} />} />
               <Route path="/economy" element={<LazyLoadingWrapper component={EconomyTablePage} />} />
               <Route
-                path="/stacks_calculator"
+                path="/stacks-calculator"
                 element={<LazyLoadingWrapper component={StacksCalculatorPage} />}
               />
+              <Route path="/exp-calculator" element={<LazyLoadingWrapper component={EXPCalculatorPage} />} />
               {/* 404 */}
               <Route path="*" element={<Page404 />} />
             </Routes>
