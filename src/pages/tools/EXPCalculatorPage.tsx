@@ -1,5 +1,5 @@
 import ContentBlock from '../../components/ContentBlock';
-import { useState, useEffect, ChangeEventHandler, KeyboardEvent, ChangeEvent } from 'react';
+import { useState, useEffect } from 'react';
 import { roundFixed } from '../../controllers/misc';
 
 const expStep = 5;
@@ -11,6 +11,7 @@ export default function EXPCalculatorPage() {
     target: 100,
     expPerHour: 1000,
   });
+
   const [output, setOutput] = useState({
     expNeeded: '',
     hoursNeeded: '',
@@ -77,7 +78,7 @@ export default function EXPCalculatorPage() {
         />
 
         <label htmlFor="exp-time-result" className="block">
-          Hours To Reach Target Level
+          Hours To Reach The Target Level
         </label>
         <input
           name="exp-time-result"
