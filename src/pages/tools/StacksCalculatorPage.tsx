@@ -21,7 +21,6 @@ export default function StacksCalculatorPage() {
 
   //if any value changed, calculate the price with a delay
   useEffect(() => {
-    let isSubscribed = true;
     //calculate the total price
     const calculateAmountTimeout = window.setTimeout(() => {
       try {
@@ -40,21 +39,20 @@ export default function StacksCalculatorPage() {
           if (amount) {
             startTransition(() => {
               const fullAmount = parseFloat(amount) * multiplier * (parseInt(singleStackPrice) || 0);
-              if (isSubscribed) setResult(Math.round(fullAmount));
+              setResult(Math.round(fullAmount));
             });
           } else {
-            if (isSubscribed) setResult(0);
+            setResult(0);
           }
         } else {
-          if (isSubscribed) setResult(0);
+          setResult(0);
         }
       } catch (err) {
-        if (isSubscribed) setResult(0);
+        setResult(0);
       }
     }, 100);
 
     return () => {
-      isSubscribed = false;
       window.clearTimeout(calculateAmountTimeout);
     };
   }, [stackAmountString, singleStackPrice]);
