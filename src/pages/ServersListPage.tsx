@@ -123,15 +123,21 @@ export default function ServersListPage() {
                     )}
                   </td>
                   <td data-label="DXP" className="w-1/5">
-                    {isOnline && isDxpActive ? (
-                      <Modal
-                        title="DXP Info"
-                        buttonValue={<DXPClock dxp={server.serverData?.dxp} timestamp={server.lastUpdated} />}
-                        buttonProps={{ className: 'lnk-btn w-full' }}>
-                        <DXPModal server={server} />
-                      </Modal>
+                    {isOnline ? (
+                      isDxpActive ? (
+                        <Modal
+                          title="DXP Info"
+                          buttonValue={
+                            <DXPClock dxp={server.serverData?.dxp} timestamp={server.lastUpdated} />
+                          }
+                          buttonProps={{ className: 'lnk-btn w-full' }}>
+                          <DXPModal server={server} />
+                        </Modal>
+                      ) : (
+                        <div className="w-full block">{server.apiname ? 'No DXP' : ''}</div>
+                      )
                     ) : (
-                      <div className="w-full block">{server.apiname ? 'No DXP' : ''}</div>
+                      <div className="w-full block">-</div>
                     )}
                   </td>
                 </tr>

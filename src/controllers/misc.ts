@@ -1,6 +1,7 @@
 import { ServerDataObject } from '../types/serverTypes';
 
-export const generateJoinLink = (server: ServerDataObject) => `fivem://connect/${server.endpoint}?pure_1`;
+export const generateJoinLink = (server: ServerDataObject, useEndpoint = true) =>
+  `fivem://connect/${!useEndpoint && server.serverip ? server.serverip : server.endpoint}?pure_1`;
 
 export const shortenLargeMoney = (num: number, sign = false): string => {
   const absNum = Math.abs(num);
