@@ -82,7 +82,7 @@ export default function StacksCalculatorPage() {
           className="block px-2 w-full max-w-sm py-1 text-center text-black"
           placeholder="..."
         />
-        <label htmlFor="singleStackPrice">Price for each (1 stack usually sells $970 to $1000)</label>
+        <label htmlFor="singleStackPrice">Price for each (1 stack usually sells for $970 to $1000)</label>
         <input
           id="singleStackPrice"
           name="singleStackPrice"

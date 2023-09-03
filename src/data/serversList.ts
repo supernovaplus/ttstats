@@ -8,6 +8,7 @@ export const serversList: ServerListRawInterface[] = [
     enabled: true,
     apiname: 'main',
     uptimeid: '43c6a237ee1b867f13cd5ccb5731926f',
+    serverip: 'server.tycoon.community:30120',
   },
   {
     endpoint: 'njyvop',
@@ -16,6 +17,7 @@ export const serversList: ServerListRawInterface[] = [
     enabled: true,
     apiname: 'beta',
     uptimeid: '676134ceb12cdf3fb6e2272f37ff5455',
+    serverip: 'server.tycoon.community:30120',
   },
   {
     endpoint: 'w8j4eb',
@@ -24,6 +26,7 @@ export const serversList: ServerListRawInterface[] = [
     enabled: true,
     apiname: '',
     uptimeid: '',
+    serverip: '',
   },
   {
     endpoint: 'dgpvx3',
@@ -32,5 +35,6 @@ export const serversList: ServerListRawInterface[] = [
     enabled: true,
     apiname: '',
     uptimeid: '',
+    serverip: '',
   },
 ];
