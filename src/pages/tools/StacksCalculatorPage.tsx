@@ -97,18 +97,18 @@ export default function StacksCalculatorPage() {
         <textarea
           value={!result ? '-' : `send ${shortenLargeMoney(result)} [${result.toLocaleString('us')}]`}
           readOnly
-          className="block shadow-md p-1 w-full max-w-sm resize-none text-center bg-blue-200 border border-black outline-none text-black"
+          className="block shadow-md p-1 w-full max-w-sm resize-none text-center bg-gray-400 border border-black outline-none text-black"
           rows={1}
         />
         <div>Copy/Paste To "Give Money" Input:</div>
         <textarea
           value={result || '-'}
           readOnly
-          className="block shadow-md p-1 w-full max-w-sm resize-none my-1 text-center bg-blue-200 border border-black outline-none text-black"
+          className="block shadow-md p-1 w-full max-w-sm resize-none my-1 text-center bg-gray-400 border border-black outline-none text-black"
           rows={1}
         />
         <hr />
-        <p className="max-w-md text-center dark:bg-black rounded p-2 my-3">
+        <p className="max-w-md text-center bg-gray-400 rounded dark:bg-gray-700 p-2 my-3">
           This tool is made for lazy people who don't want to count zeroes when selling/buying stacks.
           <br />
           Single stack price is saved for later.
