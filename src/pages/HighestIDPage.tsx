@@ -19,15 +19,17 @@ export default function HighestIDPage() {
     });
   }
 
-  playersList = playersList
-    .sort((a, b) => b.id - a.id)
-    .map((player, index) => {
-      player.index = index + 1;
-      return player;
-    });
+  if (playersList.length) {
+    playersList = playersList
+      .sort((a, b) => b.id - a.id)
+      .map((player, index) => {
+        player.index = index + 1;
+        return player;
+      });
 
-  if (playersList.length > 25) {
-    playersList = [...playersList.splice(0, 10), ...playersList.splice(playersList.length - 10)];
+    if (playersList.length > 21) {
+      playersList = [...playersList.splice(0, 11), ...playersList.splice(playersList.length - 10)];
+    }
   }
 
   return (

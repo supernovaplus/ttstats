@@ -1,9 +1,7 @@
 import ContentBlock from '../../components/ContentBlock';
 import { useState, useEffect } from 'react';
 import { roundFixed } from '../../controllers/misc';
-
-const expStep = 5;
-const calculateExp = (level: number) => Math.floor((expStep * level * (level + 1)) / 2);
+import { calcLvlToEXP, calcEXPToLvl, prettyNum } from '../../controllers/misc';
 
 const changeStateVal = (target: string, val: string, setState: any) => {
   const numVal = Number(val);
@@ -23,16 +21,16 @@ function EXPCalculator() {
   });
 
   useEffect(() => {
-    const expResult = calculateExp(state.target) - calculateExp(state.current);
+    const expResult = calcLvlToEXP(state.target) - calcLvlToEXP(state.current);
     const hoursNeeded = expResult / state.expPerHour;
     setOutput({
-      expNeeded: expResult <= 0 ? 'Level Reached' : `${expResult.toLocaleString('en-us')} exp`,
+      expNeeded: expResult <= 0 ? 'Level Reached' : `${prettyNum(expResult)} exp`,
       hoursNeeded: `${roundFixed(hoursNeeded, 1)} hours`,
     });
   }, [state]);
 
   return (
-    <ContentBlock title="EXP Calculator">
+    <ContentBlock title="EXP Target Calculator">
       <div className="flex flex-col text-center items-center">
         <label htmlFor="current-level">Current Level:</label>
         <input
@@ -106,8 +104,8 @@ function EXPConverter() {
 
   useEffect(() => {
     setOutput(() => ({
-      lvlToEXPOutput: String(Math.floor((5 * state.lvlToEXPInput * (state.lvlToEXPInput + 1)) / 2)),
-      expToLevelOutput: String(Math.floor((Math.sqrt(1 + (8 * state.expToLevelInput) / 5) - 1) / 2)),
+      lvlToEXPOutput: String(calcLvlToEXP(state.lvlToEXPInput)),
+      expToLevelOutput: String(calcEXPToLvl(state.expToLevelInput)),
     }));
   }, [state]);
 
@@ -132,7 +130,7 @@ function EXPConverter() {
             type="text"
             readOnly
             className="bg-gray-500 text-white text-shadow-1 outline-none p-2 text-center mb-3 max-w-[200px]"
-            value={`${Number(output.expToLevelOutput).toLocaleString('en-us')} Lvl`}
+            value={`${prettyNum(Number(output.expToLevelOutput))} Lvl`}
           />
         </div>
         <div>
@@ -151,7 +149,7 @@ function EXPConverter() {
             type="text"
             readOnly
             className="bg-gray-500 text-white text-shadow-1 outline-none p-2 text-center mb-3 max-w-[200px]"
-            value={`${Number(output.lvlToEXPOutput).toLocaleString('en-us')} EXP`}
+            value={`${prettyNum(Number(output.lvlToEXPOutput))} EXP`}
           />
         </div>
       </div>
@@ -159,11 +157,48 @@ function EXPConverter() {
   );
 }
 
+function NotableLevels() {
+  const data: [target: string, value: number][] = [
+    ["lvl", 100],
+    ["exp", 500_000],
+    ["exp", 1_000_000],
+    ["lvl", 1000]
+  ];
+
+  return (
+    <ContentBlock title="Notable levels">
+      <div className="flex flex-col text-center items-center">
+        <div className="mb-2 w-full max-w-[400px]">
+          <table className='w-full'>
+            <tbody>
+              {data.map(([target, value], index) => {
+                const [lvl, exp] = target === "lvl" ?
+                  [prettyNum(value), prettyNum(calcLvlToEXP(value))]
+                  : [prettyNum(calcEXPToLvl(value)), prettyNum(value)];
+
+                return (
+                  <tr className='bg-gray-500 text-white w-full text-shadow-1' key={index}>
+                    <td className='p-2'>{lvl} Lvl</td>
+                    <td className='p-1 bg-gray-600 dark:text-white'>=</td>
+                    <td p-2>{exp} EXP</td>
+                  </tr>
+                )
+              })}
+            </tbody>
+          </table>
+        </div>
+      </div >
+    </ContentBlock >
+  )
+};
+
+
 export default function EXPCalculatorPage() {
   return (
     <>
       <EXPCalculator />
       <EXPConverter />
+      <NotableLevels />
     </>
   );
 }
