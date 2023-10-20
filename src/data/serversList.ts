@@ -17,7 +17,7 @@ export const serversList: ServerListRawInterface[] = [
     enabled: true,
     apiname: 'beta',
     uptimeid: '676134ceb12cdf3fb6e2272f37ff5455',
-    serverip: 'server.tycoon.community:30120',
+    serverip: 'server.tycoon.community:30121',
   },
   {
     endpoint: 'w8j4eb',
