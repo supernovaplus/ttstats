@@ -24,7 +24,13 @@ const DifferenceTab = ({ value, shorten = false }: { value: number; shorten?: bo
   }
 };
 
+const ECONOMYLINKS = [
+  ["Main Server", "https://d3.ttstats.eu/data/economy2-reversed.json"],
+  ["Legacy Server (No longer updated)", "https://d3.ttstats.eu/data/economy-reversed.json"]
+]
+
 export default function EconomyTablePage() {
+  const [selectedServer, setSelectedServer] = useState(0);
   const [state, setState] = useState<EconomyTableState>({
     loading: true,
     data: null,
@@ -33,7 +39,7 @@ export default function EconomyTablePage() {
 
   useEffect(() => {
     let isSubscribed = true;
-    fetch('https://d3.ttstats.eu/data/economy-reversed.json')
+    fetch(ECONOMYLINKS[selectedServer][1])
       .then((res) => res.json())
       .then((res: EconomyResponse) => {
         if (!res || !Array.isArray(res.data)) throw new Error('Invalid Data');
@@ -59,12 +65,20 @@ export default function EconomyTablePage() {
     return () => {
       isSubscribed = false;
     };
-  }, []);
+  }, [selectedServer]);
 
   // Time;Debt;Money;Debts;Millionaires;Billionaires;Users;Players
 
   return (
     <ContentBlock title="Economy">
+      <div className='flex'>
+        <div className='p-2'>Server: </div>
+        <select className='block w-full p-1 my-1 text-black cursor-pointer' defaultValue={"0"} onChange={(e) => {setSelectedServer(parseInt(e.currentTarget.value))}}>
+          {ECONOMYLINKS.map(([name, link], index) => 
+            <option key={index} value={index}>{name}</option>
+          )}
+        </select>
+      </div>
       {state.loading && <LoadingRow />}
       {state.error && <ErrorRow>{state.error}</ErrorRow>}
       {state.data && state.data.data && (
