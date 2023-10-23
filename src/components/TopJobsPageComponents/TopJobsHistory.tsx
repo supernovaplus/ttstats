@@ -36,8 +36,8 @@ export default function TopJobsHistory() {
 
   return (
     <>
-      <TopJobHistoryElement state={state} dataKey="twodays" title="Top 10 Jobs (Last 2 Days)" />
-      <TopJobHistoryElement state={state} dataKey="monthly" title="Top 20 Jobs (Last 30 Days)" />
+      <TopJobHistoryElement state={state} dataKey="twodays" title="Top 10 Jobs (Last 2 Days) [Legacy Server Only]" />
+      <TopJobHistoryElement state={state} dataKey="monthly" title="Top 20 Jobs (Last 30 Days) [Legacy Server Only]" />
       {/* <TopJobHistoryElement state={state} dataKey="year" title="Top 30 Jobs (Last 365 days)" /> */}
     </>
   );

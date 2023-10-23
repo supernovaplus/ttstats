@@ -57,7 +57,7 @@ export default function TopVehiclesLive() {
 
   return (
     <>
-      <ContentBlock title="Top Vehicles Now">
+      <ContentBlock title="Top Vehicles Now [Legacy Server Only]">
         {state.loading ? (
           <LoadingRow />
         ) : state.error ? (
@@ -98,7 +98,7 @@ export default function TopVehiclesLive() {
         )}
         <TimeUpdatedRow updated_at={state.timestamp} />
       </ContentBlock>
-      <ContentBlock title="Top Vehicle Classes Now">
+      <ContentBlock title="Top Vehicle Classes Now [Legacy Server Only]">
         <div className="max-h-[300px] overflow-y-auto border-b-2 border-nova-c1 dark:border-nova-c3 box-shadow-1">
           {state.loading ? (
             <div className="text-center">Loading...</div>

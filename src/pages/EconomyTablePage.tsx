@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, ChangeEventHandler } from 'react';
 import ContentBlock from '../components/ContentBlock';
 import { EconomyTableState, EconomyResponse } from '../types/serverTypes';
 import { shortenLargeMoney } from '../controllers/misc';
@@ -25,21 +25,30 @@ const DifferenceTab = ({ value, shorten = false }: { value: number; shorten?: bo
 };
 
 const ECONOMYLINKS = [
-  ["Main Server", "https://d3.ttstats.eu/data/economy2-reversed.json"],
-  ["Legacy Server (No longer updated)", "https://d3.ttstats.eu/data/economy-reversed.json"]
+  ["Main", "https://d3.ttstats.eu/data/economy2-reversed.json"],
+  ["Legacy (No longer updated)", "https://d3.ttstats.eu/data/economy-reversed.json"]
 ]
 
+const initalState: EconomyTableState = {
+  loading: true,
+  data: null,
+  error: null,
+  selectedServer: 0
+};
+
 export default function EconomyTablePage() {
-  const [selectedServer, setSelectedServer] = useState(0);
-  const [state, setState] = useState<EconomyTableState>({
-    loading: true,
-    data: null,
-    error: null,
-  });
+  const [state, setState] = useState<EconomyTableState>(initalState);
+
+  const changeServer: ChangeEventHandler<HTMLSelectElement> = (e) => {
+    setState(s => ({
+      ...initalState,
+      selectedServer: parseInt(e.target.value)
+    }));
+  }
 
   useEffect(() => {
     let isSubscribed = true;
-    fetch(ECONOMYLINKS[selectedServer][1])
+    fetch(ECONOMYLINKS[state.selectedServer][1])
       .then((res) => res.json())
       .then((res: EconomyResponse) => {
         if (!res || !Array.isArray(res.data)) throw new Error('Invalid Data');
@@ -65,17 +74,17 @@ export default function EconomyTablePage() {
     return () => {
       isSubscribed = false;
     };
-  }, [selectedServer]);
+  }, [state.selectedServer]);
 
   // Time;Debt;Money;Debts;Millionaires;Billionaires;Users;Players
 
   return (
     <ContentBlock title="Economy">
-      <div className='flex'>
-        <div className='p-2'>Server: </div>
-        <select className='block w-full p-1 my-1 text-black cursor-pointer' defaultValue={"0"} onChange={(e) => {setSelectedServer(parseInt(e.currentTarget.value))}}>
-          {ECONOMYLINKS.map(([name, link], index) => 
-            <option key={index} value={index}>{name}</option>
+      <div className='flex p-1'>
+        <div className='p-1'>Server: </div>
+        <select className='p-0 m-0 ml-1 block w-full my-1 cursor-pointer text-center bg-gray-600 border border-gray-600 text-white' defaultValue={"0"} onChange={changeServer}>
+          {ECONOMYLINKS.map(([name, link], index) =>
+            <option key={index} value={index} className='text-center p-2'>{name}</option>
           )}
         </select>
       </div>

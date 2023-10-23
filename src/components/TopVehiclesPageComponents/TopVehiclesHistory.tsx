@@ -36,8 +36,8 @@ export default function TopVehiclesHistory() {
 
   return (
     <>
-      <TopVehiclesHistoryElement state={state} title="Top 30 Vehicles (Last 2 Days)" dataKey="twodays" />
-      <TopVehiclesHistoryElement state={state} title="Top 30 Vehicles (Last 30 Days)" dataKey="monthly" />
+      <TopVehiclesHistoryElement state={state} title="Top 30 Vehicles (Last 2 Days) [Legacy Server Only]" dataKey="twodays" />
+      <TopVehiclesHistoryElement state={state} title="Top 30 Vehicles (Last 30 Days) [Legacy Server Only]" dataKey="monthly" />
     </>
   );
 }
