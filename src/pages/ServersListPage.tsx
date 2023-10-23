@@ -8,6 +8,7 @@ import DXPClock from '../components/ServersListPageComponents/DXPClock';
 import DXPModal from '../components/ServersListPageComponents/DXPModal';
 import Uptime from '../components/ServersListPageComponents/Uptime';
 import Skillboost from '../components/ServersListPageComponents/Skillboost';
+import PopUnder from '../components/PopUnder';
 
 export default function ServersListPage() {
   const { servers } = useDataContext();
@@ -54,7 +55,19 @@ export default function ServersListPage() {
               <tbody key={index} className={trClass}>
                 <tr className="undyntable">
                   <td colSpan={5}>
-                    <div className="mt-1 text-left block pt-2">Server {server.name}</div>
+                    <div className="mt-1 text-left block pt-2">Server {server.name}
+                      {server.info &&
+                        <PopUnder>
+                          {server.info}
+                          {server.links && <div>{server.links.map(([name, link], index) => <a key={index} href={link} target='_blank' className='text-blue-800 dark:text-blue-300 underline'>{name}</a>)}</div>}
+                        </PopUnder>}
+                      {/* {server.info && 
+                        <Modal
+                          title={`info`}
+                          buttonValue={"i"}
+                          buttonProps={{ className: 'text-red ml-1 bg-red-900 w-[25px] rounded' }}>
+                        </Modal>} */}
+                    </div>
                   </td>
                 </tr>
                 <tr className={`dark:border-b-black ${trClass}`}>

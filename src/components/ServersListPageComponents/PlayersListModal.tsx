@@ -12,8 +12,7 @@ export default function PlayersListModal({ server }: { server: ServerDataObject 
           <table className="w-full">
             <thead className="sticky top-0 text-white bg-nova-c1 dark:bg-nova-c3" style={{ zIndex: 2 }}>
               <tr>
-                <th></th>
-                <th>Name, ID, Job</th>
+                <th colSpan={2}>Name, ID, Job</th>
               </tr>
             </thead>
             <tbody>

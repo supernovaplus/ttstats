@@ -1,3 +1,4 @@
+
 export interface ServerListRawInterface {
   endpoint: string;
   name: string;
@@ -6,6 +7,9 @@ export interface ServerListRawInterface {
   apiname: string;
   uptimeid: string;
   serverip: string;
+  /** link, url */
+  links?: [string, string][];
+  info: string;
 }
 
 export interface MainAPIPlayer {
@@ -50,14 +54,7 @@ export interface MainAPIPlayersResponse {
   server: MainAPIServer;
 }
 
-export interface ServerDataObject {
-  endpoint: string;
-  name: string;
-  sname: string;
-  enabled: boolean;
-  apiname: string;
-  uptimeid: string;
-  serverip: string;
+export interface ServerDataObject extends ServerListRawInterface{
   error: boolean;
   serverData: null | MainAPIServer;
   playersData: null | MainAPIPlayer[];
