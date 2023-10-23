@@ -39,7 +39,7 @@ export default function TopTenPage() {
         }
       })
       // eslint-disable-next-line @typescript-eslint/no-empty-function
-      .catch(() => {});
+      .catch(() => { });
 
     fetch('https://d3.ttstats.eu/data/top10_v2.json')
       .then((res) => res.json())
@@ -76,7 +76,7 @@ export default function TopTenPage() {
 
   return (
     <>
-      <ContentBlock title="Top 10 Leaderboards">
+      <ContentBlock title="Top 10 Leaderboards [Legacy Server Only]">
         {state.loading && <LoadingRow />}
         {state.error && <ErrorRow>{state.error}</ErrorRow>}
         {state.data && (
@@ -90,8 +90,7 @@ export default function TopTenPage() {
                   to={`/top10/${stat_name}`}
                   key={index}
                   className={({ isActive }) =>
-                    ` dark:text-white hover:underline py-1 block text-center select-none border-b border-nova-c2 ${
-                      isActive ? 'bg-nova-c1 dark:bg-nova-c2 text-white' : ''
+                    ` dark:text-white hover:underline py-1 block text-center select-none border-b border-nova-c2 ${isActive ? 'bg-nova-c1 dark:bg-nova-c2 text-white' : ''
                     }`
                   }>
                   {nice_name}
@@ -141,11 +140,10 @@ function Board({ state }: { state: TopTenDataState }) {
             {selectedBoard.json_data.map((row, index2) => (
               <tr
                 key={index2}
-                className={`odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk ${
-                  state.bannedPlayersList.has(row.user_id)
+                className={`odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk ${state.bannedPlayersList.has(row.user_id)
                     ? 'line-through text-gray-400 dark:text-gray-600'
                     : ''
-                }`}>
+                  }`}>
                 <td data-label="# Place">{index2 + 1}</td>
                 <td data-label="Player">
                   {row.username}{' '}

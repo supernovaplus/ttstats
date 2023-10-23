@@ -216,6 +216,7 @@ export interface EconomyTableState {
   loading: boolean;
   data: null | EconomyResponse;
   error: null | string;
+  selectedServer: number;
 }
 
 export interface TopJobsHistoryResponse {
