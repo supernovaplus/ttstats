@@ -160,7 +160,7 @@ input::-webkit-inner-spin-button {
 //   text-shadow: 1px 1px 1px black;
 // }
 
-::selection {
+::selection, .dark input::selection {
   background-color: black;
   color: white;
 }
