@@ -10,6 +10,7 @@ export interface ServerListRawInterface {
   /** link, url */
   links?: [string, string][];
   info: string;
+  apiKeyAllow?: boolean;
 }
 
 export interface MainAPIPlayer {

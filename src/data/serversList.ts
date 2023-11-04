@@ -10,7 +10,8 @@ export const serversList: ServerListRawInterface[] = [
     uptimeid: '43c6a237ee1b867f13cd5ccb5731926f',
     serverip: 'server.tycoon.community:30120',
     info: 'This server is running on the original database, but it won\'t receive any future updates.',
-    links: [["more info on wiki", "https://dash.tycoon.community/wiki/index.php/Legacy"]]
+    links: [["more info on wiki", "https://dash.tycoon.community/wiki/index.php/Legacy"]],
+    apiKeyAllow: true
   },
   {
     endpoint: '2epova',
@@ -21,6 +22,7 @@ export const serversList: ServerListRawInterface[] = [
     uptimeid: '676134ceb12cdf3fb6e2272f37ff5455',
     serverip: 'server.tycoon.community:30121',
     info: 'This server is replacing the original server and is running on a new separate database. This server will receive all the future updates.',
+    apiKeyAllow: true
   },
   {
     endpoint: 'w8j4eb',
