@@ -4,6 +4,7 @@ import { getCacheStr } from '../../controllers/misc';
 import { serversList } from '../../data/serversList';
 import { NavLink } from 'react-router-dom';
 import businessData from '../../data/businessData';
+import { useUserDataContext } from '../../store/UserDataContext';
 const localCacheKey = 'api_biz_data_v1.';
 
 interface BizServer {
@@ -12,6 +13,9 @@ interface BizServer {
 }
 
 export default function BusinessPage() {
+  const {
+    userDataState: { servers },
+  } = useUserDataContext();
   const [selectedServer, setSelectedServer] = useState(null);
 
   useEffect(() => {
@@ -39,13 +43,11 @@ export default function BusinessPage() {
           <option value="" disabled>
             Select server
           </option>
-          {serversList
-            .filter((server) => server.apiKeyAllow)
-            .map((server, index) => (
-              <option value={server.apiname} key={index}>
-                {server.name}
-              </option>
-            ))}
+          {servers.map(({ server }, index) => (
+            <option value={server.endpoint} key={index}>
+              {server.name}
+            </option>
+          ))}
         </select>
       </div>
       <button className="lnk-btn text-white bg-nova-c1 dark:bg-nova-c3 px-1 text-center block w-full max-w-[200px] m-auto">
