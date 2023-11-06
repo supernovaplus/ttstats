@@ -14,6 +14,7 @@ export function useMessager() {
   const [messages, setMessages] = useState(initialMessagesState);
 
   const clearMessages = () => {
+    if (!messages.errors.length && !messages.messages.length) return;
     setMessages(initialMessagesState);
   };
 

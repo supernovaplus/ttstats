@@ -70,16 +70,18 @@ export default function UserSettings() {
         .then((res) => res.json())
         .then((res) => {
           if (res && typeof res[0] === 'number') {
-            if (res[0] === 0) {
+            if (res[0] < 1) {
               addMessage('errors', 'Invalid key or no charges left');
               console.error('invalid key or no charges');
 
               setUserDataState((s) => {
                 s.servers[serverEndpoint].charges = '';
                 s.servers[serverEndpoint].lastChecked = '';
+                s.servers[serverEndpoint].apikey = '';
                 return { ...s };
               });
             } else {
+              console.log("save this");
               localStorage.setItem(
                 localStorageKeys.SERVER_API_PRIVATE_KEY + '.' + serverState.server.endpoint,
                 String(serverState.apikey)
@@ -94,7 +96,7 @@ export default function UserSettings() {
               );
 
               setUserDataState((s) => {
-                s.servers[serverEndpoint].charges = res[0];
+                s.servers[serverEndpoint].charges = String(res[0]);
                 s.servers[serverEndpoint].lastChecked = String(Date.now());
                 return { ...s };
               });
@@ -109,7 +111,7 @@ export default function UserSettings() {
           addMessage('errors', 'Server error: ' + err.toString());
         });
     } else {
-      addMessage('errors', 'Please enter the api key for ' + serverState.server.name);
+      addMessage('errors', 'Please enter valid api key for ' + serverState.server.name);
     }
   };
 
@@ -161,27 +163,30 @@ export default function UserSettings() {
           </div>
         </UserSettingsContentBlock>
       ))}
-      <UserSettingsContentBlock title="Other Settings">
-        <div className="flex mb-2">
-          <div className="min-w-[170px]">Default User Id</div>
-          <input
-            type="text"
-            className="inline-block text-black p-1 w-full dislay box-border"
-            placeholder="enter any in-game player id"
-            onChange={onSelectedUserIdChange}
-            value={state.selectedUserId}
-          />
-        </div>
-        <div className="flex justify-center">
-          <button
-            className="lnk-btn text-white bg-nova-c1 dark:bg-nova-c3 px-1 text-center block w-[200px]"
-            onClick={onSaveSelectedUserId}>
-            save
-          </button>
-        </div>
-      </UserSettingsContentBlock>
 
-      <div className="flex justify-center mb-5">
+      <div className="hidden">
+        <UserSettingsContentBlock title="Other Settings">
+          <div className="flex mb-2">
+            <div className="min-w-[170px]">Default User Id</div>
+            <input
+              type="text"
+              className="inline-block text-black p-1 w-full dislay box-border"
+              placeholder="enter any in-game player id"
+              onChange={onSelectedUserIdChange}
+              value={state.selectedUserId}
+            />
+          </div>
+          <div className="flex justify-center">
+            <button
+              className="lnk-btn text-white bg-nova-c1 dark:bg-nova-c3 px-1 text-center block w-[200px]"
+              onClick={onSaveSelectedUserId}>
+              save
+            </button>
+          </div>
+        </UserSettingsContentBlock>
+      </div>
+
+      <div className="flex justify-end mb-2 mt-5">
         <button
           className="lnk-btn text-white bg-gray-600 dark:bg-gray-800 px-1 text-center block w-[200px]"
           onClick={() => {
