@@ -180,7 +180,7 @@ function NotableLevels() {
                   <tr className='bg-gray-500 text-white w-full text-shadow-1' key={index}>
                     <td className='p-2'>{lvl} Lvl</td>
                     <td className='p-1 bg-gray-600 dark:text-white'>=</td>
-                    <td p-2>{exp} EXP</td>
+                    <td className='p-2'>{exp} EXP</td>
                   </tr>
                 )
               })}

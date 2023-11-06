@@ -1,9 +1,11 @@
 import { ReactNode, useState } from 'react';
 
-const initialMessagesState: {
+interface InitialMessagesStateInterface {
   errors: string[];
   messages: string[];
-} = {
+}
+
+const initialMessagesState: InitialMessagesStateInterface = {
   errors: [],
   messages: [],
 };
@@ -24,7 +26,11 @@ export function useMessager() {
     }
   };
 
-  const MessagesDisplayBlock = (
+  return { messages, setMessages, clearMessages, addMessage };
+}
+
+export function MessagerBlock({ messages }: { messages: InitialMessagesStateInterface }) {
+  return (
     <>
       {!!messages.errors.length &&
         messages.errors.map((err, index) => (
@@ -41,6 +47,4 @@ export function useMessager() {
         ))}
     </>
   );
-
-  return { messages, setMessages, clearMessages, addMessage, MessagesDisplayBlock };
 }

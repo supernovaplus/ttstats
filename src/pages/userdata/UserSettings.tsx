@@ -4,15 +4,9 @@ import { ChangeEvent, ReactNode, useEffect, useState, MouseEvent } from 'react';
 import { serversList } from '../../data/serversList';
 import { ServerListRawInterface } from '../../types/serverTypes';
 import { prettyNum } from '../../controllers/misc';
-const localStorageKey = 'usersettings-v1.';
-
-const initialMessagesState: {
-  errors: string[];
-  messages: string[];
-} = {
-  errors: [],
-  messages: [],
-};
+import { useMessager, MessagerBlock } from '../../components/MessagerBlock';
+import { useUserDataContext } from '../../store/UserDataContext';
+import { localStorageKeys } from '../../data/config';
 
 const UserSettingsContentBlock = ({ title, children }: { title: string; children: ReactNode }) => {
   return (
@@ -25,50 +19,24 @@ const UserSettingsContentBlock = ({ title, children }: { title: string; children
 
 export default function UserSettings() {
   const navigate = useNavigate();
+  const { userDataState, setUserDataState } = useUserDataContext();
   const [state, setState] = useState({
-    servers: serversList
-      .filter((server) => !!server.apiname)
-      .map((server) => ({
-        server,
-        apikey: localStorage.getItem(localStorageKey + server.endpoint + '.apikey') || '',
-        charges: localStorage.getItem(localStorageKey + server.endpoint + '.charges') || '',
-        lastChecked: Number(localStorage.getItem(localStorageKey + server.endpoint + '.chargesDate')) || '',
-      })),
-    selectedUserId: localStorage.getItem(localStorageKey + 'selected_user_id') || '',
-    errors: '',
+    selectedUserId: localStorage.getItem(localStorageKeys.SELECTED_USER_ID) || '',
   });
+  const { addMessage, clearMessages, messages } = useMessager();
 
-  const [messages, setMessages] = useState(initialMessagesState);
-
-  const clearMessages = () => {
-    setMessages(initialMessagesState);
-  };
-
-  const addMessage = (key: 'errors' | 'messages', msg: string) => {
-    if (key === 'errors' || key === 'messages') {
-      setMessages((s) => ({
-        ...s,
-        [key]: [...s[key], msg],
-      }));
-    }
-  };
-
-  const onApiKeyInputChange = (serverIndex: number) => (e: ChangeEvent<HTMLInputElement>) => {
-    setState((s) => {
-      const servers = s.servers;
-      servers[serverIndex].apikey = e.target.value;
-      return {
-        ...s,
-        servers,
-      };
+  const onApiKeyInputChange = (serverEndpoint: string) => (e: ChangeEvent<HTMLInputElement>) => {
+    setUserDataState((s) => {
+      s.servers[serverEndpoint].apikey = e.target.value;
+      return { ...s };
     });
   };
 
   const onApiKeyCheckboxChecked = (e: ChangeEvent<HTMLInputElement>) => {
-    if(e.target.previousElementSibling?.tagName === "INPUT"){
-      (e.target.previousElementSibling as HTMLInputElement).type = e.target.checked ? "text" : "password";
+    if (e.target.previousElementSibling?.tagName === 'INPUT') {
+      (e.target.previousElementSibling as HTMLInputElement).type = e.target.checked ? 'text' : 'password';
     }
-  }
+  };
 
   const onSelectedUserIdChange = (e: ChangeEvent<HTMLInputElement>) => {
     setState((s) => ({
@@ -80,19 +48,19 @@ export default function UserSettings() {
   const onSaveSelectedUserId = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     clearMessages();
-    if(!state.selectedUserId.length || isNaN(Number(state.selectedUserId))){
-      addMessage('errors','Invalid user id  ');
-    }else{
-      localStorage.setItem(localStorageKey + 'selected_user_id', state.selectedUserId);
-      addMessage('messages','Selected user id saved');
+    if (!state.selectedUserId.length || isNaN(Number(state.selectedUserId))) {
+      addMessage('errors', 'Invalid user id');
+    } else {
+      localStorage.setItem(localStorageKeys.SELECTED_USER_ID, state.selectedUserId);
+      addMessage('messages', 'Selected user id saved');
     }
   };
 
-  const saveAndCheckChargesBtn = (serverIndex: number) => (e: MouseEvent<HTMLButtonElement>) => {
+  const saveAndCheckChargesBtn = (serverEndpoint: string) => (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     clearMessages();
 
-    const serverState = state.servers[serverIndex];
+    const serverState = userDataState.servers[serverEndpoint];
     if (serverState.apikey.length > 10) {
       fetch(`https://d.transporttycoon.eu/${serverState.server.apiname}/charges.json`, {
         headers: {
@@ -105,42 +73,43 @@ export default function UserSettings() {
             if (res[0] === 0) {
               addMessage('errors', 'Invalid key or no charges left');
               console.error('invalid key or no charges');
+
+              setUserDataState((s) => {
+                s.servers[serverEndpoint].charges = '';
+                s.servers[serverEndpoint].lastChecked = '';
+                return { ...s };
+              });
             } else {
               localStorage.setItem(
-                localStorageKey + serverState.server.endpoint + '.apikey',
+                localStorageKeys.SERVER_API_PRIVATE_KEY + '.' + serverState.server.endpoint,
                 String(serverState.apikey)
               );
               localStorage.setItem(
-                localStorageKey + serverState.server.endpoint + '.charges',
+                localStorageKeys.SERVER_API_PRIVATE_CHARGES + '.' + serverState.server.endpoint,
                 String(res[0])
               );
               localStorage.setItem(
-                localStorageKey + serverState.server.endpoint + '.chargesDate',
+                localStorageKeys.SERVER_API_PRIVATE_CHECK_DATE + '.' + serverState.server.endpoint,
                 String(Date.now())
               );
 
-              setState((s) => {
-                const servers = s.servers;
-                s.servers[serverIndex].charges = res[0];
-                s.servers[serverIndex].lastChecked = Date.now();
-
-                return {
-                  ...s,
-                  servers,
-                };
+              setUserDataState((s) => {
+                s.servers[serverEndpoint].charges = res[0];
+                s.servers[serverEndpoint].lastChecked = String(Date.now());
+                return { ...s };
               });
 
-              addMessage('messages','Charges succesfully checked for ' + serverState.server.name);
+              addMessage('messages', 'Charges succesfully checked for ' + serverState.server.name);
             }
           } else {
             addMessage('errors', 'Data unavailable');
           }
         })
         .catch((err) => {
-          addMessage('errors','Server error: ' + err.toString());
+          addMessage('errors', 'Server error: ' + err.toString());
         });
     } else {
-      addMessage('errors','Please enter the api key for ' + serverState.server.name);
+      addMessage('errors', 'Please enter the api key for ' + serverState.server.name);
     }
   };
 
@@ -153,8 +122,8 @@ export default function UserSettings() {
           Go back
         </button>
       </div>
-      {state.servers.map(({ server }, serverIndex) => (
-        <UserSettingsContentBlock title={`${server.name} Settings`} key={serverIndex}>
+      {Object.entries(userDataState.servers).map(([serverEndpoint, serverState], index) => (
+        <UserSettingsContentBlock title={`${serverState.server.name} Settings`} key={index}>
           {/* <div className="flex">
                 <div className="min-w-[150px]">Public API Key</div>
                 <input
@@ -170,31 +139,23 @@ export default function UserSettings() {
               type="password"
               className="inline-block text-black p-1 w-full dislay box-border"
               placeholder="enter you key here"
-              onChange={onApiKeyInputChange(serverIndex)}
-              value={state.servers[serverIndex].apikey}
+              onChange={onApiKeyInputChange(serverEndpoint)}
+              value={serverState.apikey}
             />
-            <input type="checkbox" onChange={onApiKeyCheckboxChecked} className='ml-2'/>
+            <input type="checkbox" onChange={onApiKeyCheckboxChecked} className="ml-2" />
           </div>
           <div className="flex">
             <div className="min-w-[170px]">Last charges: </div>
-            <div>
-              {state.servers[serverIndex].charges
-                ? prettyNum(Number(state.servers[serverIndex].charges))
-                : '?'}
-            </div>
+            <div>{serverState.charges ? prettyNum(Number(serverState.charges)) : '?'}</div>
           </div>
           <div className="flex">
             <div className="min-w-[170px]">Last check date: </div>
-            <div>
-              {state.servers[serverIndex].lastChecked
-                ? new Date(state.servers[serverIndex].lastChecked).toString()
-                : '?'}
-            </div>
+            <div>{serverState.lastChecked ? new Date(Number(serverState.lastChecked)).toString() : '?'}</div>
           </div>
           <div className="flex justify-center">
             <button
               className="lnk-btn text-white bg-nova-c1 dark:bg-nova-c3 px-1 text-center block w-[200px]"
-              onClick={saveAndCheckChargesBtn(serverIndex)}>
+              onClick={saveAndCheckChargesBtn(serverEndpoint)}>
               save and check charges
             </button>
           </div>
@@ -220,19 +181,19 @@ export default function UserSettings() {
         </div>
       </UserSettingsContentBlock>
 
-      {!!messages.errors.length &&
-        messages.errors.map((err, index) => (
-          <div className="bg-red-600 p-2" key={index}>
-            {err}
-          </div>
-        ))}
+      <div className="flex justify-center mb-5">
+        <button
+          className="lnk-btn text-white bg-gray-600 dark:bg-gray-800 px-1 text-center block w-[200px]"
+          onClick={() => {
+            localStorage.clear();
+            alert('All data is clear from local storage');
+            window.location.href = window.location.href;
+          }}>
+          clear all saved data
+        </button>
+      </div>
 
-      {!!messages.messages.length &&
-        messages.messages.map((err, index) => (
-          <div className="bg-green-400 p-2" key={index}>
-            {err}
-          </div>
-        ))}
+      <MessagerBlock messages={messages} />
     </ContentBlock>
   );
 }
