@@ -36,6 +36,8 @@ const initialUserDataState = {
   selectedUserId: localStorage.getItem(localStorageKeys.SELECTED_USER_ID) || '',
 };
 
+console.log(initialUserDataState)
+
 const UserDataContext = createContext<{
   userDataState: UserDataContextInterface;
   setUserDataState: React.Dispatch<React.SetStateAction<UserDataContextInterface>>;
