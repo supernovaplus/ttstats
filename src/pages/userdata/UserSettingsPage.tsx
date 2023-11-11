@@ -17,7 +17,7 @@ const UserSettingsContentBlock = ({ title, children }: { title: string; children
   );
 };
 
-export default function UserSettings() {
+export default function UserSettingsPage() {
   const navigate = useNavigate();
   const { userDataState, setUserDataState } = useUserDataContext();
   const [state, setState] = useState({

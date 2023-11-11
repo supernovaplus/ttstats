@@ -1,20 +1,8 @@
 import { createContext, ReactNode, useState, useEffect, useContext } from 'react';
 import { serversList } from '../data/serversList';
 import { ServerListRawInterface } from '../types/serverTypes';
-import config from '../data/config';
 import { localStorageKeys } from '../data/config';
-
-interface UserDataContextInterface {
-  servers: {
-    [serverEndpoint: string]: {
-      server: ServerListRawInterface;
-      apikey: string;
-      charges: string;
-      lastChecked: string;
-    };
-  };
-  selectedUserId: string;
-}
+import { UserDataContextInterface } from '../types/serverTypes';
 
 const initialUserDataState = {
   servers: Object.fromEntries(

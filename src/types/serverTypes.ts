@@ -259,3 +259,15 @@ export interface TopVehiclesHistoryState {
   error: null | string;
   updated_at: number;
 }
+
+export interface UserDataContextInterface {
+  servers: {
+    [serverEndpoint: string]: {
+      server: ServerListRawInterface;
+      apikey: string;
+      charges: string;
+      lastChecked: string;
+    };
+  };
+  selectedUserId: string;
+}

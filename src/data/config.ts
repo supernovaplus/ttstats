@@ -1,4 +1,4 @@
-const UserSettingsKey = 'usersettings-v1.';
+export const UserSettingsKey = 'usersettings-v1.';
 
 export const localStorageKeys = {
   SELECTED_USER_ID: UserSettingsKey + 'selected_user_id',
@@ -8,9 +8,4 @@ export const localStorageKeys = {
   STACK_PRICE: "ttstats-stacks-price"
 }
 
-const config = {
-  localStorageKeys
-};
-
-
-export default config;
+export const ttApiUri = `https://d.transporttycoon.eu`
