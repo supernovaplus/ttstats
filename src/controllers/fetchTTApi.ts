@@ -9,6 +9,7 @@ interface FetchApiInterface {
 
 export const fetchTTApi = ({ uri, apiKey, endpoint, setUserDataState }: FetchApiInterface) =>
   fetch(uri, {
+    method: "GET",
     headers: {
       'x-tycoon-key': apiKey,
     },

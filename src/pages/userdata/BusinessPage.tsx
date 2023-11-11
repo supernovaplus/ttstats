@@ -32,6 +32,10 @@ const MarkValue = ({ children }: { children: ReactNode }) => {
   return <span className="bg-gray-600 px-2 py-1">{children}</span>;
 };
 
+const calculateBonus = (tier1Cost: number, tier: number) => {
+  return tier === 1 ? tier1Cost : tier1Cost + tier1Cost * tier * 0.25;
+};
+
 export default function BusinessPage() {
   const { userDataState, setUserDataState } = useUserDataContext();
   const [state, setState] = useState({ ...initialBizState, selectedUserId: userDataState.selectedUserId });
@@ -48,14 +52,17 @@ export default function BusinessPage() {
   //   }
   // }, []);
 
+  const loggedIn = !!state.bizData?.data?.businesses;
   const isTiered = selectedServerState?.server.endpoint === 'njyvop';
   let businessesOwned = 0;
   let myBonus = 0;
   let myMoneySpent = 0;
   let totalPossibleBonus = 0;
   let totalMoneyToSpend = 0;
-  let earningFromApi = 0;
+  // let earningFromApi = 0;
   let bankOwned = false;
+  let visibleBusinesses = 0;
+
   // let userDailyBonus += Math.floor(biz.id.includes('biz_train') ? myBonus - myBonus * 0.2 : myBonus);
   // let userTaxedDailyBonus += Math.floor(myBonus - myBonus * 0.2);
 
@@ -67,46 +74,52 @@ export default function BusinessPage() {
     })
     .map((biz, index) => {
       const owned = state.bizData?.data?.businesses.hasOwnProperty(biz.id);
+      const upgradable = biz.id !== 'biz_pacific_standard';
+      let tier = 1;
       if (owned) {
+        tier = state.bizData?.data?.businesses[biz.id] || 1;
         businessesOwned++;
-        myBonus += biz.bonus;
-        myMoneySpent += biz.cost;
-        earningFromApi += state.bizData?.data?.businesses[biz.id].earnings;
+        myBonus += calculateBonus(biz.bonus, tier);
+        myMoneySpent += biz.cost * tier;
+        // earningFromApi += state.bizData?.data?.businesses[biz.id].earnings;
         if (biz.id === 'biz_pacific_standard') bankOwned = true;
       }
       totalMoneyToSpend += biz.cost;
       totalPossibleBonus += biz.bonus;
-      if (isTiered) {
+      if (isTiered && upgradable) {
         totalMoneyToSpend += biz.cost * 99;
         totalPossibleBonus += biz.bonus * 0.25 * 99;
       }
 
+      if (state.filterOwned && owned) {
+        return <tr key={index}></tr>;
+      } else {
+        visibleBusinesses++;
+      }
+
       return (
         <tr key={index}>
-          {state.filterOwned && owned ? (
-            <></>
-          ) : (
+          <td>#{index + 1}</td>
+          <td title={biz.id}>
+            {biz.name}
+            {owned ? ' ✅' : ''}
+          </td>
+          {loggedIn && (
             <>
-              <td>#{index + 1}</td>
-              <td title={biz.id}>
-                {biz.name}
-                {owned ? ' ✅' : ''}
-              </td>
-              <td>
-                ${shortenLargeMoney(biz.cost)}
-                {isTiered && '+' + shortenLargeMoney(biz.cost * 99)}
-              </td>
-              <td>${shortenLargeMoney(biz.bonus)}</td>
-              <td>
-                <a
-                  href={`https://ttmap.eu/?x=${biz.position.x}&y=${biz.position.y}&hideplayers`}
-                  target="_blank"
-                  className="text-blue-700 text-xs">
-                  map
-                </a>
-              </td>
+              <td>${totalMoneyToSpend - (biz.cost + biz.cost * tier)}</td>
+              {isTiered && <td>{tier}</td>}
             </>
           )}
+          <td>${shortenLargeMoney(biz.cost)}</td>
+          <td>${shortenLargeMoney(calculateBonus(biz.bonus, tier))}</td>
+          <td>
+            <a
+              href={`https://ttmap.eu/?x=${biz.position.x}&y=${biz.position.y}&hideplayers`}
+              target="_blank"
+              className="text-blue-700 text-xs">
+              map
+            </a>
+          </td>
         </tr>
       );
     });
@@ -251,6 +264,10 @@ export default function BusinessPage() {
             </option>
           ))}
         </select>
+        <div className="flex">
+          <input type="button" value="bussiness" className="bg-red-400" />
+          <input type="button" value="my bussines" className="bg-red-400" />
+        </div>
         <div
           style={{ maxHeight: '600px' }}
           className="overflow-y-auto flex flex-col border-b-2 border-nova-c1 dark:border-nova-c3 box-shadow-1">
@@ -258,14 +275,25 @@ export default function BusinessPage() {
             <table className="w-full text-center">
               <thead className="sticky top-0 text-white bg-nova-c1 dark:bg-nova-c3 z-0">
                 <tr>
-                  <th></th>
-                  <th>Business</th>
-                  <th>Cost{isTiered && ' + 100 tier'}</th>
-                  <th>Bonus</th>
-                  <th>Links</th>
+                  <th>#</th>
+                  <th>#</th>
+                  {loggedIn && <th>#</th>}
+                  <th>#</th>
+                  <th>#</th>
+                  <th>#</th>
                 </tr>
               </thead>
-              <tbody>{filteredBusineses}</tbody>
+              <tbody>
+                {visibleBusinesses > 0 ? (
+                  filteredBusineses
+                ) : (
+                  <tr>
+                    <td colSpan={5} className="min-h-[100px] py-10">
+                      No bussinesses left to buy
+                    </td>
+                  </tr>
+                )}
+              </tbody>
             </table>
           </div>
         </div>
@@ -308,14 +336,14 @@ export default function BusinessPage() {
                   bonus after tax ({bankOwned ? '20%' : '30%'}):{' '}
                   <MarkValue>{shortenLargeMoney(totalBonusInDayAfterTax)}</MarkValue> per day
                 </div>
-                {isTiered && (
+                {/* {isTiered && (
                   <>
                     <div className="border px-2">
                       bonus after tax ({bankOwned ? '20%' : '30%'}):{' '}
                       <MarkValue>{shortenLargeMoney(totalBonusInDayAfterTax)}</MarkValue> per day
                     </div>
                   </>
-                )}
+                )} */}
                 {/* <div className="border px-2">
                   earning from api: <MarkValue>{shortenLargeMoney(earningFromApi)}</MarkValue> per day
                 </div> */}
