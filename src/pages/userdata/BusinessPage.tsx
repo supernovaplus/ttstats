@@ -1,7 +1,7 @@
-import { MouseEvent, ChangeEvent, useEffect, useState, ReactNode } from 'react';
+import { MouseEvent, ChangeEvent, useEffect, useState, ReactNode, useMemo } from 'react';
 import ContentBlock from '../../components/ContentBlock';
 import { getCacheStr, prettyNum, shortenLargeMoney } from '../../controllers/misc';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useSearchParams } from 'react-router-dom';
 import businessData from '../../data/businessData';
 import { useUserDataContext } from '../../store/UserDataContext';
 import { useMessager, MessagerBlock } from '../../components/MessagerBlock';
@@ -36,21 +36,25 @@ const calculateBonus = (tier1Cost: number, tier: number) => {
   return tier === 1 ? tier1Cost : tier1Cost + tier1Cost * tier * 0.25;
 };
 
+// function useQuery() {
+//   const { search } = useLocation();
+//   return useMemo(() => new URLSearchParams(search), [search]);
+// }
+
 export default function BusinessPage() {
   const { userDataState, setUserDataState } = useUserDataContext();
   const [state, setState] = useState({ ...initialBizState, selectedUserId: userDataState.selectedUserId });
   const { messages, addMessage, clearMessages } = useMessager();
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const selectedServerState = !state.selectedServerEndpoint
-    ? null
-    : userDataState.servers[state.selectedServerEndpoint];
+  // Access individual parameters
+  const serverId = searchParams.get('serverId') || '2epova';
+  const page = searchParams.get('page');
+  console.log({ serverId, page });
+  // const { server, page } = useParams();
+  // console.log(server, page);
 
-  // useEffect(() => {
-  //   if (selectedServerState && !selectedServerState.apikey) {
-  //     addMessage('errors', 'No api key provided, go to api settings');
-  //     console.log('yesnt');
-  //   }
-  // }, []);
+  const selectedServerState = !serverId ? null : userDataState.servers[serverId];
 
   const loggedIn = !!state.bizData?.data?.businesses;
   const isTiered = selectedServerState?.server.endpoint === 'njyvop';
@@ -127,9 +131,13 @@ export default function BusinessPage() {
   const totalBonusInDay = myBonus * 8;
   const totalBonusInDayAfterTax = totalBonusInDay * (bankOwned ? 0.8 : 0.7);
 
-  const onServerChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setState((s) => ({ ...s, bizData: initialBizState.bizData, selectedServerEndpoint: e.target.value }));
+  const onServerChange = (endpoint: string) => {
+    setState((s) => ({ ...s, bizData: initialBizState.bizData }));
   };
+
+  // const onServerChange = (e: ChangeEvent<HTMLSelectElement>) => {
+  //   setState((s) => ({ ...s, bizData: initialBizState.bizData, selectedServerEndpoint: e.target.value }));
+  // };
 
   const onGetBiz = (e: MouseEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -254,7 +262,7 @@ export default function BusinessPage() {
   return (
     <ContentBlock title="Business">
       <div style={{ minHeight: '200px', maxHeight: '90vh' }}>
-        <select
+        {/* <select
           defaultValue={initialBizState.selectedServerEndpoint}
           className="px-2 cursor-pointer w-full text-center py-2 mb-1 border-b-2 dark:border-nova-c3 bg-gray-600 border border-gray-600 text-white"
           onChange={onServerChange}>
@@ -263,10 +271,25 @@ export default function BusinessPage() {
               {server.name}
             </option>
           ))}
-        </select>
+        </select> */}
         <div className="flex">
-          <input type="button" value="bussiness" className="bg-red-400" />
-          <input type="button" value="my bussines" className="bg-red-400" />
+          {Object.entries(userDataState.servers).map(([serverEndpoint, { server }], index) => (
+            <NavLink
+              key={index}
+              to={`?serverId=${server.endpoint}`}
+              className="bg-black px-2 mx-1 hover:bg-gray-700"
+              onClick={() => onServerChange(server.endpoint)}>
+              {server.name}
+            </NavLink>
+          ))}
+        </div>
+        <div className="flex">
+          <NavLink to={`?serverId=${serverId}&page=all`} className="bg-black px-2 mx-1 hover:bg-gray-700">
+            all
+          </NavLink>
+          <NavLink to={`?serverId=${serverId}&page=all`} className="bg-black px-2 mx-1 hover:bg-gray-700">
+            player's bussinesses
+          </NavLink>
         </div>
         <div
           style={{ maxHeight: '600px' }}
