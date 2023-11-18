@@ -69,10 +69,10 @@ export default function TopJobsLive() {
             </thead>
             <tbody>
               {jobsState.counter === 0 ? (
-                <tr>
+                <tr className="text-gray-600 dark:text-gray-400 odd:bg-kebab-odd even:bg-kebab-even hover:bg-kebab-dk">
                   <td>-</td>
                   <td>No Data</td>
-                  <td>N/A</td>
+                  <td>-</td>
                 </tr>
               ) : (
                 jobsState.entries.map((job, index) => {
@@ -108,10 +108,10 @@ export default function TopJobsLive() {
             </thead>
             <tbody>
               {companyJobsState.counter === 0 ? (
-                <tr>
+                <tr className="text-gray-600 dark:text-gray-400 odd:bg-kebab-odd even:bg-kebab-even hover:bg-kebab-dk">
                   <td>-</td>
                   <td>No Data</td>
-                  <td>N/A</td>
+                  <td>-</td>
                 </tr>
               ) : (
                 companyJobsState.entries.map((job, index) => {

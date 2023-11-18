@@ -48,10 +48,8 @@ export default function HighestIDPage() {
           </thead>
           <tbody>
             {!playersList.length ? (
-              <tr>
-                <th></th>
-                <th>No Data</th>
-                <th></th>
+              <tr className="text-gray-600 dark:text-gray-400 odd:bg-kebab-odd even:bg-kebab-even hover:bg-kebab-dk">
+                <th colSpan={4}>No Data</th>
               </tr>
             ) : (
               playersList.map((player, index) =>

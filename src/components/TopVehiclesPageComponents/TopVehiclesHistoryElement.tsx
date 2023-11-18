@@ -54,25 +54,36 @@ export default function TopVehiclesHistoryElement({ state, title, dataKey }: pro
                 </tr>
               </thead>
               <tbody>
-                {state.data![dataKey].map(({ name, hours, percentage, vclass }, index) => (
-                  <tr key={index} className="odd:bg-kebab-odd even:bg-kebab-even hover:bg-kebab-dk">
-                    <td>#{index + 1}</td>
-                    <td>{percentage}%</td>
-                    <td>
-                      {name}{' '}
-                      <span className="inline-block text-xs bg-nova-c1 dark:bg-nova-c3 text-white text-shadow-1 rounded px-1">
-                        {vclass}
-                      </span>
-                    </td>
-                    <td>{hours.toLocaleString('en-us')} h</td>
+                {state.data![dataKey].length ? (
+                  <>
+                    {state.data![dataKey].map(({ name, hours, percentage, vclass }, index) => (
+                      <tr key={index} className="odd:bg-kebab-odd even:bg-kebab-even hover:bg-kebab-dk">
+                        <td>#{index + 1}</td>
+                        <td>{percentage}%</td>
+                        <td>
+                          {name}{' '}
+                          <span className="inline-block text-xs bg-nova-c1 dark:bg-nova-c3 text-white text-shadow-1 rounded px-1">
+                            {vclass}
+                          </span>
+                        </td>
+                        <td>{hours.toLocaleString('en-us')} h</td>
+                      </tr>
+                    ))}
+                    <tr className="text-gray-600 dark:text-gray-400 odd:bg-kebab-odd even:bg-kebab-even hover:bg-kebab-dk">
+                      <td>...</td>
+                      <td>{roundFixed(calculations.percentage, 1)}%</td>
+                      <td>Other Vehicles</td>
+                      <td>{Math.round(calculations.hours).toLocaleString('en-us')} h</td>
+                    </tr>
+                  </>
+                ) : (
+                  <tr className="text-gray-600 dark:text-gray-400 odd:bg-kebab-odd even:bg-kebab-even hover:bg-kebab-dk">
+                    <td>-</td>
+                    <td>-</td>
+                    <td>No Data</td>
+                    <td>-</td>
                   </tr>
-                ))}
-                <tr className="text-gray-600 dark:text-gray-400 odd:bg-kebab-odd even:bg-kebab-even hover:bg-kebab-dk">
-                  <td>...</td>
-                  <td>{roundFixed(calculations.percentage, 1)}%</td>
-                  <td>Other Vehicles</td>
-                  <td>{Math.round(calculations.hours).toLocaleString('en-us')} h</td>
-                </tr>
+                )}
               </tbody>
             </table>
           </div>

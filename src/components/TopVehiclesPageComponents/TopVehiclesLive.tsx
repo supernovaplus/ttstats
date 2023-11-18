@@ -74,10 +74,10 @@ export default function TopVehiclesLive() {
               </thead>
               <tbody>
                 {!state.sorted_vehicles || !state.sorted_vehicles.length ? (
-                  <tr>
+                  <tr className="text-gray-600 dark:text-gray-400 odd:bg-kebab-odd even:bg-kebab-even hover:bg-kebab-dk">
                     <td>-</td>
                     <td>No Data</td>
-                    <td>N/A</td>
+                    <td>-</td>
                   </tr>
                 ) : (
                   <>
@@ -115,10 +115,10 @@ export default function TopVehiclesLive() {
               </thead>
               <tbody>
                 {!state.sorted_classes || !state.sorted_classes.length ? (
-                  <tr>
+                  <tr className="text-gray-600 dark:text-gray-400 odd:bg-kebab-odd even:bg-kebab-even hover:bg-kebab-dk">
                     <td>-</td>
                     <td>No Data</td>
-                    <td>N/A</td>
+                    <td>-</td>
                   </tr>
                 ) : (
                   <>
