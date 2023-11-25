@@ -18,12 +18,12 @@ export default function ServersListPage() {
       <ContentBlock title="Transport Tycoon Servers List">
         <table className="w-full text-center dyntable mb-40">
           <thead className="bg-nova-opa1">
-            <tr className="text-lg">
-              <th>Server</th>
-              <th>Players</th>
-              <th>Status</th>
-              <th>Uptime</th>
-              <th>DXP</th>
+            <tr className="text-lg sm:flex sm:flex-wrap">
+              <th className="w-1/5 sm:w-1/2">Server</th>
+              <th className="w-1/5 sm:w-1/2">Players</th>
+              <th className="w-1/5 sm:w-1/2">Status</th>
+              <th className="w-1/5 sm:w-1/2">Uptime</th>
+              <th className="w-1/5 sm:w-1/2">DXP</th>
             </tr>
           </thead>
           {Object.values(servers).map((server, index) => {
@@ -70,8 +70,8 @@ export default function ServersListPage() {
                     </div>
                   </td>
                 </tr>
-                <tr className={`dark:border-b-black ${trClass}`}>
-                  <td data-label="Server" className="w-1/5">
+                <tr className={`dark:border-b-black sm:flex sm:flex-wrap sm:border-b sm:bg-gray-400 sm:dark:bg-gray-700 ${trClass}`}>
+                  <td data-label="Server" className="w-1/5 sm:w-1/2">
                     <Modal
                       title={`Joining ${server.name} server`}
                       buttonValue="Connect"
@@ -79,7 +79,7 @@ export default function ServersListPage() {
                       <ServerConnectModal server={server} />
                     </Modal>
                   </td>
-                  <td data-label="Players" className="w-1/5">
+                  <td data-label="Players" className="w-1/5 sm:w-1/2">
                     {!isOnline || !server.playersData ? (
                       '-/-'
                     ) : (
@@ -97,10 +97,10 @@ export default function ServersListPage() {
                       </Modal>
                     )}
                   </td>
-                  <td data-label="Status" className="w-1/5">
+                  <td data-label="Status" className="w-1/5 sm:w-1/2">
                     {!server.loaded ? 'Loading' : isOnline ? 'Online' : 'Offline'}
                   </td>
-                  <td data-label="Uptime" className="w-1/5">
+                  <td data-label="Uptime" className="w-1/5 sm:w-1/2">
                     {isOnline && server.serverData ? (
                       server.apiname ? (
                         <Modal
@@ -135,7 +135,7 @@ export default function ServersListPage() {
                       '-'
                     )}
                   </td>
-                  <td data-label="DXP" className="w-1/5">
+                  <td data-label="DXP" className="w-1/5 sm:w-1/2">
                     {isOnline ? (
                       isDxpActive ? (
                         <Modal
