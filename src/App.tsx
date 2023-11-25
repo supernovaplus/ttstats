@@ -39,11 +39,11 @@ export default function App() {
 
   return (
     <DataContextProvider>
-      <div className="max-w-[1000px] w-full mx-auto my-0 min-h-screen px-1 min-w-[400px]">
+      <div className="max-w-[1000px] w-full mx-auto my-0 min-h-screen px-1 min-w-[200px]">
         <Header />
         <div className="flex md:flex-col items-start md:items-center">
           <Sidebar />
-          <div className=" w-full">
+          <div className="w-full">
             <Routes>
               {/* static */}
               <Route path="/" element={<ServersListPage />} />
