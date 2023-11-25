@@ -159,6 +159,7 @@ function EXPConverter() {
 
 function NotableLevels() {
   const data: [target: string, value: number][] = [
+    ["lvl", 10],
     ["lvl", 100],
     ["exp", 500_000],
     ["exp", 1_000_000],

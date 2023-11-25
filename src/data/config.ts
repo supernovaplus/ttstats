@@ -5,7 +5,7 @@ export const localStorageKeys = {
   SERVER_API_PRIVATE_KEY: UserSettingsKey + 'api_private_key',
   SERVER_API_PRIVATE_CHARGES: UserSettingsKey + 'api_private_charges',
   SERVER_API_PRIVATE_CHECK_DATE: UserSettingsKey + 'api_private_charges_check_date',
-  STACK_PRICE: "ttstats-stacks-price"
-}
+  STACK_PRICE: 'ttstats-stacks-price',
+};
 
-export const ttApiUri = `https://d.transporttycoon.eu`
+export const ttApiUri = `https://d.transporttycoon.eu`;

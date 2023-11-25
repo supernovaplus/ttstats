@@ -83,9 +83,9 @@ export default function Sidebar() {
             <OneItem to="/links" setForceOpen={setForceOpen}>
               Useful Links
             </OneItem>
-            <OneItem to="/user/business" setForceOpen={setForceOpen}>
+            {/* <OneItem to="/user/business" setForceOpen={setForceOpen}>
               Business
-            </OneItem>
+            </OneItem> */}
             {/* <OneItem to="/lazy">lazy</OneItem> */}
             {/* <OneItem to="/chart">chart</OneItem> */}
             {/* <OneItem to="/404">404</OneItem> */}

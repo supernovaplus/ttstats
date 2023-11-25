@@ -22,9 +22,9 @@ export default function ContentBlock({ title, children }: props) {
           </>
         )}
         {children && (
-          <article className="p-2 bg-gray-300 dark:bg-nova-c1 text-black dark:text-white border-2 border-nova-c1 dark:border-nova-c2">
+          <section className="p-2 bg-gray-300 dark:bg-nova-c1 text-black dark:text-white border-2 border-nova-c1 dark:border-nova-c2">
             {children}
-          </article>
+          </section>
         )}
       </div>
     </>

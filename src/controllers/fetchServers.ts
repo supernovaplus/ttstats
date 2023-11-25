@@ -22,25 +22,26 @@ export const defaultServersState = serversList.reduce((acc: ServerDataObjectList
   return acc;
 }, {});
 
-const cancellableJSONFetch = async ({
-  cancelController,
-  url,
-  cancelControllerTimeout,
-}: {
-  cancelController: AbortController;
-  url: string;
-  cancelControllerTimeout?: NodeJS.Timeout;
-}) => {
-  cancelControllerTimeout = setTimeout(() => {
-    cancelController.abort();
-  }, 5000);
+/**
+ * Fetch with a timeout using abort controller
+ * @param url API URL
+ * @param abortAfter Abort after X miliseconds
+ * @returns
+ */
+const cFetch = async (url: string, abortAfter = 5000) => {
+  const abortController = new AbortController();
+  const timeout = setTimeout(() => {
+    abortController.abort();
+  }, abortAfter);
 
   const res = await fetch(url, {
-    signal: cancelController.signal,
+    signal: abortController.signal,
     redirect: 'error',
   });
 
-  if (res.status === 404) {
+  clearTimeout(timeout);
+
+  if (res.status !== 200) {
     throw new Error('offline');
   } else {
     return res.json();
@@ -87,20 +88,16 @@ export const fetchServer = async (server: ServerDataObject, setServer: SetServer
     },
   }));
 
-  const cancelController = new AbortController();
-  let cancelControllerTimeout;
   let success = false;
 
   if (server.apiname) {
     try {
-      const res: MainAPIPlayersResponse = await cancellableJSONFetch({
-        cancelController,
-        cancelControllerTimeout,
+      const res: MainAPIPlayersResponse = await cFetch(
         //fetch fivem reverse proxy
-        // url: `https://tycoon-${server.endpoint}.users.cfx.re/status/widget/players.json`,
+        // `https://tycoon-${server.endpoint}.users.cfx.re/status/widget/players.json`,
         //fetch via server's nginx server
-        url: `https://d.transporttycoon.eu/${server.apiname}/widget/players.json`,
-      });
+        `https://d.transporttycoon.eu/${server.apiname}/widget/players.json`
+      );
       await parseStatusJSON({ res, setServer, server });
       success = true;
     } catch (err) {}
@@ -109,7 +106,7 @@ export const fetchServer = async (server: ServerDataObject, setServer: SetServer
     // try {
     //   clearTimeout(cancelControllerTimeout);
     //   if (success) return;
-    //   const res = await cancellableJSONFetch({
+    //   const res = await cFetch({
     //     cancelController,
     //     cancelControllerTimeout,
     //     url: `https://d.ttstats.eu/status/${server.endpoint}`,
@@ -121,13 +118,10 @@ export const fetchServer = async (server: ServerDataObject, setServer: SetServer
 
   //else fetch fivem server status api
   try {
-    clearTimeout(cancelControllerTimeout);
     if (success) return;
-    const res: ServerFallbackAPIResponse = await cancellableJSONFetch({
-      cancelController,
-      cancelControllerTimeout,
-      url: `https://servers-frontend.fivem.net/api/servers/single/${server.endpoint}`,
-    });
+    const res: ServerFallbackAPIResponse = await cFetch(
+      `https://servers-frontend.fivem.net/api/servers/single/${server.endpoint}`
+    );
 
     if (!('Data' in res)) throw new Error('offline');
     const data = res['Data'];
@@ -136,6 +130,7 @@ export const fetchServer = async (server: ServerDataObject, setServer: SetServer
       ...s,
       [server.endpoint]: {
         ...server,
+        name: (server.endpoint === '2epova' && data?.['hostname']?.replace('^1', '')) || server.name,
         loaded: true,
         error: false,
         playersData: data.players.map((player) => [player.name || '?', -1, 0, '', false, '?', false]),
@@ -158,7 +153,6 @@ export const fetchServer = async (server: ServerDataObject, setServer: SetServer
   } catch (err) {}
 
   //else all fetches failed, set status to offline
-  clearTimeout(cancelControllerTimeout);
   if (success) return;
   setServer((s) => ({
     ...s,

@@ -58,12 +58,12 @@ export default function TopVehiclesLive() {
   return (
     <>
       <ContentBlock title="Top Vehicles Now [Legacy Server Only]">
-        {state.loading ? (
-          <LoadingRow />
-        ) : state.error ? (
-          <ErrorRow>{state.error}</ErrorRow>
-        ) : (
-          <div className="max-h-[300px] overflow-y-auto border-b-2 border-nova-c1 dark:border-nova-c3 box-shadow-1">
+        <div className="max-h-[300px] overflow-y-auto border-b-2 border-nova-c1 dark:border-nova-c3 box-shadow-1">
+          {state.loading ? (
+            <div className="text-center">Loading...</div>
+          ) : state.error ? (
+            <ErrorRow>{state.error}</ErrorRow>
+          ) : (
             <table className="w-full text-center">
               <thead className="sticky top-0 text-white bg-nova-c1  dark:bg-nova-c3">
                 <tr>
@@ -94,8 +94,8 @@ export default function TopVehiclesLive() {
                 )}
               </tbody>
             </table>
-          </div>
-        )}
+          )}
+        </div>
         <TimeUpdatedRow updated_at={state.timestamp} />
       </ContentBlock>
       <ContentBlock title="Top Vehicle Classes Now [Legacy Server Only]">
