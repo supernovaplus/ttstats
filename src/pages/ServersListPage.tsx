@@ -52,7 +52,7 @@ export default function ServersListPage() {
             }
 
             return (
-              <tbody key={index} className={trClass}>
+              <tbody key={index} className={`sm:border-opacity-20 sm:border-2 sm:border-dashed border-black ${trClass}`}>
                 <tr className="undyntable">
                   <td colSpan={5}>
                     <div className="mt-1 text-left block pt-2">Server {server.name}
@@ -70,7 +70,7 @@ export default function ServersListPage() {
                     </div>
                   </td>
                 </tr>
-                <tr className={`dark:border-b-black sm:flex sm:flex-wrap sm:border-b sm:bg-gray-400 sm:dark:bg-gray-700 ${trClass}`}>
+                <tr className={`dark:border-b-black sm:flex sm:flex-wrap ${trClass}`}>
                   <td data-label="Server" className="w-1/5 sm:w-1/2">
                     <Modal
                       title={`Joining ${server.name} server`}
