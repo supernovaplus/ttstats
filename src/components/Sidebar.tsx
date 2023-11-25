@@ -79,10 +79,13 @@ export default function Sidebar() {
             <OneItem to="/exp-calculator" setForceOpen={setForceOpen}>
               EXP Calculator
             </OneItem>
-            <Category>Info</Category>
+            <Category>Other</Category>
             <OneItem to="/links" setForceOpen={setForceOpen}>
               Useful Links
             </OneItem>
+            {/* <OneItem to="/user/business" setForceOpen={setForceOpen}>
+              Business
+            </OneItem> */}
             {/* <OneItem to="/lazy">lazy</OneItem> */}
             {/* <OneItem to="/chart">chart</OneItem> */}
             {/* <OneItem to="/404">404</OneItem> */}

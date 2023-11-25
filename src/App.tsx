@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 
 import { DataContextProvider } from './store/DataContext';
 
-import Navbar from './components/Navbar';
+import Header from './components/Header';
 import Footer from './components/Footer';
 import Sidebar from './components/Sidebar';
 
@@ -15,6 +15,7 @@ import PlayerFinderPage from './pages/PlayerFinderPage';
 import Page404 from './components/Page404';
 import UptimePage from './pages/UptimePage';
 import LinksPage from './pages/LinksPage';
+import UserDataIndexPage from './pages/userdata/UserDataIndexPage';
 
 const TopJobs = lazy(() => import('./pages/TopJobsPage'));
 const HighestIDPage = lazy(() => import('./pages/HighestIDPage'));
@@ -39,7 +40,7 @@ export default function App() {
   return (
     <DataContextProvider>
       <div className="max-w-[1000px] w-full mx-auto my-0 min-h-screen px-1 min-w-[400px]">
-        <Navbar />
+        <Header />
         <div className="flex md:flex-col items-start md:items-center">
           <Sidebar />
           <div className=" w-full">
@@ -61,6 +62,7 @@ export default function App() {
                 element={<LazyLoadingWrapper component={StacksCalculatorPage} />}
               />
               <Route path="/exp-calculator" element={<LazyLoadingWrapper component={EXPCalculatorPage} />} />
+              <Route path="/user/*" element={<UserDataIndexPage/>}/>
               {/* 404 */}
               <Route path="*" element={<Page404 />} />
             </Routes>

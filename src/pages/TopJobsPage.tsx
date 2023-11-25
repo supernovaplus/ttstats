@@ -5,8 +5,8 @@ import ContentBlock from '../components/ContentBlock';
 export default function TopJobsPage() {
   return (
     <>
-      <TopJobsHistory />
       <TopJobsLive />
+      <TopJobsHistory />
     </>
   );
 }

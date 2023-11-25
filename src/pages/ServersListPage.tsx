@@ -158,8 +158,6 @@ export default function ServersListPage() {
             );
           })}
         </table>
-      </ContentBlock>
-      <ContentBlock>
         <Skillboost />
       </ContentBlock>
     </>

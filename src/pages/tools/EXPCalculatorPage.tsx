@@ -159,6 +159,7 @@ function EXPConverter() {
 
 function NotableLevels() {
   const data: [target: string, value: number][] = [
+    ["lvl", 10],
     ["lvl", 100],
     ["exp", 500_000],
     ["exp", 1_000_000],
@@ -180,7 +181,7 @@ function NotableLevels() {
                   <tr className='bg-gray-500 text-white w-full text-shadow-1' key={index}>
                     <td className='p-2'>{lvl} Lvl</td>
                     <td className='p-1 bg-gray-600 dark:text-white'>=</td>
-                    <td p-2>{exp} EXP</td>
+                    <td className='p-2'>{exp} EXP</td>
                   </tr>
                 )
               })}

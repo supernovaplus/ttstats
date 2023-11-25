@@ -1,11 +1,10 @@
 import { useState, useEffect, startTransition } from 'react';
 import ContentBlock from '../../components/ContentBlock';
 import { shortenLargeMoney } from '../../controllers/misc';
-
-const localStorageKey = 'ttstats-stacks-price';
+import { localStorageKeys } from '../../data/config';
 
 export default function StacksCalculatorPage() {
-  const savedPrice = window.localStorage.getItem(localStorageKey);
+  const savedPrice = window.localStorage.getItem(localStorageKeys.STACK_PRICE);
   const [stackAmountString, setStackAmountString] = useState('');
   const [singleStackPrice, setSingleStackPrice] = useState(savedPrice || '1000');
   const [result, setResult] = useState(0);
@@ -60,7 +59,7 @@ export default function StacksCalculatorPage() {
   //save single stack price to localStorage with a delay
   useEffect(() => {
     const saveSingleStackTimeout = window.setTimeout(() => {
-      window.localStorage.setItem(localStorageKey, String(singleStackPrice) || '1000');
+      window.localStorage.setItem(localStorageKeys.STACK_PRICE, String(singleStackPrice) || '1000');
       console.log('single stack price saved');
     }, 1000);
 
@@ -110,8 +109,6 @@ export default function StacksCalculatorPage() {
         <hr />
         <p className="max-w-md text-center bg-gray-400 rounded dark:bg-gray-700 p-2 my-3">
           This tool is made for lazy people who don't want to count zeroes when selling/buying stacks.
-          <br />
-          Single stack price is saved for later.
         </p>
       </div>
     </ContentBlock>

@@ -1,8 +1,10 @@
 import { useDataContext } from '../store/DataContext';
 import { MainAPIPlayerHighest } from '../types/serverTypes';
 import ContentBlock from '../components/ContentBlock';
+import { useState } from 'react';
 
 export default function HighestIDPage() {
+  const [showFull, setShowFull] = useState(false);
   const { servers } = useDataContext();
   let playersList: MainAPIPlayerHighest[] = [];
 
@@ -27,7 +29,7 @@ export default function HighestIDPage() {
         return player;
       });
 
-    if (playersList.length > 21) {
+    if (!showFull && playersList.length > 21) {
       playersList = [...playersList.splice(0, 11), ...playersList.splice(playersList.length - 10)];
     }
   }
@@ -46,14 +48,12 @@ export default function HighestIDPage() {
           </thead>
           <tbody>
             {!playersList.length ? (
-              <tr>
-                <th></th>
-                <th>No Data</th>
-                <th></th>
+              <tr className="text-gray-600 dark:text-gray-400 odd:bg-kebab-odd even:bg-kebab-even hover:bg-kebab-dk">
+                <th colSpan={4}>No Data</th>
               </tr>
             ) : (
               playersList.map((player, index) =>
-                index === 10 ? (
+                !showFull && index === 10 ? (
                   <tr
                     key={index}
                     className="odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-d select-none">
@@ -78,6 +78,14 @@ export default function HighestIDPage() {
           </tbody>
         </table>
       </div>
+      {playersList.length > 20 && (
+        <input
+          type="button"
+          className="mt-3 cursor-pointer block m-auto bg-gray-400 px-2 dark:bg-nova-c3"
+          value={!showFull ? 'show all' : 'show less'}
+          onClick={() => setShowFull((s) => !s)}
+        />
+      )}
     </ContentBlock>
   );
 }

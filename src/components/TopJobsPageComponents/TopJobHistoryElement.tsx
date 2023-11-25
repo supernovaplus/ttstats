@@ -56,20 +56,31 @@ export default function TopJobHistoryElement({ state, title, dataKey }: props) {
                 </tr>
               </thead>
               <tbody>
-                {state.data![dataKey].map(({ name, hours, percentage }, index) => (
-                  <tr key={index} className="odd:bg-kebab-odd even:bg-kebab-even hover:bg-kebab-dk">
-                    <td>#{index + 1}</td>
-                    <td>{percentage}%</td>
-                    <td>{name}</td>
-                    <td>{hours.toLocaleString('en-us')} h</td>
+                {state.data![dataKey].length ? (
+                  <>
+                    {state.data![dataKey].map(({ name, hours, percentage }, index) => (
+                      <tr key={index} className="odd:bg-kebab-odd even:bg-kebab-even hover:bg-kebab-dk">
+                        <td>#{index + 1}</td>
+                        <td>{percentage}%</td>
+                        <td>{name}</td>
+                        <td>{hours.toLocaleString('en-us')} h</td>
+                      </tr>
+                    ))}
+                    <tr className="text-gray-600 dark:text-gray-400 odd:bg-kebab-odd even:bg-kebab-even hover:bg-kebab-dk">
+                      <td>...</td>
+                      <td>{roundFixed(calculations.percentage, 1)}%</td>
+                      <td>Other Jobs</td>
+                      <td>{Math.round(calculations.hours).toLocaleString('en-us')} h</td>
+                    </tr>
+                  </>
+                ) : (
+                  <tr className="text-gray-600 dark:text-gray-400 odd:bg-kebab-odd even:bg-kebab-even hover:bg-kebab-dk">
+                    <td>-</td>
+                    <td>-</td>
+                    <td>No Data</td>
+                    <td>-</td>
                   </tr>
-                ))}
-                <tr className="text-gray-600 dark:text-gray-400 odd:bg-kebab-odd even:bg-kebab-even hover:bg-kebab-dk">
-                  <td>...</td>
-                  <td>{roundFixed(calculations.percentage, 1)}%</td>
-                  <td>Other Jobs</td>
-                  <td>{Math.round(calculations.hours).toLocaleString('en-us')} h</td>
-                </tr>
+                )}
               </tbody>
             </table>
           </div>

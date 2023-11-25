@@ -10,6 +10,7 @@ export interface ServerListRawInterface {
   /** link, url */
   links?: [string, string][];
   info: string;
+  apiKeyAllow?: boolean;
 }
 
 export interface MainAPIPlayer {
@@ -257,4 +258,16 @@ export interface TopVehiclesHistoryState {
   data: null | TopVehiclesHistoryResponse['data'];
   error: null | string;
   updated_at: number;
+}
+
+export interface UserDataContextInterface {
+  servers: {
+    [serverEndpoint: string]: {
+      server: ServerListRawInterface;
+      apikey: string;
+      charges: string;
+      lastChecked: string;
+    };
+  };
+  selectedUserId: string;
 }

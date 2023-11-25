@@ -55,3 +55,34 @@ export const calcLvlToEXP = (level: number) => Math.floor((5 * level * (level + 
 export const calcEXPToLvl = (exp: number) => Math.floor((Math.sqrt(1 + (8 * exp) / 5) - 1) / 2);
 
 export const prettyNum = (num: number) => num.toLocaleString('en-us');
+
+export const getCacheObj = (key: string) => {
+  const data = localStorage.getItem(key);
+  if (!data) return false;
+
+  try {
+    return JSON.parse(data);
+  } catch (err) {
+    console.error(err);
+    return false;
+  }
+}
+
+export const setLocalObj = (key: string, data: Object) => {
+  try {
+    localStorage.setItem(key, JSON.stringify(data));
+    return true;
+  } catch (err) {
+    console.error(err);
+    return false;
+  }
+}
+
+export const getCacheStr = (key: string) => {
+  return localStorage.getItem(key);
+}
+
+export const setCacheStr = (key: string, data: string) => {
+  localStorage.setItem(key, data);
+  return true;
+}
