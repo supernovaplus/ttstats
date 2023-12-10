@@ -96,6 +96,18 @@ export const fetchServer = async (server: ServerDataObject, setServer: SetServer
         //fetch fivem reverse proxy
         // `https://tycoon-${server.endpoint}.users.cfx.re/status/widget/players.json`,
         //fetch via server's nginx server
+        `https://tycoon-${server.endpoint}.users.cfx.re/status/widget/players.json`
+      );
+      await parseStatusJSON({ res, setServer, server });
+      success = true;
+    } catch (err) {}
+    
+    try {
+      if(success) return;
+      const res: MainAPIPlayersResponse = await cFetch(
+        //fetch fivem reverse proxy
+        // `https://tycoon-${server.endpoint}.users.cfx.re/status/widget/players.json`,
+        //fetch via server's nginx server
         `https://d.transporttycoon.eu/${server.apiname}/widget/players.json`
       );
       await parseStatusJSON({ res, setServer, server });
