@@ -9,7 +9,8 @@ export default function ServerConnectModal({ server }: { server: ServerDataObjec
   };
 
   useEffect(() => {
-    window.location.href = server.serverip ? generateJoinLink(server, false) : generateJoinLink(server);
+    // window.location.href = server.serverip ? generateJoinLink(server, false) : generateJoinLink(server);
+    window.location.href = generateJoinLink(server);
   }, []);
 
   return (
