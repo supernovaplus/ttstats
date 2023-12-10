@@ -6,7 +6,7 @@ export default function TopJobsPage() {
   return (
     <>
       <TopJobsLive />
-      <TopJobsHistory />
+      {/* <TopJobsHistory /> */}
     </>
   );
 }

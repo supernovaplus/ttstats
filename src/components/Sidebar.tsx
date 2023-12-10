@@ -60,11 +60,11 @@ export default function Sidebar() {
             <OneItem to="/topjobs" setForceOpen={setForceOpen}>
               Top Jobs
             </OneItem>
-            <OneItem to="/topvehicles" setForceOpen={setForceOpen}>
+            {/* <OneItem to="/topvehicles" setForceOpen={setForceOpen}>
               Top Vehicles
-            </OneItem>
+            </OneItem> */}
             <OneItem to="/top10" setForceOpen={setForceOpen}>
-              Top 10
+              Legacy Top 10
             </OneItem>
             <OneItem to="/highest-id" setForceOpen={setForceOpen}>
               Highest ID

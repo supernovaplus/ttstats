@@ -23,27 +23,27 @@ export const serversList: ServerListRawInterface[] = [
     serverip: 'server.tycoon.community:30121',
     info: 'Old database was lost, starting fresh.',
     // info: 'This server is replacing the original server and is running on a new separate database. This server will receive all the future updates.',
-    apiKeyAllow: true
+    apiKeyAllow: true,
   },
-  {
-    endpoint: 'w8j4eb',
-    name: 'EVENT',
-    sname: 'EVENT',
-    enabled: true,
-    apiname: '',
-    uptimeid: '',
-    serverip: '',
-    info: 'This server is only active during events. See #events channel in TT discord for any future events.'
-  },
-  {
-    endpoint: 'dgpvx3',
-    name: '[LITE] Transportation',
-    sname: 'LITE',
-    enabled: true,
-    apiname: '',
-    uptimeid: '',
-    serverip: '',
-    info: 'Lite server is running on different game mode than other transport tycoon servers. Server\'s only focus is trucking.',
-    links: [["more info on wiki", "https://dash.tycoon.community/wiki/index.php/LITE_Transportation"]]
-  },
+  // {
+  //   endpoint: 'w8j4eb',
+  //   name: 'EVENT',
+  //   sname: 'EVENT',
+  //   enabled: true,
+  //   apiname: '',
+  //   uptimeid: '',
+  //   serverip: '',
+  //   info: 'This server is only active during events. See #events channel in TT discord for any future events.'
+  // },
+  // {
+  //   endpoint: 'dgpvx3',
+  //   name: '[LITE] Transportation',
+  //   sname: 'LITE',
+  //   enabled: true,
+  //   apiname: '',
+  //   uptimeid: '',
+  //   serverip: '',
+  //   info: 'Lite server is running on different game mode than other transport tycoon servers. Server\'s only focus is trucking.',
+  //   links: [["more info on wiki", "https://dash.tycoon.community/wiki/index.php/LITE_Transportation"]]
+  // },
 ];
