@@ -9,7 +9,7 @@ export interface ServerListRawInterface {
   serverip: string;
   /** link, url */
   links?: [string, string][];
-  info: string;
+  info?: string;
   apiKeyAllow?: boolean;
 }
 
