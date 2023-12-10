@@ -15,13 +15,13 @@ export const serversList: ServerListRawInterface[] = [
   // },
   {
     endpoint: '2epova',
-    name: 'NY-1 Main (Legacy)',
+    name: 'NY-1 Main',
     sname: 'NY-1',
     enabled: true,
     apiname: 'beta',
     uptimeid: '676134ceb12cdf3fb6e2272f37ff5455',
     serverip: 'server.tycoon.community:30121',
-    info: 'New Main server\'s data was lost. Current server uses old legacy database from an old backup.',
+    info: 'Old database was lost, starting fresh.',
     // info: 'This server is replacing the original server and is running on a new separate database. This server will receive all the future updates.',
     apiKeyAllow: true
   },
