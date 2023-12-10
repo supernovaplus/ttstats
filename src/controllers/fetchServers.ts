@@ -130,7 +130,8 @@ export const fetchServer = async (server: ServerDataObject, setServer: SetServer
       ...s,
       [server.endpoint]: {
         ...server,
-        name: (server.endpoint === '2epova' && data?.['hostname']?.replace('^1', '')) || server.name,
+        // name: (server.endpoint === '2epova' && data?.['hostname']?.replace('^1', '')) || server.name,
+        name: server.name,
         loaded: true,
         error: false,
         playersData: data.players.map((player) => [player.name || '?', -1, 0, '', false, '?', false]),
