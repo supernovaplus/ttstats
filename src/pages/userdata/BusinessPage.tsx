@@ -116,6 +116,7 @@ export default function BusinessPage() {
           )}
           <td>${shortenLargeMoney(biz.cost)}</td>
           <td>${shortenLargeMoney(calculateBonus(biz.bonus, tier))}</td>
+          <td>{biz.visuallvl}</td>
           <td>
             <a
               href={`https://ttmap.eu/?x=${biz.position.x}&y=${biz.position.y}&hideplayers`}
@@ -303,6 +304,7 @@ export default function BusinessPage() {
                   {loggedIn && <th>#</th>}
                   <th>Price</th>
                   <th>Bonus per day<br/><span className='text-xs'>(8 stacks)</span></th>
+                  <th>Lvl</th>
                   <th>Map</th>
                 </tr>
               </thead>
