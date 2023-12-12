@@ -120,7 +120,7 @@ export default function BusinessPage() {
             <a
               href={`https://ttmap.eu/?x=${biz.position.x}&y=${biz.position.y}&hideplayers`}
               target="_blank"
-              className="text-blue-700 text-xs">
+              className="text-s underline text-black dark:text-white hover:text-gray-500 dark:hover:text-gray-400">
               map
             </a>
           </td>
@@ -131,9 +131,9 @@ export default function BusinessPage() {
   const totalBonusInDay = myBonus * 8;
   const totalBonusInDayAfterTax = totalBonusInDay * (bankOwned ? 0.8 : 0.7);
 
-  const onServerChange = (endpoint: string) => {
-    setState((s) => ({ ...s, bizData: initialBizState.bizData }));
-  };
+  // const onServerChange = (endpoint: string) => {
+  //   setState((s) => ({ ...s, bizData: initialBizState.bizData }));
+  // };
 
   // const onServerChange = (e: ChangeEvent<HTMLSelectElement>) => {
   //   setState((s) => ({ ...s, bizData: initialBizState.bizData, selectedServerEndpoint: e.target.value }));
@@ -272,7 +272,7 @@ export default function BusinessPage() {
             </option>
           ))}
         </select> */}
-        <div className="flex">
+        {/* <div className="flex">
           {Object.entries(userDataState.servers).map(([serverEndpoint, { server }], index) => (
             <NavLink
               key={index}
@@ -282,15 +282,15 @@ export default function BusinessPage() {
               {server.name}
             </NavLink>
           ))}
-        </div>
-        <div className="flex">
+        </div> */}
+        {/* <div className="flex">
           <NavLink to={`?serverId=${serverId}&page=all`} className="bg-black px-2 mx-1 hover:bg-gray-700">
             all
           </NavLink>
           <NavLink to={`?serverId=${serverId}&page=all`} className="bg-black px-2 mx-1 hover:bg-gray-700">
             player's bussinesses
           </NavLink>
-        </div>
+        </div> */}
         <div
           style={{ maxHeight: '600px' }}
           className="overflow-y-auto flex flex-col border-b-2 border-nova-c1 dark:border-nova-c3 box-shadow-1">
@@ -299,11 +299,11 @@ export default function BusinessPage() {
               <thead className="sticky top-0 text-white bg-nova-c1 dark:bg-nova-c3 z-0">
                 <tr>
                   <th>#</th>
-                  <th>#</th>
+                  <th>Name</th>
                   {loggedIn && <th>#</th>}
-                  <th>#</th>
-                  <th>#</th>
-                  <th>#</th>
+                  <th>Price</th>
+                  <th>Bonus per day<br/><span className='text-xs'>(8 stacks)</span></th>
+                  <th>Map</th>
                 </tr>
               </thead>
               <tbody>
@@ -380,13 +380,12 @@ export default function BusinessPage() {
                   total cost: <MarkValue>{shortenLargeMoney(totalMoneyToSpend)}</MarkValue>
                 </div>
                 <div className="border px-2">
-                  total raw bonus: <MarkValue>{shortenLargeMoney(totalPossibleBonus * 8)}</MarkValue> per day
+                  total bonus before tax: <MarkValue>{shortenLargeMoney(totalPossibleBonus * 8)}</MarkValue> per day
                 </div>
               </>
             )}
           </div>
-          <div className="flex gap-1 flex-wrap justify-center py-1 w-full bg-black">
-            {/* <div>My bussiness</div> */}
+          {/* <div className="flex gap-1 flex-wrap justify-center py-1 w-full bg-black">
             <div className="border p-1 flex justify-center align-middle">
               <NavLink
                 to={`/user/settings`}
@@ -399,12 +398,7 @@ export default function BusinessPage() {
               <>
                 {selectedServerState.apikey ? (
                   <>
-                    {/* <input
-                      type="button"
-                      value={`update bussinesses (+-${selectedServerState.charges} charges left)`}
-                      className="px-2 bg-white text-black cursor-pointer hover:bg-gray-200"
-                      onClick={onGetStacksData}
-                    /> */}
+
                     <div className="max-w-5xl border p-1">
                       Player ID:{' '}
                       <input
@@ -440,9 +434,9 @@ export default function BusinessPage() {
             {state.bizData.loading && (
               <div className="text-center w-full bg-yellow-200 text-black">loading data from the api</div>
             )}
-          </div>
+          </div> */}
         </div>
-        <MessagerBlock messages={messages} />
+        {/* <MessagerBlock messages={messages} /> */}
       </div>
     </ContentBlock>
   );
