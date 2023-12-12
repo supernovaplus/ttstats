@@ -16,7 +16,7 @@ export default function ServersListPage() {
   return (
     <>
       <ContentBlock title="Transport Tycoon Servers List">
-        <table className="w-full text-center dyntable mb-40">
+        <table className="w-full text-center dyntable mb-60">
           <thead className="bg-nova-opa1">
             <tr className="text-lg sm:flex sm:flex-wrap">
               <th className="w-1/5 sm:w-1/2">Server</th>
