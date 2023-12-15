@@ -1,6 +1,5 @@
 import ContentBlock from '../../components/ContentBlock';
 import { useState, useEffect } from 'react';
-import { roundFixed } from '../../controllers/misc';
 import { calcLvlToEXP, calcEXPToLvl, prettyNum } from '../../controllers/misc';
 
 const changeStateVal = (target: string, val: string, setState: any) => {
@@ -17,15 +16,19 @@ function EXPCalculator() {
 
   const [output, setOutput] = useState({
     expNeeded: '',
-    hoursNeeded: '',
+    timeNeeded: '',
   });
 
   useEffect(() => {
     const expResult = calcLvlToEXP(state.target) - calcLvlToEXP(state.current);
-    const hoursNeeded = expResult / state.expPerHour;
+    const timeNeeded = expResult / state.expPerHour;
+    const h = Math.floor(timeNeeded);
+    const m = Math.floor((timeNeeded - h) * 60)
+    let timeString = `${h ? h + "h ": ""}${m}m`;
+
     setOutput({
       expNeeded: expResult <= 0 ? 'Level Reached' : `${prettyNum(expResult)} exp`,
-      hoursNeeded: `${roundFixed(hoursNeeded, 1)} hours`,
+      timeNeeded: expResult <= 0 ? 'Level Reached' : timeString,
     });
   }, [state]);
 
@@ -77,13 +80,13 @@ function EXPCalculator() {
         />
 
         <label htmlFor="exp-time-result" className="block">
-          Hours To Reach The Target Level
+          Time To Reach The Target Level
         </label>
         <input
           name="exp-time-result"
           type="text"
           className="bg-gray-500 text-white text-shadow-1 outline-none p-2 block w-full max-w-[400px] text-center mb-3"
-          value={output.hoursNeeded}
+          value={output.timeNeeded}
           readOnly
         />
       </div>

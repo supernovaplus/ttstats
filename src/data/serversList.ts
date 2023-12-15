@@ -20,7 +20,7 @@ export const serversList: ServerListRawInterface[] = [
     enabled: true,
     apiname: 'beta',
     uptimeid: '43c6a237ee1b867f13cd5ccb5731926f',
-    serverip: 'server.tycoon.community:30121',
+    serverip: '45.88.229.43:30120',
     info: 'Old database was lost, starting fresh.',
     // info: 'This server is replacing the original server and is running on a new separate database. This server will receive all the future updates.',
     apiKeyAllow: true,
