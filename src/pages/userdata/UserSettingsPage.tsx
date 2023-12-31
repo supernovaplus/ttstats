@@ -82,7 +82,7 @@ export default function UserSettingsPage() {
                 return { ...s };
               });
             } else {
-              console.log('save this');
+              // console.log('save this');
               localStorage.setItem(
                 localStorageKeys.SERVER_API_PRIVATE_KEY + '.' + serverState.server.endpoint,
                 String(serverState.apikey)

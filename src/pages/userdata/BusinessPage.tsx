@@ -50,7 +50,6 @@ export default function BusinessPage() {
   // Access individual parameters
   const serverId = searchParams.get('serverId') || '2epova';
   const page = searchParams.get('page');
-  console.log({ serverId, page });
   // const { server, page } = useParams();
   // console.log(server, page);
 
@@ -314,7 +313,7 @@ export default function BusinessPage() {
                 ) : (
                   <tr>
                     <td colSpan={5} className="min-h-[100px] py-10">
-                      No bussinesses left to buy
+                      No businesses left to buy
                     </td>
                   </tr>
                 )}
@@ -376,7 +375,7 @@ export default function BusinessPage() {
             ) : (
               <>
                 <div className="border px-2">
-                  total bussineses: <MarkValue>{businessData.length}</MarkValue>
+                  total busineses: <MarkValue>{businessData.length}</MarkValue>
                 </div>
                 <div className="border px-2">
                   total cost: <MarkValue>{shortenLargeMoney(totalMoneyToSpend)}</MarkValue>
