@@ -13,7 +13,7 @@ export default function StacksCalculatorPage() {
     startTransition(() => {
       let price = parseInt(value) || 0;
       if (price < 0) price = 0;
-      if (price > 1000) price = 1000;
+      // if (price > 1000) price = 1000;
       setSingleStackPrice(price === 0 ? '' : String(price));
     });
   };
@@ -60,7 +60,7 @@ export default function StacksCalculatorPage() {
   useEffect(() => {
     const saveSingleStackTimeout = window.setTimeout(() => {
       window.localStorage.setItem(localStorageKeys.STACK_PRICE, String(singleStackPrice) || '1000');
-      console.log('single stack price saved');
+      // console.log('single stack price saved');
     }, 1000);
 
     return () => {
@@ -69,7 +69,7 @@ export default function StacksCalculatorPage() {
   }, [singleStackPrice]);
 
   return (
-    <ContentBlock title="stacks sell/buy calculator">
+    <ContentBlock title="stacks/auction sell/buy calculator">
       <div className="flex flex-col justify-center items-center">
         <label htmlFor="stackAmountString">Stacks amount (eg. 1.2mil)</label>
         <input

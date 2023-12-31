@@ -24,7 +24,7 @@ const initialUserDataState = {
   selectedUserId: localStorage.getItem(localStorageKeys.SELECTED_USER_ID) || '',
 };
 
-console.log(initialUserDataState)
+// console.log(initialUserDataState)
 
 const UserDataContext = createContext<{
   userDataState: UserDataContextInterface;

@@ -1,29 +1,29 @@
 import { ServerListRawInterface } from '../types/serverTypes';
 
 export const serversList: ServerListRawInterface[] = [
-  // {
-  //   endpoint: 'njyvop',
-  //   name: 'LG-1 (Legacy)',
-  //   sname: 'LG-1',
-  //   enabled: true,
-  //   apiname: 'main',
-  //   uptimeid: '676134ceb12cdf3fb6e2272f37ff5455',
-  //   serverip: 'server.tycoon.community:30120',
-  //   info: 'This server is running on the original database, but it won\'t receive any future updates.',
-  //   links: [["more info on wiki", "https://dash.tycoon.community/wiki/index.php/Legacy"]],
-  //   apiKeyAllow: true
-  // },
   {
     endpoint: '2epova',
     name: 'NY-1 Main',
     sname: 'NY-1',
     enabled: true,
-    apiname: 'beta',
+    apiname: 'main',
     uptimeid: '43c6a237ee1b867f13cd5ccb5731926f',
     serverip: '45.88.229.43:30120',
     info: 'Old database was lost, starting fresh.',
     // info: 'This server is replacing the original server and is running on a new separate database. This server will receive all the future updates.',
     apiKeyAllow: true,
+  },
+  {
+    endpoint: 'njyvop',
+    name: 'NY-2 Beta',
+    sname: 'NY-2',
+    enabled: true,
+    apiname: 'beta',
+    uptimeid: '676134ceb12cdf3fb6e2272f37ff5455',
+    serverip: '45.88.229.43:30121',
+    info: 'This server is used for testing. It\'s is available to players with beta access',
+    // links: [["more info on wiki", "https://dash.tycoon.community/wiki/index.php/Legacy"]],
+    apiKeyAllow: true
   },
   // {
   //   endpoint: 'w8j4eb',
