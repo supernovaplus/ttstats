@@ -21,7 +21,7 @@ export const serversList: ServerListRawInterface[] = [
     apiname: 'beta',
     uptimeid: '676134ceb12cdf3fb6e2272f37ff5455',
     serverip: '45.88.229.43:30121',
-    info: 'This server is used for testing. It\'s is available to players with beta access',
+    info: 'This server is used for testing. It is available to players with beta access',
     // links: [["more info on wiki", "https://dash.tycoon.community/wiki/index.php/Legacy"]],
     apiKeyAllow: true
   },

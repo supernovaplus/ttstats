@@ -57,6 +57,9 @@ export default function Sidebar() {
               Player Finder
             </OneItem>
             <Category>Data</Category>
+            <OneItem to="/dealership" setForceOpen={setForceOpen}>
+              Dealership
+            </OneItem>
             <OneItem to="/topjobs" setForceOpen={setForceOpen}>
               Top Jobs
             </OneItem>
