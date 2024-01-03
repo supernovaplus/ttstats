@@ -1,6 +1,5 @@
-## ttstats (2020-2023)
-Servers, players stats and tools for FiveM Transport Tycoon servers. Made using React, Vite and Tailwind.
-Deployed on Cloudflare Pages, Cloudflare R2 and Hetzner VPS.
+## ttstats (2020-2024)
+Server info, players stats and tools for FiveM Transport Tycoon servers. Made using React, Vite and Tailwind.
 
 to enter dev mode  
 `npm run dev`
