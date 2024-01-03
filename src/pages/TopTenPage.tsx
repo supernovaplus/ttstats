@@ -5,43 +5,47 @@ import { Routes, Route, useParams } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import { TimeUpdatedRow, LoadingRow, ErrorRow } from '../components/MiscComponents';
 
-// function ProfilePage() {
-//   // Get the userId param from the URL.
-//   let { userId } = useParams();
+const DATALINKS = [
+  ['Wipe 2.0 (current)', 'https://d3.ttstats.eu/data/top10_v3.json'],
+  ['Legacy (No longer updated)', 'https://d3.ttstats.eu/data/top10_v2.json'],
+];
 
-//   return <>{userId}</>;
-// }
+const initalState: TopTenDataState = {
+  loading: true,
+  error: null,
+  data: null,
+  selectedStatName: 'bus_route_completed',
+  bannedPlayersList: new Set(),
+  selectedServer: 0,
+};
 
 export default function TopTenPage() {
-  // const navigate = useNavigate();
-  // const navParams = useParams();
-  // let { userId } = useParams();
+  const [state, setState] = useState<TopTenDataState>({ ...initalState });
 
-  const [state, setState] = useState<TopTenDataState>({
-    loading: true,
-    error: null,
-    data: null,
-    selectedStatName: 'bus_route_completed',
-    bannedPlayersList: new Set(),
-  });
+  const changeServer: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
+    setState((s) => ({
+      ...initalState,
+      selectedServer: parseInt(e.target.value),
+    }));
+  };
 
   useEffect(() => {
     let isSubscribed = true;
 
-    fetch('https://api.transporttycoon.eu/banned-top.json')
-      .then((res) => res.json())
-      .then((res: number[]) => {
-        if (res && Array.isArray(res) && isSubscribed) {
-          setState((s) => ({
-            ...s,
-            bannedPlayersList: new Set(res),
-          }));
-        }
-      })
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
-      .catch(() => { });
+    // fetch('https://api.transporttycoon.eu/banned-top.json')
+    //   .then((res) => res.json())
+    //   .then((res: number[]) => {
+    //     if (res && Array.isArray(res) && isSubscribed) {
+    //       setState((s) => ({
+    //         ...s,
+    //         bannedPlayersList: new Set(res),
+    //       }));
+    //     }
+    //   })
+    //   // eslint-disable-next-line @typescript-eslint/no-empty-function
+    //   .catch(() => { });
 
-    fetch('https://d3.ttstats.eu/data/top10_v2.json')
+    fetch(DATALINKS[state.selectedServer][1])
       .then((res) => res.json())
       .then((res: TopTenDataResponse) => {
         if (!res || !res.data || !Array.isArray(res.data)) throw new Error('no data received');
@@ -72,11 +76,24 @@ export default function TopTenPage() {
     return () => {
       isSubscribed = false;
     };
-  }, []);
+  }, [state.selectedServer]);
 
   return (
     <>
-      <ContentBlock title="Top 10 Leaderboards [Legacy Server Only]">
+      <ContentBlock title="Top 10 Leaderboards">
+        <div className="flex p-1">
+          <div className="p-1">Server: </div>
+          <select
+            className="p-0 m-0 ml-1 block w-full my-1 cursor-pointer text-center bg-gray-600 border border-gray-600 text-white"
+            defaultValue={'0'}
+            onChange={changeServer}>
+            {DATALINKS.map(([name, link], index) => (
+              <option key={index} value={index} className="text-center p-2">
+                {name}
+              </option>
+            ))}
+          </select>
+        </div>
         {state.loading && <LoadingRow />}
         {state.error && <ErrorRow>{state.error}</ErrorRow>}
         {state.data && (
@@ -90,7 +107,8 @@ export default function TopTenPage() {
                   to={`/top10/${stat_name}`}
                   key={index}
                   className={({ isActive }) =>
-                    ` dark:text-white hover:underline py-1 block text-center select-none border-b border-nova-c2 ${isActive ? 'bg-nova-c1 dark:bg-nova-c2 text-white' : ''
+                    ` dark:text-white hover:underline py-1 block text-center select-none border-b border-nova-c2 ${
+                      isActive ? 'bg-nova-c1 dark:bg-nova-c2 text-white' : ''
                     }`
                   }>
                   {nice_name}
@@ -140,10 +158,11 @@ function Board({ state }: { state: TopTenDataState }) {
             {selectedBoard.json_data.map((row, index2) => (
               <tr
                 key={index2}
-                className={`odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk ${state.bannedPlayersList.has(row.user_id)
+                className={`odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk ${
+                  state.bannedPlayersList.has(row.user_id)
                     ? 'line-through text-gray-400 dark:text-gray-600'
                     : ''
-                  }`}>
+                }`}>
                 <td data-label="# Place">{index2 + 1}</td>
                 <td data-label="Player">
                   {row.username}{' '}

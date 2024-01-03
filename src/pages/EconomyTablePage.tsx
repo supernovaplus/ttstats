@@ -25,8 +25,8 @@ const DifferenceTab = ({ value, shorten = false }: { value: number; shorten?: bo
 };
 
 const ECONOMYLINKS = [
-  ["New New Main", "https://d3.ttstats.eu/data/economy3-reversed.json"],
-  ["New Main (No longer updated)", "https://d3.ttstats.eu/data/economy2-reversed.json"],
+  ["Wipe 2.0 (current)", "https://d3.ttstats.eu/data/economy3-reversed.json"],
+  ["Wipe 1.0 (No longer updated)", "https://d3.ttstats.eu/data/economy2-reversed.json"],
   ["Legacy (No longer updated)", "https://d3.ttstats.eu/data/economy-reversed.json"]
 ]
 

@@ -189,6 +189,7 @@ export interface TopTenDataState {
   data: TopTenDataResponse['data'] | null;
   selectedStatName: string;
   bannedPlayersList: Set<number>;
+  selectedServer: number;
 }
 
 export interface HighestIDList {
