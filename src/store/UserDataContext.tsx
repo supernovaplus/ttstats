@@ -1,6 +1,5 @@
 import { createContext, ReactNode, useState, useEffect, useContext } from 'react';
 import { serversList } from '../data/serversList';
-import { ServerListRawInterface } from '../types/serverTypes';
 import { localStorageKeys } from '../data/config';
 import { UserDataContextInterface } from '../types/serverTypes';
 
