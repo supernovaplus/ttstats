@@ -101,26 +101,31 @@ export default function DealershipPage() {
                     <div
                       hidden={state.isHidden[category]}
                       className="flex flex-wrap gap-2 pt-2 justify-center mb-2">
-                      {(vehicles as any).map(({ name, model, price }, index) => (
-                        <div key={index} className="w-full max-w-[235px] p-1 text-center bg-gray-600">
-                          <a
-                            href={`https://cdn.tycoon.community/dealership/vehicles/${model}.png`}
-                            target="_blank"
-                            title={model}>
-                            <img
-                              src={`https://cdn.tycoon.community/dealership/vehicles/${model}.png`}
-                              alt=""
-                              loading="lazy"
-                              className="block mb-2 w-full"
-                              style={{ minHeight: '120px' }}
-                              onError={onImageErr}
-                            />
-                          </a>
+                      {(vehicles as any).map(
+                        (
+                          { name, model, price }: { name: string; model: string; price: number },
+                          index: number
+                        ) => (
+                          <div key={index} className="w-full max-w-[235px] p-1 text-center bg-gray-600">
+                            <a
+                              href={`https://cdn.tycoon.community/dealership/vehicles/${model}.png`}
+                              target="_blank"
+                              title={model}>
+                              <img
+                                src={`https://cdn.tycoon.community/dealership/vehicles/${model}.png`}
+                                alt=""
+                                loading="lazy"
+                                className="block mb-2 w-full"
+                                style={{ minHeight: '120px' }}
+                                onError={onImageErr}
+                              />
+                            </a>
 
-                          <p>{name}</p>
-                          <p>${shortenLargeMoney(price)}</p>
-                        </div>
-                      ))}
+                            <p>{name}</p>
+                            <p>${shortenLargeMoney(price)}</p>
+                          </div>
+                        )
+                      )}
                     </div>
                   )}
                 </div>
