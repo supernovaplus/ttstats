@@ -84,7 +84,7 @@ export default function DealershipPage() {
           <>
             <div className=" mb-1 rounded-sm w-full text-center">
               <div
-                className="cursor-pointer bg-gray-700 text-white p-1 text-sm inline-block hover:underline"
+                className="cursor-pointer bg-gray-700 text-white p-1 text-sm inline-block hover:underline rounded-sm"
                 onClick={onToggleAll}>
                 Show/Hide All
               </div>
@@ -111,40 +111,33 @@ export default function DealershipPage() {
                           }: { name: string; model: string; price: number; req: string | null },
                           index: number
                         ) => (
-                          <div key={index} className="w-full max-w-[250px] text-center">
-                            <div className=" justify-end">
-                              <div className='min-h-[150px] flex flex-col  justify-end'>
-                                <a
-                                  href={`https://cdn.tycoon.community/dealership/vehicles/${model}.png`}
-                                  target="_blank"
-                                  title={model}>
-                                  <img
-                                    src={`https://cdn.tycoon.community/dealership/vehicles/${model}.png`}
-                                    alt=""
-                                    loading="lazy"
-                                    className="block w-full"
-                                    style={{ minHeight: '120px' }}
-                                    onError={onImageErr}
-                                  />
-                                </a>
-                              </div>
-                              <div className="flex w-full">
-                                <div className="block border-gray-500 text-center bg-slate-500 w-full">
-                                  <div className="text-xs w-full bg-gray-700 px-1">Name:</div>
-                                  <div className="text px-1">{name}</div>
+                          <div key={index} className="w-full max-w-[250px] text-center ">
+                            <div className="bg-slate-500 box-shadow-1  border border-transparent rounded-sm overflow-hidden">
+                              <a
+                                href={`https://cdn.tycoon.community/dealership/vehicles/${model}.png`}
+                                target="_blank"
+                                title={model}>
+                                <img
+                                  src={`https://cdn.tycoon.community/dealership/vehicles/${model}.png`}
+                                  alt=""
+                                  loading="lazy"
+                                  className="block w-full object-cover overflow-hidden"
+                                  style={{ height: '150px' }}
+                                  onError={onImageErr}
+                                />
+                              </a>
+                              <div className="w-full flex bg-slate-600 items-start p-[2px]">
+                                <div className="block text-center w-full">
+                                  <div className="text px-1 inline-block">{name}</div>
                                 </div>
-                                <div className="block border-gray-700 border-l bg-gray-700">
-                                  <div className="text-xs w-full bg-gray-800 px-1">Price:</div>
-                                  <div className="text px-1">${shortenLargeMoney(price)}</div>
+                                <div className="block  bg-gray-700 inset-shadow-1 rounded-sm">
+                                  <div className="text px-3">${shortenLargeMoney(price)}</div>
                                 </div>
                               </div>
                               {req && (
-                                <div className="block border-gray-500 w-full bg-slate-500">
-                                  <div className="text-xs text-center w-full bg-gray-700 px-1">
-                                    Requirement:
-                                  </div>
+                                <div className="block w-full bg-slate-500">
                                   <div className="text-xs px-1 bg-red-500 text-black text-shadow-none">
-                                    {req}
+                                    {req} required
                                   </div>
                                 </div>
                               )}
