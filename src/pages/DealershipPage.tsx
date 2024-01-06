@@ -82,7 +82,7 @@ export default function DealershipPage() {
         {state.error && <ErrorRow>{state.error}</ErrorRow>}
         {state.data && (
           <>
-            <div className=" mb-1 rounded-sm w-full text-center">
+            <div className="mb-1 rounded-sm w-full text-center">
               <div
                 className="cursor-pointer bg-gray-700 text-white p-1 text-sm inline-block hover:underline rounded-sm"
                 onClick={onToggleAll}>
@@ -91,9 +91,10 @@ export default function DealershipPage() {
             </div>
             {Object.entries(state.data).map(([category, vehicles], index) => (
               <div key={index} className="text-white text-center">
-                <div className=" border-white mb-1 rounded-sm">
+                {/* {index !== 0 && <hr className="mb-2 p-0 h-0 border border-b-black" />} */}
+                <div className="border-white mb-1 rounded-sm">
                   <div
-                    className="w-full cursor-pointer hover:bg-gray-500 p-2 bg-gray-700 select-none"
+                    className="w-full cursor-pointer hover:bg-gray-500 p-2 bg-gray-700 select-none rounded-sm border border-transparent"
                     onClick={() => onChangeVisibility(category)}>
                     {category} ({state.data[category].length})
                   </div>
@@ -111,7 +112,7 @@ export default function DealershipPage() {
                           }: { name: string; model: string; price: number; req: string | null },
                           index: number
                         ) => (
-                          <div key={index} className="w-full max-w-[250px] text-center ">
+                          <div key={index} className="w-full max-w-[250px] text-center">
                             <div className="bg-slate-500 box-shadow-1  border border-transparent rounded-sm overflow-hidden">
                               <a
                                 href={`https://cdn.tycoon.community/dealership/vehicles/${model}.png`}
@@ -130,13 +131,13 @@ export default function DealershipPage() {
                                 <div className="block text-center w-full">
                                   <div className="text px-1 inline-block">{name}</div>
                                 </div>
-                                <div className="block  bg-gray-700 inset-shadow-1 rounded-sm">
+                                <div className="block bg-gray-700 inset-shadow-1 rounded-sm">
                                   <div className="text px-3">${shortenLargeMoney(price)}</div>
                                 </div>
                               </div>
                               {req && (
-                                <div className="block w-full bg-slate-500">
-                                  <div className="text-xs px-1 bg-red-500 text-black text-shadow-none">
+                                <div className="block bg-gray-800 inset-shadow-1 rounded-sm">
+                                  <div className="text-xs p-px">
                                     {req} required
                                   </div>
                                 </div>
