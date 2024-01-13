@@ -1,4 +1,3 @@
-
 export interface ServerListRawInterface {
   endpoint: string;
   name: string;
@@ -55,7 +54,7 @@ export interface MainAPIPlayersResponse {
   server: MainAPIServer;
 }
 
-export interface ServerDataObject extends ServerListRawInterface{
+export interface ServerDataObject extends ServerListRawInterface {
   error: boolean;
   serverData: null | MainAPIServer;
   playersData: null | MainAPIPlayer[];

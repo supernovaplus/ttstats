@@ -91,41 +91,24 @@ export const fetchServer = async (server: ServerDataObject, setServer: SetServer
   let success = false;
 
   if (server.apiname) {
+    //main reverse proxy api
     try {
       const res: MainAPIPlayersResponse = await cFetch(
-        //fetch fivem reverse proxy
-        // `https://tycoon-${server.endpoint}.users.cfx.re/status/widget/players.json`,
-        //fetch via server's nginx server
         `https://tycoon-${server.endpoint}.users.cfx.re/status/widget/players.json`
       );
       await parseStatusJSON({ res, setServer, server });
       success = true;
     } catch (err) {}
-    
+
+    //else if fails, try ttstats reverse proxy api
     try {
-      if(success) return;
+      if (success) return;
       const res: MainAPIPlayersResponse = await cFetch(
-        //fetch fivem reverse proxy
-        // `https://tycoon-${server.endpoint}.users.cfx.re/status/widget/players.json`,
-        //fetch via server's nginx server
-        `https://d.transporttycoon.eu/${server.apiname}/widget/players.json`
+        `https://d.ttstats.eu/${server.apiname}/status/widget/players.json`
       );
       await parseStatusJSON({ res, setServer, server });
       success = true;
     } catch (err) {}
-
-    //else fetch ttstats reverse proxy
-    // try {
-    //   clearTimeout(cancelControllerTimeout);
-    //   if (success) return;
-    //   const res = await cFetch({
-    //     cancelController,
-    //     cancelControllerTimeout,
-    //     url: `https://d.ttstats.eu/status/${server.endpoint}`,
-    //   });
-    //   await parseStatusJSON({ res, setServer, server });
-    //   success = true;
-    // } catch (err) {}
   }
 
   //else fetch fivem server status api

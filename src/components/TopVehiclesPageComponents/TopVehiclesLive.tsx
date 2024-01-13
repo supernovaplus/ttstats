@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { VehicleClasses } from '../../data/vehicleData';
 import { TopVehicleData, TopVehicleDataState } from '../../types/serverTypes';
 import ContentBlock from '../../components/ContentBlock';
-import { ErrorRow, TimeUpdatedRow, LoadingRow } from '../MiscComponents';
+import { ErrorRow, TimeUpdatedDiffRow } from '../MiscComponents';
 
 export default function TopVehiclesLive() {
   const [state, setState] = useState<TopVehicleDataState>({
@@ -96,7 +96,7 @@ export default function TopVehiclesLive() {
             </table>
           )}
         </div>
-        <TimeUpdatedRow updated_at={state.timestamp} />
+        <TimeUpdatedDiffRow fromTime={state.timestamp} />
       </ContentBlock>
       <ContentBlock title="Top Vehicle Classes Now [Legacy Server Only]">
         <div className="max-h-[300px] overflow-y-auto border-b-2 border-nova-c1 dark:border-nova-c3 box-shadow-1">
@@ -137,7 +137,7 @@ export default function TopVehiclesLive() {
             </table>
           )}
         </div>
-        <TimeUpdatedRow updated_at={state.timestamp} />
+        <TimeUpdatedDiffRow fromTime={state.timestamp} />
       </ContentBlock>
     </>
   );

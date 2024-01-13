@@ -25,11 +25,11 @@ export default function DxpClock({ dxp, timestamp }: { dxp?: DXP; timestamp: num
       {time < 1 ? (
         '-'
       ) : (
-        <span>
+        <>
           {HH ? HH + 'h ' : ''}
           {MM ? MM + 'm ' : HH ? '0m ' : ''}
           {SS ? SS + 's' : '0s'}
-        </span>
+        </>
       )}
     </>
   );
