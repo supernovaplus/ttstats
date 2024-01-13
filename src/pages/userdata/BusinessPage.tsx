@@ -375,7 +375,7 @@ export default function BusinessPage() {
             ) : (
               <>
                 <div className="border px-2">
-                  total busineses: <MarkValue>{businessData.length}</MarkValue>
+                  total businesses: <MarkValue>{businessData.length}</MarkValue>
                 </div>
                 <div className="border px-2">
                   total cost: <MarkValue>{shortenLargeMoney(totalMoneyToSpend)}</MarkValue>

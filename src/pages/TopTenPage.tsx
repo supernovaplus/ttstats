@@ -3,7 +3,7 @@ import { TopTenDataState, TopTenDataResponse } from '../types/serverTypes';
 import ContentBlock from '../components/ContentBlock';
 import { Routes, Route, useParams } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
-import { TimeUpdatedRow, LoadingRow, ErrorRow } from '../components/MiscComponents';
+import { TimeUpdatedDiffRow, LoadingRow, ErrorRow } from '../components/MiscComponents';
 
 const DATALINKS = [
   ['Wipe 2.0 (current)', 'https://d3.ttstats.eu/data/top10_v3.json'],
@@ -178,7 +178,7 @@ function Board({ state }: { state: TopTenDataState }) {
           </tbody>
         </table>
       </div>
-      <TimeUpdatedRow updated_at={selectedBoard.updated_at} />
+      <TimeUpdatedDiffRow fromTime={selectedBoard.updated_at} />
     </ContentBlock>
   );
 }

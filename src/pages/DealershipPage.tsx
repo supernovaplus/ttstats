@@ -1,14 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import ContentBlock from '../components/ContentBlock';
-import { TimeUpdatedRow, LoadingRow, ErrorRow } from '../components/MiscComponents';
-import { shortenLargeMoney } from '../controllers/misc';
+import { TimeUpdatedDiffRow, LoadingRow, ErrorRow } from '../components/MiscComponents';
+import { prettyNum, shortenLargeMoney } from '../controllers/misc';
+
+interface DealershipResponseJsonInterface {
+  updated_at: number;
+  data: {
+    [category: string]: {
+      model: string;
+      name: string;
+      price: number;
+    }[];
+  };
+  requirements: {
+    [key: string]: string;
+  };
+}
+
+interface DealershipStateInterface {
+  loading: boolean;
+  error: null | string;
+  data: null | DealershipResponseJsonInterface['data'];
+  updated_at: null | number;
+  requirements: null | DealershipResponseJsonInterface['requirements'];
+  isHidden: null | { [key: string]: boolean };
+}
 
 export default function DealershipPage() {
-  const [state, setState] = useState<any>({
+  const [state, setState] = useState<DealershipStateInterface>({
     loading: true,
     error: null,
     data: null,
     updated_at: null,
+    requirements: null,
+    isHidden: null,
   });
 
   //TODO: types
@@ -17,19 +42,20 @@ export default function DealershipPage() {
 
     fetch('https://d3.ttstats.eu/data/dealership.json')
       .then((res) => res.json())
-      .then((res: any) => {
+      .then((res: DealershipResponseJsonInterface) => {
         if (!res || !res.data || typeof res.data !== 'object') throw new Error('no data received');
 
         if (isSubscribed) {
           for (const category in res.data) {
-            res.data[category] = res.data[category].sort((a: any, b: any) => a.name.localeCompare(b.name));
+            res.data[category] = res.data[category].sort((a, b) => a.name.localeCompare(b.name));
           }
-          setState((s: any) => ({
+          setState((s) => ({
             ...s,
             loading: false,
             error: null,
             data: res.data,
             updated_at: res.updated_at,
+            requirements: res.requirements || null,
             isHidden: Object.fromEntries(Object.keys(res.data).map((category) => [category, false])),
           }));
         }
@@ -37,7 +63,7 @@ export default function DealershipPage() {
       .catch((err) => {
         if (isSubscribed) {
           console.log(err);
-          setState((s: any) => ({
+          setState((s) => ({
             ...s,
             loading: false,
             error: 'Failed to load the data, try again later.',
@@ -53,15 +79,16 @@ export default function DealershipPage() {
   }, []);
 
   const onChangeVisibility = (category: string) => {
-    setState((s: any) => {
+    setState((s) => {
+      if (!s.isHidden) return s;
       s.isHidden[category] = !s.isHidden[category];
       return { ...s };
     });
   };
 
   const onToggleAll = () => {
-    setState((s: any) => {
-      const isFirstHidden = Object.values(s.isHidden)[0];
+    setState((s) => {
+      const isFirstHidden = s.isHidden === null ? false : Object.values(s.isHidden)[0];
       for (const category in s.isHidden) {
         s.isHidden[category] = !isFirstHidden;
       }
@@ -75,6 +102,8 @@ export default function DealershipPage() {
     e.currentTarget.style.minHeight = '0';
   };
 
+  console.log(state);
+
   return (
     <>
       <ContentBlock title="Dealership">
@@ -82,7 +111,7 @@ export default function DealershipPage() {
         {state.error && <ErrorRow>{state.error}</ErrorRow>}
         {state.data && (
           <>
-            <div className=" mb-1 rounded-sm w-full text-center">
+            <div className="mb-1 rounded-sm w-full text-center">
               <div
                 className="cursor-pointer bg-gray-700 text-white p-1 text-sm inline-block hover:underline rounded-sm"
                 onClick={onToggleAll}>
@@ -91,66 +120,57 @@ export default function DealershipPage() {
             </div>
             {Object.entries(state.data).map(([category, vehicles], index) => (
               <div key={index} className="text-white text-center">
-                <div className=" border-white mb-1 rounded-sm">
+                {/* {index !== 0 && <hr className="mb-2 p-0 h-0 border border-b-black" />} */}
+                <div className="border-white mb-1 rounded-sm">
                   <div
-                    className="w-full cursor-pointer hover:bg-gray-500 p-2 bg-gray-700 select-none"
+                    className="w-full cursor-pointer hover:bg-gray-500 p-2 bg-gray-700 select-none rounded-sm border border-transparent"
                     onClick={() => onChangeVisibility(category)}>
-                    {category} ({state.data[category].length})
+                    {category} ({state.data && state.data[category].length})
                   </div>
-                  {!state.isHidden[category] && (
+                  {state.isHidden && !state.isHidden[category] && (
                     <div
                       hidden={state.isHidden[category]}
                       className="flex flex-wrap gap-2 pt-2 mb-2 justify-center">
-                      {(vehicles as any).map(
-                        (
-                          {
-                            name,
-                            model,
-                            price,
-                            req,
-                          }: { name: string; model: string; price: number; req: string | null },
-                          index: number
-                        ) => (
-                          <div key={index} className="w-full max-w-[250px] text-center ">
-                            <div className="bg-slate-500 box-shadow-1  border border-transparent rounded-sm overflow-hidden">
-                              <a
-                                href={`https://cdn.tycoon.community/dealership/vehicles/${model}.png`}
-                                target="_blank"
-                                title={model}>
-                                <img
-                                  src={`https://cdn.tycoon.community/dealership/vehicles/${model}.png`}
-                                  alt=""
-                                  loading="lazy"
-                                  className="block w-full object-cover overflow-hidden"
-                                  style={{ height: '150px' }}
-                                  onError={onImageErr}
-                                />
-                              </a>
-                              <div className="w-full flex bg-slate-600 items-start p-[2px]">
-                                <div className="block text-center w-full">
-                                  <div className="text px-1 inline-block">{name}</div>
-                                </div>
-                                <div className="block  bg-gray-700 inset-shadow-1 rounded-sm">
-                                  <div className="text px-3">${shortenLargeMoney(price)}</div>
+                      {vehicles.map(({ name, model, price }, index: number) => (
+                        <div key={index} className="w-full max-w-[250px] text-center">
+                          <div className="bg-slate-500 box-shadow-1  border border-transparent rounded-sm overflow-hidden">
+                            <a
+                              href={`https://cdn.tycoon.community/dealership/vehicles/${model}.png`}
+                              target="_blank"
+                              title={model}>
+                              <img
+                                src={`https://cdn.tycoon.community/dealership/vehicles/${model}.png`}
+                                alt=""
+                                loading="lazy"
+                                className="block w-full object-cover overflow-hidden"
+                                style={{ height: '150px' }}
+                                onError={onImageErr}
+                              />
+                            </a>
+                            <div className="w-full flex bg-slate-600 items-start p-[2px]">
+                              <div className="block text-center w-full">
+                                <div className="text px-1 inline-block">{name}</div>
+                              </div>
+                              <div className="block bg-gray-700 inset-shadow-1 rounded-sm">
+                                <div className="text px-3" title={`$${prettyNum(price)}`}>
+                                  ${shortenLargeMoney(price)}
                                 </div>
                               </div>
-                              {req && (
-                                <div className="block w-full bg-slate-500">
-                                  <div className="text-xs px-1 bg-red-500 text-black text-shadow-none">
-                                    {req} required
-                                  </div>
-                                </div>
-                              )}
                             </div>
+                            {state.requirements?.hasOwnProperty(model) ? (
+                              <div className="block bg-gray-800 inset-shadow-1 rounded-sm">
+                                <div className="text-xs p-px">{state.requirements[model]} required</div>
+                              </div>
+                            ) : <></>}
                           </div>
-                        )
-                      )}
+                        </div>
+                      ))}
                     </div>
                   )}
                 </div>
               </div>
             ))}
-            <TimeUpdatedRow updated_at={state.updated_at * 1000} />
+            {state.updated_at && <TimeUpdatedDiffRow fromTime={state.updated_at * 1000} />}
           </>
         )}
       </ContentBlock>

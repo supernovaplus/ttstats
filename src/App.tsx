@@ -40,7 +40,7 @@ export default function App() {
 
   return (
     <DataContextProvider>
-      <div className="max-w-[1000px] w-full mx-auto my-0 min-h-screen px-1 min-w-[200px]">
+      <div className="max-w-[1000px] w-full mx-auto my-0 min-h-screen px-1 min-w-[200px] mb-6">
         <Header />
         <div className="flex md:flex-col items-start md:items-center">
           <Sidebar />

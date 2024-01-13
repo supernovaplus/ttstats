@@ -1,7 +1,7 @@
 import ContentBlock from '../ContentBlock';
 import { TopJobsHistoryState } from '../../types/serverTypes';
 import { roundFixed } from '../../controllers/misc';
-import { TimeUpdatedRow } from '../MiscComponents';
+import { TimeUpdatedDiffRow } from '../MiscComponents';
 
 type props = {
   state: TopJobsHistoryState;
@@ -84,7 +84,7 @@ export default function TopJobHistoryElement({ state, title, dataKey }: props) {
               </tbody>
             </table>
           </div>
-          <TimeUpdatedRow updated_at={state.updated_at} />
+          <TimeUpdatedDiffRow fromTime={state.updated_at} />
         </ContentBlock>
       )}
     </>

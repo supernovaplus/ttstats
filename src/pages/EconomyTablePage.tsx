@@ -3,7 +3,7 @@ import ContentBlock from '../components/ContentBlock';
 import { EconomyTableState, EconomyResponse } from '../types/serverTypes';
 import { shortenLargeMoney } from '../controllers/misc';
 import { utcDate } from '../controllers/misc';
-import { TimeUpdatedRow, ErrorRow } from '../components/MiscComponents';
+import { TimeUpdatedDiffRow, ErrorRow } from '../components/MiscComponents';
 import { LoadingRow } from '../components/MiscComponents';
 
 const DifferenceTab = ({ value, shorten = false }: { value: number; shorten?: boolean }) => {
@@ -163,7 +163,7 @@ export default function EconomyTablePage() {
               </tbody>
             </table>
           </div>
-          <TimeUpdatedRow updated_at={state.data.updated_at} />
+          <TimeUpdatedDiffRow fromTime={state.data.updated_at} />
         </>
       )}
     </ContentBlock>
