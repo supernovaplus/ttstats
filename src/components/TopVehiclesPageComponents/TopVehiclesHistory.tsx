@@ -2,6 +2,7 @@ import ContentBlock from '../ContentBlock';
 import { useEffect, useState } from 'react';
 import { TopVehiclesHistoryResponse, TopVehiclesHistoryState } from '../../types/serverTypes';
 import TopVehiclesHistoryElement from './TopVehiclesHistoryElement';
+import { bucketUri } from '../../data/config';
 
 export default function TopVehiclesHistory() {
   const [state, setState] = useState<TopVehiclesHistoryState>({
@@ -14,7 +15,7 @@ export default function TopVehiclesHistory() {
   useEffect(() => {
     let isSubscribed = true;
 
-    fetch('https://d3.ttstats.eu/data/topvehicles.json')
+    fetch(`${bucketUri}/data/topvehicles.json`)
       .then((res) => res.json())
       .then((res: TopVehiclesHistoryResponse) => {
         if (isSubscribed) {

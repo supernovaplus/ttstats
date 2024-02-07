@@ -5,6 +5,7 @@ import { shortenLargeMoney } from '../controllers/misc';
 import { utcDate } from '../controllers/misc';
 import { TimeUpdatedDiffRow, ErrorRow } from '../components/MiscComponents';
 import { LoadingRow } from '../components/MiscComponents';
+import { bucketUri } from '../data/config';
 
 const DifferenceTab = ({ value, shorten = false }: { value: number; shorten?: boolean }) => {
   if (value > 0) {
@@ -25,27 +26,27 @@ const DifferenceTab = ({ value, shorten = false }: { value: number; shorten?: bo
 };
 
 const ECONOMYLINKS = [
-  ["Wipe 2.0 (current)", "https://d3.ttstats.eu/data/economy3-reversed.json"],
-  ["Wipe 1.0 (No longer updated)", "https://d3.ttstats.eu/data/economy2-reversed.json"],
-  ["Legacy (No longer updated)", "https://d3.ttstats.eu/data/economy-reversed.json"]
-]
+  ['Wipe 2.0 (current)', `${bucketUri}/data/economy3-reversed.json`],
+  ['Wipe 1.0 (No longer updated)', `${bucketUri}/data/economy2-reversed.json`],
+  ['Legacy (No longer updated)', `${bucketUri}/data/economy-reversed.json`],
+];
 
 const initalState: EconomyTableState = {
   loading: true,
   data: null,
   error: null,
-  selectedServer: 0
+  selectedServer: 0,
 };
 
 export default function EconomyTablePage() {
   const [state, setState] = useState<EconomyTableState>(initalState);
 
   const changeServer: ChangeEventHandler<HTMLSelectElement> = (e) => {
-    setState(s => ({
+    setState((s) => ({
       ...initalState,
-      selectedServer: parseInt(e.target.value)
+      selectedServer: parseInt(e.target.value),
     }));
-  }
+  };
 
   useEffect(() => {
     let isSubscribed = true;
@@ -81,12 +82,17 @@ export default function EconomyTablePage() {
 
   return (
     <ContentBlock title="Economy">
-      <div className='flex p-1'>
-        <div className='p-1'>Server: </div>
-        <select className='p-0 m-0 ml-1 block w-full my-1 cursor-pointer text-center bg-gray-600 border border-gray-600 text-white' defaultValue={"0"} onChange={changeServer}>
-          {ECONOMYLINKS.map(([name, link], index) =>
-            <option key={index} value={index} className='text-center p-2'>{name}</option>
-          )}
+      <div className="flex p-1">
+        <div className="p-1">Server: </div>
+        <select
+          className="p-0 m-0 ml-1 block w-full my-1 cursor-pointer text-center bg-gray-600 border border-gray-600 text-white"
+          defaultValue={'0'}
+          onChange={changeServer}>
+          {ECONOMYLINKS.map(([name, link], index) => (
+            <option key={index} value={index} className="text-center p-2">
+              {name}
+            </option>
+          ))}
         </select>
       </div>
       {state.loading && <LoadingRow />}

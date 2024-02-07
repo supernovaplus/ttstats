@@ -4,10 +4,11 @@ import ContentBlock from '../components/ContentBlock';
 import { Routes, Route, useParams } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import { TimeUpdatedDiffRow, LoadingRow, ErrorRow } from '../components/MiscComponents';
+import { bucketUri } from '../data/config';
 
 const DATALINKS = [
-  ['Wipe 2.0 (current)', 'https://d3.ttstats.eu/data/top10_v3.json'],
-  ['Legacy (No longer updated)', 'https://d3.ttstats.eu/data/top10_v2.json'],
+  ['Wipe 2.0 (current)', `${bucketUri}/data/top10_v3.json`],
+  ['Legacy (No longer updated)', `${bucketUri}/data/top10_v2.json`],
 ];
 
 const initalState: TopTenDataState = {

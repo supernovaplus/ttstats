@@ -14,6 +14,7 @@ import {
   ReferenceLine,
   Legend,
 } from 'recharts';
+import { bucketUri } from '../data/config';
 
 const data = [
   {
@@ -64,7 +65,7 @@ export default function EconomyChartPage() {
   const [state, setState] = useState(undefined);
 
   useEffect(() => {
-    fetch('https://d3.ttstats.eu/data/economy.json')
+    fetch(`${bucketUri}/data/economy.json`)
       .then((res) => res.json())
       .then((res) => {
         const d = res.map((item: any) => ({ time: item[0], debt: item[1] }));

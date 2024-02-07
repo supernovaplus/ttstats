@@ -40,9 +40,9 @@ export default function App() {
 
   return (
     <DataContextProvider>
-      <div className="max-w-[1000px] w-full mx-auto my-0 min-h-screen px-1 min-w-[200px] mb-6">
+      <div className="max-w-[1000px] w-full mx-auto my-0 min-h-screen px-1 min-w-[200px]">
         <Header />
-        <div className="flex md:flex-col items-start md:items-center">
+        <div className="flex md:flex-col items-start md:items-center mb-6">
           <Sidebar />
           <div className="w-full">
             <Routes>

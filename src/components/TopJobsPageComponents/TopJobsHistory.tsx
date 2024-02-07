@@ -2,6 +2,7 @@ import ContentBlock from '../ContentBlock';
 import { useEffect, useState } from 'react';
 import { TopJobsHistoryResponse, TopJobsHistoryState } from '../../types/serverTypes';
 import TopJobHistoryElement from './TopJobHistoryElement';
+import { bucketUri } from '../../data/config';
 
 export default function TopJobsHistory() {
   const [state, setState] = useState<TopJobsHistoryState>({
@@ -14,7 +15,7 @@ export default function TopJobsHistory() {
   useEffect(() => {
     let isSubscribed = true;
 
-    fetch('https://d3.ttstats.eu/data/topjobs.json')
+    fetch(`${bucketUri}/data/topjobs.json`)
       .then((res) => res.json())
       .then((res: TopJobsHistoryResponse) => {
         if (isSubscribed) {
