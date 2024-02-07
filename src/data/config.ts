@@ -9,3 +9,5 @@ export const localStorageKeys = {
 };
 
 export const ttApiUri = `https://d.transporttycoon.eu`;
+
+export const bucketUri = `https://api.transporttycoon.eu`;

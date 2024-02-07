@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ContentBlock from '../components/ContentBlock';
 import { TimeUpdatedDiffRow, LoadingRow, ErrorRow } from '../components/MiscComponents';
 import { prettyNum, shortenLargeMoney } from '../controllers/misc';
+import { bucketUri } from '../data/config';
 
 interface DealershipResponseJsonInterface {
   updated_at: number;
@@ -40,7 +41,7 @@ export default function DealershipPage() {
   useEffect(() => {
     let isSubscribed = true;
 
-    fetch('https://d3.ttstats.eu/data/dealership.json')
+    fetch(`${bucketUri}/data/dealership.json`)
       .then((res) => res.json())
       .then((res: DealershipResponseJsonInterface) => {
         if (!res || !res.data || typeof res.data !== 'object') throw new Error('no data received');
@@ -102,8 +103,6 @@ export default function DealershipPage() {
     e.currentTarget.style.minHeight = '0';
   };
 
-  console.log(state);
-
   return (
     <>
       <ContentBlock title="Dealership">
@@ -161,7 +160,9 @@ export default function DealershipPage() {
                               <div className="block bg-gray-800 inset-shadow-1 rounded-sm">
                                 <div className="text-xs p-px">{state.requirements[model]} required</div>
                               </div>
-                            ) : <></>}
+                            ) : (
+                              <></>
+                            )}
                           </div>
                         </div>
                       ))}

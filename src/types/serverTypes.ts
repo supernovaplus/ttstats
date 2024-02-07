@@ -36,6 +36,15 @@ export interface MainAPIPlayerHighest {
   sname: string;
 }
 
+/**
+ * DXP Array
+ *
+ * @property {boolean} 0 - Whether DXP is active.
+ * @property {string} [1] - The DXP host (optional).
+ * @property {number} [2] - Time remaining for DXP (optional).
+ * @property {number} [3] - Extra DXP time (optional).
+ * @property {number} [4] - Duration for which DXP has been active (optional).
+ */
 export type DXP = [boolean, string?, number?, number?, number?];
 
 export interface MainAPIServer {
