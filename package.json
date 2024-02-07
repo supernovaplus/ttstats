@@ -18,9 +18,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "test": "tsc && vite build && playwright test",
-    "pw": "playwright test"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^3.1.0",
@@ -31,7 +29,6 @@
     "recharts": "^2.5.0"
   },
   "devDependencies": {
-    "@playwright/test": "^1.32.2",
     "@types/jest": "^29.4.0",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
@@ -47,6 +44,6 @@
     "scss": "^0.2.4",
     "tailwindcss": "^3.2.7",
     "typescript": "^4.9.3",
-    "vite": "^4.3.9"
+    "vite": "^5.0.12"
   }
 }

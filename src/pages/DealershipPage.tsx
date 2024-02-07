@@ -103,8 +103,6 @@ export default function DealershipPage() {
     e.currentTarget.style.minHeight = '0';
   };
 
-  console.log(state);
-
   return (
     <>
       <ContentBlock title="Dealership">
