@@ -128,7 +128,7 @@ export default function BusinessPage() {
       );
     });
 
-  const totalBonusInDay = myBonus * 8;
+  const totalBonusInDay = myBonus;
   const totalBonusInDayAfterTax = totalBonusInDay * (bankOwned ? 0.8 : 0.7);
 
   // const onServerChange = (endpoint: string) => {
@@ -209,10 +209,10 @@ export default function BusinessPage() {
               total businesses: <MarkValue>{businessData.length}</MarkValue>
             </div>
             <div className=" px-2 bg-nova-c1 dark:bg-nova-c3 box-shadow-4">
-              total cost: <MarkValue>{shortenLargeMoney(totalMoneyToSpend)}</MarkValue>
+              total cost: <MarkValue>${shortenLargeMoney(totalMoneyToSpend)}</MarkValue>
             </div>
             <div className=" px-2 bg-nova-c1 dark:bg-nova-c3 box-shadow-4">
-              total bonus pre-tax: <MarkValue>{shortenLargeMoney(totalPossibleBonus * 8)}</MarkValue> per day
+              total bonus pre-tax: <MarkValue>${shortenLargeMoney(totalPossibleBonus)}</MarkValue> per day
             </div>
 
             {!!businessesOwned && (
@@ -226,8 +226,8 @@ export default function BusinessPage() {
                 <div className="border px-2 bg-nova-c1 dark:bg-nova-c3 border-black box-shadow-4">
                   money invested:{' '}
                   <MarkValue>
-                    {shortenLargeMoney(myMoneySpent)}
-                    {totalMoneyToSpend !== myMoneySpent && <>/{shortenLargeMoney(totalMoneyToSpend)}</>}
+                    ${shortenLargeMoney(myMoneySpent)}
+                    {totalMoneyToSpend !== myMoneySpent && <>/${shortenLargeMoney(totalMoneyToSpend)}</>}
                   </MarkValue>
                 </div>
                 <div className="border px-2 bg-nova-c1 dark:bg-nova-c3 border-black box-shadow-4">
@@ -235,16 +235,16 @@ export default function BusinessPage() {
                   <MarkValue>
                     {totalMoneyToSpend - myMoneySpent === 0
                       ? '-'
-                      : shortenLargeMoney(totalMoneyToSpend - myMoneySpent)}
+                      : '$' + shortenLargeMoney(totalMoneyToSpend - myMoneySpent)}
                   </MarkValue>
                 </div>
                 <div className="border px-2 bg-nova-c1 dark:bg-nova-c3 border-black box-shadow-4">
-                  your daily bonus pre-tax: <MarkValue>{shortenLargeMoney(totalBonusInDay)}</MarkValue> per
+                  your daily bonus pre-tax: <MarkValue>${shortenLargeMoney(totalBonusInDay)}</MarkValue> per
                   day
                 </div>
                 <div className="border px-2 bg-nova-c1 dark:bg-nova-c3 border-black box-shadow-4">
                   your bonus after {bankOwned ? '20%' : '30%'} tax:{' '}
-                  <MarkValue>{shortenLargeMoney(totalBonusInDayAfterTax)}</MarkValue> per day
+                  <MarkValue>${shortenLargeMoney(totalBonusInDayAfterTax)}</MarkValue> per day
                 </div>
               </>
             )}
