@@ -10,6 +10,7 @@ export interface ServerListRawInterface {
   links?: [string, string][];
   info?: string;
   apiKeyAllow?: boolean;
+  chartId: string | null;
 }
 
 export interface MainAPIPlayer {

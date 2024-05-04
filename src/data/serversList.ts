@@ -12,6 +12,7 @@ export const serversList: ServerListRawInterface[] = [
     info: 'Old database was lost, starting fresh.',
     // info: 'This server is replacing the original server and is running on a new separate database. This server will receive all the future updates.',
     apiKeyAllow: true,
+    chartId: "EG6U3"
   },
   {
     endpoint: 'njyvop',
@@ -23,7 +24,8 @@ export const serversList: ServerListRawInterface[] = [
     serverip: '45.88.229.43:30121',
     info: 'This server is used for testing. It is available to players with beta access',
     // links: [["more info on wiki", "https://dash.tycoon.community/wiki/index.php/Legacy"]],
-    apiKeyAllow: true
+    apiKeyAllow: true,
+    chartId: "1huiF"
   },
   // {
   //   endpoint: 'w8j4eb',

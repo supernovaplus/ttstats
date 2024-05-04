@@ -1,8 +1,10 @@
 import { ServerDataObject } from '../../types/serverTypes';
+// import DatawrapperChart from '../DatawrapperChart';
 
 export default function PlayersListModal({ server }: { server: ServerDataObject }) {
   return (
     <div className="text-center">
+      {/* {server.chartId && <DatawrapperChart chartId={server.chartId}/>} */}
       {!server.playersData || !server.playersData.length ? (
         <div>No Players</div>
       ) : (
