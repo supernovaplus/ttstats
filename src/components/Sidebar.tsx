@@ -67,7 +67,7 @@ export default function Sidebar() {
               Top Vehicles
             </OneItem> */}
             <OneItem to="/top10" setForceOpen={setForceOpen}>
-              New Top 10
+              Top 10
             </OneItem>
             <OneItem to="/highest-id" setForceOpen={setForceOpen}>
               Highest ID
