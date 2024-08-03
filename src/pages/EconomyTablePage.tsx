@@ -124,7 +124,7 @@ export default function EconomyTablePage() {
 
                   return (
                     <tr key={index} className="odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk">
-                      <td data-label="Date" className="px-1">
+                      <td data-label="Date" className="px-1" title={new Date(row.date).toUTCString()}>
                         {utcDate(row.date, true)}
                       </td>
                       <td data-label="Debt" className="text-right">
