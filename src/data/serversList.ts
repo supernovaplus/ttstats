@@ -8,8 +8,8 @@ export const serversList: ServerListRawInterface[] = [
     enabled: true,
     apiname: 'main',
     uptimeid: '43c6a237ee1b867f13cd5ccb5731926f',
-    serverip: '45.88.229.43:30120',
-    info: 'Old database was lost, starting fresh.',
+    serverip: 'server.tycoon.community:30120',
+    info: '',
     // info: 'This server is replacing the original server and is running on a new separate database. This server will receive all the future updates.',
     apiKeyAllow: true,
     chartId: "EG6U3"
@@ -21,8 +21,8 @@ export const serversList: ServerListRawInterface[] = [
     enabled: true,
     apiname: 'beta',
     uptimeid: '676134ceb12cdf3fb6e2272f37ff5455',
-    serverip: '45.88.229.43:30121',
-    info: 'This server is used for testing. It is available to players with beta access',
+    serverip: 'server.tycoon.community:30125',
+    info: 'This server is used for testing. It is available to players with beta access.',
     // links: [["more info on wiki", "https://dash.tycoon.community/wiki/index.php/Legacy"]],
     apiKeyAllow: true,
     chartId: "1huiF"
