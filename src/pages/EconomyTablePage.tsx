@@ -25,8 +25,8 @@ const DifferenceTab = ({ value, shorten = false }: { value: number; shorten?: bo
   }
 };
 
-const ECONOMYLINKS = [
-  ['Wipe 2.0 (current)', `${bucketUri}/data/economy3-reversed.json`],
+const VERSION = [
+  ['Wipe 2.0 (Latest)', `${bucketUri}/data/economy3-reversed.json`],
   ['Wipe 1.0 (No longer updated)', `${bucketUri}/data/economy2-reversed.json`],
   ['Legacy (No longer updated)', `${bucketUri}/data/economy-reversed.json`],
 ];
@@ -35,22 +35,22 @@ const initalState: EconomyTableState = {
   loading: true,
   data: null,
   error: null,
-  selectedServer: 0,
+  selectedVersion: 0,
 };
 
 export default function EconomyTablePage() {
   const [state, setState] = useState<EconomyTableState>(initalState);
 
-  const changeServer: ChangeEventHandler<HTMLSelectElement> = (e) => {
+  const changeVersion: ChangeEventHandler<HTMLSelectElement> = (e) => {
     setState((s) => ({
       ...initalState,
-      selectedServer: parseInt(e.target.value),
+      selectedVersion: parseInt(e.target.value),
     }));
   };
 
   useEffect(() => {
     let isSubscribed = true;
-    fetch(ECONOMYLINKS[state.selectedServer][1])
+    fetch(VERSION[state.selectedVersion][1])
       .then((res) => res.json())
       .then((res: EconomyResponse) => {
         if (!res || !Array.isArray(res.data)) throw new Error('Invalid Data');
@@ -76,19 +76,19 @@ export default function EconomyTablePage() {
     return () => {
       isSubscribed = false;
     };
-  }, [state.selectedServer]);
+  }, [state.selectedVersion]);
 
   // Time;Debt;Money;Debts;Millionaires;Billionaires;Users;Players
 
   return (
     <ContentBlock title="Economy">
       <div className="flex p-1">
-        <div className="p-1">Server: </div>
+        <div className="p-1">Version: </div>
         <select
           className="p-0 m-0 ml-1 block w-full my-1 cursor-pointer text-center bg-gray-600 border border-gray-600 text-white"
           defaultValue={'0'}
-          onChange={changeServer}>
-          {ECONOMYLINKS.map(([name, link], index) => (
+          onChange={changeVersion}>
+          {VERSION.map(([name, link], index) => (
             <option key={index} value={index} className="text-center p-2">
               {name}
             </option>

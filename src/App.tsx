@@ -16,6 +16,8 @@ import Page404 from './components/Page404';
 import UptimePage from './pages/UptimePage';
 import LinksPage from './pages/LinksPage';
 import UserDataIndexPage from './pages/userdata/UserDataIndexPage';
+import { UserDataContextProvider } from './store/UserDataContext';
+import { ActivityDetection } from './controllers/activityDetection';
 
 const TopJobs = lazy(() => import('./pages/TopJobsPage'));
 const HighestIDPage = lazy(() => import('./pages/HighestIDPage'));
@@ -40,38 +42,44 @@ export default function App() {
 
   return (
     <DataContextProvider>
-      <div className="max-w-[1000px] w-full mx-auto my-0 min-h-screen px-1 min-w-[200px]">
-        <Header />
-        <div className="flex md:flex-col items-start md:items-center mb-6">
-          <Sidebar />
-          <div className="w-full">
-            <Routes>
-              {/* static */}
-              <Route path="/" element={<ServersListPage />} />
-              <Route path="/playerfinder" element={<PlayerFinderPage />} />
-              <Route path="/uptime" element={<UptimePage />} />
-              {/* dynamic/lazy */}
-              <Route path="/chart" element={<LazyLoadingWrapper component={ChartPage2} />} />
-              <Route path="/topvehicles" element={<LazyLoadingWrapper component={TopVehicles} />} />
-              <Route path="/highest-id" element={<LazyLoadingWrapper component={HighestIDPage} />} />
-              <Route path="/top10/*" element={<LazyLoadingWrapper component={Top10} />} />
-              <Route path="/topjobs" element={<LazyLoadingWrapper component={TopJobs} />} />
-              <Route path="/links" element={<LazyLoadingWrapper component={LinksPage} />} />
-              <Route path="/economy" element={<LazyLoadingWrapper component={EconomyTablePage} />} />
-              <Route path="/dealership" element={<LazyLoadingWrapper component={DealershipPage} />} />
-              <Route
-                path="/stacks-calculator"
-                element={<LazyLoadingWrapper component={StacksCalculatorPage} />}
-              />
-              <Route path="/exp-calculator" element={<LazyLoadingWrapper component={EXPCalculatorPage} />} />
-              <Route path="/user/*" element={<UserDataIndexPage/>}/>
-              {/* 404 */}
-              <Route path="*" element={<Page404 />} />
-            </Routes>
+      <UserDataContextProvider>
+        <ActivityDetection/>
+        <div className="max-w-[1000px] w-full mx-auto my-0 min-h-screen px-1 min-w-[200px]">
+          <Header />
+          <div className="flex md:flex-col items-start md:items-center mb-6">
+            <Sidebar />
+            <div className="w-full">
+              <Routes>
+                {/* static */}
+                <Route path="/" element={<ServersListPage />} />
+                <Route path="/playerfinder" element={<PlayerFinderPage />} />
+                <Route path="/uptime" element={<UptimePage />} />
+                {/* dynamic/lazy */}
+                <Route path="/chart" element={<LazyLoadingWrapper component={ChartPage2} />} />
+                <Route path="/topvehicles" element={<LazyLoadingWrapper component={TopVehicles} />} />
+                <Route path="/highest-id" element={<LazyLoadingWrapper component={HighestIDPage} />} />
+                <Route path="/top10/*" element={<LazyLoadingWrapper component={Top10} />} />
+                <Route path="/topjobs" element={<LazyLoadingWrapper component={TopJobs} />} />
+                <Route path="/links" element={<LazyLoadingWrapper component={LinksPage} />} />
+                <Route path="/economy" element={<LazyLoadingWrapper component={EconomyTablePage} />} />
+                <Route path="/dealership" element={<LazyLoadingWrapper component={DealershipPage} />} />
+                <Route
+                  path="/stacks-calculator"
+                  element={<LazyLoadingWrapper component={StacksCalculatorPage} />}
+                />
+                <Route
+                  path="/exp-calculator"
+                  element={<LazyLoadingWrapper component={EXPCalculatorPage} />}
+                />
+                <Route path="/user/*" element={<UserDataIndexPage />} />
+                {/* 404 */}
+                <Route path="*" element={<Page404 />} />
+              </Routes>
+            </div>
           </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
+      </UserDataContextProvider>
     </DataContextProvider>
   );
 }

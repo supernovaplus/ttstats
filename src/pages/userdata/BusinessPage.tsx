@@ -45,12 +45,8 @@ export default function BusinessPage() {
     {}
   );
 
-  const serverId = searchParams.get('serverId') || '2epova';
-  const page = searchParams.get('page');
   // const { server, page } = useParams();
   // console.log(server, page);
-
-  const selectedServerState = !serverId ? null : userDataState.servers[serverId];
 
   let businessesOwned = 0;
   let myBonus = 0;
@@ -105,11 +101,21 @@ export default function BusinessPage() {
       return (
         <tr key={index} className={`odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk`}>
           <td>#{index + 1}</td>
-          <td><input type="checkbox" name={`biz-${biz.id}`} className='cursor-pointer' checked={owned} onChange={() => toggleBiz(biz.id)} /></td>
+          <td>
+            <input
+              type="checkbox"
+              name={`biz-${biz.id}`}
+              className="cursor-pointer"
+              checked={owned}
+              onChange={() => toggleBiz(biz.id)}
+            />
+          </td>
           <td
             title={biz.id}
             onClick={() => toggleBiz(biz.id)}
-            className={`cursor-pointer hover:underline ${owned ? 'text-green-800 dark:text-green-500 line-through' : ''}`}>
+            className={`cursor-pointer hover:underline ${
+              owned ? 'text-green-800 dark:text-green-500 line-through' : ''
+            }`}>
             {biz.name}
             {owned ? ' ✅' : ''}
           </td>
@@ -176,7 +182,7 @@ export default function BusinessPage() {
               <thead className="sticky top-0 text-white bg-nova-c1 dark:bg-nova-c3">
                 <tr>
                   <th>#</th>
-                  <th className='text-sm'>Owned</th>
+                  <th className="text-sm">Owned</th>
                   <th>Name</th>
                   <th>Price</th>
                   <th>
@@ -206,19 +212,19 @@ export default function BusinessPage() {
         <div className="p-1 mt-1 text-white">
           <div className="flex gap-1 flex-wrap justify-center py-1 w-full mb-1">
             <div className=" px-2 bg-nova-c1 dark:bg-nova-c3 box-shadow-4">
-              total businesses: <MarkValue>{businessData.length}</MarkValue>
+              [ALL] businesses: <MarkValue>{businessData.length}</MarkValue>
             </div>
             <div className=" px-2 bg-nova-c1 dark:bg-nova-c3 box-shadow-4">
-              total cost: <MarkValue>${shortenLargeMoney(totalMoneyToSpend)}</MarkValue>
+              [ALL] cost: <MarkValue>${shortenLargeMoney(totalMoneyToSpend)}</MarkValue>
             </div>
             <div className=" px-2 bg-nova-c1 dark:bg-nova-c3 box-shadow-4">
-              total bonus pre-tax: <MarkValue>${shortenLargeMoney(totalPossibleBonus)}</MarkValue> per day
+              [ALL] bonus pre-tax: <MarkValue>${shortenLargeMoney(totalPossibleBonus)}</MarkValue> per day
             </div>
 
             {!!businessesOwned && (
               <>
                 <div className="border px-2 bg-nova-c1 dark:bg-nova-c3 border-black box-shadow-4">
-                  busineses you own:{' '}
+                  busineses owned:{' '}
                   <MarkValue>
                     {businessesOwned}/{businessData.length}
                   </MarkValue>
@@ -228,14 +234,6 @@ export default function BusinessPage() {
                   <MarkValue>
                     ${shortenLargeMoney(myMoneySpent)}
                     {totalMoneyToSpend !== myMoneySpent && <>/${shortenLargeMoney(totalMoneyToSpend)}</>}
-                  </MarkValue>
-                </div>
-                <div className="border px-2 bg-nova-c1 dark:bg-nova-c3 border-black box-shadow-4">
-                  money left to invest:{' '}
-                  <MarkValue>
-                    {totalMoneyToSpend - myMoneySpent === 0
-                      ? '-'
-                      : '$' + shortenLargeMoney(totalMoneyToSpend - myMoneySpent)}
                   </MarkValue>
                 </div>
                 <div className="border px-2 bg-nova-c1 dark:bg-nova-c3 border-black box-shadow-4">

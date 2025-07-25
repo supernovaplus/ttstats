@@ -198,7 +198,7 @@ export interface TopTenDataState {
   data: TopTenDataResponse['data'] | null;
   selectedStatName: string;
   bannedPlayersList: Set<number>;
-  selectedServer: number;
+  selectedVersion: number;
 }
 
 export interface HighestIDList {
@@ -227,7 +227,7 @@ export interface EconomyTableState {
   loading: boolean;
   data: null | EconomyResponse;
   error: null | string;
-  selectedServer: number;
+  selectedVersion: number;
 }
 
 export interface TopJobsHistoryResponse {
@@ -271,13 +271,6 @@ export interface TopVehiclesHistoryState {
 }
 
 export interface UserDataContextInterface {
-  servers: {
-    [serverEndpoint: string]: {
-      server: ServerListRawInterface;
-      apikey: string;
-      charges: string;
-      lastChecked: string;
-    };
-  };
   selectedUserId: string;
+  data1: Set<string> | null;
 }
