@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import ContentBlock from '../components/ContentBlock';
-import {
-  LineChart,
-  Line,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  Brush,
-  AreaChart,
-  Area,
-  ResponsiveContainer,
-  ReferenceLine,
-  Legend,
-} from 'recharts';
+// import {
+//   LineChart,
+//   Line,
+//   XAxis,
+//   YAxis,
+//   CartesianGrid,
+//   Tooltip,
+//   Brush,
+//   AreaChart,
+//   Area,
+//   ResponsiveContainer,
+//   ReferenceLine,
+//   Legend,
+// } from 'recharts';
 import { bucketUri } from '../data/config';
 
 const data = [
@@ -97,15 +97,14 @@ export default function EconomyChartPage() {
       <p>Maybe some other content</p>
 
       {/* <ResponsiveContainer width={700} height="80%"> */}
-      <LineChart width={730} height={250} data={state} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+      {/* <LineChart width={730} height={250} data={state} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
         <XAxis dataKey="time" />
         <YAxis />
         <CartesianGrid strokeDasharray="3 3" />
         <Tooltip />
         <Legend verticalAlign="top" height={36} />
         <Line name="pv of pages" type="monotone" dataKey="debt" stroke="#8884d8" />
-        {/* <Line name="uv of pages" type="monotone" dataKey="uv" stroke="#82ca9d" /> */}
-      </LineChart>
+      </LineChart> */}
       {/* </ResponsiveContainer> */}
     </ContentBlock>
   );

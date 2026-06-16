@@ -6,7 +6,7 @@ import Page404 from '../../components/Page404';
 import { UserDataContextProvider } from '../../store/UserDataContext';
 
 const BusinessPage = lazy(() => import('./BusinessPage'));
-const UserSettingsPage = lazy(() => import('./UserSettingsPage'));
+// const UserSettingsPage = lazy(() => import('./UserSettingsPage'));
 
 export default function UserDataIndexPage() {
   return (
@@ -20,7 +20,7 @@ export default function UserDataIndexPage() {
         {/* <Route path="/user/:userId/category/:category" component={User} /> */}
 
         <Route path="business" element={<LazyLoadingWrapper component={BusinessPage} />} />
-        <Route path="settings" element={<LazyLoadingWrapper component={UserSettingsPage} />} />
+        {/* <Route path="settings" element={<LazyLoadingWrapper component={UserSettingsPage} />} /> */}
         <Route path="*" element={<Page404 />} />
       </Routes>
     </UserDataContextProvider>

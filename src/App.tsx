@@ -23,8 +23,8 @@ const TopJobs = lazy(() => import('./pages/TopJobsPage'));
 const HighestIDPage = lazy(() => import('./pages/HighestIDPage'));
 const Top10 = lazy(() => import('./pages/TopTenPage'));
 const TopVehicles = lazy(() => import('./pages/TopVehiclesPage'));
-const ChartPage = lazy(() => import('./pages/ChartPage'));
-const ChartPage2 = lazy(() => import('./pages/ChartPage2'));
+// const ChartPage = lazy(() => import('./pages/ChartPage'));
+// const ChartPage2 = lazy(() => import('./pages/ChartPage2'));
 const StacksCalculatorPage = lazy(() => import('./pages/tools/StacksCalculatorPage'));
 const EXPCalculatorPage = lazy(() => import('./pages/tools/EXPCalculatorPage'));
 const EconomyTablePage = lazy(() => import('./pages/EconomyTablePage'));
@@ -43,7 +43,7 @@ export default function App() {
   return (
     <DataContextProvider>
       <UserDataContextProvider>
-        <ActivityDetection/>
+        <ActivityDetection />
         <div className="max-w-[1000px] w-full mx-auto my-0 min-h-screen px-1 min-w-[200px]">
           <Header />
           <div className="flex md:flex-col items-start md:items-center mb-6">
@@ -55,7 +55,7 @@ export default function App() {
                 <Route path="/playerfinder" element={<PlayerFinderPage />} />
                 <Route path="/uptime" element={<UptimePage />} />
                 {/* dynamic/lazy */}
-                <Route path="/chart" element={<LazyLoadingWrapper component={ChartPage2} />} />
+                {/* <Route path="/chart" element={<LazyLoadingWrapper component={ChartPage2} />} /> */}
                 <Route path="/topvehicles" element={<LazyLoadingWrapper component={TopVehicles} />} />
                 <Route path="/highest-id" element={<LazyLoadingWrapper component={HighestIDPage} />} />
                 <Route path="/top10/*" element={<LazyLoadingWrapper component={Top10} />} />
