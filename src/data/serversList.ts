@@ -3,12 +3,13 @@ import { ServerListRawInterface } from '../types/serverTypes';
 export const serversList: ServerListRawInterface[] = [
   {
     endpoint: '2epova',
-    name: 'NY-1 Main',
-    sname: 'NY-1',
+    name: 'S1 Main',
+    sname: 'S1',
     enabled: true,
     apiname: 'main',
     uptimeid: '43c6a237ee1b867f13cd5ccb5731926f',
     serverip: 'server.tycoon.community:30120',
+    reverseurl: 's1.transporttycoon.eu',
     info: '',
     // info: 'This server is replacing the original server and is running on a new separate database. This server will receive all the future updates.',
     apiKeyAllow: true,
@@ -16,13 +17,14 @@ export const serversList: ServerListRawInterface[] = [
   },
   {
     endpoint: 'njyvop',
-    name: 'NY-2 Beta',
-    sname: 'NY-2',
+    name: 'S2 Beta',
+    sname: 'S2',
     enabled: true,
     apiname: 'beta',
     uptimeid: '676134ceb12cdf3fb6e2272f37ff5455',
     serverip: 'server.tycoon.community:30125',
-    info: 'This server is used for testing. It is available to players with beta access.',
+    reverseurl: 's2.transporttycoon.eu',
+    info: 'This server is used for testing. Beta access required.',
     // links: [["more info on wiki", "https://dash.tycoon.community/wiki/index.php/Legacy"]],
     apiKeyAllow: true,
     chartId: "1huiF"

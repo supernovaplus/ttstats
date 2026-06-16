@@ -25,6 +25,7 @@ interface DealershipStateInterface {
   updated_at: null | number;
   requirements: null | DealershipResponseJsonInterface['requirements'];
   isHidden: null | { [key: string]: boolean };
+  hideOwned: boolean;
 }
 
 export default function DealershipPage() {
@@ -35,6 +36,7 @@ export default function DealershipPage() {
     updated_at: null,
     requirements: null,
     isHidden: null,
+    hideOwned: false
   });
 
   //TODO: types
@@ -98,9 +100,10 @@ export default function DealershipPage() {
   };
 
   const onImageErr = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-    e.currentTarget.alt = '(No Image)';
-    e.currentTarget.style.maxHeight = '30px';
-    e.currentTarget.style.minHeight = '0';
+    e.currentTarget.src = `https://ttdata.transporttycoon.eu/vehicles/veh_images_min/unk.jpg`;
+    // e.currentTarget.alt = '(No Image)';
+    // e.currentTarget.style.maxHeight = '30px';
+    // e.currentTarget.style.minHeight = '0';
   };
 
   return (
@@ -110,7 +113,7 @@ export default function DealershipPage() {
         {state.error && <ErrorRow>{state.error}</ErrorRow>}
         {state.data && (
           <>
-            <div className="mb-1 rounded-sm w-full text-center">
+            <div className="mb-1 rounded-sm w-full text-center gap-2 flex justify-end">
               <div
                 className="cursor-pointer bg-gray-700 text-white p-1 text-sm inline-block hover:underline rounded-sm"
                 onClick={onToggleAll}>
@@ -124,20 +127,29 @@ export default function DealershipPage() {
                   <div
                     className="w-full cursor-pointer hover:bg-gray-500 p-2 bg-gray-700 select-none rounded-sm border border-transparent"
                     onClick={() => onChangeVisibility(category)}>
-                    {category} ({state.data && state.data[category].length})
+                    {category}{' '}
+                    {state.data && (
+                      <>
+                        ({state.data[category].length}){' '}
+                        <div className="text-right float-right min-w-10">
+                          [{state.isHidden && state.isHidden[category] ? '+' : '-'}]
+                        </div>
+                      </>
+                    )}
                   </div>
                   {state.isHidden && !state.isHidden[category] && (
                     <div
                       hidden={state.isHidden[category]}
                       className="flex flex-wrap gap-2 pt-2 mb-2 justify-center">
                       {vehicles.map(({ name, model, price }, index: number) => (
-                        <div key={index} className="w-full max-w-[250px] text-center">
-                          <div className="bg-slate-500 box-shadow-1  border border-transparent rounded-sm overflow-hidden">
+                        <div key={index} className="w-full max-w-[250px] text-center relative">
+                          <div className="bg-slate-500 box-shadow-1 border border-transparent rounded-sm overflow-hidden">
                             <a
                               href={`https://cdn.tycoon.community/dealership/vehicles/${model}.png`}
                               target="_blank"
                               title={model}>
                               <img
+                                // src={`https://ttdata.transporttycoon.eu/vehicles/veh_images_min/${model}.jpg`}
                                 src={`https://cdn.tycoon.community/dealership/vehicles/${model}.png`}
                                 alt=""
                                 loading="lazy"
@@ -156,12 +168,10 @@ export default function DealershipPage() {
                                 </div>
                               </div>
                             </div>
-                            {state.requirements?.hasOwnProperty(model) ? (
+                            {state.requirements?.hasOwnProperty(model) && (
                               <div className="block bg-gray-800 inset-shadow-1 rounded-sm">
                                 <div className="text-xs p-px">{state.requirements[model]} required</div>
                               </div>
-                            ) : (
-                              <></>
                             )}
                           </div>
                         </div>

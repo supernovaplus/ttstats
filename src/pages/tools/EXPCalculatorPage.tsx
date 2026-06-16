@@ -24,7 +24,7 @@ function EXPCalculator() {
     const timeNeeded = expResult / state.expPerHour;
     const h = Math.floor(timeNeeded);
     const m = Math.floor((timeNeeded - h) * 60)
-    let timeString = `${h ? h + "h ": ""}${m}m`;
+    let timeString = `${h ? h + "h " : ""}${m}m`;
 
     setOutput({
       expNeeded: expResult <= 0 ? 'Level Reached' : `${prettyNum(expResult)} exp`,
@@ -40,7 +40,7 @@ function EXPCalculator() {
           min={1}
           type="number"
           name="current-level"
-          className="text-black mx-2 p-2 w-full max-w-[400px] mb-2 text-center"
+          className="text-black mx-2 p-2 w-full max-w-[400px] bg-white mb-2 text-center"
           defaultValue={state.current}
           onChange={(e) => changeStateVal('current', e.target.value, setState)}
           onKeyDown={(e) => changeStateVal('current', (e.target as HTMLInputElement).value, setState)}
@@ -51,7 +51,7 @@ function EXPCalculator() {
         <input
           type="number"
           name="target-level"
-          className="text-black mx-2 p-2 block w-full max-w-[400px] mb-2 text-center"
+          className="text-black mx-2 p-2 block bg-white w-full max-w-[400px] mb-2 text-center"
           onChange={(e) => changeStateVal('target', e.target.value, setState)}
           onKeyDown={(e) => changeStateVal('target', (e.target as HTMLInputElement).value, setState)}
           defaultValue={state.target}
@@ -73,7 +73,7 @@ function EXPCalculator() {
         <input
           name="exp-per-hour"
           type="text"
-          className="p-2 block w-full max-w-[400px] text-center text-black mb-2"
+          className="p-2 block bg-white w-full max-w-[400px] text-center text-black mb-2"
           onChange={(e) => changeStateVal('expPerHour', e.target.value, setState)}
           onKeyDown={(e) => changeStateVal('expPerHour', (e.target as HTMLInputElement).value, setState)}
           defaultValue={state.expPerHour}
@@ -127,7 +127,7 @@ function EXPConverter() {
             onChange={(e) =>
               changeStateVal('expToLevelInput', (e.target as HTMLInputElement).value, setState)
             }
-            className="p-2 text-black max-w-[200px] outline-none appearance"
+            className="p-2 bg-white text-black max-w-[200px] outline-none appearance"
           />
           <input
             type="text"
@@ -146,7 +146,7 @@ function EXPConverter() {
             name="exp-2"
             value={state.lvlToEXPInput === 0 ? '' : state.lvlToEXPInput}
             onChange={(e) => changeStateVal('lvlToEXPInput', (e.target as HTMLInputElement).value, setState)}
-            className="p-2 text-black max-w-[200px] outline-none auto appearance"
+            className="p-2 bg-white text-black max-w-[200px] outline-none auto appearance"
           />
           <input
             type="text"

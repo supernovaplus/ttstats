@@ -8,8 +8,8 @@ export default function Navbar() {
     <nav className="flex justify-between min-h-[50px] items-center px-4 md:min-h-[70px]">
       <div id="left-nav" className="">
         <div id="site-logo" className="block">
-          <a href="https://ttstats.eu" title="ttstats.eu" className="w-7">
-            <img src={ttLogo} className='block w-full'/>
+          <a href="/" title="ttstats.eu" className="w-7">
+            <img src={ttLogo} className='block w-full' />
           </a>
         </div>
       </div>

@@ -98,17 +98,17 @@ export const fetchServer = async (server: ServerDataObject, setServer: SetServer
       );
       await parseStatusJSON({ res, setServer, server });
       success = true;
-    } catch (err) {}
+    } catch (err) { }
 
     //else if fails, try ttstats reverse proxy api
     try {
       if (success) return;
       const res: MainAPIPlayersResponse = await cFetch(
-        `https://d.ttstats.eu/${server.apiname}/status/widget/players.json`
+        `https://${server.reverseurl}/status/widget/players.json`
       );
       await parseStatusJSON({ res, setServer, server });
       success = true;
-    } catch (err) {}
+    } catch (err) { }
   }
 
   //else fetch fivem server status api
@@ -146,7 +146,7 @@ export const fetchServer = async (server: ServerDataObject, setServer: SetServer
     }));
 
     success = true;
-  } catch (err) {}
+  } catch (err) { }
 
   //else all fetches failed, set status to offline
   if (success) return;

@@ -567,8 +567,24 @@ const businessData = [
     bonus: 2038284,
     position: { x: 2761, y: 1548 },
   },
+  {
+    name: 'Juniper Shipping Yard',
+    id: 'biz_train_rox',
+    cost: 80000000,
+    visuallvl: 80,
+    bonus: 2038284,
+    position: { x: -3039, y: 6773 },
+  },
+  {
+    name: 'Marina Beach Mansion',
+    id: 'biz_rox_mansion',
+    cost: 20000000,
+    visuallvl: 55,
+    bonus: 646313,
+    position: { x: -846, y: 7171 },
+  },
 ];
 
-export const bizDataUpdatedAt = 1714821475582;
+export const bizDataUpdatedAt = 1781642639089;
 
 export default businessData;

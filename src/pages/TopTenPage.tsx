@@ -6,8 +6,8 @@ import { NavLink } from 'react-router-dom';
 import { TimeUpdatedDiffRow, LoadingRow, ErrorRow } from '../components/MiscComponents';
 import { bucketUri } from '../data/config';
 
-const DATALINKS = [
-  ['Wipe 2.0 (current)', `${bucketUri}/data/top10_v3.json`],
+const VERSION = [
+  ['Wipe 2.0 (Latest)', `${bucketUri}/data/top10_v3.json`],
   ['Legacy (No longer updated)', `${bucketUri}/data/top10_v2.json`],
 ];
 
@@ -17,36 +17,23 @@ const initalState: TopTenDataState = {
   data: null,
   selectedStatName: 'bus_route_completed',
   bannedPlayersList: new Set(),
-  selectedServer: 0,
+  selectedVersion: 0,
 };
 
 export default function TopTenPage() {
   const [state, setState] = useState<TopTenDataState>({ ...initalState });
 
-  const changeServer: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
+  const changeVersion: React.ChangeEventHandler<HTMLSelectElement> = (e) => {
     setState((s) => ({
       ...initalState,
-      selectedServer: parseInt(e.target.value),
+      selectedVersion: parseInt(e.target.value),
     }));
   };
 
   useEffect(() => {
     let isSubscribed = true;
 
-    // fetch('https://api.transporttycoon.eu/banned-top.json')
-    //   .then((res) => res.json())
-    //   .then((res: number[]) => {
-    //     if (res && Array.isArray(res) && isSubscribed) {
-    //       setState((s) => ({
-    //         ...s,
-    //         bannedPlayersList: new Set(res),
-    //       }));
-    //     }
-    //   })
-    //   // eslint-disable-next-line @typescript-eslint/no-empty-function
-    //   .catch(() => { });
-
-    fetch(DATALINKS[state.selectedServer][1])
+    fetch(VERSION[state.selectedVersion][1])
       .then((res) => res.json())
       .then((res: TopTenDataResponse) => {
         if (!res || !res.data || !Array.isArray(res.data)) throw new Error('no data received');
@@ -77,18 +64,18 @@ export default function TopTenPage() {
     return () => {
       isSubscribed = false;
     };
-  }, [state.selectedServer]);
+  }, [state.selectedVersion]);
 
   return (
     <>
       <ContentBlock title="Top 10 Leaderboards">
         <div className="flex p-1">
-          <div className="p-1">Server: </div>
+          <div className="p-1">Version: </div>
           <select
             className="p-0 m-0 ml-1 block w-full my-1 cursor-pointer text-center bg-gray-600 border border-gray-600 text-white"
             defaultValue={'0'}
-            onChange={changeServer}>
-            {DATALINKS.map(([name, link], index) => (
+            onChange={changeVersion}>
+            {VERSION.map(([name, link], index) => (
               <option key={index} value={index} className="text-center p-2">
                 {name}
               </option>
@@ -108,8 +95,7 @@ export default function TopTenPage() {
                   to={`/top10/${stat_name}`}
                   key={index}
                   className={({ isActive }) =>
-                    ` dark:text-white hover:underline py-1 block text-center select-none border-b border-nova-c2 ${
-                      isActive ? 'bg-nova-c1 dark:bg-nova-c2 text-white' : ''
+                    ` dark:text-white hover:underline py-1 block text-center select-none border-b border-nova-c2 ${isActive ? 'bg-nova-c1 dark:bg-nova-c2 text-white' : ''
                     }`
                   }>
                   {nice_name}
@@ -127,7 +113,9 @@ export default function TopTenPage() {
             !state.loading &&
             state.data && (
               <ContentBlock>
-                <div className="text-center">Select Top 10 Board</div>
+                <p className="max-w-md text-center bg-gray-400 rounded dark:bg-gray-700 p-2 my-3 m-auto">
+                  Select a category from the list.
+                </p>
               </ContentBlock>
             )
           }
@@ -159,11 +147,10 @@ function Board({ state }: { state: TopTenDataState }) {
             {selectedBoard.json_data.map((row, index2) => (
               <tr
                 key={index2}
-                className={`odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk ${
-                  state.bannedPlayersList.has(row.user_id)
-                    ? 'line-through text-gray-400 dark:text-gray-600'
-                    : ''
-                }`}>
+                className={`odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk ${state.bannedPlayersList.has(row.user_id)
+                  ? 'line-through text-gray-400 dark:text-gray-600'
+                  : ''
+                  }`}>
                 <td data-label="# Place">{index2 + 1}</td>
                 <td data-label="Player">
                   {row.username}{' '}

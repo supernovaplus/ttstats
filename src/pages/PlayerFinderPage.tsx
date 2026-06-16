@@ -80,16 +80,16 @@ export default function PlayerFinderPage() {
     setState((s) =>
       playerFinderFound.length > 0
         ? {
-            ...s,
-            playerFinderMessages:
-              'Found ' + playerFinderFound.length + ' player' + (playerFinderFound.length === 1 ? '' : 's'),
-            playerFinderFound,
-          }
+          ...s,
+          playerFinderMessages:
+            'Found ' + playerFinderFound.length + ' player' + (playerFinderFound.length === 1 ? '' : 's'),
+          playerFinderFound,
+        }
         : {
-            ...s,
-            playerFinderMessages: isButton ? 'Found nothing' : '...',
-            playerFinderFound: [],
-          }
+          ...s,
+          playerFinderMessages: isButton ? 'Found nothing' : '...',
+          playerFinderFound: [],
+        }
     );
   };
 
@@ -121,7 +121,7 @@ export default function PlayerFinderPage() {
             placeholder="Enter player's name or in-game ID here..."
             onChange={handlePlayersNameInput}
             onKeyDown={handleOnKeyDownEnter}
-            className="block w-full p-1 my-1 text-black"
+            className="block w-full p-1 my-1 text-black bg-white"
           />
         </div>
         <div>
@@ -130,7 +130,7 @@ export default function PlayerFinderPage() {
             id="serverSelector"
             onChange={handleServerSelect}
             value={state.serverSelect}
-            className="block w-full p-1 my-1 bg-white cursor-pointer text-black border-5">
+            className="block w-full p-1 my-1 bg-white cursor-pointer text-black border-none">
             <option value="All Servers" className="cursor-pointer text-white py-5 dark:bg-nova-c1 border-5">
               All Servers
             </option>
