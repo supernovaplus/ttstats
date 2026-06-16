@@ -17,7 +17,7 @@ export default function PopUnder({ button = "i", children }: { button?: string, 
 
     return <>
         <div className="inline-block">
-            <button className="ml-1 w-[20px] h-[20px] bg-gray-600 rounded box-shadow-3 text-white text-shadow-1" onClick={toggle}>{button}</button>
+            <button className="ml-1 w-[20px] h-[20px] bg-gray-600 rounded box-shadow-3 text-white text-shadow-1 cursor-pointer" onClick={toggle}>{button}</button>
         </div>
         <div className="mb-2 rounded border border-black p-1 hidden server-list-info-box box-shadow dark:text-white bg-gray-400 dark:bg-gray-700 text-black text-sm inner-shadow" ref={ref}>
             {children}

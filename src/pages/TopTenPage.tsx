@@ -95,8 +95,7 @@ export default function TopTenPage() {
                   to={`/top10/${stat_name}`}
                   key={index}
                   className={({ isActive }) =>
-                    ` dark:text-white hover:underline py-1 block text-center select-none border-b border-nova-c2 ${
-                      isActive ? 'bg-nova-c1 dark:bg-nova-c2 text-white' : ''
+                    ` dark:text-white hover:underline py-1 block text-center select-none border-b border-nova-c2 ${isActive ? 'bg-nova-c1 dark:bg-nova-c2 text-white' : ''
                     }`
                   }>
                   {nice_name}
@@ -114,11 +113,7 @@ export default function TopTenPage() {
             !state.loading &&
             state.data && (
               <ContentBlock>
-                <div className="w-full">
-                  <div className="text-center  max-w-md bg-gray-400 rounded dark:bg-gray-700 p-2 my-1 m-auto">
-                    Select Top 10 Board
-                  </div>
-                </div>
+                <div className="text-center">Select Top 10 Board</div>
               </ContentBlock>
             )
           }
@@ -150,7 +145,10 @@ function Board({ state }: { state: TopTenDataState }) {
             {selectedBoard.json_data.map((row, index2) => (
               <tr
                 key={index2}
-                className={`odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk`}>
+                className={`odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk ${state.bannedPlayersList.has(row.user_id)
+                    ? 'line-through text-gray-400 dark:text-gray-600'
+                    : ''
+                  }`}>
                 <td data-label="# Place">{index2 + 1}</td>
                 <td data-label="Player">
                   {row.username}{' '}

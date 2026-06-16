@@ -1,6 +1,2 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-
-@import './Main.scss';
-@import './Extentions.scss';
+@use "./Main.scss";
+@use "./Extentions.scss";

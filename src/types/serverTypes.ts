@@ -6,6 +6,7 @@ export interface ServerListRawInterface {
   apiname: string;
   uptimeid: string;
   serverip: string;
+  reverseurl: string;
   /** link, url */
   links?: [string, string][];
   info?: string;

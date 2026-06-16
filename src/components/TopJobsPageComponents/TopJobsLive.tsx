@@ -57,7 +57,7 @@ export default function TopJobsLive() {
   return (
     <>
       <ContentBlock title="Top Jobs Now (Live Data)">
-        <div className="text-center overflow-y-auto border-b-2 border-nova-c1 dark:border-nova-c3 box-shadow-1" style={{maxHeight: "600px"}}>
+        <div className="text-center max-h-[300px] overflow-y-auto border-b-2 border-nova-c1 dark:border-nova-c3 box-shadow-1 min-h-90">
           <table className="w-full">
             <thead className="sticky top-0 text-white bg-nova-c1  dark:bg-nova-c3">
               <tr>

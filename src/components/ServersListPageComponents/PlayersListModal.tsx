@@ -12,11 +12,6 @@ export default function PlayersListModal({ server }: { server: ServerDataObject 
           className="overflow-y-auto border-b-2 border-nova-c1 dark:border-nova-c3 box-shadow-1"
           style={{ maxHeight: '80vh' }}>
           <table className="w-full">
-            <thead className="sticky top-0 text-white bg-nova-c1 dark:bg-nova-c3" style={{ zIndex: 2 }}>
-              <tr>
-                <th colSpan={2}>Name, ID, Job</th>
-              </tr>
-            </thead>
             <tbody>
               {server.playersData.map((player, index) => (
                 <tr key={index} className="odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk z-0">
@@ -40,29 +35,31 @@ export default function PlayersListModal({ server }: { server: ServerDataObject 
                         // <img className="no-avatar" src="media/no-avatar.gif" alt="-" />
                         <div
                           style={{ width: '50px', height: '50px' }}
-                          className="bg-black items-center flex justify-center text-gray-700 select-none">
+                          className="bg-black items-center flex justify-center text-gray-700">
                           ?
                         </div>
                       )}
                     </div>
                   </td>
                   <td data-label="Name #ID">
-                    <span>{player[0]}</span>{' '}
-                    {!!player[2] && (
-                      <span
-                        className={'text-xs bg-nova-c1 text-white dark:bg-nova-c3 p-1 rounded text-shadow-1'}>
-                        #{player[2]}
-                      </span>
-                    )}
+                    <span>
+                      <span title="Player name">{player[0]}</span>{' '}
+                      {!!player[2] && (
+                        <span
+                          className={'text-xs bg-nova-c1 text-white dark:bg-nova-c3 p-1 rounded text-shadow-1'} title="Player ID">
+                          #{player[2]}
+                        </span>
+                      )}
+                    </span>
                     {player[5] && (
-                      <span className={'bg-yellow-500 p-1 rounded ml-1 text-xs text-black text-shadow-none'}>
+                      <span className={'bg-yellow-500 p-1 rounded ml-1 text-xs text-black text-shadow-none'} title='Player job'>
                         {player[5]}
                       </span>
                     )}
                     {player[4] && (
                       <span
                         className={
-                          'p-1 bg-red-800 ml-1 rounded text-xs text-white select-none text-shadow-1'
+                          'p-1 bg-red-800 ml-1 rounded text-xs text-white text-shadow-1'
                         }>
                         Staff
                       </span>
@@ -70,7 +67,7 @@ export default function PlayersListModal({ server }: { server: ServerDataObject 
                     {player[6] && (
                       <span
                         className={
-                          'bg-orange-700 p-1 rounded ml-1 text-xs text-white select-none text-shadow-1'
+                          'bg-orange-700 p-1 rounded ml-1 text-xs text-white text-shadow-1'
                         }>
                         Donator
                       </span>
