@@ -3,8 +3,6 @@ import ContentBlock from '../components/ContentBlock';
 import { TimeUpdatedDiffRow, LoadingRow, ErrorRow } from '../components/MiscComponents';
 import { prettyNum, shortenLargeMoney } from '../controllers/misc';
 import { bucketUri } from '../data/config';
-import DataSyncBlock from '../components/DataSyncBlock';
-import { useUserDataContext } from '../store/UserDataContext';
 
 interface DealershipResponseJsonInterface {
   updated_at: number;
@@ -40,7 +38,6 @@ export default function DealershipPage() {
     isHidden: null,
     hideOwned: false
   });
-  const { userDataState, setUserDataState } = useUserDataContext();
 
   //TODO: types
   useEffect(() => {
@@ -145,14 +142,15 @@ export default function DealershipPage() {
                       hidden={state.isHidden[category]}
                       className="flex flex-wrap gap-2 pt-2 mb-2 justify-center">
                       {vehicles.map(({ name, model, price }, index: number) => (
-                        <div key={index} className="w-full max-w-[250px] text-center relative" hidden={state.hideOwned && userDataState.data1?.has(model)}>
+                        <div key={index} className="w-full max-w-[250px] text-center relative">
                           <div className="bg-slate-500 box-shadow-1 border border-transparent rounded-sm overflow-hidden">
                             <a
                               href={`https://cdn.tycoon.community/dealership/vehicles/${model}.png`}
                               target="_blank"
                               title={model}>
                               <img
-                                src={`https://ttdata.transporttycoon.eu/vehicles/veh_images_min/${model}.jpg`}
+                                // src={`https://ttdata.transporttycoon.eu/vehicles/veh_images_min/${model}.jpg`}
+                                src={`https://cdn.tycoon.community/dealership/vehicles/${model}.png`}
                                 alt=""
                                 loading="lazy"
                                 className="block w-full object-cover overflow-hidden"
@@ -173,11 +171,6 @@ export default function DealershipPage() {
                             {state.requirements?.hasOwnProperty(model) && (
                               <div className="block bg-gray-800 inset-shadow-1 rounded-sm">
                                 <div className="text-xs p-px">{state.requirements[model]} required</div>
-                              </div>
-                            )}
-                            {userDataState.data1?.has(model) && (
-                              <div className="block bg-red-500 border border-gray-900 inset-shadow-1 text-shadow-1 text-white rounded-sm float-left absolute top-1 left-1">
-                                <div className="text-xs px-1">Owned</div>
                               </div>
                             )}
                           </div>

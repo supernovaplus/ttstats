@@ -1,13 +1,11 @@
 import { MouseEvent, ChangeEvent, useEffect, useState, ReactNode, useMemo } from 'react';
-import ContentBlock from '../../components/ContentBlock';
-import { getCacheStr, prettyNum, shortenLargeMoney } from '../../controllers/misc';
+import ContentBlock from '../components/ContentBlock';
+import { getCacheStr, prettyNum, shortenLargeMoney } from '../controllers/misc';
 import { NavLink, useSearchParams } from 'react-router-dom';
-import businessData, { bizDataUpdatedAt } from '../../data/businessData';
-import { useUserDataContext } from '../../store/UserDataContext';
-import { useMessager, MessagerBlock } from '../../components/MessagerBlock';
-// import UserSettingsPage from './UserSettingsPage';
-// import { fetchTTApi } from '../../controllers/fetchTTApi';
-import { usePersistantState } from '../../controllers/misc';
+import businessData, { bizDataUpdatedAt } from '../data/businessData';
+import { useMessager, MessagerBlock } from '../components/MessagerBlock';
+// import { fetchTTApi } from '../controllers/fetchTTApi';
+import { usePersistantState } from '../controllers/misc';
 const LOCAL_STORAGE_KEY = 'bizOwnedList';
 
 interface BizState {
@@ -36,7 +34,6 @@ const MarkValue = ({ children }: { children: ReactNode }) => {
 // }
 
 export default function BusinessPage() {
-  const { userDataState, setUserDataState } = useUserDataContext();
   const [state, setState] = useState({ ...initialBizState });
   const { messages, addMessage, clearMessages } = useMessager();
   const [searchParams, setSearchParams] = useSearchParams();
@@ -113,9 +110,8 @@ export default function BusinessPage() {
           <td
             title={biz.id}
             onClick={() => toggleBiz(biz.id)}
-            className={`cursor-pointer hover:underline ${
-              owned ? 'text-green-800 dark:text-green-500 line-through' : ''
-            }`}>
+            className={`cursor-pointer hover:underline ${owned ? 'text-green-800 dark:text-green-500 line-through' : ''
+              }`}>
             {biz.name}
             {owned ? ' ✅' : ''}
           </td>

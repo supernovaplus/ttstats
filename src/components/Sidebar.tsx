@@ -44,9 +44,8 @@ export default function Sidebar() {
         Menu
       </button>
       <aside
-        className={`bg-white w-full min-w-[140px] max-w-[200px] text-black dark:text-white h-fit text-center overflow-hidden mr-1 dark:bg-gray-800 md:fixed md:left-0 md:top-16 z-10 box-shadow-1 sm:box-shadow-2 border-2 border-nova-c1 dark:border-nova-c2 ${
-          forceOpen ? 'block' : 'md:hidden'
-        }`}>
+        className={`bg-white w-full min-w-[140px] max-w-[200px] text-black dark:text-white h-fit text-center overflow-hidden mr-1 dark:bg-gray-800 md:fixed md:left-0 md:top-16 z-10 box-shadow-1 sm:box-shadow-2 border-2 border-nova-c1 dark:border-nova-c2 ${forceOpen ? 'block' : 'md:hidden'
+          }`}>
         <div className="relative">
           <ul className="z-10">
             <Category>Live</Category>
@@ -75,7 +74,7 @@ export default function Sidebar() {
             <OneItem to="/economy" setForceOpen={setForceOpen}>
               Economy
             </OneItem>
-            <OneItem to="/user/business" setForceOpen={setForceOpen}>
+            <OneItem to="/business" setForceOpen={setForceOpen}>
               Business
             </OneItem>
             <Category>Tools</Category>
