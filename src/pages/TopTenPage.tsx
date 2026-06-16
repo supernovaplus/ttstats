@@ -113,7 +113,9 @@ export default function TopTenPage() {
             !state.loading &&
             state.data && (
               <ContentBlock>
-                <div className="text-center">Select Top 10 Board</div>
+                <p className="max-w-md text-center bg-gray-400 rounded dark:bg-gray-700 p-2 my-3 m-auto">
+                  Select a category from the list.
+                </p>
               </ContentBlock>
             )
           }
@@ -146,8 +148,8 @@ function Board({ state }: { state: TopTenDataState }) {
               <tr
                 key={index2}
                 className={`odd:bg-kebab-odd even:bg-kebab-even hover:hover:bg-kebab-dk ${state.bannedPlayersList.has(row.user_id)
-                    ? 'line-through text-gray-400 dark:text-gray-600'
-                    : ''
+                  ? 'line-through text-gray-400 dark:text-gray-600'
+                  : ''
                   }`}>
                 <td data-label="# Place">{index2 + 1}</td>
                 <td data-label="Player">

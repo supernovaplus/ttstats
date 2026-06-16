@@ -17,8 +17,8 @@ export const serversList: ServerListRawInterface[] = [
   },
   {
     endpoint: 'njyvop',
-    name: 'NY-2 Beta',
-    sname: 'NY-2',
+    name: 'S2 Beta',
+    sname: 'S2',
     enabled: true,
     apiname: 'beta',
     uptimeid: '676134ceb12cdf3fb6e2272f37ff5455',

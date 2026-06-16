@@ -122,11 +122,6 @@ export default function DealershipPage() {
                 onClick={onToggleAll}>
                 Show/Hide All
               </div>
-              <div
-                className="cursor-pointer bg-gray-700 text-white p-1 text-sm inline-block hover:underline rounded-sm"
-                onClick={() => setState(s => ({...s, hideOwned: !s.hideOwned}))}>
-                Show/Hide Owned
-              </div>
             </div>
             {Object.entries(state.data).map(([category, vehicles], index) => (
               <div key={index} className="text-white text-center">
@@ -196,9 +191,6 @@ export default function DealershipPage() {
             {state.updated_at && <TimeUpdatedDiffRow fromTime={state.updated_at * 1000} />}
           </>
         )}
-      </ContentBlock>
-      <ContentBlock title="Sync Dealership Data">
-        <DataSyncBlock></DataSyncBlock>
       </ContentBlock>
     </>
   );
