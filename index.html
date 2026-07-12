@@ -11,14 +11,14 @@
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="preload" href="/josefinsans.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preconnect" href="https://api.transporttycoon.eu" crossorigin />
-  <link rel="preconnect" href="https://api.tycoon.community" crossorigin />
-  <link rel="preconnect" href="https://apibeta.tycoon.community" crossorigin />
+  <link rel="preconnect" href="https://s1.transporttycoon.eu" crossorigin />
+  <link rel="preconnect" href="https://s2.transporttycoon.eu" crossorigin />
   <script type="text/javascript">
     (function () {
       const f = url => fetch(url, { credentials: "omit" }).then(r => r.ok ? r.json() : null).catch(() => null);
       window.preloadedData = {
-        "api.tycoon.community": f("https://api.tycoon.community/widget/players.json"),
-        "apibeta.tycoon.community": f("https://apibeta.tycoon.community/widget/players.json")
+        "s1.transporttycoon.eu": f("https://s1.transporttycoon.eu/status/widget/players.json"),
+        "s2.transporttycoon.eu": f("https://s2.transporttycoon.eu/status/widget/players.json")
       };
     })();
   </script>
