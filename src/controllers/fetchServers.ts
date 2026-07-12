@@ -8,6 +8,12 @@ import {
   SetServerDispatchType,
 } from '../types/serverTypes';
 
+declare global {
+  interface Window {
+    preloadedData?: Record<string, Promise<any> | null>;
+  }
+}
+
 export const defaultServersState = serversList.reduce((acc: ServerDataObjectList, server) => {
   acc[server.endpoint] = {
     ...server,
@@ -37,6 +43,7 @@ const cFetch = async (url: string, abortAfter = 5000) => {
   const res = await fetch(url, {
     signal: abortController.signal,
     redirect: 'error',
+    credentials: 'omit',
   });
 
   clearTimeout(timeout);
@@ -53,11 +60,11 @@ const parseStatusJSON = async ({
   setServer,
   server,
 }: {
-  res: MainAPIPlayersResponse;
+  res: MainAPIPlayersResponse | null;
   setServer: SetServerDispatchType;
   server: ServerDataObject;
 }) => {
-  if (!('server' in res)) throw new Error('offline');
+  if (!res || !('server' in res)) throw new Error('offline');
 
   for (let i = 0; i < res.players!.length; i++) {
     if (res.players![i][5] === '') res.players![i][5] = 'Unemployed';
@@ -93,9 +100,16 @@ export const fetchServer = async (server: ServerDataObject, setServer: SetServer
   if (server.apiname) {
     //main reverse proxy api
     try {
-      const res: MainAPIPlayersResponse = await cFetch(
-        `https://tycoon-${server.endpoint}.users.cfx.re/status/widget/players.json`
-      );
+      let res: MainAPIPlayersResponse | null = null;
+      const host = server.mainapi;
+      if (window.preloadedData && window.preloadedData[host]) {
+        res = await window.preloadedData[host];
+        window.preloadedData[host] = null; // Clear so subsequent refreshes fetch fresh data
+      }
+
+      if (!res) {
+        res = await cFetch(`https://${host}/widget/players.json`);
+      }
       await parseStatusJSON({ res, setServer, server });
       success = true;
     } catch (err) { }
@@ -115,7 +129,7 @@ export const fetchServer = async (server: ServerDataObject, setServer: SetServer
   try {
     if (success) return;
     const res: ServerFallbackAPIResponse = await cFetch(
-      `https://servers-frontend.fivem.net/api/servers/single/${server.endpoint}`
+      `https://frontend.cfx-services.net/api/servers/single/${server.endpoint}`
     );
 
     if (!('Data' in res)) throw new Error('offline');

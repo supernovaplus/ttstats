@@ -1,48 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0c1e42" />
-    <meta name="description" content="Servers list and stats for FiveM Transport Tycoon server" />
-    <link rel="icon" type="image/png" href="/favicon.png" />
-    <link
-      rel="preload"
-      href="https://fonts.gstatic.com/s/josefinsans/v25/Qw3PZQNVED7rKGKxtqIqX5E-AVSJrOCfjY46_ArQbMZhLw.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin />
-    <link rel="preconnect" href="https://api.transporttycoon.eu" />
-    <link
-      rel="preload"
-      href="https://tycoon-2epova.users.cfx.re/status/widget/players.json"
-      as="fetch"
-      crossorigin="anonymous" />
-    <link rel="preload" href="https://d.ttstats.eu/skillboost" as="fetch" crossorigin="anonymous" />
-    <title>TTSTATS | Transport Tycoon Server Browser</title>
-    <style>
-      body {
-        background-color: #3b415c;
-      }
-    </style>
-  </head>
-  <!-- <body> -->
-  <body class="dark">
-    <div id="main"></div>
-    <div id="modal-root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-    <script type="text/javascript">
-      if (window.location.host.includes('ttstats.')) {
-        setTimeout(() => {
-          window.ybug_settings = { id: '16bd61hfh8p9cc4ft97d' };
-          var ybug = document.createElement('script');
-          ybug.type = 'text/javascript';
-          ybug.async = true;
-          ybug.src = 'https://widget.ybug.io/button/' + window.ybug_settings.id + '.js';
-          var s = document.getElementsByTagName('script')[0];
-          s.parentNode.insertBefore(ybug, s);
-        }, 1000);
-      }
-    </script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0c1e42" />
+  <meta name="description" content="Servers list and stats for FiveM Transport Tycoon server" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="darkreader-lock" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <link rel="preload" href="/josefinsans.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preconnect" href="https://api.transporttycoon.eu" crossorigin />
+  <link rel="preconnect" href="https://api.tycoon.community" crossorigin />
+  <link rel="preconnect" href="https://apibeta.tycoon.community" crossorigin />
+  <script type="text/javascript">
+    (function () {
+      const f = url => fetch(url, { credentials: "omit" }).then(r => r.ok ? r.json() : null).catch(() => null);
+      window.preloadedData = {
+        "api.tycoon.community": f("https://api.tycoon.community/widget/players.json"),
+        "apibeta.tycoon.community": f("https://apibeta.tycoon.community/widget/players.json")
+      };
+    })();
+  </script>
+  <link rel="preload" href="https://d.ttstats.eu/skillboost" as="fetch" crossorigin="anonymous" />
+  <title>TTSTATS | Transport Tycoon Server Browser</title>
+  <style>
+    body {
+      background-color: rgb(19, 19, 19);
+    }
+  </style>
+</head>
+
+<body class="dark">
+  <div id="main"></div>
+  <div id="modal-root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+  <script type="text/javascript">
+    // if (window.location.host.includes('ttstats.')) {
+    setTimeout(() => {
+      window.ybug_settings = { id: '16bd61hfh8p9cc4ft97d' };
+      const ybug = document.createElement('script');
+      ybug.async = true;
+      ybug.src = `https://widget.ybug.io/button/${window.ybug_settings.id}.js`;
+      document.head.appendChild(ybug);
+    }, 1000);
+    // }
+  </script>
+</body>
+
 </html>

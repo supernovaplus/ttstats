@@ -7,6 +7,7 @@ export interface ServerListRawInterface {
   uptimeid: string;
   serverip: string;
   reverseurl: string;
+  mainapi: string;
   /** link, url */
   links?: [string, string][];
   info?: string;
@@ -269,9 +270,4 @@ export interface TopVehiclesHistoryState {
   data: null | TopVehiclesHistoryResponse['data'];
   error: null | string;
   updated_at: number;
-}
-
-export interface UserDataContextInterface {
-  selectedUserId: string;
-  data1: Set<string> | null;
 }
