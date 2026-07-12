@@ -7,11 +7,10 @@ export function UseBackground() {
         if (!body) return;
         const bgUrl = backgroundsList[1];
 
-        body.style.setProperty('--body-bg', `url(${bgUrl})`);
-
         const img = new Image();
         img.src = bgUrl;
         img.onload = () => {
+            body.style.setProperty('--body-bg', `url(${bgUrl})`);
             body.classList.add('bg-loaded');
         };
         img.onerror = () => {
