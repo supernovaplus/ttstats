@@ -35,37 +35,39 @@ body::before {
   background-attachment: fixed;
   background-position: top;
   background-repeat: no-repeat;
-  opacity: 0;
+  opacity: 1;
   transition: opacity 1s linear;
   background-image: var(--body-bg);
 }
 
-body.bg-loaded::before {
-  opacity: 0.4;
-}
+
+// body.bg-loaded::before {
+//   opacity: 0.4;
+// }
 
 body,
 button,
 select {
   // font-family: 'Spartan', Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   // font-family: 'Merienda', cursive;
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: 'Josefin Sans', Arial, sans-serif;
 }
 
-// body {
-//   background-size: cover;
-//   background-attachment: fixed;
-// }
+body.dark::before {
+  background-image: url('../assets/images/bgDark1.svg');
+}
 
-// body.dark {
-//   background-image: url('../assets/images/bgDark1.svg');
-//   background-color: #004070;
-// }
+body:not(.dark)::before {
+  background-image: url('../assets/images/bgWhite1.svg');
+}
 
-// body:not(.dark) {
-//   background-image: url('../assets/images/bgWhite1.svg');
-//   background-color: #727272;
-// }
+body.dark {
+  background-color: #004070;
+}
+
+body:not(.dark) {
+  background-color: #727272;
+}
 
 body.dark,
 button.dark,
