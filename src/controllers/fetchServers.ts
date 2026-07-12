@@ -97,33 +97,29 @@ export const fetchServer = async (server: ServerDataObject, setServer: SetServer
 
   let success = false;
 
-  if (server.apiname) {
-    //main reverse proxy api
-    try {
-      let res: MainAPIPlayersResponse | null = null;
-      const host = server.mainapi;
-      if (window.preloadedData && window.preloadedData[host]) {
-        res = await window.preloadedData[host];
-        window.preloadedData[host] = null; // Clear so subsequent refreshes fetch fresh data
-      }
+  //ttstats reverse proxy api
+  try {
+    let res: MainAPIPlayersResponse | null = null;
+    const host = server.reverseurl;
+    if (window.preloadedData && window.preloadedData[host]) {
+      res = await window.preloadedData[host];
+      window.preloadedData[host] = null; // Clear so subsequent refreshes fetch fresh data
+    }
 
-      if (!res) {
-        res = await cFetch(`https://${host}/widget/players.json`);
-      }
-      await parseStatusJSON({ res, setServer, server });
-      success = true;
-    } catch (err) { }
+    if (!res) {
+      res = await cFetch(`https://${host}/status/widget/players.json`);
+    }
+    await parseStatusJSON({ res, setServer, server });
+    success = true;
+  } catch (err) { }
 
-    //else if fails, try ttstats reverse proxy api
-    try {
-      if (success) return;
-      const res: MainAPIPlayersResponse = await cFetch(
-        `https://${server.reverseurl}/status/widget/players.json`
-      );
-      await parseStatusJSON({ res, setServer, server });
-      success = true;
-    } catch (err) { }
-  }
+  //else if fails, try main reverse proxy api
+  try {
+    if (success) return;
+    const res: MainAPIPlayersResponse = await cFetch(`https://${server.mainapi}/widget/players.json`);
+    await parseStatusJSON({ res, setServer, server });
+    success = true;
+  } catch (err) { }
 
   //else fetch fivem server status api
   try {
