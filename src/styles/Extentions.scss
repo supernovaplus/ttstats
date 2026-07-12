@@ -47,6 +47,8 @@
     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.833);
     // border-color: rgba(255, 255, 255, 0.076);
     cursor: pointer;
+    transition: all 100ms ease-in-out;
+    position: relative;
   }
 
   .dark .lnk-btn {
@@ -60,7 +62,8 @@
 
   .dark .lnk-btn:hover {
     // border-color: white;
-    box-shadow: 2px 2px 5px black;
+    // box-shadow: 2px 2px 5px black;
+    box-shadow: 2px 2px 1px black, 0 0 5px black;
     z-index: 9;
     transform: scale(1.01);
   }

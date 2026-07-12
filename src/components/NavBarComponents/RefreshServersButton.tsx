@@ -30,7 +30,7 @@ export default function RefreshServersButton() {
   }, [servers]);
 
   return (
-    <button onClick={handleOnClickRefresh} className="hover:text-gray-300 text-shadow-2">
+    <button onClick={handleOnClickRefresh} className="hover:text-gray-300 text-shadow-2 cursor-pointer">
       <span className="sm:block">
         Servers Loaded: {state.servers}/{state.total} ({state.players} players)
       </span>

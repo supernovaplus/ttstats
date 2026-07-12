@@ -208,13 +208,13 @@ export default function BusinessPage() {
         <div className="p-1 mt-1 text-white">
           <div className="flex gap-1 flex-wrap justify-center py-1 w-full mb-1">
             <div className=" px-2 bg-nova-c1 dark:bg-nova-c3 box-shadow-4">
-              [ALL] businesses: <MarkValue>{businessData.length}</MarkValue>
+              businesses: <MarkValue>{businessData.length}</MarkValue>
             </div>
             <div className=" px-2 bg-nova-c1 dark:bg-nova-c3 box-shadow-4">
-              [ALL] cost: <MarkValue>${shortenLargeMoney(totalMoneyToSpend)}</MarkValue>
+              cost: <MarkValue>${shortenLargeMoney(totalMoneyToSpend)}</MarkValue>
             </div>
             <div className=" px-2 bg-nova-c1 dark:bg-nova-c3 box-shadow-4">
-              [ALL] bonus pre-tax: <MarkValue>${shortenLargeMoney(totalPossibleBonus)}</MarkValue> per day
+              bonus pre-tax: <MarkValue>${shortenLargeMoney(totalPossibleBonus)}</MarkValue> per day
             </div>
 
             {!!businessesOwned && (

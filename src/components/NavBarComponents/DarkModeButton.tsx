@@ -34,7 +34,8 @@ export default function DarkModeButton() {
       </svg> */}
       <svg
         id="theme-toggle-dark-icon"
-        className={`w-8 h-8 active:text-white`}
+        className="w-8 h-8 dark:text-white cursor-pointer text-black"
+        style={{ filter: "drop-shadow(black 0px 1px 1px)" }}
         fill="currentColor"
         viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg">
@@ -43,6 +44,6 @@ export default function DarkModeButton() {
           fillRule="evenodd"
           clipRule="evenodd"></path>
       </svg>
-    </button>
+    </button >
   );
 }

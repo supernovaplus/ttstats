@@ -270,8 +270,3 @@ export interface TopVehiclesHistoryState {
   error: null | string;
   updated_at: number;
 }
-
-export interface UserDataContextInterface {
-  selectedUserId: string;
-  data1: Set<string> | null;
-}

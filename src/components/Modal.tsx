@@ -30,15 +30,11 @@ export default function Modal({ children, buttonProps = {}, buttonValue, title }
             <div className="modal-container modal-center">
               <ContentBlock title={title}>
                 <div>{children}</div>
-                <div
-                  className="flex justify-end bg-nova-c1 pb-2 px-2 mt-2"
-                  style={{ marginBottom: '-8px', marginLeft: '-8px', marginRight: '-8px' }}>
-                  <button
-                    onClick={toggleOpen}
-                    className="inline-flex items-center px-3 mt-2 text-sm text-white lnk-btn bg-nova-c1 dark:bg-nova-c3">
-                    CLOSE
-                  </button>
-                </div>
+                <button
+                  onClick={toggleOpen}
+                  className="text-sm text-white lnk-btn bg-nova-c3 dark:bg-nova-c3 w-full mt-2">
+                  CLOSE
+                </button>
               </ContentBlock>
             </div>
           </>
