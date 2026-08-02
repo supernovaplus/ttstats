@@ -8,11 +8,7 @@ import {
   SetServerDispatchType,
 } from '../types/serverTypes';
 
-declare global {
-  interface Window {
-    preloadedData?: Record<string, Promise<any> | null>;
-  }
-}
+
 
 export const defaultServersState = serversList.reduce((acc: ServerDataObjectList, server) => {
   acc[server.endpoint] = {
@@ -101,18 +97,7 @@ export const fetchServer = async (server: ServerDataObject, setServer: SetServer
 
   //ttstats reverse proxy api
   try {
-    let res: MainAPIPlayersResponse | null = null;
-    const host = server.reverseurl;
-    if (window.preloadedData && window.preloadedData[host]) {
-      const preloadPromise = window.preloadedData[host];
-      window.preloadedData[host] = null; // Clear so subsequent refreshes fetch fresh data
-      const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 4000));
-      res = await Promise.race([preloadPromise, timeoutPromise]);
-    }
-
-    if (!res) {
-      res = await cFetch(`https://${host}/status/widget/players.json`);
-    }
+    const res: MainAPIPlayersResponse = await cFetch(`https://${server.reverseurl}/status/widget/players.json`);
     await parseStatusJSON({ res, setServer, server });
     success = true;
   } catch (err) { }
