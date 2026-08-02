@@ -15,7 +15,14 @@
   <link rel="preconnect" href="https://s2.transporttycoon.eu" crossorigin />
   <script type="text/javascript">
     (function () {
-      const f = url => fetch(url, { credentials: "omit" }).then(r => r.ok ? r.json() : null).catch(() => null);
+      const f = url => {
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 4000);
+        return fetch(url, { credentials: "omit", signal: controller.signal })
+          .then(r => (r.ok ? r.json() : null))
+          .catch(() => null)
+          .finally(() => clearTimeout(timeout));
+      };
       window.preloadedData = {
         "s1.transporttycoon.eu": f("https://s1.transporttycoon.eu/status/widget/players.json"),
         "s2.transporttycoon.eu": f("https://s2.transporttycoon.eu/status/widget/players.json")

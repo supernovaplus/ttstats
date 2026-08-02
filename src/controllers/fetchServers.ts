@@ -40,18 +40,20 @@ const cFetch = async (url: string, abortAfter = 4000) => {
     abortController.abort();
   }, abortAfter);
 
-  const res = await fetch(url, {
-    signal: abortController.signal,
-    redirect: 'error',
-    credentials: 'omit',
-  });
+  try {
+    const res = await fetch(url, {
+      signal: abortController.signal,
+      redirect: 'error',
+      credentials: 'omit',
+    });
 
-  clearTimeout(timeout);
-
-  if (res.status !== 200) {
-    throw new Error('offline');
-  } else {
-    return res.json();
+    if (res.status !== 200) {
+      throw new Error('offline');
+    } else {
+      return await res.json();
+    }
+  } finally {
+    clearTimeout(timeout);
   }
 };
 
@@ -102,8 +104,10 @@ export const fetchServer = async (server: ServerDataObject, setServer: SetServer
     let res: MainAPIPlayersResponse | null = null;
     const host = server.reverseurl;
     if (window.preloadedData && window.preloadedData[host]) {
-      res = await window.preloadedData[host];
+      const preloadPromise = window.preloadedData[host];
       window.preloadedData[host] = null; // Clear so subsequent refreshes fetch fresh data
+      const timeoutPromise = new Promise<null>((resolve) => setTimeout(() => resolve(null), 4000));
+      res = await Promise.race([preloadPromise, timeoutPromise]);
     }
 
     if (!res) {
