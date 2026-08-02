@@ -34,7 +34,7 @@ export const defaultServersState = serversList.reduce((acc: ServerDataObjectList
  * @param abortAfter Abort after X miliseconds
  * @returns
  */
-const cFetch = async (url: string, abortAfter = 5000) => {
+const cFetch = async (url: string, abortAfter = 4000) => {
   const abortController = new AbortController();
   const timeout = setTimeout(() => {
     abortController.abort();
@@ -114,12 +114,12 @@ export const fetchServer = async (server: ServerDataObject, setServer: SetServer
   } catch (err) { }
 
   //else if fails, try main reverse proxy api
-  try {
-    if (success) return;
-    const res: MainAPIPlayersResponse = await cFetch(`https://${server.mainapi}/widget/players.json`);
-    await parseStatusJSON({ res, setServer, server });
-    success = true;
-  } catch (err) { }
+  // try {
+  //   if (success) return;
+  //   const res: MainAPIPlayersResponse = await cFetch(`https://${server.mainapi}/widget/players.json`);
+  //   await parseStatusJSON({ res, setServer, server });
+  //   success = true;
+  // } catch (err) { }
 
   //else fetch fivem server status api
   try {
