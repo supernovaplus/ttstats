@@ -8,11 +8,7 @@ import {
   SetServerDispatchType,
 } from '../types/serverTypes';
 
-declare global {
-  interface Window {
-    preloadedData?: Record<string, Promise<any> | null>;
-  }
-}
+
 
 export const defaultServersState = serversList.reduce((acc: ServerDataObjectList, server) => {
   acc[server.endpoint] = {
@@ -40,18 +36,20 @@ const cFetch = async (url: string, abortAfter = 4000) => {
     abortController.abort();
   }, abortAfter);
 
-  const res = await fetch(url, {
-    signal: abortController.signal,
-    redirect: 'error',
-    credentials: 'omit',
-  });
+  try {
+    const res = await fetch(url, {
+      signal: abortController.signal,
+      redirect: 'error',
+      credentials: 'omit',
+    });
 
-  clearTimeout(timeout);
-
-  if (res.status !== 200) {
-    throw new Error('offline');
-  } else {
-    return res.json();
+    if (res.status !== 200) {
+      throw new Error('offline');
+    } else {
+      return await res.json();
+    }
+  } finally {
+    clearTimeout(timeout);
   }
 };
 
@@ -99,16 +97,7 @@ export const fetchServer = async (server: ServerDataObject, setServer: SetServer
 
   //ttstats reverse proxy api
   try {
-    let res: MainAPIPlayersResponse | null = null;
-    const host = server.reverseurl;
-    if (window.preloadedData && window.preloadedData[host]) {
-      res = await window.preloadedData[host];
-      window.preloadedData[host] = null; // Clear so subsequent refreshes fetch fresh data
-    }
-
-    if (!res) {
-      res = await cFetch(`https://${host}/status/widget/players.json`);
-    }
+    const res: MainAPIPlayersResponse = await cFetch(`https://${server.reverseurl}/status/widget/players.json`);
     await parseStatusJSON({ res, setServer, server });
     success = true;
   } catch (err) { }
